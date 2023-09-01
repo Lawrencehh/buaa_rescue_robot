@@ -1,0 +1,39 @@
+[0.019s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/serial -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/serial
+[0.042s] -- Found rclcpp: 16.0.5 (/opt/ros/humble/share/rclcpp/cmake)
+[0.252s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.256s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.262s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.275s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.292s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.387s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.389s] -- Found rmw_fastrtps_cpp: 6.2.3 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.558s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.910s] -- Configuring done
+[0.925s] -- Generating done
+[0.928s] -- Build files have been written to: /home/rescue_robot/buaa_rescue_robot/build/serial
+[0.938s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/serial -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/serial
+[0.941s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[0.992s] [ 50%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[7.645s] [100%] [32m[1mLinking CXX executable serial_sender[0m
+[7.850s] [100%] Built target serial_sender
+[7.867s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[7.903s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/serial
+[7.910s] -- Install configuration: ""
+[7.910s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/lib/serial/serial_sender
+[7.911s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/serial/lib/serial/serial_sender" to ""
+[7.911s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/ament_index/resource_index/package_run_dependencies/serial
+[7.911s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/ament_index/resource_index/parent_prefix_path/serial
+[7.912s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/environment/ament_prefix_path.sh
+[7.912s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/environment/ament_prefix_path.dsv
+[7.912s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/environment/path.sh
+[7.912s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/environment/path.dsv
+[7.912s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/local_setup.bash
+[7.912s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/local_setup.sh
+[7.912s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/local_setup.zsh
+[7.913s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/local_setup.dsv
+[7.913s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.dsv
+[7.913s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/ament_index/resource_index/packages/serial
+[7.913s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/cmake/serialConfig.cmake
+[7.913s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/cmake/serialConfig-version.cmake
+[7.914s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.xml
+[7.917s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/serial' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/serial
