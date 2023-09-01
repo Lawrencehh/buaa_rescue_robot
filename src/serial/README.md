@@ -43,7 +43,7 @@ ros2 run serial serial_receiver
 ```
 
 # 串口设置
-默认情况下，两个节点都配置为使用 /dev/ttyUSB0 串口，并设置了以下串口参数：   
+默认情况下, 两个节点分别配置为/dev/ttyUSB0 和 /dev/ttyUSB1 串口，并设置了以下串口参数：   
 
 
 波特率: 115200   
