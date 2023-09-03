@@ -57,9 +57,11 @@ Run the serial receiver node:
 ```bash
 ros2 run serial serial_receiver
 ```
+The communication protocol for the robot system can be found in the link:  
+https://docs.google.com/document/d/15l8EZoLQ8ltLROfFUyf_mJ9b2J9PZ0hl/edit?usp=sharing&ouid=102832733841320281280&rtpof=true&sd=true
 
 ## Contributing
-Please read CONTRIBUTING.md for details on how to contribute to this project.
+The current code contributor is Dr. Huang Hao.
 
 ## License
 This project is licensed under the MIT License.
