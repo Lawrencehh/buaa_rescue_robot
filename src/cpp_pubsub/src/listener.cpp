@@ -8,7 +8,7 @@ public:
   {
     // 创建一个名为 "chatter" 的订阅器，订阅 talker 发布的话题
     subscription_ = this->create_subscription<std_msgs::msg::String>(
-      "chatter", 
+      "motor_control", 
       10, 
       std::bind(&Listener::callback, this, std::placeholders::_1));
   }

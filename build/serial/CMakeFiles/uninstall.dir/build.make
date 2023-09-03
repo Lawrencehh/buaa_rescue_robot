@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rescue_robot/buaa_rescue_robot/src/serial
+CMAKE_SOURCE_DIR = /home/rescue-robot/buaa_rescue_robot/src/serial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rescue_robot/buaa_rescue_robot/build/serial
+CMAKE_BINARY_DIR = /home/rescue-robot/buaa_rescue_robot/build/serial
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/rescue_robot/buaa_rescue_robot/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rescue_robot/buaa_rescue_robot/src/serial /home/rescue_robot/buaa_rescue_robot/src/serial /home/rescue_robot/buaa_rescue_robot/build/serial /home/rescue_robot/buaa_rescue_robot/build/serial /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/rescue-robot/buaa_rescue_robot/build/serial && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/rescue-robot/buaa_rescue_robot/src/serial /home/rescue-robot/buaa_rescue_robot/src/serial /home/rescue-robot/buaa_rescue_robot/build/serial /home/rescue-robot/buaa_rescue_robot/build/serial /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 

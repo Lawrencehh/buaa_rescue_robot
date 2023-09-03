@@ -2,7 +2,7 @@
 # ament_cmake_core/cmake/uninstall_target/ament_cmake_uninstall_target.cmake.in
 
 function(ament_cmake_uninstall_target_remove_empty_directories path)
-  set(install_space "/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub")
+  set(install_space "/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub")
   if(install_space STREQUAL "")
     message(FATAL_ERROR "The CMAKE_INSTALL_PREFIX variable must not be empty")
   endif()
@@ -29,7 +29,7 @@ function(ament_cmake_uninstall_target_remove_empty_directories path)
 endfunction()
 
 # uninstall files installed using the standard install() function
-set(install_manifest "/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub/install_manifest.txt")
+set(install_manifest "/home/rescue-robot/buaa_rescue_robot/build/cpp_pubsub/install_manifest.txt")
 if(NOT EXISTS "${install_manifest}")
   message(FATAL_ERROR "Cannot find install manifest: ${install_manifest}")
 endif()

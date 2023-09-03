@@ -1,5 +1,5 @@
 CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o: \
- /home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp \
+ /home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp \
  /usr/include/stdc-predef.h \
  /opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp \
  /usr/include/c++/11/csignal \
@@ -1126,4 +1126,8 @@ CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o: \
  /usr/include/asio/windows/overlapped_ptr.hpp \
  /usr/include/asio/windows/random_access_handle.hpp \
  /usr/include/asio/windows/stream_handle.hpp /usr/include/asio/write.hpp \
- /usr/include/asio/write_at.hpp /usr/include/asio/impl/write_at.hpp
+ /usr/include/asio/write_at.hpp /usr/include/asio/impl/write_at.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/string.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__struct.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__builder.hpp \
+ /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/string__traits.hpp

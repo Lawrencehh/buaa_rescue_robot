@@ -54,10 +54,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/rescue_robot/buaa_rescue_robot/src/serial
+CMAKE_SOURCE_DIR = /home/rescue-robot/buaa_rescue_robot/src/serial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/rescue_robot/buaa_rescue_robot/build/serial
+CMAKE_BINARY_DIR = /home/rescue-robot/buaa_rescue_robot/build/serial
 
 #=============================================================================
 # Directory level rules for the build root directory
@@ -85,14 +85,14 @@ clean: CMakeFiles/serial_receiver.dir/clean
 CMakeFiles/uninstall.dir/all: CMakeFiles/serial_uninstall.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num= "Built target uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num= "Built target uninstall"
 .PHONY : CMakeFiles/uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/uninstall.dir/rule
 
 # Convenience name for target.
@@ -111,14 +111,14 @@ CMakeFiles/uninstall.dir/clean:
 CMakeFiles/serial_uninstall.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_uninstall.dir/build.make CMakeFiles/serial_uninstall.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_uninstall.dir/build.make CMakeFiles/serial_uninstall.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num= "Built target serial_uninstall"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num= "Built target serial_uninstall"
 .PHONY : CMakeFiles/serial_uninstall.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/serial_uninstall.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 0
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/serial_uninstall.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/serial_uninstall.dir/rule
 
 # Convenience name for target.
@@ -137,14 +137,14 @@ CMakeFiles/serial_uninstall.dir/clean:
 CMakeFiles/serial_sender.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_sender.dir/build.make CMakeFiles/serial_sender.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_sender.dir/build.make CMakeFiles/serial_sender.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num=3,4 "Built target serial_sender"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num=3,4 "Built target serial_sender"
 .PHONY : CMakeFiles/serial_sender.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/serial_sender.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/serial_sender.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/serial_sender.dir/rule
 
 # Convenience name for target.
@@ -163,14 +163,14 @@ CMakeFiles/serial_sender.dir/clean:
 CMakeFiles/serial_receiver.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_receiver.dir/build.make CMakeFiles/serial_receiver.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/serial_receiver.dir/build.make CMakeFiles/serial_receiver.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num=1,2 "Built target serial_receiver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles --progress-num=1,2 "Built target serial_receiver"
 .PHONY : CMakeFiles/serial_receiver.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/serial_receiver.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/serial_receiver.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue_robot/buaa_rescue_robot/build/serial/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/rescue-robot/buaa_rescue_robot/build/serial/CMakeFiles 0
 .PHONY : CMakeFiles/serial_receiver.dir/rule
 
 # Convenience name for target.

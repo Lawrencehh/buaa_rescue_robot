@@ -1,5 +1,5 @@
 CMakeFiles/talker.dir/src/talker.cpp.o: \
- /home/rescue_robot/buaa_rescue_robot/src/cpp_pubsub/src/talker.cpp \
+ /home/rescue-robot/buaa_rescue_robot/src/cpp_pubsub/src/talker.cpp \
  /usr/include/stdc-predef.h \
  /opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp \
  /usr/include/c++/11/csignal \

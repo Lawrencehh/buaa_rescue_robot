@@ -1,0 +1,93 @@
+[0.014s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[0.055s] [35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[0.082s] [ 50%] Built target serial_receiver
+[0.087s] [ 75%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[2.286s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:34:6:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K;[m[K’ after class definition
+[2.286s]    34 |     }
+[2.286s]       |      [01;31m[K^[m[K
+[2.286s]       |      [32m[K;[m[K
+[2.303s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In constructor ‘[01m[KSerialSender::SerialSender()[m[K’:
+[2.303s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:15:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kserial_port_[m[K’ was not declared in this scope
+[2.303s]    15 |             [01;31m[Kserial_port_[m[K = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
+[2.303s]       |             [01;31m[K^~~~~~~~~~~~[m[K
+[2.307s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:15:64:[m[K [01;31m[Kerror: [m[K‘[01m[Kio_[m[K’ was not declared in this scope
+[2.307s]    15 |             serial_port_ = std::make_shared<asio::serial_port>([01;31m[Kio_[m[K, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
+[2.307s]       |                                                                [01;31m[K^~~[m[K
+[2.313s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:24:9:[m[K [01;31m[Kerror: [m[K‘[01m[Ktimer_[m[K’ was not declared in this scope; did you mean ‘[01m[Ktimer_t[m[K’?
+[2.313s]    24 |         [01;31m[Ktimer_[m[K = this->create_wall_timer(
+[2.313s]       |         [01;31m[K^~~~~~[m[K
+[2.313s]       |         [32m[Ktimer_t[m[K
+[2.313s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:26:38:[m[K [01;31m[Kerror: [m[K‘[01m[Ktimer_callback[m[K’ is not a member of ‘[01m[KSerialSender[m[K’
+[2.313s]    26 |             std::bind(&SerialSender::[01;31m[Ktimer_callback[m[K, this));
+[2.313s]       |                                      [01;31m[K^~~~~~~~~~~~~~[m[K
+[2.323s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:29:9:[m[K [01;31m[Kerror: [m[K‘[01m[Ksubscription_[m[K’ was not declared in this scope; did you mean ‘[01m[Krmw_subscription_t[m[K’?
+[2.323s]    29 |         [01;31m[Ksubscription_[m[K = this->create_subscription<std_msgs::msg::String>(
+[2.323s]       |         [01;31m[K^~~~~~~~~~~~~[m[K
+[2.323s]       |         [32m[Krmw_subscription_t[m[K
+[2.323s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:32:38:[m[K [01;31m[Kerror: [m[K‘[01m[Kcallback[m[K’ is not a member of ‘[01m[KSerialSender[m[K’
+[2.323s]    32 |             std::bind(&SerialSender::[01;31m[Kcallback[m[K, this, std::placeholders::_1));
+[2.323s]       |                                      [01;31m[K^~~~~~~~[m[K
+[2.324s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K At global scope:
+[2.324s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:36:1:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kprivate[m[K’
+[2.324s]    36 | [01;31m[Kprivate[m[K:
+[2.324s]       | [01;31m[K^~~~~~~[m[K
+[2.330s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In function ‘[01m[Kvoid timer_callback()[m[K’:
+[2.331s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:46:22:[m[K [01;31m[Kerror: [m[K‘[01m[Kserial_port_[m[K’ was not declared in this scope
+[2.331s]    46 |         asio::write(*[01;31m[Kserial_port_[m[K, asio::buffer(msg, msg.size()));  // 发送消息
+[2.331s]       |                      [01;31m[K^~~~~~~~~~~~[m[K
+[2.331s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[2.331s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[2.331s]                  from [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:1[m[K:
+[2.331s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[2.332s]    47 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.332s]       |                     [01;31m[K^~~~[m[K
+[2.332s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[2.332s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[2.332s]    47 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.332s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[2.332s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:9:[m[K [01;31m[Kerror: [m[K‘[01m[K<declaration error>[m[K’ is not a template [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.332s]    47 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.332s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[2.332s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[2.332s]    47 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.332s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[2.332s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:9:[m[K [01;31m[Kerror: [m[K‘[01m[K<declaration error>[m[K’ is not a template [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.332s]    47 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.332s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[2.332s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:9:[m[K [01;31m[Kerror: [m[Ktemplate argument 1 is invalid
+[2.332s]    47 |         [01;31m[KRCLCPP_INFO[m[K(this->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.332s]       |         [01;31m[K^~~~~~~~~~~[m[K
+[2.332s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24[m[K,
+[2.332s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40[m[K,
+[2.332s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[2.333s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[2.333s]                  from [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:1[m[K:
+[2.333s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[2.333s]    47 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.333s]       |                     [01;31m[K^~~~[m[K
+[2.333s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:47:21:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[Kthis[m[K’ in non-member function
+[2.333s]    47 |         RCLCPP_INFO([01;31m[Kthis[m[K->get_logger(), "Sent message: '%s'", msg.c_str());
+[2.333s]       |                     [01;31m[K^~~~[m[K
+[2.365s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K At global scope:
+[2.365s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:55:1:[m[K [01;31m[Kerror: [m[Kexpected declaration before ‘[01m[K}[m[K’ token
+[2.365s]    55 | [01;31m[K}[m[K;
+[2.365s]       | [01;31m[K^[m[K
+[2.754s] gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+[2.754s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+[2.754s] gmake: *** [Makefile:146: all] Error 2
+[2.756s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/serial' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8

@@ -13,19 +13,27 @@ endif()
 # uncomment the following section if you need asio
 # find_package(asio REQUIRED)
 
+find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)  # 注意这一行
 
+# 创建 serial_sender 可执行文件
 add_executable(serial_sender src/serial_sender.cpp)
-ament_target_dependencies(serial_sender rclcpp)  # removed asio
+# 为 serial_sender 添加依赖
+ament_target_dependencies(serial_sender rclcpp std_msgs) 
 
+# 创建 serial_receiver 可执行文件
 add_executable(serial_receiver src/serial_receiver.cpp)
-ament_target_dependencies(serial_receiver rclcpp)
+# 为 serial_receiver 添加依赖
+ament_target_dependencies(serial_receiver rclcpp std_msgs)
 
 
+# 安装目标
 install(TARGETS
   serial_sender
   serial_receiver
   DESTINATION lib/${PROJECT_NAME}
 )
 
+# 打包
 ament_package()

@@ -7,7 +7,7 @@ class Talker : public rclcpp::Node  // 继承自 rclcpp::Node 类
 public:
   Talker() : Node("talker"), count_(0)  // 初始化节点名为 "talker"，并初始化计数为0
   {
-    publisher_ = this->create_publisher<std_msgs::msg::String>("chatter", 10);  // 创建一个名为 "chatter" 的发布器
+    publisher_ = this->create_publisher<std_msgs::msg::String>("motor_control", 10);  // 创建一个名为 "chatter" 的发布器
 
     // 使用定时器来触发消息发布
     timer_ = this->create_wall_timer(

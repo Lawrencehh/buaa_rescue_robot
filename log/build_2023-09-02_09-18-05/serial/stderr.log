@@ -1,0 +1,14 @@
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:2:10:[m[K [01;31m[Kfatal error: [m[Kasio.hpp: No such file or directory
+    2 | #include [01;31m[K<asio.hpp>[m[K
+      |          [01;31m[K^~~~~~~~~~[m[K
+compilation terminated.
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_receiver.cpp:2:10:[m[K [01;31m[Kfatal error: [m[Kasio.hpp: No such file or directory
+    2 | #include [01;31m[K<asio.hpp>[m[K  // 包含 ASIO 库
+      |          [01;31m[K^~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+gmake[2]: *** [CMakeFiles/serial_receiver.dir/build.make:76: CMakeFiles/serial_receiver.dir/src/serial_receiver.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:165: CMakeFiles/serial_receiver.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/rescue_robot/buaa_rescue_robot/src/cpp_pubsub/src/talker.cpp" "CMakeFiles/talker.dir/src/talker.cpp.o" "gcc" "CMakeFiles/talker.dir/src/talker.cpp.o.d"
+  "/home/rescue-robot/buaa_rescue_robot/src/cpp_pubsub/src/talker.cpp" "CMakeFiles/talker.dir/src/talker.cpp.o" "gcc" "CMakeFiles/talker.dir/src/talker.cpp.o.d"
   )
 
 # Targets to which this target links.
