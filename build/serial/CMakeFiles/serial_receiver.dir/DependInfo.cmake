@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_receiver.cpp" "CMakeFiles/serial_receiver.dir/src/serial_receiver.cpp.o" "gcc" "CMakeFiles/serial_receiver.dir/src/serial_receiver.cpp.o.d"
+  "/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_receiver.cpp" "CMakeFiles/serial_receiver.dir/src/serial_receiver.cpp.o" "gcc" "CMakeFiles/serial_receiver.dir/src/serial_receiver.cpp.o.d"
   )
 
 # Targets to which this target links.

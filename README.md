@@ -35,7 +35,7 @@ source install/setup.bash
 ```
 
 ## Usage
-Talker and Listener  
+### Talker and Listener  
 Run the talker node:
 
 ```bash
@@ -45,9 +45,9 @@ ros2 run cpp_pubsub talker
 Run the listener node:
 ```bash
 ros2 run cpp_pubsub listener
-Serial Communication
 ```
 
+### Serial Communication
 Run the serial sender node:
 ```bash
 ros2 run serial serial_sender

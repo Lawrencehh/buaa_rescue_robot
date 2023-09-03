@@ -1,0 +1,5 @@
+# 排除build文件夹
+build/
+
+# 排除install文件夹
+install/

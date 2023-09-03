@@ -1,5 +1,5 @@
 CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o: \
- /home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp \
+ /home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp \
  /usr/include/stdc-predef.h \
  /opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp \
  /usr/include/c++/11/csignal \
