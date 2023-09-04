@@ -29,28 +29,22 @@ int main(int argc, char * argv[])
     int key = getch();  // 获取键盘输入
 
     if (key == '8') {  // 检查是否按下了'8'
-      msg->controller_addr = 3;
-      msg->dev_addr = 1;
-      msg->func_code = 0x33;
-      msg->control_data = 0x010001;
+      msg->elevator_control = 1;
+
       publisher->publish(*msg);  // 发布消息
-      RCLCPP_INFO(node->get_logger(), "Published control message with func_code: 0x33");  // 打印日志
+      RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: 1");  // 打印日志
     }
     else if (key == '5') {  // 检查是否按下了'5'
-      msg->controller_addr = 3;
-      msg->dev_addr = 1;
-      msg->func_code = 0x4F;
-      msg->control_data = 0x014F4F;
+      msg->elevator_control = 0;
+
       publisher->publish(*msg);  // 发布消息
-      RCLCPP_INFO(node->get_logger(), "Published control message with func_code: 0x4F");  // 打印日志
+      RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: 0");  // 打印日志
     }
     else if (key == '2') {  // 检查是否按下了'2'
-      msg->controller_addr = 3;
-      msg->dev_addr = 1;
-      msg->func_code = 0x33;
-      msg->control_data = 0x01FFFF;
+      msg->elevator_control = -1;
+
       publisher->publish(*msg);  // 发布消息
-      RCLCPP_INFO(node->get_logger(), "Published control message with func_code: 0x33");  // 打印日志
+      RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: -1");  // 打印日志
     }
 
     rclcpp::spin_some(node);  // 处理回调
