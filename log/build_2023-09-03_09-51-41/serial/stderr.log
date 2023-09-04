@@ -1,6 +1,0 @@
-[31mCMake Error at CMakeLists.txt:26 (target_link_libraries):
-  Cannot specify link libraries for target "serial" which is not built by
-  this project.
-
-[0m
-gmake: *** [Makefile:308: cmake_check_build_system] Error 1

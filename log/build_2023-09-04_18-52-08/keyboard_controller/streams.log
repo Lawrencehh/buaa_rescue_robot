@@ -1,0 +1,66 @@
+[0.035s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/keyboard_controller -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller
+[0.127s] -- The C compiler identification is GNU 11.4.0
+[0.252s] -- The CXX compiler identification is GNU 11.4.0
+[0.264s] -- Detecting C compiler ABI info
+[0.412s] -- Detecting C compiler ABI info - done
+[0.428s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.428s] -- Detecting C compile features
+[0.429s] -- Detecting C compile features - done
+[0.435s] -- Detecting CXX compiler ABI info
+[0.580s] -- Detecting CXX compiler ABI info - done
+[0.597s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.597s] -- Detecting CXX compile features
+[0.599s] -- Detecting CXX compile features - done
+[0.603s] -- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.880s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[1.003s] -- Found rclcpp: 16.0.5 (/opt/ros/humble/share/rclcpp/cmake)
+[1.074s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.081s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.094s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.110s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.142s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.259s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.263s] -- Found rmw_fastrtps_cpp: 6.2.3 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.407s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.452s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.539s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.554s] -- Looking for pthread.h
+[1.677s] -- Looking for pthread.h - found
+[1.678s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.800s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.800s] -- Found Threads: TRUE  
+[2.090s] -- Found ament_lint_auto: 0.12.7 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[2.225s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[2.225s] -- Configured cppcheck include dirs: 
+[2.226s] -- Configured cppcheck exclude dirs and/or files: 
+[2.226s] -- Added test 'lint_cmake' to check CMake code style
+[2.226s] -- Added test 'uncrustify' to check C / C++ code style
+[2.226s] -- Configured uncrustify additional arguments: 
+[2.226s] -- Added test 'xmllint' to check XML markup files
+[2.228s] -- Configuring done
+[2.244s] -- Generating done
+[2.247s] -- Build files have been written to: /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller
+[2.264s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/keyboard_controller -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller
+[2.265s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[2.333s] [ 50%] [32mBuilding CXX object CMakeFiles/keyboard_publisher.dir/src/keyboard_publisher.cpp.o[0m
+[10.653s] [100%] [32m[1mLinking CXX executable keyboard_publisher[0m
+[11.095s] [100%] Built target keyboard_publisher
+[11.139s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[11.200s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller
+[11.211s] -- Install configuration: ""
+[11.212s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/package_run_dependencies/keyboard_controller
+[11.212s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/parent_prefix_path/keyboard_controller
+[11.213s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/ament_prefix_path.sh
+[11.213s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/ament_prefix_path.dsv
+[11.214s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/path.sh
+[11.214s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/path.dsv
+[11.215s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.bash
+[11.215s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.sh
+[11.216s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.zsh
+[11.216s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.dsv
+[11.217s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.dsv
+[11.217s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/packages/keyboard_controller
+[11.218s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controllerConfig.cmake
+[11.218s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controllerConfig-version.cmake
+[11.218s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.xml
+[11.233s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller

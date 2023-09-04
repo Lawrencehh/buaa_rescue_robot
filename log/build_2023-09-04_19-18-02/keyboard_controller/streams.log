@@ -1,0 +1,33 @@
+[0.034s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[0.081s] -- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.396s] -- Found rclcpp: 16.0.5 (/opt/ros/humble/share/rclcpp/cmake)
+[0.450s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.455s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.468s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.490s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.521s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.623s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.625s] -- Found rmw_fastrtps_cpp: 6.2.3 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.800s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.009s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[1.296s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.682s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.827s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.857s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[1.859s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.886s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[1.886s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.886s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.886s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.909s] -- Found PythonExtra: .so  
+[1.954s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_target_dependencies/cmake/ament_target_dependencies.cmake:77 (message):
+[1.954s]   ament_target_dependencies() the passed package name 'keyboard_controller'
+[1.954s]   was not found before
+[1.954s] Call Stack (most recent call first):
+[1.954s]   CMakeLists.txt:26 (ament_target_dependencies)
+[1.954s] 
+[1.954s] [0m
+[1.954s] -- Configuring incomplete, errors occurred!
+[1.954s] See also "/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller/CMakeFiles/CMakeOutput.log".
+[1.961s] gmake: *** [Makefile:267: cmake_check_build_system] Error 1
+[1.964s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8

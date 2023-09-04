@@ -1,0 +1,181 @@
+[0.034s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[0.072s] -- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.286s] -- Found rclcpp: 16.0.5 (/opt/ros/humble/share/rclcpp/cmake)
+[0.325s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.330s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.338s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.360s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.385s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.467s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.469s] -- Found rmw_fastrtps_cpp: 6.2.3 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.624s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.823s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[1.094s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[1.436s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.572s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.594s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[1.627s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[1.627s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[1.627s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[1.647s] -- Configuring done
+[1.685s] -- Generating done
+[1.689s] -- Build files have been written to: /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller
+[1.726s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_generator_c[0m
+[1.737s] [  3%] Built target keyboard_controller__cpp
+[1.743s] [ 12%] Built target keyboard_controller__rosidl_generator_c
+[1.751s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_cpp[0m
+[1.753s] [ 12%] Built target ament_cmake_python_copy_keyboard_controller
+[1.754s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_fastrtps_cpp[0m
+[1.759s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_introspection_cpp[0m
+[1.759s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_fastrtps_c[0m
+[1.759s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_introspection_c[0m
+[1.763s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_c[0m
+[1.769s] [ 21%] Built target keyboard_controller__rosidl_typesupport_cpp
+[1.774s] [ 39%] Built target keyboard_controller__rosidl_typesupport_introspection_c
+[1.775s] [ 39%] Built target keyboard_controller__rosidl_typesupport_fastrtps_cpp
+[1.780s] [ 48%] Built target keyboard_controller__rosidl_typesupport_introspection_cpp
+[1.782s] [ 57%] Built target keyboard_controller__rosidl_typesupport_fastrtps_c
+[1.784s] [ 66%] Built target keyboard_controller__rosidl_typesupport_c
+[1.785s] [35m[1mConsolidate compiler generated dependencies of target keyboard_publisher[0m
+[1.809s] [ 69%] [32mBuilding CXX object CMakeFiles/keyboard_publisher.dir/src/keyboard_publisher.cpp.o[0m
+[1.809s] [ 69%] Built target keyboard_controller
+[1.841s] [ 72%] Built target keyboard_controller__py
+[1.853s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_generator_py[0m
+[1.867s] [ 78%] Built target keyboard_controller__rosidl_generator_py
+[1.880s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_c__pyext[0m
+[1.880s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_fastrtps_c__pyext[0m
+[1.881s] [35m[1mConsolidate compiler generated dependencies of target keyboard_controller__rosidl_typesupport_introspection_c__pyext[0m
+[1.898s] [ 84%] Built target keyboard_controller__rosidl_typesupport_introspection_c__pyext
+[1.900s] [ 90%] Built target keyboard_controller__rosidl_typesupport_c__pyext
+[1.901s] [ 96%] Built target keyboard_controller__rosidl_typesupport_fastrtps_c__pyext
+[2.098s] running egg_info
+[2.099s] writing keyboard_controller.egg-info/PKG-INFO
+[2.099s] writing dependency_links to keyboard_controller.egg-info/dependency_links.txt
+[2.100s] writing top-level names to keyboard_controller.egg-info/top_level.txt
+[2.104s] reading manifest file 'keyboard_controller.egg-info/SOURCES.txt'
+[2.104s] writing manifest file 'keyboard_controller.egg-info/SOURCES.txt'
+[2.144s] [ 96%] Built target ament_cmake_python_build_keyboard_controller_egg
+[6.594s] [100%] [32m[1mLinking CXX executable keyboard_publisher[0m
+[6.819s] [100%] Built target keyboard_publisher
+[6.835s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[6.897s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller
+[6.904s] -- Install configuration: ""
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/rosidl_interfaces/keyboard_controller
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__functions.h
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__functions.c
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__type_support.h
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__struct.h
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/control_message.h
+[6.905s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/rosidl_generator_c__visibility_control.h
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/library_path.sh
+[6.906s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/library_path.dsv
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_generator_c.so
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__rosidl_typesupport_fastrtps_c.h
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_typesupport_fastrtps_c.so
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg
+[6.906s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/control_message.hpp
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__builder.hpp
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__traits.hpp
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__struct.hpp
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/dds_fastrtps
+[6.907s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__rosidl_typesupport_fastrtps_cpp.hpp
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_typesupport_fastrtps_cpp.so
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__rosidl_typesupport_introspection_c.h
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__type_support.c
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_typesupport_introspection_c.so
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_typesupport_c.so
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg
+[6.908s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail
+[6.909s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__type_support.cpp
+[6.909s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/include/keyboard_controller/keyboard_controller/msg/detail/control_message__rosidl_typesupport_introspection_cpp.hpp
+[6.909s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_typesupport_introspection_cpp.so
+[6.909s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_typesupport_cpp.so
+[6.909s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/pythonpath.sh
+[6.909s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/pythonpath.dsv
+[6.909s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller-0.0.1-py3.10.egg-info
+[6.909s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller-0.0.1-py3.10.egg-info/top_level.txt
+[6.910s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller-0.0.1-py3.10.egg-info/dependency_links.txt
+[6.910s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller-0.0.1-py3.10.egg-info/SOURCES.txt
+[6.910s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller-0.0.1-py3.10.egg-info/PKG-INFO
+[6.910s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller
+[6.910s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/keyboard_controller_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[6.910s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/_keyboard_controller_s.ep.rosidl_typesupport_introspection_c.c
+[6.910s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/libkeyboard_controller__rosidl_generator_py.so
+[6.910s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/_keyboard_controller_s.ep.rosidl_typesupport_c.c
+[6.910s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/_keyboard_controller_s.ep.rosidl_typesupport_fastrtps_c.c
+[6.911s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/keyboard_controller_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[6.911s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/__init__.py
+[6.911s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/keyboard_controller_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[6.911s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/msg
+[6.911s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/msg/_control_message.py
+[6.911s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/msg/_control_message_s.c
+[6.911s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/msg/__init__.py
+[6.954s] Listing '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller'...
+[6.954s] Compiling '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/__init__.py'...
+[6.954s] Listing '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/msg'...
+[6.959s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/keyboard_controller_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[6.959s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/keyboard_controller_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[6.960s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/local/lib/python3.10/dist-packages/keyboard_controller/keyboard_controller_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[6.960s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/libkeyboard_controller__rosidl_generator_py.so
+[6.960s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/msg/ControlMessage.idl
+[6.960s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/msg/ControlMessage.msg
+[6.961s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/keyboard_controller/keyboard_publisher
+[6.962s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/keyboard_controller/keyboard_publisher" to ""
+[6.963s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/package_run_dependencies/keyboard_controller
+[6.963s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/parent_prefix_path/keyboard_controller
+[6.963s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/ament_prefix_path.sh
+[6.963s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/ament_prefix_path.dsv
+[6.963s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/path.sh
+[6.963s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/path.dsv
+[6.963s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.bash
+[6.964s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.sh
+[6.964s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.zsh
+[6.964s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.dsv
+[6.964s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.dsv
+[6.964s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/packages/keyboard_controller
+[6.964s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_generator_cExport.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_generator_cExport-noconfig.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_typesupport_fastrtps_cExport.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_generator_cppExport.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_typesupport_fastrtps_cppExport.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_introspection_cExport.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_cExport.cmake
+[6.965s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_cExport-noconfig.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_introspection_cppExport.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_cppExport.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controller__rosidl_typesupport_cppExport-noconfig.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_generator_pyExport.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/export_keyboard_controller__rosidl_generator_pyExport-noconfig.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/rosidl_cmake-extras.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/ament_cmake_export_include_directories-extras.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/ament_cmake_export_libraries-extras.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/ament_cmake_export_targets-extras.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/ament_cmake_export_dependencies-extras.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[6.966s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controllerConfig.cmake
+[6.967s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controllerConfig-version.cmake
+[6.967s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.xml
+[6.972s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller

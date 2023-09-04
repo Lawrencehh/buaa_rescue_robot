@@ -1,0 +1,65 @@
+[0.045s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/cpp_pubsub -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub
+[0.139s] -- The C compiler identification is GNU 11.4.0
+[0.273s] -- The CXX compiler identification is GNU 11.4.0
+[0.286s] -- Detecting C compiler ABI info
+[0.421s] -- Detecting C compiler ABI info - done
+[0.438s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.439s] -- Detecting C compile features
+[0.439s] -- Detecting C compile features - done
+[0.445s] -- Detecting CXX compiler ABI info
+[0.601s] -- Detecting CXX compiler ABI info - done
+[0.616s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.616s] -- Detecting CXX compile features
+[0.617s] -- Detecting CXX compile features - done
+[0.620s] -- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.922s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[1.054s] -- Found rclcpp: 16.0.5 (/opt/ros/humble/share/rclcpp/cmake)
+[1.122s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.129s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.143s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.172s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.210s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.339s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.343s] -- Found rmw_fastrtps_cpp: 6.2.3 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.490s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.535s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.603s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.619s] -- Looking for pthread.h
+[1.731s] -- Looking for pthread.h - found
+[1.731s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.849s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.851s] -- Found Threads: TRUE  
+[2.268s] -- Configuring done
+[2.287s] -- Generating done
+[2.289s] -- Build files have been written to: /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub
+[2.315s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/cpp_pubsub -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub
+[2.315s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub -- -j8 -l8
+[2.402s] [ 25%] [32mBuilding CXX object CMakeFiles/talker.dir/src/talker.cpp.o[0m
+[2.403s] [ 50%] [32mBuilding CXX object CMakeFiles/listener.dir/src/listener.cpp.o[0m
+[10.566s] [ 75%] [32m[1mLinking CXX executable talker[0m
+[11.042s] [ 75%] Built target talker
+[16.642s] [100%] [32m[1mLinking CXX executable listener[0m
+[17.596s] [100%] Built target listener
+[17.612s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub -- -j8 -l8
+[17.661s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub
+[17.669s] -- Install configuration: ""
+[17.669s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/cpp_pubsub/talker
+[17.672s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/cpp_pubsub/talker" to ""
+[17.673s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/cpp_pubsub/listener
+[17.680s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/cpp_pubsub/listener" to ""
+[17.681s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/ament_index/resource_index/package_run_dependencies/cpp_pubsub
+[17.681s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/ament_index/resource_index/parent_prefix_path/cpp_pubsub
+[17.682s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/environment/ament_prefix_path.sh
+[17.682s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/environment/ament_prefix_path.dsv
+[17.682s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/environment/path.sh
+[17.683s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/environment/path.dsv
+[17.684s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/local_setup.bash
+[17.684s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/local_setup.sh
+[17.685s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/local_setup.zsh
+[17.685s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/local_setup.dsv
+[17.685s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.dsv
+[17.685s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/ament_index/resource_index/packages/cpp_pubsub
+[17.686s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/cmake/cpp_pubsubConfig.cmake
+[17.686s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/cmake/cpp_pubsubConfig-version.cmake
+[17.687s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.xml
+[17.697s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub
