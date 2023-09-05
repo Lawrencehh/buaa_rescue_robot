@@ -1,6 +1,7 @@
 #include <rclcpp/rclcpp.hpp>
 #include <asio.hpp>
 #include <std_msgs/msg/string.hpp>
+#include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
 
 using namespace std;
 using asio::ip::tcp;
@@ -25,30 +26,31 @@ public:
             std::chrono::seconds(1),
             std::bind(&SerialSender::timer_callback, this));
         
-        // 创建订阅器，订阅名为"motor_control"的话题
-        subscription_ = this->create_subscription<std_msgs::msg::String>(
-            "motor_control",
+        // 创建订阅器，订阅名为"control_topic"的话题
+  
+        subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>(
+            "control_topic",
             10,
             std::bind(&SerialSender::callback, this, std::placeholders::_1));
     }
 
 
 private:
-    void callback(const std_msgs::msg::String::SharedPtr msg)
+    void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg)
     {
         // 解析接收到的消息，并生成Modbus协议帧
         // 这里简单地将接收到的消息存储为待发送的Modbus帧
-        modbus_frame_ = msg->data;
+        // modbus_frame_ = msg->data;
     }
     void timer_callback()   // 定时器回调函数
     {
-        const std::string msg = modbus_frame_;
-        asio::write(*serial_port_, asio::buffer(msg, msg.size()));  // 发送消息
-        RCLCPP_INFO(this->get_logger(), "Sent message: '%s'", msg.c_str());
+        // const std::string msg = modbus_frame_;
+        // asio::write(*serial_port_, asio::buffer(msg, msg.size()));  // 发送消息
+        // RCLCPP_INFO(this->get_logger(), "Sent message: '%s'", msg.c_str());
     }
 
     rclcpp::TimerBase::SharedPtr timer_;    // 定时器
-    rclcpp::Subscription<std_msgs::msg::String>::SharedPtr subscription_;  //订阅器
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr subscription_;  //订阅器
     std::shared_ptr<asio::serial_port> serial_port_;    // 串口对象
     asio::io_service io_;   // ASIO I/O服务
     std::string modbus_frame_;  // 存储Modbus协议帧

@@ -15,17 +15,20 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)  # 注意这一行
+find_package(std_msgs REQUIRED)  
+find_package(rosidl_default_generators REQUIRED)
+find_package(buaa_rescue_robot_msgs REQUIRED)  # 已经添加了这个依赖
+
 
 # 创建 serial_sender 可执行文件
 add_executable(serial_sender src/serial_sender.cpp)
 # 为 serial_sender 添加依赖
-ament_target_dependencies(serial_sender rclcpp std_msgs) 
+ament_target_dependencies(serial_sender rclcpp std_msgs buaa_rescue_robot_msgs) 
 
 # 创建 serial_receiver 可执行文件
 add_executable(serial_receiver src/serial_receiver.cpp)
 # 为 serial_receiver 添加依赖
-ament_target_dependencies(serial_receiver rclcpp std_msgs)
+ament_target_dependencies(serial_receiver rclcpp std_msgs buaa_rescue_robot_msgs) 
 
 
 # 安装目标

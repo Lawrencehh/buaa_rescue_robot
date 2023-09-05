@@ -1,0 +1,245 @@
+[0.035s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/buaa_rescue_robot_msgs -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs
+[0.119s] -- The C compiler identification is GNU 11.4.0
+[0.210s] -- The CXX compiler identification is GNU 11.4.0
+[0.225s] -- Detecting C compiler ABI info
+[0.324s] -- Detecting C compiler ABI info - done
+[0.341s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.342s] -- Detecting C compile features
+[0.343s] -- Detecting C compile features - done
+[0.348s] -- Detecting CXX compiler ABI info
+[0.462s] -- Detecting CXX compiler ABI info - done
+[0.474s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.474s] -- Detecting CXX compile features
+[0.476s] -- Detecting CXX compile features - done
+[0.479s] -- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.744s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[0.875s] -- Found rclcpp: 16.0.5 (/opt/ros/humble/share/rclcpp/cmake)
+[0.923s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.930s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.944s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.968s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.995s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.105s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.108s] -- Found rmw_fastrtps_cpp: 6.2.3 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.230s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.271s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.346s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.363s] -- Looking for pthread.h
+[1.454s] -- Looking for pthread.h - found
+[1.454s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.553s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.555s] -- Found Threads: TRUE  
+[1.795s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[2.168s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[2.675s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[2.844s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[2.882s] -- Found PythonInterp: /usr/bin/python3 (found suitable version "3.10.12", minimum required is "3.6") 
+[2.884s] -- Found python_cmake_module: 0.10.0 (/opt/ros/humble/share/python_cmake_module/cmake)
+[2.929s] -- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.10.so (found suitable version "3.10.12", minimum required is "3.5") 
+[2.929s] -- Using PYTHON_EXECUTABLE: /usr/bin/python3
+[2.930s] -- Using PYTHON_INCLUDE_DIRS: /usr/include/python3.10
+[2.930s] -- Using PYTHON_LIBRARIES: /usr/lib/x86_64-linux-gnu/libpython3.10.so
+[2.966s] -- Found PythonExtra: .so  
+[3.012s] -- Found ament_lint_auto: 0.12.7 (/opt/ros/humble/share/ament_lint_auto/cmake)
+[3.096s] -- Added test 'cppcheck' to perform static code analysis on C / C++ code
+[3.096s] -- Configured cppcheck include dirs: 
+[3.097s] -- Configured cppcheck exclude dirs and/or files: 
+[3.103s] -- Added test 'flake8' to check Python code syntax and style conventions
+[3.116s] -- Added test 'lint_cmake' to check CMake code style
+[3.124s] -- Added test 'pep257' to check Python code against some of the docstring style conventions in PEP 257
+[3.190s] -- Added test 'uncrustify' to check C / C++ code style
+[3.190s] -- Configured uncrustify additional arguments: 
+[3.195s] -- Added test 'xmllint' to check XML markup files
+[3.198s] -- Configuring done
+[3.241s] -- Generating done
+[3.247s] -- Build files have been written to: /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs
+[3.270s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/rescue_robot/buaa_rescue_robot/src/buaa_rescue_robot_msgs -DCMAKE_INSTALL_PREFIX=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs
+[3.270s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs -- -j8 -l8
+[3.333s] [  3%] [34m[1mGenerating C code for ROS interfaces[0m
+[3.355s] [  6%] [34m[1mGenerating C++ code for ROS interfaces[0m
+[3.392s] [  6%] Built target ament_cmake_python_copy_buaa_rescue_robot_msgs
+[3.849s] running egg_info
+[3.851s] creating buaa_rescue_robot_msgs.egg-info
+[3.852s] writing buaa_rescue_robot_msgs.egg-info/PKG-INFO
+[3.853s] writing dependency_links to buaa_rescue_robot_msgs.egg-info/dependency_links.txt
+[3.853s] writing top-level names to buaa_rescue_robot_msgs.egg-info/top_level.txt
+[3.854s] writing manifest file 'buaa_rescue_robot_msgs.egg-info/SOURCES.txt'
+[3.858s] reading manifest file 'buaa_rescue_robot_msgs.egg-info/SOURCES.txt'
+[3.860s] writing manifest file 'buaa_rescue_robot_msgs.egg-info/SOURCES.txt'
+[3.869s] [  6%] Built target buaa_rescue_robot_msgs__cpp
+[3.890s] [  9%] [34m[1mGenerating C++ type support dispatch for ROS interfaces[0m
+[3.896s] [ 12%] [34m[1mGenerating C++ type support for eProsima Fast-RTPS[0m
+[3.900s] [ 16%] [34m[1mGenerating C++ introspection for ROS interfaces[0m
+[3.925s] [ 19%] [32mBuilding C object CMakeFiles/buaa_rescue_robot_msgs__rosidl_generator_c.dir/rosidl_generator_c/buaa_rescue_robot_msgs/msg/detail/control_message__functions.c.o[0m
+[3.942s] [ 19%] Built target ament_cmake_python_build_buaa_rescue_robot_msgs_egg
+[4.048s] [ 22%] [32m[1mLinking C shared library libbuaa_rescue_robot_msgs__rosidl_generator_c.so[0m
+[4.167s] [ 22%] Built target buaa_rescue_robot_msgs__rosidl_generator_c
+[4.188s] [ 25%] [34m[1mGenerating C introspection for ROS interfaces[0m
+[4.218s] [ 29%] [34m[1mGenerating C type support dispatch for ROS interfaces[0m
+[4.238s] [ 32%] [34m[1mGenerating C type support for eProsima Fast-RTPS[0m
+[4.391s] [ 35%] [32mBuilding CXX object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/buaa_rescue_robot_msgs/msg/control_message__type_support.cpp.o[0m
+[4.487s] [ 38%] [32mBuilding CXX object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/buaa_rescue_robot_msgs/msg/detail/dds_fastrtps/control_message__type_support.cpp.o[0m
+[4.604s] [ 41%] [32mBuilding CXX object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/buaa_rescue_robot_msgs/msg/detail/control_message__type_support.cpp.o[0m
+[4.878s] [ 45%] [32mBuilding CXX object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/buaa_rescue_robot_msgs/msg/detail/control_message__type_support_c.cpp.o[0m
+[4.993s] [ 48%] [32mBuilding C object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/buaa_rescue_robot_msgs/msg/detail/control_message__type_support.c.o[0m
+[5.004s] [ 54%] [32m[1mLinking CXX shared library libbuaa_rescue_robot_msgs__rosidl_typesupport_cpp.so[0m
+[5.005s] [ 54%] [32mBuilding CXX object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_c.dir/rosidl_typesupport_c/buaa_rescue_robot_msgs/msg/control_message__type_support.cpp.o[0m
+[5.069s] [ 58%] [32m[1mLinking C shared library libbuaa_rescue_robot_msgs__rosidl_typesupport_introspection_c.so[0m
+[5.105s] [ 61%] [32m[1mLinking CXX shared library libbuaa_rescue_robot_msgs__rosidl_typesupport_c.so[0m
+[5.140s] [ 61%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_cpp
+[5.223s] [ 61%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_c
+[5.226s] [ 61%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_introspection_c
+[5.313s] [ 64%] [32m[1mLinking CXX shared library libbuaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cpp.so[0m
+[5.392s] [ 67%] [32m[1mLinking CXX shared library libbuaa_rescue_robot_msgs__rosidl_typesupport_introspection_cpp.so[0m
+[5.481s] [ 67%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cpp
+[5.483s] [ 67%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_introspection_cpp
+[5.629s] [ 70%] [32m[1mLinking CXX shared library libbuaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_c.so[0m
+[5.770s] [ 70%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_c
+[5.802s] [ 70%] Built target buaa_rescue_robot_msgs
+[5.829s] [ 74%] [34m[1mGenerating Python code for ROS interfaces[0m
+[6.335s] [ 74%] Built target buaa_rescue_robot_msgs__py
+[6.359s] [ 77%] [32mBuilding C object CMakeFiles/buaa_rescue_robot_msgs__rosidl_generator_py.dir/rosidl_generator_py/buaa_rescue_robot_msgs/msg/_control_message_s.c.o[0m
+[6.513s] [ 80%] [32m[1mLinking C shared library rosidl_generator_py/buaa_rescue_robot_msgs/libbuaa_rescue_robot_msgs__rosidl_generator_py.so[0m
+[6.568s] [ 80%] Built target buaa_rescue_robot_msgs__rosidl_generator_py
+[6.602s] [ 83%] [32mBuilding C object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator_py/buaa_rescue_robot_msgs/_buaa_rescue_robot_msgs_s.ep.rosidl_typesupport_fastrtps_c.c.o[0m
+[6.607s] [ 87%] [32mBuilding C object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_introspection_c__pyext.dir/rosidl_generator_py/buaa_rescue_robot_msgs/_buaa_rescue_robot_msgs_s.ep.rosidl_typesupport_introspection_c.c.o[0m
+[6.638s] [ 90%] [32mBuilding C object CMakeFiles/buaa_rescue_robot_msgs__rosidl_typesupport_c__pyext.dir/rosidl_generator_py/buaa_rescue_robot_msgs/_buaa_rescue_robot_msgs_s.ep.rosidl_typesupport_c.c.o[0m
+[6.778s] [ 93%] [32m[1mLinking C shared library rosidl_generator_py/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so[0m
+[6.790s] [ 96%] [32m[1mLinking C shared library rosidl_generator_py/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so[0m
+[6.805s] [100%] [32m[1mLinking C shared library rosidl_generator_py/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so[0m
+[6.844s] [100%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_c__pyext
+[6.867s] [100%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_introspection_c__pyext
+[6.879s] [100%] Built target buaa_rescue_robot_msgs__rosidl_typesupport_c__pyext
+[6.896s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs -- -j8 -l8
+[7.025s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs
+[7.039s] -- Install configuration: ""
+[7.039s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/ament_index/resource_index/rosidl_interfaces/buaa_rescue_robot_msgs
+[7.039s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs
+[7.039s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg
+[7.039s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail
+[7.039s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__functions.h
+[7.040s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__functions.c
+[7.040s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__type_support.h
+[7.040s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__struct.h
+[7.040s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/control_message.h
+[7.040s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/rosidl_generator_c__visibility_control.h
+[7.040s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/library_path.sh
+[7.041s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/library_path.dsv
+[7.041s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_generator_c.so
+[7.041s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_generator_c.so" to ""
+[7.042s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs
+[7.042s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg
+[7.042s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail
+[7.042s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__rosidl_typesupport_fastrtps_c.h
+[7.042s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/rosidl_typesupport_fastrtps_c__visibility_control.h
+[7.042s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_c.so
+[7.043s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_c.so" to ""
+[7.043s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs
+[7.043s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg
+[7.043s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/control_message.hpp
+[7.043s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail
+[7.043s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__builder.hpp
+[7.044s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__traits.hpp
+[7.044s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__struct.hpp
+[7.044s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs
+[7.044s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg
+[7.044s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail
+[7.044s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/dds_fastrtps
+[7.044s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__rosidl_typesupport_fastrtps_cpp.hpp
+[7.045s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/rosidl_typesupport_fastrtps_cpp__visibility_control.h
+[7.045s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cpp.so
+[7.045s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cpp.so" to ""
+[7.045s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs
+[7.045s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg
+[7.046s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail
+[7.046s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__rosidl_typesupport_introspection_c.h
+[7.046s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__type_support.c
+[7.046s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h
+[7.046s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_introspection_c.so
+[7.047s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_introspection_c.so" to ""
+[7.047s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_c.so
+[7.048s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_c.so" to ""
+[7.048s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs
+[7.048s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg
+[7.048s] -- Up-to-date: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail
+[7.049s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__type_support.cpp
+[7.049s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/include/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs/msg/detail/control_message__rosidl_typesupport_introspection_cpp.hpp
+[7.049s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_introspection_cpp.so
+[7.049s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_introspection_cpp.so" to ""
+[7.050s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_cpp.so
+[7.050s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_typesupport_cpp.so" to ""
+[7.050s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/pythonpath.sh
+[7.050s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/pythonpath.dsv
+[7.050s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs-0.0.0-py3.10.egg-info
+[7.051s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs-0.0.0-py3.10.egg-info/top_level.txt
+[7.051s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs-0.0.0-py3.10.egg-info/dependency_links.txt
+[7.051s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs-0.0.0-py3.10.egg-info/SOURCES.txt
+[7.051s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs-0.0.0-py3.10.egg-info/PKG-INFO
+[7.051s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs
+[7.051s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/_buaa_rescue_robot_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
+[7.051s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/_buaa_rescue_robot_msgs_s.ep.rosidl_typesupport_introspection_c.c
+[7.052s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[7.052s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[7.052s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/libbuaa_rescue_robot_msgs__rosidl_generator_py.so
+[7.052s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/_buaa_rescue_robot_msgs_s.ep.rosidl_typesupport_c.c
+[7.052s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/__init__.py
+[7.052s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[7.053s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/msg
+[7.053s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/msg/_control_message.py
+[7.053s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/msg/_control_message_s.c
+[7.053s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/msg/__init__.py
+[7.114s] Listing '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs'...
+[7.114s] Compiling '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/__init__.py'...
+[7.115s] Listing '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/msg'...
+[7.115s] Compiling '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/msg/__init__.py'...
+[7.115s] Compiling '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/msg/_control_message.py'...
+[7.119s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so
+[7.120s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_fastrtps_c.cpython-310-x86_64-linux-gnu.so" to ""
+[7.121s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so
+[7.122s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_introspection_c.cpython-310-x86_64-linux-gnu.so" to ""
+[7.122s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so
+[7.123s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages/buaa_rescue_robot_msgs/buaa_rescue_robot_msgs_s__rosidl_typesupport_c.cpython-310-x86_64-linux-gnu.so" to ""
+[7.123s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_generator_py.so
+[7.125s] -- Set runtime path of "/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/libbuaa_rescue_robot_msgs__rosidl_generator_py.so" to ""
+[7.125s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/msg/ControlMessage.idl
+[7.125s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/msg/ControlMessage.msg
+[7.126s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/ament_index/resource_index/package_run_dependencies/buaa_rescue_robot_msgs
+[7.126s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/ament_index/resource_index/parent_prefix_path/buaa_rescue_robot_msgs
+[7.126s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/ament_prefix_path.sh
+[7.126s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/ament_prefix_path.dsv
+[7.127s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/path.sh
+[7.127s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/environment/path.dsv
+[7.127s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/local_setup.bash
+[7.127s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/local_setup.sh
+[7.127s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/local_setup.zsh
+[7.128s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/local_setup.dsv
+[7.128s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.dsv
+[7.128s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/ament_index/resource_index/packages/buaa_rescue_robot_msgs
+[7.128s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_generator_cExport.cmake
+[7.128s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_generator_cExport-noconfig.cmake
+[7.128s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cExport.cmake
+[7.129s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cExport-noconfig.cmake
+[7.129s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_generator_cppExport.cmake
+[7.129s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cppExport.cmake
+[7.129s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_typesupport_fastrtps_cppExport-noconfig.cmake
+[7.130s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_introspection_cExport.cmake
+[7.130s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_introspection_cExport-noconfig.cmake
+[7.130s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_cExport.cmake
+[7.131s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_cExport-noconfig.cmake
+[7.131s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_introspection_cppExport.cmake
+[7.131s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_introspection_cppExport-noconfig.cmake
+[7.131s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_cppExport.cmake
+[7.132s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgs__rosidl_typesupport_cppExport-noconfig.cmake
+[7.132s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_generator_pyExport.cmake
+[7.132s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/export_buaa_rescue_robot_msgs__rosidl_generator_pyExport-noconfig.cmake
+[7.132s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/rosidl_cmake-extras.cmake
+[7.133s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/ament_cmake_export_include_directories-extras.cmake
+[7.133s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/ament_cmake_export_libraries-extras.cmake
+[7.133s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/ament_cmake_export_targets-extras.cmake
+[7.133s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/rosidl_cmake_export_typesupport_targets-extras.cmake
+[7.134s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/ament_cmake_export_dependencies-extras.cmake
+[7.134s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/rosidl_cmake_export_typesupport_libraries-extras.cmake
+[7.134s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgsConfig.cmake
+[7.134s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake/buaa_rescue_robot_msgsConfig-version.cmake
+[7.134s] -- Installing: /home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.xml
+[7.138s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs

@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"  // 引入ROS 2的C++库
-#include "keyboard_controller/msg/control_message.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
 
 #include <termios.h>  // 用于键盘输入
 #include <unistd.h>  // Unix标准库
@@ -21,9 +21,9 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);  // 初始化ROS 2节点
   auto node = std::make_shared<rclcpp::Node>("keyboard_controller");  // 创建节点
-  auto publisher = node->create_publisher<keyboard_controller::msg::ControlMessage>("control_topic", 10);  // 创建发布器
+  auto publisher = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10);  // 创建发布器
 
-  auto msg = std::make_shared<keyboard_controller::msg::ControlMessage>();  // 创建消息对象
+  auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();  // 创建消息对象
 
   while (rclcpp::ok()) {  // 主循环
     int key = getch();  // 获取键盘输入
