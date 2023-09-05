@@ -46,6 +46,12 @@ int main(int argc, char * argv[])
       publisher->publish(*msg);  // 发布消息
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: -1");  // 打印日志
     }
+    else if (key == '0') {  // 检查是否按下了'0'
+      msg->elevator_control = 666;
+
+      publisher->publish(*msg);  // 发布消息
+      RCLCPP_INFO(node->get_logger(), "Published control message to reset the counter with elevator_control: 666");  // 打印日志
+    }
 
     rclcpp::spin_some(node);  // 处理回调
   }

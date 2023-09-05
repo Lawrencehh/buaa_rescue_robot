@@ -1,0 +1,25 @@
+[0.010s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[0.087s] [ 50%] [32mBuilding CXX object CMakeFiles/keyboard_publisher.dir/src/keyboard_publisher.cpp.o[0m
+[3.382s] [100%] [32m[1mLinking CXX executable keyboard_publisher[0m
+[3.547s] [100%] Built target keyboard_publisher
+[3.559s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[3.578s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --install /home/rescue-robot/buaa_rescue_robot/build/keyboard_controller
+[3.585s] -- Install configuration: ""
+[3.585s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/lib/keyboard_controller/keyboard_publisher
+[3.586s] -- Set runtime path of "/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/lib/keyboard_controller/keyboard_publisher" to ""
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/package_run_dependencies/keyboard_controller
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/parent_prefix_path/keyboard_controller
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/ament_prefix_path.sh
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/ament_prefix_path.dsv
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/path.sh
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/environment/path.dsv
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.bash
+[3.586s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.sh
+[3.587s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.zsh
+[3.587s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/local_setup.dsv
+[3.587s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.dsv
+[3.587s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/ament_index/resource_index/packages/keyboard_controller
+[3.587s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controllerConfig.cmake
+[3.587s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/cmake/keyboard_controllerConfig-version.cmake
+[3.587s] -- Up-to-date: /home/rescue-robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.xml
+[3.590s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --install /home/rescue-robot/buaa_rescue_robot/build/keyboard_controller

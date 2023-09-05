@@ -3,6 +3,9 @@
 #include <std_msgs/msg/string.hpp>
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
 
+#include <thread>   // delay
+#include <chrono>   // delay
+
 using namespace std;
 using asio::ip::tcp;
 
@@ -14,7 +17,7 @@ public:
         // 初始化串口
         try {
             serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
-            serial_port_->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
+            serial_port_->set_option(asio::serial_port::baud_rate(57600));  // 设置波特率
         }
         catch (const std::exception &e) {
             RCLCPP_ERROR(this->get_logger(), "Could not open serial port: %s", e.what());
@@ -27,8 +30,7 @@ public:
             std::bind(&SerialSender::timer_callback, this));
         
         // 创建订阅器，订阅名为"control_topic"的话题
-  
-        subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>(
+          subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>(
             "control_topic",
             10,
             std::bind(&SerialSender::callback, this, std::placeholders::_1));
@@ -38,22 +40,70 @@ public:
 private:
     void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg)
     {
-        // 解析接收到的消息，并生成Modbus协议帧
-        // 这里简单地将接收到的消息存储为待发送的Modbus帧
-        // modbus_frame_ = msg->data;
+        // 直接使用类成员变量
+        if (msg->elevator_control == 1) //elavator going upwards
+        {
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0xFF, 0x00, 0x8C, 0x3A};
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+        }
+        else if (msg->elevator_control == 0)    //elavator stop
+        {
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+
+        }
+        else if (msg->elevator_control == -1)   //elavator going downwards
+        {
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0xFF, 0x00, 0xDD, 0xFA};
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+        }
+        else if (msg->elevator_control == 666)  //elavator stop and reset the counter
+        {
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x01, 0x10, 0x00, 0x00, 0x00, 0x02, 0x04, 0x00, 0x00, 0x00, 0x00, 0xF3, 0xAF}; //reset the counter 01 10 00 00 00 02 04 00 00 00 00 F3 AF
+            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+        }
+
+        
     }
-    void timer_callback()   // 定时器回调函数
+
+    void timer_callback()
     {
-        // const std::string msg = modbus_frame_;
-        // asio::write(*serial_port_, asio::buffer(msg, msg.size()));  // 发送消息
-        // RCLCPP_INFO(this->get_logger(), "Sent message: '%s'", msg.c_str());
+        // 打印vector的内容
+        std::string msg_str = "";
+        for (auto &byte : modbus_frame_) {
+            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        }
+        RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());
     }
+
 
     rclcpp::TimerBase::SharedPtr timer_;    // 定时器
     rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr subscription_;  //订阅器
     std::shared_ptr<asio::serial_port> serial_port_;    // 串口对象
     asio::io_service io_;   // ASIO I/O服务
-    std::string modbus_frame_;  // 存储Modbus协议帧
+    std::vector<uint8_t> modbus_frame_; // 存储Modbus协议帧
+
 };
 
 int main(int argc, char **argv)
