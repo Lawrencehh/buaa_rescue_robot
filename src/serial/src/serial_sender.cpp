@@ -41,6 +41,7 @@ private:
     void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg)
     {
         // 直接使用类成员变量
+        // serial_port sending control command to the elevator 
         if (msg->elevator_control == 1) //elavator going upwards
         {
             modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
