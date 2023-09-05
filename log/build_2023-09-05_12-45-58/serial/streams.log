@@ -1,0 +1,71 @@
+[0.022s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/serial': AMENT_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble LD_LIBRARY_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/rescue-robot/buaa_rescue_robot/src/serial -DCMAKE_INSTALL_PREFIX=/home/rescue-robot/buaa_rescue_robot/install/serial
+[0.080s] -- The C compiler identification is GNU 11.4.0
+[0.140s] -- The CXX compiler identification is GNU 11.4.0
+[0.149s] -- Detecting C compiler ABI info
+[0.226s] -- Detecting C compiler ABI info - done
+[0.237s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.237s] -- Detecting C compile features
+[0.237s] -- Detecting C compile features - done
+[0.240s] -- Detecting CXX compiler ABI info
+[0.348s] -- Detecting CXX compiler ABI info - done
+[0.354s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.355s] -- Detecting CXX compile features
+[0.356s] -- Detecting CXX compile features - done
+[0.359s] -- Found ament_cmake: 1.3.5 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.551s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.12") found components: Interpreter 
+[0.660s] -- Found rclcpp: 16.0.5 (/opt/ros/humble/share/rclcpp/cmake)
+[0.702s] -- Found rosidl_generator_c: 3.1.5 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.707s] -- Found rosidl_adapter: 3.1.5 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.717s] -- Found rosidl_generator_cpp: 3.1.5 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.734s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.750s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.829s] -- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.831s] -- Found rmw_fastrtps_cpp: 6.2.3 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.943s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.967s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.020s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.031s] -- Looking for pthread.h
+[1.125s] -- Looking for pthread.h - found
+[1.125s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[1.232s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[1.233s] -- Found Threads: TRUE  
+[1.421s] -- Found rosidl_default_generators: 1.2.0 (/opt/ros/humble/share/rosidl_default_generators/cmake)
+[1.431s] -- Found buaa_rescue_robot_msgs: 0.0.0 (/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/cmake)
+[1.529s] -- Configuring done
+[1.542s] -- Generating done
+[1.544s] -- Build files have been written to: /home/rescue-robot/buaa_rescue_robot/build/serial
+[1.561s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/serial' returned '0': AMENT_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble LD_LIBRARY_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake /home/rescue-robot/buaa_rescue_robot/src/serial -DCMAKE_INSTALL_PREFIX=/home/rescue-robot/buaa_rescue_robot/install/serial
+[1.562s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/serial': AMENT_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble LD_LIBRARY_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[1.641s] [ 25%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[1.650s] [ 50%] [32mBuilding CXX object CMakeFiles/serial_receiver.dir/src/serial_receiver.cpp.o[0m
+[5.075s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In member function ‘[01m[Kvoid SerialSender::callback(buaa_rescue_robot_msgs::msg::ControlMessage_<std::allocator<void> >::SharedPtr)[m[K’:
+[5.075s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:39:80:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kmsg[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[5.075s]    39 |     void callback([01;35m[Kconst buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg[m[K)
+[5.075s]       |                   [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~[m[K
+[6.334s] [ 75%] [32m[1mLinking CXX executable serial_receiver[0m
+[6.504s] [ 75%] Built target serial_receiver
+[11.289s] [100%] [32m[1mLinking CXX executable serial_sender[0m
+[11.693s] [100%] Built target serial_sender
+[11.704s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/serial' returned '0': AMENT_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble LD_LIBRARY_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[11.729s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/serial': AMENT_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble LD_LIBRARY_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/rescue-robot/buaa_rescue_robot/build/serial
+[11.737s] -- Install configuration: ""
+[11.738s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/lib/serial/serial_sender
+[11.741s] -- Set runtime path of "/home/rescue-robot/buaa_rescue_robot/install/serial/lib/serial/serial_sender" to ""
+[11.741s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/lib/serial/serial_receiver
+[11.741s] -- Set runtime path of "/home/rescue-robot/buaa_rescue_robot/install/serial/lib/serial/serial_receiver" to ""
+[11.741s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/ament_index/resource_index/package_run_dependencies/serial
+[11.741s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/ament_index/resource_index/parent_prefix_path/serial
+[11.741s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/environment/ament_prefix_path.sh
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/environment/ament_prefix_path.dsv
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/environment/path.sh
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/environment/path.dsv
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/local_setup.bash
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/local_setup.sh
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/local_setup.zsh
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/local_setup.dsv
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/package.dsv
+[11.742s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/ament_index/resource_index/packages/serial
+[11.743s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/cmake/serialConfig.cmake
+[11.743s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/cmake/serialConfig-version.cmake
+[11.743s] -- Installing: /home/rescue-robot/buaa_rescue_robot/install/serial/share/serial/package.xml
+[11.746s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/serial' returned '0': AMENT_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:${AMENT_PREFIX_PATH} CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble LD_LIBRARY_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib:${LD_LIBRARY_PATH} PYTHONPATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/local/lib/python3.10/dist-packages:${PYTHONPATH} /usr/bin/cmake --install /home/rescue-robot/buaa_rescue_robot/build/serial
