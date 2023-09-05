@@ -37,15 +37,10 @@ source install/setup.bash
 ## Usage
 ### keyboard_controller  
 Run the keyboard_publisher node:
-
 ```bash
 ros2 run keyboard_controller keyboard_publisher
 ```
 
-Run the listener node:
-```bash
-ros2 run cpp_pubsub listener
-```
 ### Talker and Listener  
 Run the talker node:
 
