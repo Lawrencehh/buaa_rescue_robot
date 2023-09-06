@@ -3,3 +3,5 @@ build/
 
 # 排除install文件夹
 install/
+
+log/
