@@ -1,0 +1,466 @@
+[0.022s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[0.095s] [35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[0.125s] [ 50%] Built target serial_receiver
+[0.141s] [ 75%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[4.079s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:308:28:[m[K [01;31m[Kerror: [m[Ktype/value mismatch at argument 2 in template parameter list for ‘[01m[Ktemplate<class _Tp, class _Alloc> class std::vector[m[K’
+[4.079s]   308 |     std::vector<uint8_t,256[01;31m[K>[m[K received_modbus_frame_;
+[4.079s]       |                            [01;31m[K^[m[K
+[4.079s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:308:28:[m[K [01;36m[Knote: [m[K  expected a type, got ‘[01m[K256[m[K’
+[4.110s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In member function ‘[01m[Kvoid SerialSender::start_receive()[m[K’:
+[4.110s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:185:32:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kclear[m[K’ in ‘[01m[K((SerialSender*)this)->SerialSender::received_modbus_frame_[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+[4.110s]   185 |         received_modbus_frame_.[01;31m[Kclear[m[K();
+[4.110s]       |                                [01;31m[K^~~~~[m[K
+[4.110s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:186:32:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kresize[m[K’ in ‘[01m[K((SerialSender*)this)->SerialSender::received_modbus_frame_[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+[4.110s]   186 |         received_modbus_frame_.[01;31m[Kresize[m[K(256);  // 在这里初始化
+[4.110s]       |                                [01;31m[K^~~~~~[m[K
+[4.114s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kbuffer(int&, int)[m[K’
+[4.116s]   193 |         asio::async_read(*serial_port_, [01;31m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.116s]       |                                         [01;31m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.116s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.116s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.116s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.116s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.116s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.116s] [01m[K/usr/include/asio/buffer.hpp:992:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::mutable_buffers_1 asio::buffer(PodType (&)[N])[m[K’
+[4.116s]   992 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(PodType (&data)[N]) ASIO_NOEXCEPT
+[4.116s]       |                            [01;36m[K^~~~~~[m[K
+[4.117s] [01m[K/usr/include/asio/buffer.hpp:992:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.117s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[KPodType [N][m[K’ and ‘[01m[Kint[m[K’
+[4.117s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.117s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.117s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.117s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.117s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.117s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.117s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.117s] [01m[K/usr/include/asio/buffer.hpp:1005:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::mutable_buffers_1 asio::buffer(PodType (&)[N], std::size_t)[m[K’
+[4.118s]  1005 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(PodType (&data)[N],
+[4.118s]       |                            [01;36m[K^~~~~~[m[K
+[4.118s] [01m[K/usr/include/asio/buffer.hpp:1005:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.118s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[KPodType [N][m[K’ and ‘[01m[Kint[m[K’
+[4.118s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.119s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.119s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.119s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.119s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.119s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.120s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.120s] [01m[K/usr/include/asio/buffer.hpp:1021:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(const PodType (&)[N])[m[K’
+[4.120s]  1021 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.120s]       |                          [01;36m[K^~~~~~[m[K
+[4.120s] [01m[K/usr/include/asio/buffer.hpp:1021:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.120s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst PodType [N][m[K’ and ‘[01m[Kint[m[K’
+[4.121s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.121s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.121s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.121s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.121s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.123s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.123s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.123s] [01m[K/usr/include/asio/buffer.hpp:1035:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(const PodType (&)[N], std::size_t)[m[K’
+[4.123s]  1035 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(const PodType (&data)[N],
+[4.124s]       |                          [01;36m[K^~~~~~[m[K
+[4.124s] [01m[K/usr/include/asio/buffer.hpp:1035:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.124s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst PodType [N][m[K’ and ‘[01m[Kint[m[K’
+[4.129s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.129s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.129s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.129s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.129s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.130s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.130s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.130s] [01m[K/usr/include/asio/buffer.hpp:1121:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::mutable_buffers_1 asio::buffer(boost::array<PodType, N>&)[m[K’
+[4.130s]  1121 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(
+[4.130s]       |                            [01;36m[K^~~~~~[m[K
+[4.130s] [01m[K/usr/include/asio/buffer.hpp:1121:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.130s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kboost::array<PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.130s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.131s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.131s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.131s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.131s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.131s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.132s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.132s] [01m[K/usr/include/asio/buffer.hpp:1136:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::mutable_buffers_1 asio::buffer(boost::array<PodType, N>&, std::size_t)[m[K’
+[4.132s]  1136 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(boost::array<PodType, N>& data,
+[4.132s]       |                            [01;36m[K^~~~~~[m[K
+[4.132s] [01m[K/usr/include/asio/buffer.hpp:1136:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.132s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kboost::array<PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.132s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.133s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.133s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.133s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.133s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.133s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.133s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.133s] [01m[K/usr/include/asio/buffer.hpp:1152:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(boost::array<const PodType, N>&)[m[K’
+[4.133s]  1152 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.134s]       |                          [01;36m[K^~~~~~[m[K
+[4.134s] [01m[K/usr/include/asio/buffer.hpp:1152:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.134s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kboost::array<const PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.134s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.134s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.134s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.134s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.134s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.134s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.135s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.135s] [01m[K/usr/include/asio/buffer.hpp:1166:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(boost::array<const PodType, N>&, std::size_t)[m[K’
+[4.135s]  1166 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(boost::array<const PodType, N>& data,
+[4.135s]       |                          [01;36m[K^~~~~~[m[K
+[4.135s] [01m[K/usr/include/asio/buffer.hpp:1166:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.135s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kboost::array<const PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.135s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.135s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.136s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.136s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.136s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.136s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.136s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.136s] [01m[K/usr/include/asio/buffer.hpp:1184:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(const boost::array<PodType, N>&)[m[K’
+[4.136s]  1184 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.137s]       |                          [01;36m[K^~~~~~[m[K
+[4.137s] [01m[K/usr/include/asio/buffer.hpp:1184:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.137s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst boost::array<PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.137s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.137s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.137s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.137s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.137s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.137s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.138s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.138s] [01m[K/usr/include/asio/buffer.hpp:1198:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(const boost::array<PodType, N>&, std::size_t)[m[K’
+[4.138s]  1198 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(const boost::array<PodType, N>& data,
+[4.138s]       |                          [01;36m[K^~~~~~[m[K
+[4.138s] [01m[K/usr/include/asio/buffer.hpp:1198:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.138s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst boost::array<PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.138s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.138s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.138s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.138s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.139s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.139s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.139s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.139s] [01m[K/usr/include/asio/buffer.hpp:1216:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::mutable_buffers_1 asio::buffer(std::array<_Tp, _Nm>&)[m[K’
+[4.139s]  1216 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(
+[4.139s]       |                            [01;36m[K^~~~~~[m[K
+[4.139s] [01m[K/usr/include/asio/buffer.hpp:1216:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.139s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::array<_Tp, _Nm>[m[K’ and ‘[01m[Kint[m[K’
+[4.139s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.140s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.140s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.140s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.140s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.140s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.140s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.140s] [01m[K/usr/include/asio/buffer.hpp:1230:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::mutable_buffers_1 asio::buffer(std::array<_Tp, _Nm>&, std::size_t)[m[K’
+[4.140s]  1230 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(std::array<PodType, N>& data,
+[4.140s]       |                            [01;36m[K^~~~~~[m[K
+[4.141s] [01m[K/usr/include/asio/buffer.hpp:1230:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.141s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::array<_Tp, _Nm>[m[K’ and ‘[01m[Kint[m[K’
+[4.141s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.141s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.141s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.141s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.141s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.141s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.141s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.142s] [01m[K/usr/include/asio/buffer.hpp:1246:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(std::array<const PodType, N>&)[m[K’
+[4.142s]  1246 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.142s]       |                          [01;36m[K^~~~~~[m[K
+[4.142s] [01m[K/usr/include/asio/buffer.hpp:1246:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.142s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::array<const PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.142s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.142s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.142s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.143s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.143s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.143s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.143s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.143s] [01m[K/usr/include/asio/buffer.hpp:1260:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(std::array<const PodType, N>&, std::size_t)[m[K’
+[4.143s]  1260 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(std::array<const PodType, N>& data,
+[4.143s]       |                          [01;36m[K^~~~~~[m[K
+[4.143s] [01m[K/usr/include/asio/buffer.hpp:1260:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.144s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::array<const PodType, N>[m[K’ and ‘[01m[Kint[m[K’
+[4.144s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.144s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.144s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.144s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.144s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.144s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.145s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.145s] [01m[K/usr/include/asio/buffer.hpp:1276:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(const std::array<_Tp, _Nm>&)[m[K’
+[4.145s]  1276 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.145s]       |                          [01;36m[K^~~~~~[m[K
+[4.145s] [01m[K/usr/include/asio/buffer.hpp:1276:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.145s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::array<_Tp, _Nm>[m[K’ and ‘[01m[Kint[m[K’
+[4.145s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.145s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.146s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.146s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.146s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.146s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.146s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.146s] [01m[K/usr/include/asio/buffer.hpp:1290:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, long unsigned int N> asio::const_buffers_1 asio::buffer(const std::array<_Tp, _Nm>&, std::size_t)[m[K’
+[4.146s]  1290 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(const std::array<PodType, N>& data,
+[4.146s]       |                          [01;36m[K^~~~~~[m[K
+[4.146s] [01m[K/usr/include/asio/buffer.hpp:1290:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.147s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::array<_Tp, _Nm>[m[K’ and ‘[01m[Kint[m[K’
+[4.147s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.147s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.147s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.147s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.147s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.147s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.147s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.147s] [01m[K/usr/include/asio/buffer.hpp:1311:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, class Allocator> asio::mutable_buffers_1 asio::buffer(std::vector<_Tp, _Alloc>&)[m[K’
+[4.148s]  1311 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(
+[4.148s]       |                            [01;36m[K^~~~~~[m[K
+[4.148s] [01m[K/usr/include/asio/buffer.hpp:1311:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.148s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::vector<_Tp, _Alloc>[m[K’ and ‘[01m[Kint[m[K’
+[4.148s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.148s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.148s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.148s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.149s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.149s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.149s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.149s] [01m[K/usr/include/asio/buffer.hpp:1335:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, class Allocator> asio::mutable_buffers_1 asio::buffer(std::vector<_Tp, _Alloc>&, std::size_t)[m[K’
+[4.149s]  1335 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(std::vector<PodType, Allocator>& data,
+[4.149s]       |                            [01;36m[K^~~~~~[m[K
+[4.149s] [01m[K/usr/include/asio/buffer.hpp:1335:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.149s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::vector<_Tp, _Alloc>[m[K’ and ‘[01m[Kint[m[K’
+[4.150s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.150s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.150s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.150s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.150s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.150s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.151s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.151s] [01m[K/usr/include/asio/buffer.hpp:1360:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, class Allocator> asio::const_buffers_1 asio::buffer(const std::vector<_Tp, _Alloc>&)[m[K’
+[4.151s]  1360 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.151s]       |                          [01;36m[K^~~~~~[m[K
+[4.151s] [01m[K/usr/include/asio/buffer.hpp:1360:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.151s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::vector<_Tp, _Alloc>[m[K’ and ‘[01m[Kint[m[K’
+[4.151s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.151s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.152s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.152s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.152s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.152s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.152s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.152s] [01m[K/usr/include/asio/buffer.hpp:1384:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class PodType, class Allocator> asio::const_buffers_1 asio::buffer(const std::vector<_Tp, _Alloc>&, std::size_t)[m[K’
+[4.152s]  1384 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.152s]       |                          [01;36m[K^~~~~~[m[K
+[4.152s] [01m[K/usr/include/asio/buffer.hpp:1384:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.153s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::vector<_Tp, _Alloc>[m[K’ and ‘[01m[Kint[m[K’
+[4.153s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.153s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.153s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.153s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.153s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.153s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.154s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.154s] [01m[K/usr/include/asio/buffer.hpp:1408:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class Elem, class Traits, class Allocator> asio::mutable_buffers_1 asio::buffer(std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&)[m[K’
+[4.154s]  1408 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(
+[4.154s]       |                            [01;36m[K^~~~~~[m[K
+[4.154s] [01m[K/usr/include/asio/buffer.hpp:1408:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.154s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::__cxx11::basic_string<_CharT, _Traits, _Allocator>[m[K’ and ‘[01m[Kint[m[K’
+[4.154s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.155s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.155s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.155s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.155s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.155s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.155s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.155s] [01m[K/usr/include/asio/buffer.hpp:1432:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class Elem, class Traits, class Allocator> asio::mutable_buffers_1 asio::buffer(std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&, std::size_t)[m[K’
+[4.155s]  1432 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(
+[4.156s]       |                            [01;36m[K^~~~~~[m[K
+[4.156s] [01m[K/usr/include/asio/buffer.hpp:1432:28:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.156s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::__cxx11::basic_string<_CharT, _Traits, _Allocator>[m[K’ and ‘[01m[Kint[m[K’
+[4.156s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.156s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.156s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.156s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.156s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.157s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.157s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.157s] [01m[K/usr/include/asio/buffer.hpp:1455:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class Elem, class Traits, class Allocator> asio::const_buffers_1 asio::buffer(const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&)[m[K’
+[4.157s]  1455 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.157s]       |                          [01;36m[K^~~~~~[m[K
+[4.157s] [01m[K/usr/include/asio/buffer.hpp:1455:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.157s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::__cxx11::basic_string<_CharT, _Traits, _Allocator>[m[K’ and ‘[01m[Kint[m[K’
+[4.158s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.158s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.158s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.158s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.158s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.158s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.158s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.158s] [01m[K/usr/include/asio/buffer.hpp:1478:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class Elem, class Traits, class Allocator> asio::const_buffers_1 asio::buffer(const std::__cxx11::basic_string<_CharT, _Traits, _Allocator>&, std::size_t)[m[K’
+[4.158s]  1478 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.159s]       |                          [01;36m[K^~~~~~[m[K
+[4.159s] [01m[K/usr/include/asio/buffer.hpp:1478:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.159s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kconst std::__cxx11::basic_string<_CharT, _Traits, _Allocator>[m[K’ and ‘[01m[Kint[m[K’
+[4.159s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.159s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.159s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.159s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.160s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.160s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.160s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.160s] [01m[K/usr/include/asio/buffer.hpp:1502:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class Elem, class Traits> asio::const_buffers_1 asio::buffer(std::basic_string_view<_CharT, _Traits>)[m[K’
+[4.160s]  1502 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.160s]       |                          [01;36m[K^~~~~~[m[K
+[4.160s] [01m[K/usr/include/asio/buffer.hpp:1502:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.160s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::basic_string_view<_CharT, _Traits>[m[K’ and ‘[01m[Kint[m[K’
+[4.161s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.161s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.161s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.161s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.161s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.161s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.161s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.161s] [01m[K/usr/include/asio/buffer.hpp:1523:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class Elem, class Traits> asio::const_buffers_1 asio::buffer(std::basic_string_view<_CharT, _Traits>, std::size_t)[m[K’
+[4.162s]  1523 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.162s]       |                          [01;36m[K^~~~~~[m[K
+[4.162s] [01m[K/usr/include/asio/buffer.hpp:1523:26:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.162s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:53:[m[K [01;36m[Knote: [m[K  mismatched types ‘[01m[Kstd::basic_string_view<_CharT, _Traits>[m[K’ and ‘[01m[Kint[m[K’
+[4.162s]   193 |         asio::async_read(*serial_port_, [01;36m[Kasio::buffer(received_modbus_frame_, 256)[m[K,
+[4.162s]       |                                         [01;36m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.162s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.162s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.163s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.163s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.163s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.163s] [01m[K/usr/include/asio/buffer.hpp:909:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kasio::mutable_buffers_1 asio::buffer(const asio::mutable_buffer&)[m[K’
+[4.163s]   909 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(
+[4.163s]       |                            [01;36m[K^~~~~~[m[K
+[4.163s] [01m[K/usr/include/asio/buffer.hpp:909:28:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 2 provided
+[4.163s] [01m[K/usr/include/asio/buffer.hpp:922:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kasio::mutable_buffers_1 asio::buffer(const asio::mutable_buffer&, std::size_t)[m[K’
+[4.164s]   922 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(const mutable_buffer& b,
+[4.164s]       |                            [01;36m[K^~~~~~[m[K
+[4.164s] [01m[K/usr/include/asio/buffer.hpp:922:57:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kconst asio::mutable_buffer&[m[K’
+[4.164s]   922 | inline ASIO_MUTABLE_BUFFER buffer([01;36m[Kconst mutable_buffer& b[m[K,
+[4.164s]       |                                   [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^[m[K
+[4.164s] [01m[K/usr/include/asio/buffer.hpp:939:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kasio::const_buffers_1 asio::buffer(const asio::const_buffer&)[m[K’
+[4.164s]   939 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(
+[4.165s]       |                          [01;36m[K^~~~~~[m[K
+[4.165s] [01m[K/usr/include/asio/buffer.hpp:939:26:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 2 provided
+[4.165s] [01m[K/usr/include/asio/buffer.hpp:952:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kasio::const_buffers_1 asio::buffer(const asio::const_buffer&, std::size_t)[m[K’
+[4.165s]   952 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(const const_buffer& b,
+[4.165s]       |                          [01;36m[K^~~~~~[m[K
+[4.165s] [01m[K/usr/include/asio/buffer.hpp:952:53:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kconst asio::const_buffer&[m[K’
+[4.165s]   952 | inline ASIO_CONST_BUFFER buffer([01;36m[Kconst const_buffer& b[m[K,
+[4.165s]       |                                 [01;36m[K~~~~~~~~~~~~~~~~~~~~^[m[K
+[4.166s] [01m[K/usr/include/asio/buffer.hpp:968:28:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kasio::mutable_buffers_1 asio::buffer(void*, std::size_t)[m[K’ (near match)
+[4.166s]   968 | inline ASIO_MUTABLE_BUFFER [01;36m[Kbuffer[m[K(void* data,
+[4.166s]       |                            [01;36m[K^~~~~~[m[K
+[4.166s] [01m[K/usr/include/asio/buffer.hpp:968:28:[m[K [01;36m[Knote: [m[K  conversion of argument 1 would be ill-formed:
+[4.166s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:54:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kint[m[K’ to ‘[01m[Kvoid*[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[4.166s]   193 |         asio::async_read(*serial_port_, asio::buffer([01;31m[Kreceived_modbus_frame_[m[K, 256),
+[4.166s]       |                                                      [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.167s]       |                                                      [01;31m[K|[m[K
+[4.167s]       |                                                      [01;31m[Kint[m[K
+[4.167s] In file included from [01m[K/usr/include/asio/detail/reactive_socket_service.hpp:22[m[K,
+[4.167s]                  from [01m[K/usr/include/asio/basic_socket.hpp:36[m[K,
+[4.167s]                  from [01m[K/usr/include/asio/basic_datagram_socket.hpp:20[m[K,
+[4.167s]                  from [01m[K/usr/include/asio.hpp:22[m[K,
+[4.168s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.168s] [01m[K/usr/include/asio/buffer.hpp:978:26:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kasio::const_buffers_1 asio::buffer(const void*, std::size_t)[m[K’ (near match)
+[4.168s]   978 | inline ASIO_CONST_BUFFER [01;36m[Kbuffer[m[K(const void* data,
+[4.168s]       |                          [01;36m[K^~~~~~[m[K
+[4.168s] [01m[K/usr/include/asio/buffer.hpp:978:26:[m[K [01;36m[Knote: [m[K  conversion of argument 1 would be ill-formed:
+[4.168s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:54:[m[K [01;31m[Kerror: [m[Kinvalid conversion from ‘[01m[Kint[m[K’ to ‘[01m[Kconst void*[m[K’ [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[4.168s]   193 |         asio::async_read(*serial_port_, asio::buffer([01;31m[Kreceived_modbus_frame_[m[K, 256),
+[4.169s]       |                                                      [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.169s]       |                                                      [01;31m[K|[m[K
+[4.169s]       |                                                      [01;31m[Kint[m[K
+[4.169s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In lambda function:
+[4.169s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:200:44:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kresize[m[K’ in ‘[01m[Kthis->SerialSender::received_modbus_frame_[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+[4.169s]   200 |                     received_modbus_frame_.[01;31m[Kresize[m[K(bytes_transferred);  // 调整大小以匹配实际接收到的字节数
+[4.169s]       |                                            [01;31m[K^~~~~~[m[K
+[4.170s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:202:46:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator=[m[K’ (operand types are ‘[01m[Kstd::vector<unsigned char, std::allocator<unsigned char> >[m[K’ and ‘[01m[Kint[m[K’)
+[4.170s]   202 |                     last_received_message_ = [01;31m[Kreceived_modbus_frame_[m[K;  // 更新最后接收到的消息
+[4.170s]       |                                              [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.170s] In file included from [01m[K/usr/include/c++/11/vector:72[m[K,
+[4.170s]                  from [01m[K/usr/include/c++/11/functional:62[m[K,
+[4.170s]                  from [01m[K/usr/include/c++/11/pstl/glue_algorithm_defs.h:13[m[K,
+[4.170s]                  from [01m[K/usr/include/c++/11/algorithm:74[m[K,
+[4.170s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:18[m[K,
+[4.171s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[4.171s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[4.171s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.171s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:2[m[K:
+[4.171s] [01m[K/usr/include/c++/11/bits/vector.tcc:198:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kstd::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(const std::vector<_Tp, _Alloc>&) [with _Tp = unsigned char; _Alloc = std::allocator<unsigned char>][m[K’
+[4.171s]   198 |     [01;36m[Kvector<_Tp, _Alloc>[m[K::
+[4.171s]       |     [01;36m[K^~~~~~~~~~~~~~~~~~~[m[K
+[4.171s] [01m[K/usr/include/c++/11/bits/vector.tcc:199:42:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kconst std::vector<unsigned char, std::allocator<unsigned char> >&[m[K’
+[4.171s]   199 |     operator=([01;36m[Kconst vector<_Tp, _Alloc>& __x[m[K)
+[4.172s]       |               [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~[m[K
+[4.172s] In file included from [01m[K/usr/include/c++/11/vector:67[m[K,
+[4.172s]                  from [01m[K/usr/include/c++/11/functional:62[m[K,
+[4.172s]                  from [01m[K/usr/include/c++/11/pstl/glue_algorithm_defs.h:13[m[K,
+[4.172s]                  from [01m[K/usr/include/c++/11/algorithm:74[m[K,
+[4.172s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:18[m[K,
+[4.172s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25[m[K,
+[4.172s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21[m[K,
+[4.173s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[4.173s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:2[m[K:
+[4.173s] [01m[K/usr/include/c++/11/bits/stl_vector.h:709:7:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kstd::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(std::vector<_Tp, _Alloc>&&) [with _Tp = unsigned char; _Alloc = std::allocator<unsigned char>][m[K’
+[4.173s]   709 |       [01;36m[Koperator[m[K=(vector&& __x) noexcept(_Alloc_traits::_S_nothrow_move())
+[4.173s]       |       [01;36m[K^~~~~~~~[m[K
+[4.173s] [01m[K/usr/include/c++/11/bits/stl_vector.h:709:26:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kstd::vector<unsigned char, std::allocator<unsigned char> >&&[m[K’
+[4.173s]   709 |       operator=([01;36m[Kvector&& __x[m[K) noexcept(_Alloc_traits::_S_nothrow_move())
+[4.173s]       |                 [01;36m[K~~~~~~~~~^~~[m[K
+[4.174s] [01m[K/usr/include/c++/11/bits/stl_vector.h:730:7:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kstd::vector<_Tp, _Alloc>& std::vector<_Tp, _Alloc>::operator=(std::initializer_list<_Tp>) [with _Tp = unsigned char; _Alloc = std::allocator<unsigned char>][m[K’
+[4.174s]   730 |       [01;36m[Koperator[m[K=(initializer_list<value_type> __l)
+[4.174s]       |       [01;36m[K^~~~~~~~[m[K
+[4.174s] [01m[K/usr/include/c++/11/bits/stl_vector.h:730:46:[m[K [01;36m[Knote: [m[K  no known conversion for argument 1 from ‘[01m[Kint[m[K’ to ‘[01m[Kstd::initializer_list<unsigned char>[m[K’
+[4.174s]   730 |       operator=([01;36m[Kinitializer_list<value_type> __l[m[K)
+[4.174s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~[m[K
+[4.174s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:205:39:[m[K [01;31m[Kerror: [m[K‘[01m[Kbegin[m[K’ was not declared in this scope; did you mean ‘[01m[Kstd::begin[m[K’?
+[4.174s]   205 |                     for (auto &byte : [01;31m[Kreceived_modbus_frame_[m[K) {
+[4.175s]       |                                       [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.175s]       |                                       [32m[Kstd::begin[m[K
+[4.175s] In file included from [01m[K/usr/include/c++/11/array:41[m[K,
+[4.175s]                  from [01m[K/usr/include/c++/11/tuple:39[m[K,
+[4.175s]                  from [01m[K/usr/include/c++/11/bits/unique_ptr.h:37[m[K,
+[4.175s]                  from [01m[K/usr/include/c++/11/memory:76[m[K,
+[4.175s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:153[m[K,
+[4.175s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:2[m[K:
+[4.175s] [01m[K/usr/include/c++/11/bits/range_access.h:108:37:[m[K [01;36m[Knote: [m[K‘[01m[Kstd::begin[m[K’ declared here
+[4.176s]   108 |   template<typename _Tp> const _Tp* [01;36m[Kbegin[m[K(const valarray<_Tp>&) noexcept;
+[4.176s]       |                                     [01;36m[K^~~~~[m[K
+[4.176s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:205:39:[m[K [01;31m[Kerror: [m[K‘[01m[Kend[m[K’ was not declared in this scope; did you mean ‘[01m[Kstd::end[m[K’?
+[4.176s]   205 |                     for (auto &byte : [01;31m[Kreceived_modbus_frame_[m[K) {
+[4.176s]       |                                       [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.176s]       |                                       [32m[Kstd::end[m[K
+[4.176s] In file included from [01m[K/usr/include/c++/11/array:41[m[K,
+[4.176s]                  from [01m[K/usr/include/c++/11/tuple:39[m[K,
+[4.176s]                  from [01m[K/usr/include/c++/11/bits/unique_ptr.h:37[m[K,
+[4.177s]                  from [01m[K/usr/include/c++/11/memory:76[m[K,
+[4.177s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:153[m[K,
+[4.177s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:2[m[K:
+[4.177s] [01m[K/usr/include/c++/11/bits/range_access.h:110:37:[m[K [01;36m[Knote: [m[K‘[01m[Kstd::end[m[K’ declared here
+[4.177s]   110 |   template<typename _Tp> const _Tp* [01;36m[Kend[m[K(const valarray<_Tp>&) noexcept;
+[4.177s]       |                                     [01;36m[K^~~[m[K
+[4.177s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:209:42:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[Kint[m[K’ to ‘[01m[Kconst std::vector<unsigned char, std::allocator<unsigned char> >&[m[K’
+[4.178s]   209 |                     process_modbus_frame([01;31m[Kreceived_modbus_frame_[m[K);
+[4.178s]       |                                          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.178s]       |                                          [01;31m[K|[m[K
+[4.178s]       |                                          [01;31m[Kint[m[K
+[4.178s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:128:59:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[Kvoid SerialSender::process_modbus_frame(const std::vector<unsigned char, std::allocator<unsigned char> >&)[m[K’
+[4.178s]   128 |     void process_modbus_frame([01;36m[Kconst std::vector<uint8_t>& frame[m[K) {
+[4.178s]       |                               [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~[m[K
+[4.178s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In member function ‘[01m[Kvoid SerialSender::start_receive()[m[K’:
+[4.179s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:220:57:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kmax_size[m[K’ in ‘[01m[K((SerialSender*)this)->SerialSender::received_modbus_frame_[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+[4.179s]   220 |     std::cerr << "Max size: " << received_modbus_frame_.[01;31m[Kmax_size[m[K() << '\n';
+[4.179s]       |                                                         [01;31m[K^~~~~~~~[m[K
+[4.179s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:221:61:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Ksize[m[K’ in ‘[01m[K((SerialSender*)this)->SerialSender::received_modbus_frame_[m[K’, which is of non-class type ‘[01m[Kint[m[K’
+[4.179s]   221 |     std::cerr << "Current size: " << received_modbus_frame_.[01;31m[Ksize[m[K() << '\n';
+[4.179s]       |                                                             [01;31m[K^~~~[m[K
+[7.444s] gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+[7.444s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+[7.444s] gmake: *** [Makefile:146: all] Error 2
+[7.448s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/serial' returned '2': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8

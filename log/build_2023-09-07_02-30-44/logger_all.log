@@ -1,0 +1,355 @@
+[0.300s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build']
+[0.300s] DEBUG:colcon:Parsed command line arguments: Namespace(log_base=None, log_level=None, verb_name='build', build_base='build', install_base='install', merge_install=False, symlink_install=False, test_result_base=None, continue_on_error=False, executor='parallel', parallel_workers=8, event_handlers=None, ignore_user_meta=False, metas=['./colcon.meta'], base_paths=['.'], packages_ignore=None, packages_ignore_regex=None, paths=None, packages_up_to=None, packages_up_to_regex=None, packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_select_by_dep=None, packages_skip_by_dep=None, packages_skip_up_to=None, packages_select_build_failed=False, packages_skip_build_finished=False, packages_select_test_failures=False, packages_skip_test_passed=False, packages_select=None, packages_skip=None, packages_select_regex=None, packages_skip_regex=None, packages_start=None, packages_end=None, allow_overriding=[], cmake_args=None, cmake_target=None, cmake_target_skip_unavailable=False, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, ament_cmake_args=None, catkin_cmake_args=None, catkin_skip_building_tests=False, verb_parser=<colcon_defaults.argument_parser.defaults.DefaultArgumentsDecorator object at 0x7f3b4f5d9900>, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7f3b4ff3b040>, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7f3b4ff3b040>>)
+[0.331s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.332s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.332s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/rescue_robot/buaa_rescue_robot'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.332s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.343s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extensions ['ignore', 'ignore_ament_install']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'ignore'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'ignore_ament_install'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extensions ['colcon_pkg']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'colcon_pkg'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extensions ['colcon_meta']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'colcon_meta'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extensions ['ros']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'ros'
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extensions ['cmake', 'python']
+[0.344s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'cmake'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'python'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extensions ['python_setup_py']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(documents) by extension 'python_setup_py'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ignore', 'ignore_ament_install']
+[0.345s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ignore_ament_install'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_pkg']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_pkg'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['colcon_meta']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'colcon_meta'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['ros']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'ros'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['cmake', 'python']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'cmake'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extensions ['python_setup_py']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src) by extension 'python_setup_py'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extensions ['ignore', 'ignore_ament_install']
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extension 'ignore'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extension 'ignore_ament_install'
+[0.346s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extensions ['colcon_pkg']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extension 'colcon_pkg'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extensions ['colcon_meta']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extension 'colcon_meta'
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extensions ['ros']
+[0.347s] Level 1:colcon.colcon_core.package_identification:_identify(src/buaa_rescue_robot_msgs) by extension 'ros'
+[0.350s] DEBUG:colcon.colcon_core.package_identification:Package 'src/buaa_rescue_robot_msgs' with type 'ros.ament_cmake' and name 'buaa_rescue_robot_msgs'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extensions ['ignore', 'ignore_ament_install']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extension 'ignore'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extension 'ignore_ament_install'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extensions ['colcon_pkg']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extension 'colcon_pkg'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extensions ['colcon_meta']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extension 'colcon_meta'
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extensions ['ros']
+[0.351s] Level 1:colcon.colcon_core.package_identification:_identify(src/cpp_pubsub) by extension 'ros'
+[0.352s] DEBUG:colcon.colcon_core.package_identification:Package 'src/cpp_pubsub' with type 'ros.ament_cmake' and name 'cpp_pubsub'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extensions ['ignore', 'ignore_ament_install']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extension 'ignore'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extension 'ignore_ament_install'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extensions ['colcon_pkg']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extension 'colcon_pkg'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extensions ['colcon_meta']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extension 'colcon_meta'
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extensions ['ros']
+[0.352s] Level 1:colcon.colcon_core.package_identification:_identify(src/keyboard_controller) by extension 'ros'
+[0.353s] DEBUG:colcon.colcon_core.package_identification:Package 'src/keyboard_controller' with type 'ros.ament_cmake' and name 'keyboard_controller'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['ignore', 'ignore_ament_install']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'ignore'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'ignore_ament_install'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['colcon_pkg']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'colcon_pkg'
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['colcon_meta']
+[0.353s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'colcon_meta'
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extensions ['ros']
+[0.354s] Level 1:colcon.colcon_core.package_identification:_identify(src/serial) by extension 'ros'
+[0.354s] DEBUG:colcon.colcon_core.package_identification:Package 'src/serial' with type 'ros.ament_cmake' and name 'serial'
+[0.354s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.354s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.354s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.354s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.354s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.376s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) check parameters
+[0.377s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) discover
+[0.379s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 4 installed packages in /home/rescue_robot/buaa_rescue_robot/install
+[0.381s] DEBUG:colcon.colcon_installed_package_information.package_discovery:Found 270 installed packages in /opt/ros/humble
+[0.383s] Level 1:colcon.colcon_core.package_discovery:discover_packages(prefix_path) using defaults
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'cmake_args' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'cmake_target' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'cmake_clean_cache' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'cmake_clean_first' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'cmake_force_configure' from command line to 'False'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'ament_cmake_args' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'catkin_cmake_args' from command line to 'None'
+[0.443s] Level 5:colcon.colcon_core.verb:set package 'buaa_rescue_robot_msgs' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.443s] DEBUG:colcon.colcon_core.verb:Building package 'buaa_rescue_robot_msgs' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs', 'merge_install': False, 'path': '/home/rescue_robot/buaa_rescue_robot/src/buaa_rescue_robot_msgs', 'symlink_install': False, 'test_result_base': None}
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'cmake_args' from command line to 'None'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'cmake_target' from command line to 'None'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'cmake_clean_cache' from command line to 'False'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'cmake_clean_first' from command line to 'False'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'cmake_force_configure' from command line to 'False'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'ament_cmake_args' from command line to 'None'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'catkin_cmake_args' from command line to 'None'
+[0.444s] Level 5:colcon.colcon_core.verb:set package 'cpp_pubsub' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.444s] DEBUG:colcon.colcon_core.verb:Building package 'cpp_pubsub' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub', 'merge_install': False, 'path': '/home/rescue_robot/buaa_rescue_robot/src/cpp_pubsub', 'symlink_install': False, 'test_result_base': None}
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'cmake_args' from command line to 'None'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'cmake_target' from command line to 'None'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'cmake_clean_cache' from command line to 'False'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'cmake_clean_first' from command line to 'False'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'cmake_force_configure' from command line to 'False'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'ament_cmake_args' from command line to 'None'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'catkin_cmake_args' from command line to 'None'
+[0.445s] Level 5:colcon.colcon_core.verb:set package 'keyboard_controller' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.445s] DEBUG:colcon.colcon_core.verb:Building package 'keyboard_controller' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller', 'merge_install': False, 'path': '/home/rescue_robot/buaa_rescue_robot/src/keyboard_controller', 'symlink_install': False, 'test_result_base': None}
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_args' from command line to 'None'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target' from command line to 'None'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_cache' from command line to 'False'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_clean_first' from command line to 'False'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'cmake_force_configure' from command line to 'False'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'ament_cmake_args' from command line to 'None'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_cmake_args' from command line to 'None'
+[0.446s] Level 5:colcon.colcon_core.verb:set package 'serial' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.446s] DEBUG:colcon.colcon_core.verb:Building package 'serial' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/rescue_robot/buaa_rescue_robot/build/serial', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/rescue_robot/buaa_rescue_robot/install/serial', 'merge_install': False, 'path': '/home/rescue_robot/buaa_rescue_robot/src/serial', 'symlink_install': False, 'test_result_base': None}
+[0.447s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[0.450s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[0.450s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/rescue_robot/buaa_rescue_robot/src/buaa_rescue_robot_msgs' with build type 'ament_cmake'
+[0.451s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/rescue_robot/buaa_rescue_robot/src/buaa_rescue_robot_msgs'
+[0.455s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[0.455s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.455s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.461s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/rescue_robot/buaa_rescue_robot/src/cpp_pubsub' with build type 'ament_cmake'
+[0.461s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/rescue_robot/buaa_rescue_robot/src/cpp_pubsub'
+[0.462s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[0.463s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[0.476s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs -- -j8 -l8
+[0.491s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub -- -j8 -l8
+[0.621s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub -- -j8 -l8
+[0.665s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub
+[0.688s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cpp_pubsub)
+[0.693s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/cpp_pubsub
+[0.700s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub' for CMake module files
+[0.701s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub' for CMake config files
+[0.702s] Level 1:colcon.colcon_core.shell:create_environment_hook('cpp_pubsub', 'cmake_prefix_path')
+[0.705s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/hook/cmake_prefix_path.ps1'
+[0.706s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/hook/cmake_prefix_path.dsv'
+[0.707s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/hook/cmake_prefix_path.sh'
+[0.709s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib'
+[0.709s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/bin'
+[0.709s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/pkgconfig/cpp_pubsub.pc'
+[0.709s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/python3.10/site-packages'
+[0.710s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/bin'
+[0.713s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.ps1'
+[0.716s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.dsv'
+[0.717s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.sh'
+[0.720s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.bash'
+[0.722s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.zsh'
+[0.723s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/colcon-core/packages/cpp_pubsub)
+[0.775s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(cpp_pubsub)
+[0.779s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub' for CMake module files
+[0.781s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub' for CMake config files
+[0.782s] Level 1:colcon.colcon_core.shell:create_environment_hook('cpp_pubsub', 'cmake_prefix_path')
+[0.785s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/hook/cmake_prefix_path.ps1'
+[0.785s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/hook/cmake_prefix_path.dsv'
+[0.786s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/hook/cmake_prefix_path.sh'
+[0.787s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib'
+[0.787s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/bin'
+[0.787s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/pkgconfig/cpp_pubsub.pc'
+[0.788s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/lib/python3.10/site-packages'
+[0.788s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/bin'
+[0.791s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.ps1'
+[0.791s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.dsv'
+[0.792s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.sh'
+[0.793s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.bash'
+[0.793s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/cpp_pubsub/package.zsh'
+[0.794s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub/share/colcon-core/packages/cpp_pubsub)
+[1.122s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs -- -j8 -l8
+[1.217s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs
+[1.282s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(buaa_rescue_robot_msgs)
+[1.286s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs' for CMake module files
+[1.288s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs' for CMake config files
+[1.289s] Level 1:colcon.colcon_core.shell:create_environment_hook('buaa_rescue_robot_msgs', 'cmake_prefix_path')
+[1.291s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/cmake_prefix_path.ps1'
+[1.293s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/cmake_prefix_path.dsv'
+[1.294s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/cmake_prefix_path.sh'
+[1.296s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/buaa_rescue_robot_msgs
+[1.296s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib'
+[1.296s] Level 1:colcon.colcon_core.shell:create_environment_hook('buaa_rescue_robot_msgs', 'ld_library_path_lib')
+[1.299s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/ld_library_path_lib.ps1'
+[1.299s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/ld_library_path_lib.dsv'
+[1.300s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/ld_library_path_lib.sh'
+[1.300s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/bin'
+[1.300s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/pkgconfig/buaa_rescue_robot_msgs.pc'
+[1.301s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/python3.10/site-packages'
+[1.301s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/bin'
+[1.303s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.ps1'
+[1.305s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.dsv'
+[1.306s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.sh'
+[1.306s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.bash'
+[1.307s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.zsh'
+[1.307s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/colcon-core/packages/buaa_rescue_robot_msgs)
+[1.401s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(buaa_rescue_robot_msgs)
+[1.404s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs' for CMake module files
+[1.405s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs' for CMake config files
+[1.405s] Level 1:colcon.colcon_core.shell:create_environment_hook('buaa_rescue_robot_msgs', 'cmake_prefix_path')
+[1.407s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/cmake_prefix_path.ps1'
+[1.408s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/cmake_prefix_path.dsv'
+[1.409s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/cmake_prefix_path.sh'
+[1.410s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib'
+[1.411s] Level 1:colcon.colcon_core.shell:create_environment_hook('buaa_rescue_robot_msgs', 'ld_library_path_lib')
+[1.413s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/ld_library_path_lib.ps1'
+[1.414s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/ld_library_path_lib.dsv'
+[1.414s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/hook/ld_library_path_lib.sh'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/bin'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/pkgconfig/buaa_rescue_robot_msgs.pc'
+[1.415s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/lib/python3.10/site-packages'
+[1.416s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/bin'
+[1.418s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.ps1'
+[1.419s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.dsv'
+[1.420s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.sh'
+[1.421s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.bash'
+[1.422s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/buaa_rescue_robot_msgs/package.zsh'
+[1.423s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs/share/colcon-core/packages/buaa_rescue_robot_msgs)
+[1.423s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/rescue_robot/buaa_rescue_robot/src/keyboard_controller' with build type 'ament_cmake'
+[1.424s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/rescue_robot/buaa_rescue_robot/src/keyboard_controller'
+[1.426s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.426s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.435s] INFO:colcon.colcon_ros.task.ament_cmake.build:Building ROS package in '/home/rescue_robot/buaa_rescue_robot/src/serial' with build type 'ament_cmake'
+[1.435s] INFO:colcon.colcon_cmake.task.cmake.build:Building CMake package in '/home/rescue_robot/buaa_rescue_robot/src/serial'
+[1.438s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.438s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[1.453s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[1.471s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[1.554s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller -- -j8 -l8
+[1.585s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller
+[1.606s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(keyboard_controller)
+[1.610s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller' for CMake module files
+[1.610s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller' for CMake config files
+[1.611s] Level 1:colcon.colcon_core.shell:create_environment_hook('keyboard_controller', 'cmake_prefix_path')
+[1.613s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/hook/cmake_prefix_path.ps1'
+[1.615s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/hook/cmake_prefix_path.dsv'
+[1.615s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/keyboard_controller' returned '0': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/keyboard_controller
+[1.616s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/hook/cmake_prefix_path.sh'
+[1.617s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib'
+[1.617s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/bin'
+[1.618s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/pkgconfig/keyboard_controller.pc'
+[1.618s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/python3.10/site-packages'
+[1.618s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/bin'
+[1.620s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.ps1'
+[1.620s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.dsv'
+[1.620s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.sh'
+[1.621s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.bash'
+[1.621s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.zsh'
+[1.621s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/colcon-core/packages/keyboard_controller)
+[1.651s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(keyboard_controller)
+[1.655s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller' for CMake module files
+[1.656s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller' for CMake config files
+[1.657s] Level 1:colcon.colcon_core.shell:create_environment_hook('keyboard_controller', 'cmake_prefix_path')
+[1.660s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/hook/cmake_prefix_path.ps1'
+[1.660s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/hook/cmake_prefix_path.dsv'
+[1.661s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/hook/cmake_prefix_path.sh'
+[1.662s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib'
+[1.662s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/bin'
+[1.662s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/pkgconfig/keyboard_controller.pc'
+[1.663s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/lib/python3.10/site-packages'
+[1.663s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/bin'
+[1.666s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.ps1'
+[1.667s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.dsv'
+[1.668s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.sh'
+[1.668s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.bash'
+[1.669s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/keyboard_controller/package.zsh'
+[1.669s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller/share/colcon-core/packages/keyboard_controller)
+[14.135s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/serial' returned '0': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[14.172s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/serial
+[14.189s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[14.191s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial' for CMake module files
+[14.192s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/serial' returned '0': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --install /home/rescue_robot/buaa_rescue_robot/build/serial
+[14.192s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial' for CMake config files
+[14.192s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[14.195s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[14.196s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[14.196s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[14.197s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/lib'
+[14.197s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/bin'
+[14.197s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/lib/pkgconfig/serial.pc'
+[14.198s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/lib/python3.10/site-packages'
+[14.198s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/bin'
+[14.199s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.ps1'
+[14.200s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.dsv'
+[14.201s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.sh'
+[14.201s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.bash'
+[14.201s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.zsh'
+[14.202s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/serial/share/colcon-core/packages/serial)
+[14.239s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(serial)
+[14.241s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial' for CMake module files
+[14.242s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial' for CMake config files
+[14.242s] Level 1:colcon.colcon_core.shell:create_environment_hook('serial', 'cmake_prefix_path')
+[14.243s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/hook/cmake_prefix_path.ps1'
+[14.244s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/hook/cmake_prefix_path.dsv'
+[14.244s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/hook/cmake_prefix_path.sh'
+[14.245s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/lib'
+[14.245s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/bin'
+[14.245s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/lib/pkgconfig/serial.pc'
+[14.245s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/lib/python3.10/site-packages'
+[14.246s] Level 1:colcon.colcon_core.environment:checking '/home/rescue_robot/buaa_rescue_robot/install/serial/bin'
+[14.247s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.ps1'
+[14.248s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.dsv'
+[14.248s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.sh'
+[14.249s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.bash'
+[14.250s] INFO:colcon.colcon_core.shell:Creating package script '/home/rescue_robot/buaa_rescue_robot/install/serial/share/serial/package.zsh'
+[14.250s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/rescue_robot/buaa_rescue_robot/install/serial/share/colcon-core/packages/serial)
+[14.251s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[14.251s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[14.251s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[14.251s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[14.256s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[14.257s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[14.257s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[14.272s] DEBUG:colcon.colcon_core.event_reactor:joined thread
+[14.274s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rescue_robot/buaa_rescue_robot/install/local_setup.ps1'
+[14.276s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/rescue_robot/buaa_rescue_robot/install/_local_setup_util_ps1.py'
+[14.278s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rescue_robot/buaa_rescue_robot/install/setup.ps1'
+[14.281s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rescue_robot/buaa_rescue_robot/install/local_setup.sh'
+[14.282s] INFO:colcon.colcon_core.shell:Creating prefix util module '/home/rescue_robot/buaa_rescue_robot/install/_local_setup_util_sh.py'
+[14.283s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rescue_robot/buaa_rescue_robot/install/setup.sh'
+[14.285s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rescue_robot/buaa_rescue_robot/install/local_setup.bash'
+[14.286s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rescue_robot/buaa_rescue_robot/install/setup.bash'
+[14.288s] INFO:colcon.colcon_core.shell:Creating prefix script '/home/rescue_robot/buaa_rescue_robot/install/local_setup.zsh'
+[14.289s] INFO:colcon.colcon_core.shell:Creating prefix chain script '/home/rescue_robot/buaa_rescue_robot/install/setup.zsh'

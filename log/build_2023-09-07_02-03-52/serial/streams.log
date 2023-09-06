@@ -1,0 +1,470 @@
+[0.019s] Invoking command in '/home/rescue_robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[0.083s] [35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[0.110s] [ 50%] Built target serial_receiver
+[0.118s] [ 75%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[0.868s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:84:[m[K [01;35m[Kwarning: [m[Kcharacter constant too long for its type
+[0.868s]   193 |         asio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, [01;35m[K'0x010404'[m[K),
+[0.868s]       |                                                                                    [01;35m[K^~~~~~~~~~[m[K
+[4.141s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In member function ‘[01m[Kvoid SerialSender::start_receive()[m[K’:
+[4.142s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Kasync_read_until(std::__shared_ptr_access<asio::basic_serial_port<>, __gnu_cxx::_S_atomic, false, false>::element_type&, asio::mutable_buffers_1, SerialSender::start_receive()::<lambda(const error_code&, std::size_t)>)[m[K’
+[4.142s]   193 |         [01;31m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.142s]       |         [01;31m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.142s]   194 | [01;31m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.142s]       |                 [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.142s]   195 | [01;31m[K            {[m[K
+[4.142s]       |             [01;31m[K~[m[K                  
+[4.142s]   196 | [01;31m[K                if (!error)[m[K
+[4.142s]       |                 [01;31m[K~~~~~~~~~~~[m[K    
+[4.143s]   197 | [01;31m[K                {[m[K
+[4.143s]       |                 [01;31m[K~[m[K              
+[4.143s]   198 | [01;31m[K                    has_received_message_ = true;[m[K
+[4.143s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.143s]   199 | 
+[4.143s]       |                                
+[4.143s]   200 | [01;31m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.143s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.143s]   201 | 
+[4.143s]       |                                
+[4.143s]   202 | [01;31m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.143s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.143s]   203 | 
+[4.143s]       |                                
+[4.143s]   204 | [01;31m[K                    std::string msg_str = "";[m[K
+[4.144s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.144s]   205 | [01;31m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.144s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.144s]   206 | [01;31m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.144s]       |                         [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.144s]   207 | [01;31m[K                    }[m[K
+[4.144s]       |                     [01;31m[K~[m[K          
+[4.145s]   208 | [01;31m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.145s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.145s]   209 | [01;31m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.145s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.145s]   210 | 
+[4.145s]       |                                
+[4.145s]   211 | 
+[4.145s]       |                                
+[4.145s]   212 | 
+[4.145s]       |                                
+[4.145s]   213 | [01;31m[K                } else {[m[K
+[4.145s]       |                 [01;31m[K~~~~~~~~[m[K       
+[4.146s]   214 | [01;31m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.146s]       |                     [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.146s]   215 | [01;31m[K                }[m[K
+[4.146s]       |                 [01;31m[K~[m[K              
+[4.146s]   216 | [01;31m[K            })[m[K;
+[4.146s]       |             [01;31m[K~~[m[K                 
+[4.146s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.146s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.146s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.146s] [01m[K/usr/include/asio/impl/read_until.hpp:1061:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v1, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v1&&, char, ReadHandler&&, typename std::enable_if<(asio::is_dynamic_buffer_v1<typename std::decay<_Tp2>::type>::value && (! asio::is_dynamic_buffer_v2<typename std::decay<_Tp2>::type>::value))>::type*)[m[K’
+[4.146s]  1061 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s,
+[4.146s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.146s] [01m[K/usr/include/asio/impl/read_until.hpp:1061:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.146s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;36m[Knote: [m[K  cannot convert ‘[01m[K<lambda closure object>SerialSender::start_receive()::<lambda(const error_code&, std::size_t)>{((SerialSender*)this)}[m[K’ (type ‘[01m[KSerialSender::start_receive()::<lambda(const error_code&, std::size_t)>[m[K’) to type ‘[01m[Kchar[m[K’
+[4.147s]   193 |         [01;36m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.147s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.147s]   194 | [01;36m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.147s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.147s]   195 | [01;36m[K            {[m[K
+[4.147s]       |             [01;36m[K~[m[K                  
+[4.147s]   196 | [01;36m[K                if (!error)[m[K
+[4.147s]       |                 [01;36m[K~~~~~~~~~~~[m[K    
+[4.147s]   197 | [01;36m[K                {[m[K
+[4.147s]       |                 [01;36m[K~[m[K              
+[4.148s]   198 | [01;36m[K                    has_received_message_ = true;[m[K
+[4.148s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.148s]   199 | 
+[4.148s]       |                                
+[4.148s]   200 | [01;36m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.148s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.148s]   201 | 
+[4.148s]       |                                
+[4.148s]   202 | [01;36m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.148s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.149s]   203 | 
+[4.149s]       |                                
+[4.149s]   204 | [01;36m[K                    std::string msg_str = "";[m[K
+[4.149s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.150s]   205 | [01;36m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.150s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.150s]   206 | [01;36m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.151s]       |                         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.151s]   207 | [01;36m[K                    }[m[K
+[4.151s]       |                     [01;36m[K~[m[K          
+[4.151s]   208 | [01;36m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.151s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.151s]   209 | [01;36m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.151s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.151s]   210 | 
+[4.152s]       |                                
+[4.152s]   211 | 
+[4.152s]       |                                
+[4.152s]   212 | 
+[4.152s]       |                                
+[4.152s]   213 | [01;36m[K                } else {[m[K
+[4.152s]       |                 [01;36m[K~~~~~~~~[m[K       
+[4.152s]   214 | [01;36m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.152s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.152s]   215 | [01;36m[K                }[m[K
+[4.152s]       |                 [01;36m[K~[m[K              
+[4.153s]   216 | [01;36m[K            })[m[K;
+[4.153s]       |             [01;36m[K~~[m[K                 
+[4.153s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.153s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.153s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.153s] [01m[K/usr/include/asio/impl/read_until.hpp:1368:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v1, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v1&&, std::string_view, ReadHandler&&, typename std::enable_if<(asio::is_dynamic_buffer_v1<typename std::decay<_Tp2>::type>::value && (! asio::is_dynamic_buffer_v2<typename std::decay<_Tp2>::type>::value))>::type*)[m[K’
+[4.153s]  1368 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s,
+[4.153s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.153s] [01m[K/usr/include/asio/impl/read_until.hpp:1368:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.153s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;36m[Knote: [m[K  cannot convert ‘[01m[K<lambda closure object>SerialSender::start_receive()::<lambda(const error_code&, std::size_t)>{((SerialSender*)this)}[m[K’ (type ‘[01m[KSerialSender::start_receive()::<lambda(const error_code&, std::size_t)>[m[K’) to type ‘[01m[Kstd::string_view[m[K’ {aka ‘[01m[Kstd::basic_string_view<char>[m[K’}
+[4.153s]   193 |         [01;36m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.154s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.154s]   194 | [01;36m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.154s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.154s]   195 | [01;36m[K            {[m[K
+[4.154s]       |             [01;36m[K~[m[K                  
+[4.154s]   196 | [01;36m[K                if (!error)[m[K
+[4.154s]       |                 [01;36m[K~~~~~~~~~~~[m[K    
+[4.154s]   197 | [01;36m[K                {[m[K
+[4.154s]       |                 [01;36m[K~[m[K              
+[4.154s]   198 | [01;36m[K                    has_received_message_ = true;[m[K
+[4.154s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.154s]   199 | 
+[4.154s]       |                                
+[4.154s]   200 | [01;36m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.154s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.154s]   201 | 
+[4.155s]       |                                
+[4.155s]   202 | [01;36m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.155s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.155s]   203 | 
+[4.155s]       |                                
+[4.155s]   204 | [01;36m[K                    std::string msg_str = "";[m[K
+[4.155s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.155s]   205 | [01;36m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.155s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.155s]   206 | [01;36m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.155s]       |                         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.155s]   207 | [01;36m[K                    }[m[K
+[4.155s]       |                     [01;36m[K~[m[K          
+[4.155s]   208 | [01;36m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.156s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.156s]   209 | [01;36m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.156s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.156s]   210 | 
+[4.156s]       |                                
+[4.156s]   211 | 
+[4.156s]       |                                
+[4.156s]   212 | 
+[4.156s]       |                                
+[4.156s]   213 | [01;36m[K                } else {[m[K
+[4.156s]       |                 [01;36m[K~~~~~~~~[m[K       
+[4.156s]   214 | [01;36m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.156s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.156s]   215 | [01;36m[K                }[m[K
+[4.156s]       |                 [01;36m[K~[m[K              
+[4.156s]   216 | [01;36m[K            })[m[K;
+[4.156s]       |             [01;36m[K~~[m[K                 
+[4.157s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.157s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.157s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.157s] [01m[K/usr/include/asio/impl/read_until.hpp:1995:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v1, class MatchCondition, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v1&&, MatchCondition, ReadHandler&&, typename std::enable_if<((asio::is_match_condition<MatchCondition>::value && asio::is_dynamic_buffer_v1<typename std::decay<_Tp2>::type>::value) && (! asio::is_dynamic_buffer_v2<typename std::decay<_Tp2>::type>::value))>::type*)[m[K’
+[4.157s]  1995 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s,
+[4.157s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.157s] [01m[K/usr/include/asio/impl/read_until.hpp:1995:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.157s] /usr/include/asio/impl/read_until.hpp: In substitution of ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v1, class MatchCondition, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v1&&, MatchCondition, ReadHandler&&, typename std::enable_if<((asio::is_match_condition<MatchCondition>::value && asio::is_dynamic_buffer_v1<typename std::decay<_Tp2>::type>::value) && (! asio::is_dynamic_buffer_v2<typename std::decay<_Tp2>::type>::value))>::type*) [with AsyncReadStream = asio::basic_serial_port<>; DynamicBuffer_v1 = asio::mutable_buffers_1; MatchCondition = SerialSender::start_receive()::<lambda(const error_code&, std::size_t)>; ReadHandler = void][m[K’:
+[4.157s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K   required from here
+[4.157s] [01m[K/usr/include/asio/impl/read_until.hpp:1995:1:[m[K [01;31m[Kerror: [m[Kno type named ‘[01m[Ktype[m[K’ in ‘[01m[Kstruct std::enable_if<false, void>[m[K’
+[4.157s] [01m[K/usr/include/asio/impl/read_until.hpp:2017:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class Allocator, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, asio::basic_streambuf<Allocator>&, char, ReadHandler&&)[m[K’
+[4.157s]  2017 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s,
+[4.157s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.157s] [01m[K/usr/include/asio/impl/read_until.hpp:2017:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.158s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;36m[Knote: [m[K  ‘[01m[Kasio::mutable_buffers_1[m[K’ is not derived from ‘[01m[Kasio::basic_streambuf<Allocator>[m[K’
+[4.158s]   193 |         [01;36m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.158s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.158s]   194 | [01;36m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.158s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.158s]   195 | [01;36m[K            {[m[K
+[4.158s]       |             [01;36m[K~[m[K                  
+[4.158s]   196 | [01;36m[K                if (!error)[m[K
+[4.158s]       |                 [01;36m[K~~~~~~~~~~~[m[K    
+[4.158s]   197 | [01;36m[K                {[m[K
+[4.158s]       |                 [01;36m[K~[m[K              
+[4.158s]   198 | [01;36m[K                    has_received_message_ = true;[m[K
+[4.158s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.158s]   199 | 
+[4.158s]       |                                
+[4.158s]   200 | [01;36m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.159s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.159s]   201 | 
+[4.159s]       |                                
+[4.159s]   202 | [01;36m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.159s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.159s]   203 | 
+[4.159s]       |                                
+[4.159s]   204 | [01;36m[K                    std::string msg_str = "";[m[K
+[4.159s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.159s]   205 | [01;36m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.159s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.159s]   206 | [01;36m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.159s]       |                         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.159s]   207 | [01;36m[K                    }[m[K
+[4.159s]       |                     [01;36m[K~[m[K          
+[4.160s]   208 | [01;36m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.160s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.160s]   209 | [01;36m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.160s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.160s]   210 | 
+[4.160s]       |                                
+[4.160s]   211 | 
+[4.160s]       |                                
+[4.160s]   212 | 
+[4.160s]       |                                
+[4.160s]   213 | [01;36m[K                } else {[m[K
+[4.160s]       |                 [01;36m[K~~~~~~~~[m[K       
+[4.160s]   214 | [01;36m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.160s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.160s]   215 | [01;36m[K                }[m[K
+[4.160s]       |                 [01;36m[K~[m[K              
+[4.160s]   216 | [01;36m[K            })[m[K;
+[4.160s]       |             [01;36m[K~~[m[K                 
+[4.161s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.161s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.161s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.161s] [01m[K/usr/include/asio/impl/read_until.hpp:2030:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class Allocator, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, asio::basic_streambuf<Allocator>&, std::string_view, ReadHandler&&)[m[K’
+[4.161s]  2030 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s,
+[4.161s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.161s] [01m[K/usr/include/asio/impl/read_until.hpp:2030:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.161s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;36m[Knote: [m[K  ‘[01m[Kasio::mutable_buffers_1[m[K’ is not derived from ‘[01m[Kasio::basic_streambuf<Allocator>[m[K’
+[4.161s]   193 |         [01;36m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.161s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.161s]   194 | [01;36m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.161s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.161s]   195 | [01;36m[K            {[m[K
+[4.161s]       |             [01;36m[K~[m[K                  
+[4.161s]   196 | [01;36m[K                if (!error)[m[K
+[4.161s]       |                 [01;36m[K~~~~~~~~~~~[m[K    
+[4.162s]   197 | [01;36m[K                {[m[K
+[4.162s]       |                 [01;36m[K~[m[K              
+[4.162s]   198 | [01;36m[K                    has_received_message_ = true;[m[K
+[4.162s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.162s]   199 | 
+[4.162s]       |                                
+[4.162s]   200 | [01;36m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.162s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.162s]   201 | 
+[4.162s]       |                                
+[4.162s]   202 | [01;36m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.162s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.162s]   203 | 
+[4.162s]       |                                
+[4.162s]   204 | [01;36m[K                    std::string msg_str = "";[m[K
+[4.162s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.162s]   205 | [01;36m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.163s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.163s]   206 | [01;36m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.163s]       |                         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.163s]   207 | [01;36m[K                    }[m[K
+[4.163s]       |                     [01;36m[K~[m[K          
+[4.163s]   208 | [01;36m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.163s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.163s]   209 | [01;36m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.163s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.163s]   210 | 
+[4.163s]       |                                
+[4.163s]   211 | 
+[4.164s]       |                                
+[4.164s]   212 | 
+[4.164s]       |                                
+[4.164s]   213 | [01;36m[K                } else {[m[K
+[4.164s]       |                 [01;36m[K~~~~~~~~[m[K       
+[4.164s]   214 | [01;36m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.164s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.164s]   215 | [01;36m[K                }[m[K
+[4.164s]       |                 [01;36m[K~[m[K              
+[4.164s]   216 | [01;36m[K            })[m[K;
+[4.164s]       |             [01;36m[K~~[m[K                 
+[4.164s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.164s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.164s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.165s] [01m[K/usr/include/asio/impl/read_until.hpp:2061:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class Allocator, class MatchCondition, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, asio::basic_streambuf<Allocator>&, MatchCondition, ReadHandler&&, typename std::enable_if<asio::is_match_condition<MatchCondition>::value>::type*)[m[K’
+[4.165s]  2061 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s,
+[4.165s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.165s] [01m[K/usr/include/asio/impl/read_until.hpp:2061:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.166s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;36m[Knote: [m[K  ‘[01m[Kasio::mutable_buffers_1[m[K’ is not derived from ‘[01m[Kasio::basic_streambuf<Allocator>[m[K’
+[4.166s]   193 |         [01;36m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.166s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.166s]   194 | [01;36m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.166s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.167s]   195 | [01;36m[K            {[m[K
+[4.167s]       |             [01;36m[K~[m[K                  
+[4.167s]   196 | [01;36m[K                if (!error)[m[K
+[4.167s]       |                 [01;36m[K~~~~~~~~~~~[m[K    
+[4.168s]   197 | [01;36m[K                {[m[K
+[4.168s]       |                 [01;36m[K~[m[K              
+[4.168s]   198 | [01;36m[K                    has_received_message_ = true;[m[K
+[4.168s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.168s]   199 | 
+[4.168s]       |                                
+[4.168s]   200 | [01;36m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.168s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.168s]   201 | 
+[4.168s]       |                                
+[4.168s]   202 | [01;36m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.168s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.168s]   203 | 
+[4.169s]       |                                
+[4.169s]   204 | [01;36m[K                    std::string msg_str = "";[m[K
+[4.169s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.169s]   205 | [01;36m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.169s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.169s]   206 | [01;36m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.169s]       |                         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.169s]   207 | [01;36m[K                    }[m[K
+[4.169s]       |                     [01;36m[K~[m[K          
+[4.169s]   208 | [01;36m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.169s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.169s]   209 | [01;36m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.170s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.170s]   210 | 
+[4.170s]       |                                
+[4.170s]   211 | 
+[4.170s]       |                                
+[4.170s]   212 | 
+[4.170s]       |                                
+[4.170s]   213 | [01;36m[K                } else {[m[K
+[4.170s]       |                 [01;36m[K~~~~~~~~[m[K       
+[4.170s]   214 | [01;36m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.170s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.170s]   215 | [01;36m[K                }[m[K
+[4.170s]       |                 [01;36m[K~[m[K              
+[4.170s]   216 | [01;36m[K            })[m[K;
+[4.170s]       |             [01;36m[K~~[m[K                 
+[4.170s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.171s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.171s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.171s] [01m[K/usr/include/asio/impl/read_until.hpp:2363:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v2, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v2, char, ReadHandler&&, typename std::enable_if<asio::is_dynamic_buffer_v2<DynamicBuffer_v2>::value>::type*)[m[K’
+[4.171s]  2363 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s, DynamicBuffer_v2 buffers,
+[4.171s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.171s] [01m[K/usr/include/asio/impl/read_until.hpp:2363:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.171s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;36m[Knote: [m[K  cannot convert ‘[01m[K<lambda closure object>SerialSender::start_receive()::<lambda(const error_code&, std::size_t)>{((SerialSender*)this)}[m[K’ (type ‘[01m[KSerialSender::start_receive()::<lambda(const error_code&, std::size_t)>[m[K’) to type ‘[01m[Kchar[m[K’
+[4.171s]   193 |         [01;36m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.171s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.171s]   194 | [01;36m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.171s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.171s]   195 | [01;36m[K            {[m[K
+[4.171s]       |             [01;36m[K~[m[K                  
+[4.171s]   196 | [01;36m[K                if (!error)[m[K
+[4.172s]       |                 [01;36m[K~~~~~~~~~~~[m[K    
+[4.172s]   197 | [01;36m[K                {[m[K
+[4.172s]       |                 [01;36m[K~[m[K              
+[4.172s]   198 | [01;36m[K                    has_received_message_ = true;[m[K
+[4.172s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.172s]   199 | 
+[4.172s]       |                                
+[4.172s]   200 | [01;36m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.172s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.172s]   201 | 
+[4.172s]       |                                
+[4.172s]   202 | [01;36m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.172s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.172s]   203 | 
+[4.173s]       |                                
+[4.173s]   204 | [01;36m[K                    std::string msg_str = "";[m[K
+[4.173s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.173s]   205 | [01;36m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.173s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.173s]   206 | [01;36m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.173s]       |                         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.173s]   207 | [01;36m[K                    }[m[K
+[4.173s]       |                     [01;36m[K~[m[K          
+[4.173s]   208 | [01;36m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.174s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.174s]   209 | [01;36m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.174s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.174s]   210 | 
+[4.174s]       |                                
+[4.174s]   211 | 
+[4.174s]       |                                
+[4.174s]   212 | 
+[4.174s]       |                                
+[4.174s]   213 | [01;36m[K                } else {[m[K
+[4.174s]       |                 [01;36m[K~~~~~~~~[m[K       
+[4.175s]   214 | [01;36m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.175s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.175s]   215 | [01;36m[K                }[m[K
+[4.175s]       |                 [01;36m[K~[m[K              
+[4.175s]   216 | [01;36m[K            })[m[K;
+[4.175s]       |             [01;36m[K~~[m[K                 
+[4.175s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.175s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.175s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.175s] [01m[K/usr/include/asio/impl/read_until.hpp:2677:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v2, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v2, std::string_view, ReadHandler&&, typename std::enable_if<asio::is_dynamic_buffer_v2<DynamicBuffer_v2>::value>::type*)[m[K’
+[4.176s]  2677 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s,
+[4.176s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.176s] [01m[K/usr/include/asio/impl/read_until.hpp:2677:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.176s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K [01;36m[Knote: [m[K  cannot convert ‘[01m[K<lambda closure object>SerialSender::start_receive()::<lambda(const error_code&, std::size_t)>{((SerialSender*)this)}[m[K’ (type ‘[01m[KSerialSender::start_receive()::<lambda(const error_code&, std::size_t)>[m[K’) to type ‘[01m[Kstd::string_view[m[K’ {aka ‘[01m[Kstd::basic_string_view<char>[m[K’}
+[4.176s]   193 |         [01;36m[Kasio::async_read_until(*serial_port_, asio::buffer(received_modbus_frame_, '0x010404'),[m[K
+[4.176s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.176s]   194 | [01;36m[K                [this](const asio::error_code& error, std::size_t bytes_transferred)[m[K
+[4.176s]       |                 [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.176s]   195 | [01;36m[K            {[m[K
+[4.176s]       |             [01;36m[K~[m[K                  
+[4.177s]   196 | [01;36m[K                if (!error)[m[K
+[4.177s]       |                 [01;36m[K~~~~~~~~~~~[m[K    
+[4.177s]   197 | [01;36m[K                {[m[K
+[4.177s]       |                 [01;36m[K~[m[K              
+[4.177s]   198 | [01;36m[K                    has_received_message_ = true;[m[K
+[4.177s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.177s]   199 | 
+[4.177s]       |                                
+[4.177s]   200 | [01;36m[K                    received_modbus_frame_.resize(bytes_transferred);  // 调整大小以匹配实际接收到的字节数[m[K
+[4.178s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.178s]   201 | 
+[4.178s]       |                                
+[4.178s]   202 | [01;36m[K                    last_received_message_ = received_modbus_frame_;  // 更新最后接收到的消息[m[K
+[4.178s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.178s]   203 | 
+[4.178s]       |                                
+[4.178s]   204 | [01;36m[K                    std::string msg_str = "";[m[K
+[4.178s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.178s]   205 | [01;36m[K                    for (auto &byte : received_modbus_frame_) {[m[K
+[4.179s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.179s]   206 | [01;36m[K                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";[m[K
+[4.179s]       |                         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.179s]   207 | [01;36m[K                    }[m[K
+[4.179s]       |                     [01;36m[K~[m[K          
+[4.179s]   208 | [01;36m[K                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());[m[K
+[4.179s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.179s]   209 | [01;36m[K                    process_modbus_frame(received_modbus_frame_);[m[K
+[4.179s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.180s]   210 | 
+[4.180s]       |                                
+[4.180s]   211 | 
+[4.180s]       |                                
+[4.180s]   212 | 
+[4.180s]       |                                
+[4.180s]   213 | [01;36m[K                } else {[m[K
+[4.180s]       |                 [01;36m[K~~~~~~~~[m[K       
+[4.180s]   214 | [01;36m[K                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());[m[K
+[4.180s]       |                     [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.180s]   215 | [01;36m[K                }[m[K
+[4.181s]       |                 [01;36m[K~[m[K              
+[4.181s]   216 | [01;36m[K            })[m[K;
+[4.181s]       |             [01;36m[K~~[m[K                 
+[4.181s] In file included from [01m[K/usr/include/asio/read_until.hpp:2861[m[K,
+[4.181s]                  from [01m[K/usr/include/asio.hpp:145[m[K,
+[4.181s]                  from [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:3[m[K:
+[4.181s] [01m[K/usr/include/asio/impl/read_until.hpp:3316:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v2, class MatchCondition, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v2, MatchCondition, ReadHandler&&, typename std::enable_if<(asio::is_match_condition<MatchCondition>::value && asio::is_dynamic_buffer_v2<DynamicBuffer_v2>::value)>::type*)[m[K’
+[4.182s]  3316 | [01;36m[Kasync_read_until[m[K(AsyncReadStream& s, DynamicBuffer_v2 buffers,
+[4.182s]       | [01;36m[K^~~~~~~~~~~~~~~~[m[K
+[4.182s] [01m[K/usr/include/asio/impl/read_until.hpp:3316:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[4.183s] /usr/include/asio/impl/read_until.hpp: In substitution of ‘[01m[Ktemplate<class AsyncReadStream, class DynamicBuffer_v2, class MatchCondition, class ReadHandler> auto asio::async_read_until(AsyncReadStream&, DynamicBuffer_v2, MatchCondition, ReadHandler&&, typename std::enable_if<(asio::is_match_condition<MatchCondition>::value && asio::is_dynamic_buffer_v2<DynamicBuffer_v2>::value)>::type*) [with AsyncReadStream = asio::basic_serial_port<>; DynamicBuffer_v2 = asio::mutable_buffers_1; MatchCondition = SerialSender::start_receive()::<lambda(const error_code&, std::size_t)>; ReadHandler = void][m[K’:
+[4.183s] [01m[K/home/rescue_robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:193:31:[m[K   required from here
+[4.184s] [01m[K/usr/include/asio/impl/read_until.hpp:3316:1:[m[K [01;31m[Kerror: [m[Kno type named ‘[01m[Ktype[m[K’ in ‘[01m[Kstruct std::enable_if<false, void>[m[K’
+[7.542s] gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+[7.542s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+[7.543s] gmake: *** [Makefile:146: all] Error 2
+[7.545s] Invoked command in '/home/rescue_robot/buaa_rescue_robot/build/serial' returned '2': CMAKE_PREFIX_PATH=/home/rescue_robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue_robot/buaa_rescue_robot/install/serial:/home/rescue_robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue_robot/buaa_rescue_robot/install/cpp_pubsub:/opt/ros/humble /usr/bin/cmake --build /home/rescue_robot/buaa_rescue_robot/build/serial -- -j8 -l8
