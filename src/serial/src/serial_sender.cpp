@@ -185,8 +185,7 @@ private:    // 私有成员函数和变量
         received_modbus_frame_.clear();
         received_modbus_frame_.resize(256);  // 在这里初始化
         try
-        {
-            
+        {         
         
         modbus_frame_ = {0x01, 0x04, 0x00, 0x00, 0x00, 0x02, 0x71, 0xCB};   // read the counter of the elevator
         asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
