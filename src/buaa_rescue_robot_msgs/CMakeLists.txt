@@ -13,6 +13,7 @@ find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ControlMessage.msg"
+  "msg/SensorsMessage.msg"
 )
 
 # 安装launch文件

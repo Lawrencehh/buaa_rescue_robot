@@ -1,0 +1,1 @@
+int32 elevator_counter  # elevator计数器字段
