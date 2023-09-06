@@ -4,4 +4,5 @@ build/
 # 排除install文件夹
 install/
 
+# exclude directory 'log'
 log/
