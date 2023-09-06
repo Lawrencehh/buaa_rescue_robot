@@ -1,0 +1,8 @@
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In lambda function:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:135:51:[m[K [01;31m[Kerror: [m[K‘[01m[Kcalculate_crc16[m[K’ was not declared in this scope; did you mean ‘[01m[Kcalculated_crc[m[K’?
+  135 |                         uint16_t calculated_crc = [01;31m[Kcalculate_crc16[m[K(frame, 0, frame.size() - 2);
+      |                                                   [01;31m[K^~~~~~~~~~~~~~~[m[K
+      |                                                   [32m[Kcalculated_crc[m[K
+gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

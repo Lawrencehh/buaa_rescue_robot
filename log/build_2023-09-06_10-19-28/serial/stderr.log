@@ -1,0 +1,4 @@
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In lambda function:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:58:63:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kbytes_transferred[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   58 |             [this](const asio::error_code& error, [01;35m[Kstd::size_t bytes_transferred[m[K) {
+      |                                                   [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~[m[K

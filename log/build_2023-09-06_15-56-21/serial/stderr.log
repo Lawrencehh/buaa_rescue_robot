@@ -1,0 +1,12 @@
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In member function ‘[01m[Kvoid SerialSender::start_receive()[m[K’:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:66:15:[m[K [01;31m[Kerror: [m[K‘[01m[Kasync_read_some[m[K’ is not a member of ‘[01m[Kasio[m[K’; did you mean ‘[01m[Kasync_read_at[m[K’?
+   66 |         asio::[01;31m[Kasync_read_some[m[K(asio::buffer(received_modbus_frame_),
+      |               [01;31m[K^~~~~~~~~~~~~~~[m[K
+      |               [32m[Kasync_read_at[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In lambda function:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:67:67:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kbytes_transferred[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   67 |                 [this](const asio::error_code& error, [01;35m[Kstd::size_t bytes_transferred[m[K)
+      |                                                       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

@@ -1,0 +1,24 @@
+[35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[ 50%] Built target serial_receiver
+[ 75%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:28:[m[K [01;31m[Kerror: [m[Kexpected identifier before ‘[01m[K*[m[K’ token
+   53 |     asio::async_read_until([01;31m[K*[m[Kserial_port_, read_buffer_, "\n",
+      |                            [01;31m[K^[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:43:[m[K [01;31m[Kerror: [m[K‘[01m[Kread_buffer_[m[K’ is not a type
+   53 |     asio::async_read_until(*serial_port_, [01;31m[Kread_buffer_[m[K, "\n",
+      |                                           [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:57:[m[K [01;31m[Kerror: [m[Kexpected identifier before string constant
+   53 |     asio::async_read_until(*serial_port_, read_buffer_, [01;31m[K"\n"[m[K,
+      |                                                         [01;31m[K^~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:57:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K...[m[K’ before string constant
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:5:[m[K [01;31m[Kerror: [m[KISO C++ forbids declaration of ‘[01m[Kasync_read_until[m[K’ with no type [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+   53 |     [01;31m[Kasio[m[K::async_read_until(*serial_port_, read_buffer_, "\n",
+      |     [01;31m[K^~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:5:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[K::[m[K’
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In lambda function:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:72:63:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kbytes_transferred[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+   72 |             [this](const asio::error_code& error, [01;35m[Kstd::size_t bytes_transferred[m[K) {
+      |                                                   [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

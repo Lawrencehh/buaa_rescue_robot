@@ -1,0 +1,59 @@
+[35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[ 50%] Built target serial_receiver
+[ 75%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:175:2:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K}[m[K’ at end of input
+  175 | }
+      |  [01;31m[K^[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:18:1:[m[K [01;36m[Knote: [m[Kto match this ‘[01m[K{[m[K’
+   18 | [01;36m[K{[m[K
+      | [01;36m[K^[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In constructor ‘[01m[KSerialSender::SerialSender()[m[K’:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:25:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kserial_port_[m[K’ was not declared in this scope
+   25 |             [01;31m[Kserial_port_[m[K = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB1");  // 这里的路径需要根据您的设备进行更改
+      |             [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:25:64:[m[K [01;31m[Kerror: [m[K‘[01m[Kio_[m[K’ was not declared in this scope
+   25 |             serial_port_ = std::make_shared<asio::serial_port>([01;31m[Kio_[m[K, "/dev/ttyUSB1");  // 这里的路径需要根据您的设备进行更改
+      |                                                                [01;31m[K^~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:34:9:[m[K [01;31m[Kerror: [m[K‘[01m[Ktimer_[m[K’ was not declared in this scope; did you mean ‘[01m[Ktimer_t[m[K’?
+   34 |         [01;31m[Ktimer_[m[K = this->create_wall_timer(
+      |         [01;31m[K^~~~~~[m[K
+      |         [32m[Ktimer_t[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:36:38:[m[K [01;31m[Kerror: [m[K‘[01m[Ktimer_callback[m[K’ is not a member of ‘[01m[KSerialSender[m[K’
+   36 |             std::bind(&SerialSender::[01;31m[Ktimer_callback[m[K, this));
+      |                                      [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:39:11:[m[K [01;31m[Kerror: [m[K‘[01m[Ksubscription_[m[K’ was not declared in this scope; did you mean ‘[01m[Krmw_subscription_t[m[K’?
+   39 |           [01;31m[Ksubscription_[m[K = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>(
+      |           [01;31m[K^~~~~~~~~~~~~[m[K
+      |           [32m[Krmw_subscription_t[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:42:38:[m[K [01;31m[Kerror: [m[K‘[01m[Kcallback[m[K’ is not a member of ‘[01m[KSerialSender[m[K’
+   42 |             std::bind(&SerialSender::[01;31m[Kcallback[m[K, this, std::placeholders::_1));
+      |                                      [01;31m[K^~~~~~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:45:9:[m[K [01;31m[Kerror: [m[K‘[01m[Kstart_receive[m[K’ was not declared in this scope
+   45 |         [01;31m[Kstart_receive[m[K();
+      |         [01;31m[K^~~~~~~~~~~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:48:44:[m[K [01;31m[Kerror: [m[Ka function-definition is not allowed here before ‘[01m[K{[m[K’ token
+   48 |         asio::io_service& get_io_service() [01;31m[K{[m[K
+      |                                            [01;31m[K^[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:1:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[Kprivate[m[K’
+   53 | [01;31m[Kprivate[m[K:    // 私有成员函数和变量
+      | [01;31m[K^~~~~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:60:26:[m[K [01;31m[Kerror: [m[Ka function-definition is not allowed here before ‘[01m[K{[m[K’ token
+   60 |     void start_receive() [01;31m[K{[m[K
+      |                          [01;31m[K^[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:82:5:[m[K [01;31m[Kerror: [m[Ka function-definition is not allowed here before ‘[01m[K{[m[K’ token
+   82 |     [01;31m[K{[m[K
+      |     [01;31m[K^[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:133:5:[m[K [01;31m[Kerror: [m[Ka function-definition is not allowed here before ‘[01m[K{[m[K’ token
+  133 |     [01;31m[K{[m[K
+      |     [01;31m[K^[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In lambda function:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:164:24:[m[K [01;31m[Kerror: [m[K‘[01m[Kusing element_type = class SerialSender[m[K’ {aka ‘[01m[Kclass SerialSender[m[K’} has no member named ‘[01m[Kget_io_service[m[K’
+  164 |         serial_sender->[01;31m[Kget_io_service[m[K().run();
+      |                        [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K At global scope:
+[01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:175:2:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id at end of input
+  175 | }
+      |  [01;31m[K^[m[K
+gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

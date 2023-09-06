@@ -1,0 +1,15 @@
+[0.010s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[0.062s] [35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[0.081s] [ 50%] Built target serial_receiver
+[0.093s] [ 75%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[2.463s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In member function ‘[01m[Kvoid SerialSender::process_modbus_frame(const std::vector<unsigned char, std::allocator<unsigned char> >&)[m[K’:
+[2.463s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:134:22:[m[K [01;31m[Kerror: [m[Kredeclaration of ‘[01m[Kuint16_t calculated_crc[m[K’
+[2.463s]   134 |             uint16_t [01;31m[Kcalculated_crc[m[K = swap_endian(calculated_crc);
+[2.463s]       |                      [01;31m[K^~~~~~~~~~~~~~[m[K
+[2.463s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:131:22:[m[K [01;36m[Knote: [m[K‘[01m[Kuint16_t calculated_crc[m[K’ previously declared here
+[2.463s]   131 |             uint16_t [01;36m[Kcalculated_crc[m[K = calculate_crc16(frame, 0, frame.size() - 2);
+[2.463s]       |                      [01;36m[K^~~~~~~~~~~~~~[m[K
+[4.739s] gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+[4.739s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+[4.739s] gmake: *** [Makefile:146: all] Error 2
+[4.740s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/serial' returned '2': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8

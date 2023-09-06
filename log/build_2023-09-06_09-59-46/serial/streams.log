@@ -1,0 +1,26 @@
+[0.009s] Invoking command in '/home/rescue-robot/buaa_rescue_robot/build/serial': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8
+[0.062s] [35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[0.097s] [ 50%] Built target serial_receiver
+[0.114s] [ 75%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[2.402s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:28:[m[K [01;31m[Kerror: [m[Kexpected identifier before ‘[01m[K*[m[K’ token
+[2.402s]    53 |     asio::async_read_until([01;31m[K*[m[Kserial_port_, read_buffer_, "\n",
+[2.402s]       |                            [01;31m[K^[m[K
+[2.402s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:43:[m[K [01;31m[Kerror: [m[K‘[01m[Kread_buffer_[m[K’ is not a type
+[2.402s]    53 |     asio::async_read_until(*serial_port_, [01;31m[Kread_buffer_[m[K, "\n",
+[2.402s]       |                                           [01;31m[K^~~~~~~~~~~~[m[K
+[2.402s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:57:[m[K [01;31m[Kerror: [m[Kexpected identifier before string constant
+[2.402s]    53 |     asio::async_read_until(*serial_port_, read_buffer_, [01;31m[K"\n"[m[K,
+[2.402s]       |                                                         [01;31m[K^~~~[m[K
+[2.402s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:57:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K...[m[K’ before string constant
+[2.402s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:5:[m[K [01;31m[Kerror: [m[KISO C++ forbids declaration of ‘[01m[Kasync_read_until[m[K’ with no type [[01;31m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-fpermissive-fpermissive]8;;[m[K]
+[2.402s]    53 |     [01;31m[Kasio[m[K::async_read_until(*serial_port_, read_buffer_, "\n",
+[2.402s]       |     [01;31m[K^~~~[m[K
+[2.403s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:53:5:[m[K [01;31m[Kerror: [m[Kinvalid use of ‘[01m[K::[m[K’
+[2.448s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:[m[K In lambda function:
+[2.449s] [01m[K/home/rescue-robot/buaa_rescue_robot/src/serial/src/serial_sender.cpp:72:63:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kbytes_transferred[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[2.449s]    72 |             [this](const asio::error_code& error, [01;35m[Kstd::size_t bytes_transferred[m[K) {
+[2.449s]       |                                                   [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~[m[K
+[4.626s] gmake[2]: *** [CMakeFiles/serial_sender.dir/build.make:76: CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o] Error 1
+[4.627s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/serial_sender.dir/all] Error 2
+[4.627s] gmake: *** [Makefile:146: all] Error 2
+[4.629s] Invoked command in '/home/rescue-robot/buaa_rescue_robot/build/serial' returned '2': CMAKE_PREFIX_PATH=/home/rescue-robot/buaa_rescue_robot/install/buaa_rescue_robot_msgs:/home/rescue-robot/buaa_rescue_robot/install/serial:/home/rescue-robot/buaa_rescue_robot/install/keyboard_controller:/home/rescue-robot/buaa_rescue_robot/install/cpp_pubsub:/home/rescue-robot/buaa_rescue_robot/install:/home/rescue-robot/buaa_rescue_robot/install:/opt/ros/humble /usr/bin/cmake --build /home/rescue-robot/buaa_rescue_robot/build/serial -- -j8 -l8

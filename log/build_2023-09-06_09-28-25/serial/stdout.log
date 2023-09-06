@@ -1,0 +1,4 @@
+[35m[1mConsolidate compiler generated dependencies of target serial_sender[0m
+[35m[1mConsolidate compiler generated dependencies of target serial_receiver[0m
+[ 25%] [32mBuilding CXX object CMakeFiles/serial_sender.dir/src/serial_sender.cpp.o[0m
+[ 75%] Built target serial_receiver
