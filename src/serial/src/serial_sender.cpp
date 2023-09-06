@@ -1,20 +1,25 @@
-#include <rclcpp/rclcpp.hpp>
-#include <asio.hpp>
-#include <std_msgs/msg/string.hpp>
+// 头文件引入
+#include <rclcpp/rclcpp.hpp>    // 引入ROS 2的核心库
+#include <asio.hpp> // 引入ASIO库，用于串口通信
+#include <std_msgs/msg/string.hpp>  // 引入标准消息类型
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
 
-#include <thread>   // delay
-#include <chrono>   // delay
+#include <thread>   // 用于线程中的sleep_for函数
+#include <chrono>   // 用于时间表示
 
+// 命名空间
 using namespace std;
 using asio::ip::tcp;
 
+// 类定义
+// 创建一个继承自rclcpp::Node的SerialSender类，并在构造函数中进行初始化。
 class SerialSender : public rclcpp::Node
 {
 public:
     SerialSender() : Node("serial_sender")
     {
         // 初始化串口
+        // 尝试初始化串口，如果出错，记录错误信息。
         try {
             serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
             serial_port_->set_option(asio::serial_port::baud_rate(57600));  // 设置波特率
@@ -37,10 +42,11 @@ public:
     }
 
 
-private:
+private:    // 私有成员函数和变量
     void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg)
     {
         // 直接使用类成员变量
+        // 业务逻辑，如控制elevator等
         // serial_port sending control command to the elevator 
         if (msg->elevator_control == 1) //elavator going upwards
         {
@@ -91,6 +97,7 @@ private:
     void timer_callback()
     {
         // 打印vector的内容
+        // // 打印发送的Modbus帧内容
         std::string msg_str = "";
         for (auto &byte : modbus_frame_) {
             msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
@@ -107,10 +114,10 @@ private:
 
 };
 
-int main(int argc, char **argv)
+int main(int argc, char **argv) // 主函数
 {
     rclcpp::init(argc, argv);   // 初始化ROS 2
-    rclcpp::spin(std::make_shared<SerialSender>()); // 串口对象
-    rclcpp::shutdown(); // ASIO I/O服务
+    rclcpp::spin(std::make_shared<SerialSender>()); // 开始事件循环, 串口对象
+    rclcpp::shutdown(); // 关闭ROS 2
     return 0;
 }
