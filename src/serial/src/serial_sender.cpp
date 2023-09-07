@@ -11,9 +11,20 @@
 #include <vector>
 #include <cstdint>
 
+#include <termios.h>
+
 // 命名空间
 using namespace std;
 using asio::ip::tcp;
+
+void flush_serial_port(asio::serial_port& port)
+{
+    // 获取串行端口的原生句柄
+    int fd = port.native_handle();
+
+    // 使用tcflush清空输入和输出缓冲区
+    tcflush(fd, TCIOFLUSH);
+}
 
 // CRC-16 Modbus查表法
 const uint16_t  crc16_table[256] = {
@@ -79,7 +90,7 @@ public:
         // 初始化串口
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
-            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB1");  // 这里的路径需要根据您的设备进行更改
+            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
             serial_port_->set_option(asio::serial_port::baud_rate(57600));  // 设置波特率
         }
         catch (const std::exception &e) {
@@ -89,7 +100,7 @@ public:
 
         // 创建定时器，定时发送消息
         timer_ = this->create_wall_timer(
-            std::chrono::milliseconds(100),  // 100毫秒，即10 Hz
+            std::chrono::milliseconds(2000),  // 100毫秒，即10 Hz
             std::bind(&SerialSender::timer_callback, this));
         
         // 创建订阅器，订阅名为"control_topic"的话题
@@ -122,7 +133,7 @@ private:    // 私有成员函数和变量
     
 
     // 处理接收到的Modbus帧
-    void process_modbus_frame(const std::vector<uint8_t>& frame) {
+    int32_t process_modbus_frame(const std::vector<uint8_t>& frame) {
         // 假设数据头是 {0x01, 0x04, 0x04}
         const std::vector<uint8_t> header = {0x01, 0x04, 0x04};
 
@@ -156,12 +167,8 @@ private:    // 私有成员函数和变量
 
                 // 解析数据段                
                 if (data.size() >= 4) {
-                    elevator_counter = static_cast<int32_t>(data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);
-                    
+                    elevator_counter = static_cast<int32_t>(data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);                    
                 }
-
-                
-
             } 
             else {
                 std::cout << "CRC check failed." << std::endl;
@@ -169,24 +176,26 @@ private:    // 私有成员函数和变量
         } else {
             std::cout << "Invalid header." << std::endl;
         }
+        return elevator_counter;
     }
     
     // 新的成员函数来启动接收
     // 在start_receive()函数中，不再调整received_modbus_frame_的大小
-    void start_receive() 
+    std::vector<uint8_t> received_modbus_frame_; 
+    int32_t start_receive() 
     {   
         
         try
-        {       
+        {        
             received_modbus_frame_.clear();
-            received_modbus_frame_.resize(256);  // 在这里初始化  
-        
-            modbus_frame_ = {0x01, 0x04, 0x00, 0x00, 0x00, 0x02, 0x71, 0xCB};   // read the counter of the elevator
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
-
-            serial_port_->async_read_some(asio::buffer(received_modbus_frame_, 256),
+            received_modbus_frame_.resize(256);  // 在这里初始化        
+            
+            // 清空串行端口缓冲区
+            flush_serial_port(*serial_port_);
+            serial_port_->async_read_some(asio::buffer(received_modbus_frame_,256),
                     [this](const asio::error_code& error, std::size_t bytes_transferred)
                 {
+                    received_modbus_frame_.resize(bytes_transferred);
                     if (!error) 
                     {
                         has_received_message_ = true;
@@ -197,7 +206,13 @@ private:    // 私有成员函数和变量
                             msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
                         }
                         RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());     
-                        process_modbus_frame(received_modbus_frame_);                                                    
+                        elevator_counter = process_modbus_frame(received_modbus_frame_);   
+
+                        // 创建并发布消息
+                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessage();
+                        msg.elevator_counter = elevator_counter;
+                        publisher_->publish(msg);
+                        RCLCPP_INFO(this->get_logger(), "Elevator_counter: %d", elevator_counter);                                                 
                                        
                     } else {
                         RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());
@@ -205,13 +220,15 @@ private:    // 私有成员函数和变量
                 });
         }
         catch (const std::length_error& le) {
-    std::cerr << "Length error: " << le.what() << '\n';
-    std::cerr << "Max size: " << received_modbus_frame_.max_size() << '\n';
-    std::cerr << "Current size: " << received_modbus_frame_.size() << '\n';
-    // 其他调试信息
-}
+            std::cerr << "Length error: " << le.what() << '\n';
+            std::cerr << "Max size: " << received_modbus_frame_.max_size() << '\n';
+            std::cerr << "Current size: " << received_modbus_frame_.size() << '\n';
+            // 其他调试信息
+        }
         
-        
+        return elevator_counter;
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒  
+        start_receive();
     }
  
     void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg)
@@ -267,12 +284,15 @@ private:    // 私有成员函数和变量
 
     void timer_callback()
     {
-        start_receive();  // 递归调用以持续接收
+        // // 清空串行端口缓冲区
+        // flush_serial_port(*serial_port_);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+        modbus_frame_ = {0x01, 0x04, 0x00, 0x00, 0x00, 0x02, 0x71, 0xCB};   // read the counter of the elevator
+        asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+        
 
-        // 创建并发布消息
-                auto msg = buaa_rescue_robot_msgs::msg::SensorsMessage();
-                msg.elevator_counter = elevator_counter;
-                publisher_->publish(msg);
+        elevator_counter = start_receive();  // 递归调用以持续接收
 
 
         // 打印vector的内容
@@ -285,11 +305,11 @@ private:    // 私有成员函数和变量
         
         if (has_received_message_) {
             // 打印最后接收到的消息
-            for (auto &byte : last_received_message_) {
+            for (auto &byte : received_modbus_frame_) {
                 msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
             }
             RCLCPP_INFO(this->get_logger(), "Last received message: %s", msg_str.c_str());
-
+            has_received_message_ = false;
         }
         
     }
@@ -301,7 +321,7 @@ private:    // 私有成员函数和变量
     std::shared_ptr<asio::serial_port> serial_port_;    // 串口对象
     asio::io_service io_;   // ASIO I/O服务
     std::vector<uint8_t> modbus_frame_; // 存储Modbus协议帧
-    std::vector<uint8_t> received_modbus_frame_;  
+    
     std::vector<uint8_t> frame;  // Modbus协议帧
 
     int32_t elevator_counter;
