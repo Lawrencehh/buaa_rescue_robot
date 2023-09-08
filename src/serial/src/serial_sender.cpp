@@ -95,7 +95,7 @@ public:
         }
 
         // 创建定时器，定时发送消息
-        timer_ = this->create_wall_timer(std::chrono::milliseconds(2000),  // 100毫秒，即10 Hz
+        timer_ = this->create_wall_timer(std::chrono::milliseconds(100),  // 100毫秒，即10 Hz
             std::bind(&SerialSender::timer_callback, this));
         
         // 创建订阅器，订阅名为"control_topic"的话题
@@ -122,6 +122,26 @@ private:    // 私有成员函数和变量
     asio::streambuf write_buffer_;  // 新添加的写缓冲区
     std::vector<uint8_t> last_received_message_;  // 添加一个新的私有成员变量来存储最后接收到的消息
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessage>::SharedPtr publisher_;   // add a publisher of SensorsMessage
+
+    // ROS 2 Humble版本的异步写入封装函数
+    void async_write_to_serial(const std::vector<uint8_t>& data_to_write)
+    {
+        asio::async_write(*serial_port_, asio::buffer(data_to_write),
+            [this](const asio::error_code& error, std::size_t bytes_transferred)
+            {
+                // 检查是否有错误
+                if (!error) 
+                {
+                    // RCLCPP_INFO(this->get_logger(), "Successfully wrote %zu bytes", bytes_transferred);
+                } 
+                else 
+                {
+                    RCLCPP_ERROR(this->get_logger(), "Write Error: %s", error.message().c_str());
+                }
+            }
+        );
+    }
+
 
     // 处理接收到的Modbus帧
     int32_t process_modbus_frame(const std::vector<uint8_t>& frame) {
@@ -166,99 +186,106 @@ private:    // 私有成员函数和变量
         return elevator_counter;
     }
     
-    // 
+    // 重构后的 start_receive 函数
     std::vector<uint8_t> received_modbus_frame_; 
+    // ROS 2 Humble版本的start_receive函数
     int32_t start_receive() 
-    {   
-        
-        try
-        {        
-            received_modbus_frame_.clear();
-            received_modbus_frame_.resize(256);  // 在这里初始化        
-            
-            // 清空串行端口缓冲区
-            flush_serial_port(*serial_port_);
-            serial_port_->async_read_some(asio::buffer(received_modbus_frame_,256),
-                    [this](const asio::error_code& error, std::size_t bytes_transferred)
+    {
+        // 清空received_modbus_frame_并初始化大小
+        received_modbus_frame_.clear();
+        received_modbus_frame_.resize(256);
+
+        // 异步读取串口数据
+        serial_port_->async_read_some(asio::buffer(received_modbus_frame_, 256),
+            [this](const asio::error_code& error, std::size_t bytes_transferred)
+            {
+                // 调整received_modbus_frame_的大小以匹配实际接收到的字节数
+                received_modbus_frame_.resize(bytes_transferred);
+
+                // 检查是否有错误
+                if (!error) 
                 {
-                    received_modbus_frame_.resize(bytes_transferred);
-                    if (!error) 
+                    // 创建一个包含数据头的vector
+                    std::vector<uint8_t> header = {0x01, 0x04, 0x04};
+                    // 搜索数据头
+                    auto it = std::search(received_modbus_frame_.begin(), received_modbus_frame_.end(), header.begin(), header.end());
+
+                    // 如果找到了数据头，并且有足够的字节用于完整的9字节帧
+                    if (it != received_modbus_frame_.end() && std::distance(it, received_modbus_frame_.end()) >= 9)
                     {
-                        std::string msg_str = "";
-                        for (auto &byte : received_modbus_frame_) {
-                            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-                        }
-                        RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());     
-                        elevator_counter = process_modbus_frame(received_modbus_frame_);   
-                        // 创建并发布消息
+                        // 提取9字节帧
+                        std::vector<uint8_t> frame(it, it + 9);
+
+                        // 处理Modbus帧并获取elevator_counter
+                        elevator_counter = process_modbus_frame(frame);
+
+                        // 发布到Sensors_data话题
                         auto msg = buaa_rescue_robot_msgs::msg::SensorsMessage();
                         msg.elevator_counter = elevator_counter;
                         publisher_->publish(msg);
-                        RCLCPP_INFO(this->get_logger(), "Elevator_counter: %d", elevator_counter);                                                 
-                                       
-                    } else {
-                        RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());
+
+                        // 移除这9字节及之前的字节
+                        received_modbus_frame_.erase(received_modbus_frame_.begin(), it + 9);
                     }
-                });
-        }
-        catch (const std::length_error& le) {
-            std::cerr << "Length error: " << le.what() << '\n';
-            std::cerr << "Max size: " << received_modbus_frame_.max_size() << '\n';
-            std::cerr << "Current size: " << received_modbus_frame_.size() << '\n';
-            // 其他调试信息
-        }
-        
-        return elevator_counter;
-        std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒  
-        start_receive();
-    }
+
+                    // 递归调用以持续接收
+                    start_receive();
+                } 
+                else 
+                {
+                    RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());
+                }
+            }
+        );
+
+    return elevator_counter;
+}
+
  
-    void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg)
-    {        
+    void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg){        
         // 直接使用类成员变量
         // 业务逻辑，如控制elevator等
         // serial_port sending control command to the elevator 
         if (msg->elevator_control == 1) //elavator going upwards
         {
-            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
             modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0xFF, 0x00, 0x8C, 0x3A};
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0xFF, 0x00, 0x8C, 0x3A};   // turn on J1
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
         else if (msg->elevator_control == 0)    //elavator stop
         {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
             modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
-
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
         else if (msg->elevator_control == -1)   //elavator going downwards
         {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
-            modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0xFF, 0x00, 0xDD, 0xFA};
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
         else if (msg->elevator_control == 666)  //elavator stop and reset the counter
         {
             modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
             modbus_frame_ = {0x01, 0x05, 0x00, 0x01, 0x00, 0x00, 0x9C, 0x0A};   // turn off J2
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x01, 0x10, 0x00, 0x00, 0x00, 0x02, 0x04, 0x00, 0x00, 0x00, 0x00, 0xF3, 0xAF}; //reset the counter 01 10 00 00 00 02 04 00 00 00 00 F3 AF
-            asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+            async_write_to_serial(modbus_frame_);
         }
 
     
@@ -266,14 +293,12 @@ private:    // 私有成员函数和变量
 
     void timer_callback()
     {
-        // // 清空串行端口缓冲区
-        // flush_serial_port(*serial_port_);
+        // reading the counter
         std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-        modbus_frame_ = {0x01, 0x04, 0x00, 0x00, 0x00, 0x02, 0x71, 0xCB};   // read the counter of the elevator
-        asio::write(*serial_port_, asio::buffer(modbus_frame_, modbus_frame_.size()));
+        modbus_frame_ = {0x01, 0x04, 0x00, 0x00, 0x00, 0x02, 0x71, 0xCB};   // reading the counter
+        async_write_to_serial(modbus_frame_);
         std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-        elevator_counter = start_receive();  // 递归调用以持续接收
-
+        
         // 打印vector的内容
         // // 打印发送的Modbus帧内容
         std::string msg_str = "";
