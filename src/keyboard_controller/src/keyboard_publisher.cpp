@@ -35,7 +35,7 @@ int main(int argc, char * argv[])
     }
     else if (key == '5') {  // 检查是否按下了'5'
       msg->elevator_control = 0;
-      msg->below_linear_module_control = 0;
+      msg->lower_linear_module_control = 0;
       msg->upper_linear_module_control = 0;
       publisher->publish(*msg);  // 发布消息
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: 0");  // 打印日志
@@ -47,18 +47,18 @@ int main(int argc, char * argv[])
     }
     else if (key == '0') {  // 检查是否按下了'0'
       msg->elevator_control = 666;
-      msg->below_linear_module_control = 666;
+      msg->lower_linear_module_control = 666;
       msg->upper_linear_module_control = 666;
       publisher->publish(*msg);  // 发布消息
       RCLCPP_INFO(node->get_logger(), "Published control message to reset the counter with elevator_control: 666");  // 打印日志
     }else if (key == '4') {  // 检查是否按下了'4'
-      msg->below_linear_module_control = 1; // forward direction
+      msg->lower_linear_module_control = 1; // forward direction
       publisher->publish(*msg);  // 发布消息
-      RCLCPP_INFO(node->get_logger(), "Published control message with below_linear_module_control: 1");  // 打印日志
+      RCLCPP_INFO(node->get_logger(), "Published control message with lower_linear_module_control: 1");  // 打印日志
     }else if (key == '6') {  // 检查是否按下了'6'
-      msg->below_linear_module_control = -1; // backward direction
+      msg->lower_linear_module_control = -1; // backward direction
       publisher->publish(*msg);  // 发布消息
-      RCLCPP_INFO(node->get_logger(), "Published control message with below_linear_module_control: -1");  // 打印日志
+      RCLCPP_INFO(node->get_logger(), "Published control message with lower_linear_module_control: -1");  // 打印日志
     }else if (key == '7') {  // 检查是否按下了'7'
       msg->upper_linear_module_control = 1; // forward direction
       publisher->publish(*msg);  // 发布消息
