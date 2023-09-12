@@ -144,7 +144,7 @@ private:    // 私有成员函数和变量
 
 
     // 处理接收到的Modbus帧
-    int32_t process_modbus_frame(const std::vector<uint8_t>& frame) {
+    int32_t process_modbus_frame_for_elevator_counter(const std::vector<uint8_t>& frame) {
         // 假设数据头是 {0x01, 0x04, 0x04}
         const std::vector<uint8_t> header = {0x01, 0x04, 0x04};
         // 检查数据头
@@ -186,6 +186,51 @@ private:    // 私有成员函数和变量
         return elevator_counter;
     }
     
+    // 处理接收到的编码器的Modbus帧
+    int64_t process_modbus_frame_for_below_encorder(const std::vector<uint8_t>& frame) {
+        // 数据头是 {0x02, 0x03, 0x08}
+        const std::vector<uint8_t> header = {0x02, 0x03, 0x08};
+        int64_t below_encoder = 0;  // 初始化编码器数据为0
+
+        // 检查数据头
+        if (std::equal(header.begin(), header.end(), frame.begin())) {
+            // 提取数据和CRC校验码
+            std::vector<uint8_t> data(frame.begin() + header.size(), frame.begin() + header.size() + 8);  // 提取8个字节的数据
+            uint16_t received_crc = (frame[frame.size() - 2] << 8) | frame[frame.size() - 1];
+
+            // 计算CRC校验码
+            uint16_t calculated_crc = calculate_crc16(frame, 0, frame.size() - 2);
+            calculated_crc = swap_endian(calculated_crc);
+
+            // 检查CRC校验码是否匹配
+            if (received_crc == calculated_crc) {
+
+                // 解析数据段
+                if (data.size() == 8) {
+                    below_encoder = -1 * static_cast<int64_t>(     //product -1
+                        static_cast<uint64_t>(data[7]) << 48 |
+                        static_cast<uint64_t>(data[6]) << 56 |
+                        static_cast<uint64_t>(data[5]) << 32 |
+                        static_cast<uint64_t>(data[4]) << 40 |
+                        static_cast<uint64_t>(data[3]) << 16 |
+                        static_cast<uint64_t>(data[2]) << 24 |
+                        static_cast<uint64_t>(data[1])       |
+                        static_cast<uint64_t>(data[0]) << 8 
+                    );
+                } else {
+                    std::cout << "Insufficient data size for encoder." << std::endl;
+                }
+            } else {
+                std::cout << "CRC check failed for encoder." << std::endl;
+            }
+        } else {
+            std::cout << "Invalid header for encoder." << std::endl;
+        }
+
+        return below_encoder;
+    }
+
+
     // 重构后的 start_receive 函数
     std::vector<uint8_t> received_modbus_frame_; 
     // ROS 2 Humble版本的start_receive函数
@@ -194,6 +239,8 @@ private:    // 私有成员函数和变量
         // 清空received_modbus_frame_并初始化大小
         received_modbus_frame_.clear();
         received_modbus_frame_.resize(256);
+
+
 
         // 异步读取串口数据
         serial_port_->async_read_some(asio::buffer(received_modbus_frame_, 256),
@@ -205,32 +252,60 @@ private:    // 私有成员函数和变量
                 // 检查是否有错误
                 if (!error) 
                 {
+                    // 打印发送的Modbus帧内容
+                    std::string msg_str = "";
+                    for (auto &byte : received_modbus_frame_) {
+                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+                    }
+                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
+
+
                     // 创建一个包含数据头的vector
-                    std::vector<uint8_t> header = {0x01, 0x04, 0x04};
+                    std::vector<uint8_t> counter_header = {0x01, 0x04, 0x04};
                     // 搜索数据头
-                    auto it = std::search(received_modbus_frame_.begin(), received_modbus_frame_.end(), header.begin(), header.end());
+                    auto it_elevator_counter = std::search(received_modbus_frame_.begin(), received_modbus_frame_.end(), counter_header.begin(), counter_header.end());
 
                     // 如果找到了数据头，并且有足够的字节用于完整的9字节帧
-                    if (it != received_modbus_frame_.end() && std::distance(it, received_modbus_frame_.end()) >= 9)
+                    if (it_elevator_counter != received_modbus_frame_.end() && std::distance(it_elevator_counter, received_modbus_frame_.end()) >= 9)
                     {
                         // 提取9字节帧
-                        std::vector<uint8_t> frame(it, it + 9);
+                        std::vector<uint8_t> frame(it_elevator_counter, it_elevator_counter + 9);
 
                         // 处理Modbus帧并获取elevator_counter
-                        elevator_counter = process_modbus_frame(frame);
+                        elevator_counter = process_modbus_frame_for_elevator_counter(frame);
 
-                        // 发布到Sensors_data话题
+                        // 移除这9字节及之前的字节
+                        received_modbus_frame_.erase(received_modbus_frame_.begin(), it_elevator_counter + 9);
+                    }
+
+                    // 创建一个包含编码器数据头的vector
+                    std::vector<uint8_t> encoder_header = {0x02, 0x03, 0x08};
+
+                    // 搜索编码器数据头
+                    auto it_below_encorder = std::search(received_modbus_frame_.begin(), received_modbus_frame_.end(), encoder_header.begin(), encoder_header.end());
+
+                    // 如果找到了编码器数据头，并且有足够的字节用于完整的15字节帧
+                    if (it_below_encorder != received_modbus_frame_.end() && std::distance(it_below_encorder, received_modbus_frame_.end()) >= 13)
+                    {
+                        // 提取13字节帧
+                        std::vector<uint8_t> encoder_frame(it_below_encorder, it_below_encorder + 13);
+
+                        // 处理Modbus帧并获取编码器数据（您需要实现这个函数）
+                        int64_t below_encorder = process_modbus_frame_for_below_encorder(encoder_frame);
+
+                        // 发布到sensors_data话题
                         auto msg = buaa_rescue_robot_msgs::msg::SensorsMessage();
+                        msg.below_encorder = below_encorder;
                         msg.elevator_counter = elevator_counter;
                         publisher_->publish(msg);
 
-                        // 移除这9字节及之前的字节
-                        received_modbus_frame_.erase(received_modbus_frame_.begin(), it + 9);
+                        // 移除这13字节及之前的字节
+                        received_modbus_frame_.erase(received_modbus_frame_.begin(), it_below_encorder + 13);
                     }
 
                     // 递归调用以持续接收
                     start_receive();
-                } 
+                }
                 else 
                 {
                     RCLCPP_ERROR(this->get_logger(), "Receive Error: %s", error.message().c_str());
@@ -238,8 +313,12 @@ private:    // 私有成员函数和变量
             }
         );
 
-    return elevator_counter;
-}
+
+
+
+
+        return elevator_counter;
+    }
 
  
     void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg){        
@@ -288,6 +367,62 @@ private:    // 私有成员函数和变量
             async_write_to_serial(modbus_frame_);
         }
 
+        if (msg->below_linear_module_control == 1) //elavator going upwards
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x14, 0x00, 0x10, 0xC8, 0xFD};   // enable the below linear module
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1B, 0x00, 0x00, 0xF9, 0x32};   // turn P5-27 to be 0. (forward direction)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1C, 0x00, 0x10, 0x49, 0x3F};   // turn P5-28 to be 1. (speed 3)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+        }
+        else if (msg->below_linear_module_control == 0)    //elavator stop
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1C, 0x00, 0x00, 0x48, 0xF3};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1D, 0x00, 0x00, 0x19, 0x33};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x14, 0x00, 0x00, 0xC9, 0x31};   // diasble the below linear module
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒
+        }
+        else if (msg->below_linear_module_control == -1)   //elavator going downwards
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x14, 0x00, 0x10, 0xC8, 0xFD};   // enable the below linear module
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1B, 0x00, 0x10, 0xF8, 0xFE};   // turn P5-27 to be 1. (backward direction)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1C, 0x00, 0x10, 0x49, 0x3F};   // turn P5-28 to be 1. (speed 3)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+        }
+        else if (msg->below_linear_module_control == 666)  //elavator stop and reset the counter
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1C, 0x00, 0x00, 0x48, 0xF3};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x1D, 0x00, 0x00, 0x19, 0x33};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x05, 0x14, 0x00, 0x00, 0xC9, 0x31};   // diasble the below linear module
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            modbus_frame_ = {0x02, 0x06, 0x21, 0x06, 0x00, 0x03, 0x23, 0xC5};   // reset the below linear module encorder
+            async_write_to_serial(modbus_frame_);
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+        }
+
     
     }
 
@@ -295,14 +430,28 @@ private:    // 私有成员函数和变量
     {
         // reading the counter
         std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-        modbus_frame_ = {0x01, 0x04, 0x00, 0x00, 0x00, 0x02, 0x71, 0xCB};   // reading the counter
-        async_write_to_serial(modbus_frame_);
+        std::vector<uint8_t> reading_counter_modbus_frame_ = {0x01, 0x04, 0x00, 0x00, 0x00, 0x02, 0x71, 0xCB};   // reading the counter
+        async_write_to_serial(reading_counter_modbus_frame_);
         std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-        
+
         // 打印vector的内容
-        // // 打印发送的Modbus帧内容
+        // 打印发送的Modbus帧内容
         std::string msg_str = "";
-        for (auto &byte : modbus_frame_) {
+        for (auto &byte : reading_counter_modbus_frame_) {
+            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        }
+        RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());  
+
+        // 发送读取上层编码器的指令
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+        std::vector<uint8_t> reading_below_encorder_modbus_frame_ = {0x02, 0x03, 0x10, 0x5E, 0x00, 0x04, 0x21, 0x28};  // 读取上层编码器的指令
+        async_write_to_serial(reading_below_encorder_modbus_frame_);
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒
+       
+        // 打印vector的内容
+        // 打印发送的Modbus帧内容
+        msg_str = "";
+        for (auto &byte : reading_below_encorder_modbus_frame_) {
             msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
         }
         RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());        

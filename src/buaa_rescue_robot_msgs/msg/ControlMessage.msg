@@ -1,1 +1,3 @@
 int16 elevator_control
+int32 below_linear_module_control
+int32 upper_linear_module_control
