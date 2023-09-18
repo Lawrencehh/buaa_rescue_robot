@@ -30,6 +30,11 @@ add_executable(serial_receiver src/serial_receiver.cpp)
 # 为 serial_receiver 添加依赖
 ament_target_dependencies(serial_receiver rclcpp std_msgs buaa_rescue_robot_msgs) 
 
+# 添加serial_robomaster_1节点的编译指令
+add_executable(serial_robomaster_1 src/serial_robomaster_1.cpp)
+ament_target_dependencies(serial_robomaster_1 rclcpp std_msgs buaa_rescue_robot_msgs)
+
+
 
 # 安装目标
 install(TARGETS
