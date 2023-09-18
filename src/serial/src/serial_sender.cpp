@@ -76,14 +76,12 @@ uint16_t swap_endian(uint16_t value) {
     return (low_byte << 8) | high_byte;  // 交换高低8位并返回
 }
 
-// 类定义
 // 创建一个继承自rclcpp::Node的SerialSender类，并在构造函数中进行初始化。
 class SerialSender : public rclcpp::Node
 {
 public:
     SerialSender() : Node("serial_sender")
     {
-        // 初始化串口
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
             serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
