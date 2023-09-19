@@ -70,6 +70,49 @@ int main(int argc, char * argv[])
     }
 
 
+    // publish snake_motors_control
+    for (int i = 0; i < 12; ++i) {
+    msg->snake_control_1_array[i] = 0;
+    }
+
+    if (key == 'q') {  // 检查是否按下了'q'
+      msg->snake_control_1_array[0] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息      
+    }else if (key == 'w') {  // 检查是否按下了'w'
+      msg->snake_control_1_array[1] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'e') {  // 检查是否按下了'e'
+      msg->snake_control_1_array[2] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'r') {  // 检查是否按下了'r'
+      msg->snake_control_1_array[3] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 't') {  // 检查是否按下了't'
+      msg->snake_control_1_array[4] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'y') {  // 检查是否按下了'y'
+      msg->snake_control_1_array[5] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'u') {  // 检查是否按下了'u'
+      msg->snake_control_1_array[6] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'i') {  // 检查是否按下了'i'
+      msg->snake_control_1_array[7] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'o') {  // 检查是否按下了'o'
+      msg->snake_control_1_array[8] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'p') {  // 检查是否按下了'p'
+      msg->snake_control_1_array[9] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == '[') {  // 检查是否按下了'['
+      msg->snake_control_1_array[10] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == ']') {  // 检查是否按下了']'
+      msg->snake_control_1_array[11] = 1; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }
+
     rclcpp::spin_some(node);  // 处理回调
   }
 

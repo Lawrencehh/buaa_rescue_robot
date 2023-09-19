@@ -40,6 +40,7 @@ ament_target_dependencies(serial_robomaster_1 rclcpp std_msgs buaa_rescue_robot_
 install(TARGETS
   serial_sender
   serial_receiver
+  serial_robomaster_1
   DESTINATION lib/${PROJECT_NAME}
 )
 
