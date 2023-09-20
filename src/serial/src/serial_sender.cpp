@@ -414,7 +414,7 @@ private:    // 私有成员函数和变量
             async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
-        else if (msg->elevator_control == 666)  //elavator stop and reset the counter
+        else if (msg->elevator_counter_reset == 1)  //elavator stop and reset the counter
         {
             modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
             async_write_to_serial(modbus_frame_);
@@ -466,7 +466,7 @@ private:    // 私有成员函数和变量
             async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
-        else if (msg->lower_linear_module_control == 666)  //lower linear module stop and reset the encorder
+        else if (msg->lower_linear_module_encorder_reset == 1)  //lower linear module stop and reset the encorder
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x02, 0x06, 0x05, 0x1C, 0x00, 0x00, 0x48, 0xF3};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
@@ -523,7 +523,7 @@ private:    // 私有成员函数和变量
             async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
-        else if (msg->upper_linear_module_control == 666)  //upper linear module stop and reset the encorder
+        else if (msg->upper_linear_module_encorder_reset == 1)  //upper linear module stop and reset the encorder
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x03, 0x06, 0x05, 0x1C, 0x00, 0x00, 0x49, 0x22};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)

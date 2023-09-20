@@ -27,7 +27,10 @@ int main(int argc, char * argv[])
 
   while (rclcpp::ok()) {  // 主循环
     int key = getch();  // 获取键盘输入
-
+    msg->pull_push_sensors_reset = 0; // reset to be 0
+    msg->elevator_counter_reset = 0; // reset to be 0
+    msg->lower_linear_module_encorder_reset = 0; // reset to be 0
+    msg->upper_linear_module_encorder_reset = 0; // reset to be 0
     if (key == '8') {  // 检查是否按下了'8'
       msg->elevator_control = 1;
       publisher->publish(*msg);  // 发布消息
@@ -46,11 +49,16 @@ int main(int argc, char * argv[])
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: -1");  // 打印日志
     }
     else if (key == '0') {  // 检查是否按下了'0'
-      msg->elevator_control = 666;
-      msg->lower_linear_module_control = 666;
-      msg->upper_linear_module_control = 666;
+      msg->elevator_control = 0;
+      msg->lower_linear_module_control = 0;
+      msg->upper_linear_module_control = 0;
+
+      msg->pull_push_sensors_reset = 1;
+      msg->elevator_counter_reset = 1; // reset to be 1
+      msg->lower_linear_module_encorder_reset = 1; // reset to be 1
+      msg->upper_linear_module_encorder_reset = 1; // reset to be 1
       publisher->publish(*msg);  // 发布消息
-      RCLCPP_INFO(node->get_logger(), "Published control message to reset the counter with elevator_control: 666");  // 打印日志
+      RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 1");  // 打印日志
     }else if (key == '4') {  // 检查是否按下了'4'
       msg->lower_linear_module_control = 1; // forward direction
       publisher->publish(*msg);  // 发布消息
