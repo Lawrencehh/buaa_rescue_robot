@@ -134,8 +134,58 @@ private:    // 私有成员函数和变量
     }
 
     // 处理接收到的Modbus帧
-    int32_t process_modbus_frame_for_robomaster_1 (const std::vector<uint8_t>& frame) {
-      
+    std::array<int32_t, 12> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
+         // 数据头
+        const std::vector<uint8_t> header = {0xAA,0x55,0x01,0x40, 0x41, 0x0c};
+        std::array<int32_t, 12>  snake_motor_encorder_position_value = {0,0,0,0,0,0,0,0,0,0,0,0};  // 初始化编码器数据为0
+
+        // 打印frame帧内容
+        std::string msg_str = "";
+        for (auto &byte : frame) {
+            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        }
+        RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());  
+
+        // 检查数据头
+        if (std::equal(header.begin(), header.end(), frame.begin())) {
+            // 提取数据和CRC校验码
+            std::vector<uint8_t> data(frame.begin() + header.size(), frame.begin() + header.size() + 60);  // 提取60个字节的数据
+            uint16_t received_crc = (frame[frame.size() - 2] << 8) | frame[frame.size() - 1];
+
+            // 计算CRC校验码
+            uint16_t calculated_crc = calculate_crc16(frame, 0, frame.size() - 2); 
+            // calculated_crc = swap_endian(calculated_crc);
+            // 使用ROS 2的日志功能打印这个变量
+            RCLCPP_INFO(this->get_logger(), "Calculated CRC: %u", calculated_crc);
+
+
+            // 检查CRC校验码是否匹配
+            if (received_crc == calculated_crc) {
+
+                // 解析数据段
+                if (data.size() == 60) {
+                    for (size_t i = 0; i < 12; i++)
+                    {
+                        snake_motor_encorder_position_value[i] = -1 * static_cast<int32_t>(     //product -1
+                        static_cast<uint64_t>(data[5*i+1])  << 24 |
+                        static_cast<uint64_t>(data[5*i+2])  << 16 |
+                        static_cast<uint64_t>(data[5*i+3])  << 8  |
+                        static_cast<uint64_t>(data[5*i+4])  
+                    );
+                    }
+                    
+                    
+                } else {
+                    std::cout << "Insufficient data size for encoder." << std::endl;
+                }
+            } else {
+                std::cout << "CRC check failed for encoder." << std::endl;
+            }
+        } else {
+            std::cout << "Invalid header for encoder." << std::endl;
+        }
+
+        return snake_motor_encorder_position_value;   
     }
 
     // 重构后的 start_receive 函数
@@ -143,7 +193,7 @@ private:    // 私有成员函数和变量
     // ROS 2 Humble版本的start_receive函数
     void start_receive() 
     {
-        // 清空received_modbus_frame_并初始化大小
+        // received_modbus_frame_初始化大小
         received_modbus_frame_.clear();
         received_modbus_frame_.resize(256);
 
@@ -157,18 +207,42 @@ private:    // 私有成员函数和变量
                 // 检查是否有错误
                 if (!error) 
                 {
-                    // 打印发送的Modbus帧内容
+                    // 将接收到的数据添加到数据缓存区
+                    data_buffer_.insert(data_buffer_.end(), received_modbus_frame_.begin(), received_modbus_frame_.end());
+
+                    // 打印data_buffer_内容
                     std::string msg_str = "";
-                    for (auto &byte : received_modbus_frame_) {
+                    for (auto &byte : data_buffer_) {
                         msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
                     }
-                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
+                    // RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
 
 
-                    
+                    // 创建一个包含数据头的vector
+                    std::vector<uint8_t> snake_encorders_header = {0xAA,0x55,0x01,0x40,0x41,0x0c};
+                    // 搜索数据头
+                    auto it_snake_encorders = std::search(data_buffer_.begin(), data_buffer_.end(), snake_encorders_header.begin(), snake_encorders_header.end());
 
-                    
+                    // 如果找到了数据头，并且有足够的字节用于完整的68字节帧 (excluding the ending 0xCFFCCCFF)
+                    if (it_snake_encorders != data_buffer_.end() && std::distance(it_snake_encorders, data_buffer_.end()) >= 68)
+                    {
+                        // 提取66字节帧
+                        std::vector<uint8_t> frame(it_snake_encorders, it_snake_encorders + 68);
 
+                        // 处理Modbus帧并获取elevator_counter
+                        snake_motor_encorder_position_1 = process_modbus_frame_for_snake_encorders(frame);
+
+
+                        // 移除这68字节(including the ending 0xCFFCCCFF)及之前的字节
+                        data_buffer_.erase(data_buffer_.begin(), it_snake_encorders + 68);
+                    }
+
+                    // 发布到sensors_data话题
+                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessage();       
+                        msg.snake_motor_encorder_position_1 = snake_motor_encorder_position_1;
+                        publisher_->publish(msg);
+
+                    received_modbus_frame_.clear();
                     // 递归调用以持续接收
                     start_receive();
                 }
@@ -178,6 +252,7 @@ private:    // 私有成员函数和变量
                 }
             }
         );
+
     }
 
  
@@ -257,6 +332,9 @@ private:    // 私有成员函数和变量
     std::vector<uint8_t> modbus_frame_; // 存储Modbus协议帧
     
     std::vector<uint8_t> frame;  // Modbus协议帧
+
+    std::array<int32_t, 12> snake_motor_encorder_position_1; 
+    std::vector<uint8_t> data_buffer_;  // 数据缓存区
 };
 
 int main(int argc, char **argv) // 主函数
