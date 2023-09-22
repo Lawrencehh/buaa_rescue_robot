@@ -1,8 +1,8 @@
 int16 elevator_control
 int32 lower_linear_module_control
 int32 upper_linear_module_control
-int16[12] snake_control_1_array  # 固定长度为12的int16数组
-int16[12] snake_control_2_array  # 固定长度为12的int16数组
+int32[12] snake_control_1_array  # 固定长度为12的int32数组
+int32[12] snake_control_2_array  # 固定长度为12的int32数组
 
 int16 pull_push_sensors_reset # reset control for pull push sensors
 int16 elevator_counter_reset # reset elevator counter

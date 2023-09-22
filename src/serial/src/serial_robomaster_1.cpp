@@ -185,8 +185,8 @@ private:    // 私有成员函数和变量
         // 1. 准备数据帧的头部, robomaster_1, snake control
         std::vector<uint8_t> frame = {0xAA, 0x55, 0x01};
 
-        // 数据长度 = 1字节功能码 + 1字节电机数量 + (12电机 * 3字节/电机) + 2字节校验码
-        frame.push_back(1 + 1 + 12 * 3 + 2);
+        // 数据长度 = 1字节功能码 + 1字节电机数量 + (12电机 * 5字节/电机) + 2字节校验码
+        frame.push_back(1 + 1 + 12 * 5 + 2);
 
         // 其他固定字段
         frame.push_back(0x31);  // 功能码
@@ -195,17 +195,30 @@ private:    // 私有成员函数和变量
         // 2. 提取snake_control_1_array的值，并添加到数据帧中
         for (int i = 0; i < 12; ++i)  // 12个电机
         {
-            int16_t speed = msg->snake_control_1_array[i];  // 提取速度值
+            int32_t speed = msg->snake_control_1_array[i];  // 提取速度值
             uint8_t motor_address = 0x01 + i;  // 电机地址从0x01开始
+
+            if (i == 0)
+            {
+                RCLCPP_INFO(this->get_logger(), "Speed%d:%d",i,speed);
+            }
+            
+            
 
             frame.push_back(motor_address);  // 添加电机地址
 
-            // 将速度值分解为高字节和低字节
-            uint8_t low_byte = speed & 0xFF;
-            uint8_t high_byte = (speed >> 8) & 0xFF;
+            uint8_t bytes[4];  // 用于存储4个字节的数组
 
-            frame.push_back(high_byte);  // 添加高字节
-            frame.push_back(low_byte);   // 添加低字节
+            // 分解 int32_t 变量为4个字节
+            bytes[0] = (speed >> 24) & 0xFF;  // 最高有效字节 (MSB)
+            bytes[1] = (speed >> 16) & 0xFF;  // 次高有效字节
+            bytes[2] = (speed >> 8) & 0xFF;   // 次低有效字节
+            bytes[3] = speed & 0xFF;          // 最低有效字节 (LSB)
+
+            frame.push_back(bytes[0]);  
+            frame.push_back(bytes[1]);   
+            frame.push_back(bytes[2]);
+            frame.push_back(bytes[3]);
         }
 
         // 3. 计算CRC-16 Modbus校验码
