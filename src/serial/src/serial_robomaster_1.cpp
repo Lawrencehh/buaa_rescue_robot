@@ -3,7 +3,7 @@
 #include <asio.hpp> // 引入ASIO库，用于串口通信
 #include <std_msgs/msg/string.hpp>  // 引入标准消息类型
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
-#include "buaa_rescue_robot_msgs/msg/sensors_message.hpp"   // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster1.hpp"   // 引入自定义消息类型
 #include <thread>   // 用于线程中的sleep_for函数
 #include <chrono>   // 用于时间表示
 #include <iostream>
@@ -77,7 +77,7 @@ public:
     {
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
-            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
+            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyRobomaster1");  // 这里的路径需要根据您的设备进行更改
             serial_port_->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
         }
         catch (const std::exception &e) {
@@ -94,7 +94,8 @@ public:
           std::bind(&serial_robomaster_1::callback, this, std::placeholders::_1));
 
         // 在serial_robomaster_1的构造函数中初始化这个发布器
-        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessage>("sensors_data", 10);
+        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1>("Sensors_Robomaster_1", 10);
+
 
         // 在构造函数中启动接收
         start_receive();
@@ -112,7 +113,7 @@ private:    // 私有成员函数和变量
     asio::streambuf read_buffer_;
     asio::streambuf write_buffer_;  // 新添加的写缓冲区
     std::vector<uint8_t> last_received_message_;  // 添加一个新的私有成员变量来存储最后接收到的消息
-    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessage>::SharedPtr publisher_;   // add a publisher of SensorsMessage
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1>::SharedPtr publisher_;   // add a publisher of SensorsMessage
 
     // ROS 2 Humble版本的异步写入封装函数
     void async_write_to_serial(const std::vector<uint8_t>& data_to_write)
@@ -166,7 +167,7 @@ private:    // 私有成员函数和变量
                 if (data.size() == 60) {
                     for (size_t i = 0; i < 12; i++)
                     {
-                        snake_motor_encorder_position_value[i] = -1 * static_cast<int32_t>(     //product -1
+                        snake_motor_encorder_position_value[i] =  static_cast<int32_t>(     
                         static_cast<uint64_t>(data[5*i+1])  << 24 |
                         static_cast<uint64_t>(data[5*i+2])  << 16 |
                         static_cast<uint64_t>(data[5*i+3])  << 8  |
@@ -237,10 +238,11 @@ private:    // 私有成员函数和变量
                         data_buffer_.erase(data_buffer_.begin(), it_snake_encorders + 68);
                     }
 
+                    
                     // 发布到sensors_data话题
-                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessage();       
-                        msg.snake_motor_encorder_position_1 = snake_motor_encorder_position_1;
-                        publisher_->publish(msg);
+                    auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1();       
+                    msg.snake_motor_encorder_position_1 = snake_motor_encorder_position_1;
+                    publisher_->publish(msg);
 
                     received_modbus_frame_.clear();
                     // 递归调用以持续接收
@@ -335,6 +337,8 @@ private:    // 私有成员函数和变量
 
     std::array<int32_t, 12> snake_motor_encorder_position_1; 
     std::vector<uint8_t> data_buffer_;  // 数据缓存区
+
+    
 };
 
 int main(int argc, char **argv) // 主函数

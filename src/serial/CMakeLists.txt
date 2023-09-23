@@ -35,8 +35,8 @@ add_executable(serial_robomaster_1 src/serial_robomaster_1.cpp)
 ament_target_dependencies(serial_robomaster_1 rclcpp std_msgs buaa_rescue_robot_msgs)
 
 # 添加pull_push_sensors_1节点的编译指令
-add_executable(serial_pull_push_sensors_1 src/serial_pull_push_sensors_1.cpp)
-ament_target_dependencies(serial_pull_push_sensors_1 rclcpp std_msgs buaa_rescue_robot_msgs)
+add_executable(serial_PullPushSensors_1 src/serial_PullPushSensors_1.cpp)
+ament_target_dependencies(serial_PullPushSensors_1 rclcpp std_msgs buaa_rescue_robot_msgs)
 
 
 # 安装目标
@@ -44,7 +44,7 @@ install(TARGETS
   serial_sender
   serial_receiver
   serial_robomaster_1
-  serial_pull_push_sensors_1
+  serial_PullPushSensors_1
   DESTINATION lib/${PROJECT_NAME}
 )
 

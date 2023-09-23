@@ -82,7 +82,9 @@
         "typeindex": "cpp",
         "typeinfo": "cpp",
         "variant": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "strstream": "cpp",
+        "cfenv": "cpp"
     },
     "cmake.configureOnOpen": false,
     

@@ -3,7 +3,7 @@
 #include <asio.hpp> // 引入ASIO库，用于串口通信
 #include <std_msgs/msg/string.hpp>  // 引入标准消息类型
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
-#include "buaa_rescue_robot_msgs/msg/sensors_message.hpp"   // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
 #include <thread>   // 用于线程中的sleep_for函数
 #include <chrono>   // 用于时间表示
 #include <iostream>
@@ -70,14 +70,14 @@ uint16_t swap_endian(uint16_t value) {
 
 // 类定义
 // 创建一个继承自rclcpp::Node的serial_robomaster_1类，并在构造函数中进行初始化。
-class serial_pull_push_sensors_1 : public rclcpp::Node
+class serial_PullPushSensors_1 : public rclcpp::Node
 {
 public:
-    serial_pull_push_sensors_1() : Node("serial_pull_push_sensors_1")
+    serial_PullPushSensors_1() : Node("serial_PullPushSensors_1")
     {
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
-            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
+            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyPullPushSensors1");  // 这里的路径需要根据您的设备进行更改
             serial_port_->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
         }
         catch (const std::exception &e) {
@@ -87,14 +87,15 @@ public:
 
         // 创建定时器，定时发送消息
         timer_ = this->create_wall_timer(std::chrono::milliseconds(100),  // 100毫秒，即10 Hz
-            std::bind(&serial_pull_push_sensors_1::timer_callback, this));
+            std::bind(&serial_PullPushSensors_1::timer_callback, this));
         
         // 创建订阅器，订阅名为"control_topic"的话题
           subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10, 
-          std::bind(&serial_pull_push_sensors_1::callback, this, std::placeholders::_1));
+          std::bind(&serial_PullPushSensors_1::callback, this, std::placeholders::_1));
 
-        // 在serial_pull_push_sensors_1的构造函数中初始化这个发布器
-        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessage>("sensors_data", 10);
+        // 在serial_PullPushSensors_1的构造函数中初始化这个发布器
+        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>("Sensors_Pull_Push_Sensors_1", 10);
+
 
         // 在构造函数中启动接收
         start_receive();
@@ -111,7 +112,7 @@ private:    // 私有成员函数和变量
     // 在私有成员变量区域添加
     asio::streambuf read_buffer_;
     asio::streambuf write_buffer_;  // 新添加的写缓冲区
-    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessage>::SharedPtr publisher_;   // add a publisher of SensorsMessage
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>::SharedPtr publisher_;   // add a publisher of SensorsMessage
 
     // ROS 2 Humble版本的异步写入封装函数
     void async_write_to_serial(const std::vector<uint8_t>& data_to_write)
@@ -229,11 +230,10 @@ private:    // 私有成员函数和变量
                         // 移除这34字节(including the ending 0xCFFCCCFF)及之前的字节
                         data_buffer_.erase(data_buffer_.begin(), it_pull_push_encorder + 34);
                     }
-
-                    // 发布到sensors_data话题
-                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessage();       
-                        msg.pull_push_sensors_1 = pull_push_sensors_1;
-                        publisher_->publish(msg);
+                    
+                    auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors();       
+                    msg.pull_push_sensors_1 = pull_push_sensors_1;
+                    publisher_->publish(msg);
 
                     received_modbus_frame_.clear();
                     // 递归调用以持续接收
@@ -302,14 +302,14 @@ int main(int argc, char **argv) // 主函数
 {
     rclcpp::init(argc, argv);  // 初始化ROS 2
 
-    auto serial_pull_push_sensors_1_node = std::make_shared<serial_pull_push_sensors_1>();   // 创建pull_push_sensors_1对象
+    auto serial_PullPushSensors_1_node = std::make_shared<serial_PullPushSensors_1>();   // 创建pull_push_sensors_1对象
 
     // 创建一个新线程来运行ASIO的io_service
     std::thread asio_thread([&]() {
-        serial_pull_push_sensors_1_node->get_io_service().run();
+        serial_PullPushSensors_1_node->get_io_service().run();
     });
 
-    rclcpp::spin(serial_pull_push_sensors_1_node);  // 开始ROS的事件循环
+    rclcpp::spin(serial_PullPushSensors_1_node);  // 开始ROS的事件循环
 
     rclcpp::shutdown();  // 关闭ROS 2
 
