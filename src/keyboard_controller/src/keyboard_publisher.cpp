@@ -31,6 +31,8 @@ int main(int argc, char * argv[])
     msg->elevator_counter_reset = 0; // reset to be 0
     msg->lower_linear_module_encorder_reset = 0; // reset to be 0
     msg->upper_linear_module_encorder_reset = 0; // reset to be 0
+    msg->robomaster_1_reset = 0; // robomaster 1 motor encorders to be 0
+    msg->robomaster_2_reset = 0; // robomaster 2 motor encorders to be 0
     if (key == '8') {  // 检查是否按下了'8'
       msg->elevator_control = 1;
       publisher->publish(*msg);  // 发布消息
@@ -57,6 +59,8 @@ int main(int argc, char * argv[])
       msg->elevator_counter_reset = 1; // reset to be 1
       msg->lower_linear_module_encorder_reset = 1; // reset to be 1
       msg->upper_linear_module_encorder_reset = 1; // reset to be 1
+      msg->robomaster_1_reset = 1; // robomaster 1 motor encorders to be 1
+      msg->robomaster_2_reset = 1; // robomaster 2 motor encorders to be 1
       publisher->publish(*msg);  // 发布消息
       RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 1");  // 打印日志
     }else if (key == '4') {  // 检查是否按下了'4'
@@ -118,6 +122,34 @@ int main(int argc, char * argv[])
       publisher->publish(*msg);  // 发布消息
     }else if (key == ']') {  // 检查是否按下了']'
       msg->snake_control_1_array[11] = 65536; // backward direction
+      publisher->publish(*msg);  // 发布消息
+    }
+
+    // publish gripper motors control
+    msg->gripper_gm6020_position_1 = 1;
+    msg->gripper_c610_position_1 = 1;
+    msg->gripper_sts3032_position_1 = 1;
+    msg->gripper_gm6020_position_2 = 1;
+    msg->gripper_c610_position_2 = 1;
+    msg->gripper_sts3032_position_2 = 1;
+
+    if (key == 'a') {  // 检查是否按下了'a'
+      msg->gripper_gm6020_position_1 = 180; // 
+      publisher->publish(*msg);  // 发布消息      
+    }else if (key == 's') {  // 检查是否按下了's'
+      msg->gripper_c610_position_1 = 180; // 
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'd') {  // 检查是否按下了'd'
+      msg->gripper_sts3032_position_1 = 180; // 
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'f') {  // 检查是否按下了'f'
+      msg->gripper_gm6020_position_2 = 180; // 
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'g') {  // 检查是否按下了'g'
+      msg->gripper_c610_position_2 = 180; // 
+      publisher->publish(*msg);  // 发布消息
+    }else if (key == 'h') {  // 检查是否按下了'h'
+      msg->gripper_sts3032_position_2 = 180; // 
       publisher->publish(*msg);  // 发布消息
     }
 

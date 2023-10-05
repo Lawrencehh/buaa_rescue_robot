@@ -77,7 +77,8 @@ public:
     {
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
-            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyRobomaster1");  // 这里的路径需要根据您的设备进行更改
+            // serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyRobomaster1");  // 这里的路径需要根据您的设备进行更改
+            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
             serial_port_->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
         }
         catch (const std::exception &e) {
@@ -135,10 +136,14 @@ private:    // 私有成员函数和变量
     }
 
     // 处理接收到的Modbus帧
-    std::array<int32_t, 12> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
+    std::tuple<std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
          // 数据头
-        const std::vector<uint8_t> header = {0xAA,0x55,0x01,0x40, 0x41, 0x0c};
+        const std::vector<uint8_t> header = {0xAA,0x55,0x01,0x4B,0x41,0x10};
         std::array<int32_t, 12>  snake_motor_encorder_position_value = {0,0,0,0,0,0,0,0,0,0,0,0};  // 初始化编码器数据为0
+        std::int16_t  gripper_gm6020_encorder_position_value = 0;  // 初始化gm6020编码器数据为0
+        std::int16_t  gripper_c610_encorder_position_value = 0;  // 初始化c610编码器数据为0
+        std::int16_t  gripper_sts3032_encorder_position_value = 0;  // 初始化sts3032编码器数据为0
+        std::int16_t  reset_encorder_value = 0;  // reset to be 0
 
         // 打印frame帧内容
         std::string msg_str = "";
@@ -150,12 +155,11 @@ private:    // 私有成员函数和变量
         // 检查数据头
         if (std::equal(header.begin(), header.end(), frame.begin())) {
             // 提取数据和CRC校验码
-            std::vector<uint8_t> data(frame.begin() + header.size(), frame.begin() + header.size() + 60);  // 提取60个字节的数据
+            std::vector<uint8_t> data(frame.begin() + header.size(), frame.begin() + header.size() + 71);  // 提取71个字节的数据
             uint16_t received_crc = (frame[frame.size() - 2] << 8) | frame[frame.size() - 1];
 
             // 计算CRC校验码
             uint16_t calculated_crc = calculate_crc16(frame, 0, frame.size() - 2); 
-            // calculated_crc = swap_endian(calculated_crc);
             // 使用ROS 2的日志功能打印这个变量
             RCLCPP_INFO(this->get_logger(), "Calculated CRC: %u", calculated_crc);
 
@@ -164,7 +168,7 @@ private:    // 私有成员函数和变量
             if (received_crc == calculated_crc) {
 
                 // 解析数据段
-                if (data.size() == 60) {
+                if (data.size() == 71) {
                     for (size_t i = 0; i < 12; i++)
                     {
                         snake_motor_encorder_position_value[i] =  static_cast<int32_t>(     
@@ -174,7 +178,21 @@ private:    // 私有成员函数和变量
                         static_cast<uint64_t>(data[5*i+4])  
                     );
                     }
-                    
+                   gripper_gm6020_encorder_position_value = static_cast<int16_t>(     
+                        static_cast<uint64_t>(data[61])  << 8 |
+                        static_cast<uint64_t>(data[62])
+                    );
+                    gripper_c610_encorder_position_value = static_cast<int16_t>(     
+                        static_cast<uint64_t>(data[64])  << 8 |
+                        static_cast<uint64_t>(data[65])
+                    );
+                    gripper_sts3032_encorder_position_value = static_cast<int16_t>(     
+                        static_cast<uint64_t>(data[67])  << 8 |
+                        static_cast<uint64_t>(data[68])
+                    );
+                    reset_encorder_value = static_cast<int16_t>(     
+                        static_cast<uint64_t>(data[70])
+                    );
                     
                 } else {
                     std::cout << "Insufficient data size for encoder." << std::endl;
@@ -186,7 +204,8 @@ private:    // 私有成员函数和变量
             std::cout << "Invalid header for encoder." << std::endl;
         }
 
-        return snake_motor_encorder_position_value;   
+        // 使用 std::make_tuple 创建一个包含所有返回值的元组
+        return std::make_tuple(snake_motor_encorder_position_value, gripper_gm6020_encorder_position_value, gripper_c610_encorder_position_value, gripper_sts3032_encorder_position_value, reset_encorder_value);   
     }
 
     // 重构后的 start_receive 函数
@@ -220,30 +239,37 @@ private:    // 私有成员函数和变量
 
 
                     // 创建一个包含数据头的vector
-                    std::vector<uint8_t> snake_encorders_header = {0xAA,0x55,0x01,0x40,0x41,0x0c};
+                    std::vector<uint8_t> snake_encorders_header = {0xAA,0x55,0x01,0x4B,0x41,0x10};
                     // 搜索数据头
                     auto it_snake_encorders = std::search(data_buffer_.begin(), data_buffer_.end(), snake_encorders_header.begin(), snake_encorders_header.end());
 
                     // 如果找到了数据头，并且有足够的字节用于完整的68字节帧 (excluding the ending 0xCFFCCCFF)
-                    if (it_snake_encorders != data_buffer_.end() && std::distance(it_snake_encorders, data_buffer_.end()) >= 68)
+                    if (it_snake_encorders != data_buffer_.end() && std::distance(it_snake_encorders, data_buffer_.end()) >= 79)
                     {
-                        // 提取66字节帧
-                        std::vector<uint8_t> frame(it_snake_encorders, it_snake_encorders + 68);
+                        // 提取79字节帧
+                        std::vector<uint8_t> frame(it_snake_encorders, it_snake_encorders + 79);
 
-                        // 处理Modbus帧并获取elevator_counter
-                        snake_motor_encorder_position_1 = process_modbus_frame_for_snake_encorders(frame);
+                        // 调用函数并获取返回的 std::tuple
+                        auto result = process_modbus_frame_for_snake_encorders(frame);
+                        // 使用 std::get 从 std::tuple 中提取值
+                        auto snake_motor_encorder_position_value = std::get<0>(result);
+                        auto gripper_gm6020_encorder_position_value = std::get<1>(result);
+                        auto gripper_c610_encorder_position_value = std::get<2>(result);
+                        auto gripper_sts3032_encorder_position_value = std::get<3>(result);
+                        auto reset_encorder_value = std::get<4>(result);
 
+                        // 发布到sensors_data话题
+                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1();       
+                        msg.snake_motor_encorder_position_1 = snake_motor_encorder_position_value;
+                        msg.gripper_gm6020_position_1 = gripper_gm6020_encorder_position_value;
+                        msg.gripper_c610_position_1 = gripper_c610_encorder_position_value;
+                        msg.gripper_sts3032_position_1 = gripper_sts3032_encorder_position_value;
+                        msg.robomaster_1_reset = reset_encorder_value;
+                        publisher_->publish(msg);
 
-                        // 移除这68字节(including the ending 0xCFFCCCFF)及之前的字节
-                        data_buffer_.erase(data_buffer_.begin(), it_snake_encorders + 68);
+                        // 移除这79字节(including the ending 0xCFFCCCFF)及之前的字节
+                        data_buffer_.erase(data_buffer_.begin(), it_snake_encorders + 79);
                     }
-
-                    
-                    // 发布到sensors_data话题
-                    auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1();       
-                    msg.snake_motor_encorder_position_1 = snake_motor_encorder_position_1;
-                    publisher_->publish(msg);
-
                     received_modbus_frame_.clear();
                     // 递归调用以持续接收
                     start_receive();
@@ -262,41 +288,52 @@ private:    // 私有成员函数和变量
         // 1. 准备数据帧的头部, robomaster_1, snake control
         std::vector<uint8_t> frame = {0xAA, 0x55, 0x01};
 
-        // 数据长度 = 1字节功能码 + 1字节电机数量 + (12电机 * 5字节/电机) + 2字节校验码
-        frame.push_back(1 + 1 + 12 * 5 + 2);
+        //（1字节功能码 + 1字节电机数量 + 71字节电机信息 + 2字节校验码 = 75字节）
+        frame.push_back(1 + 1 + 71 + 2);
 
         // 其他固定字段
         frame.push_back(0x31);  // 功能码
-        frame.push_back(0x0C);  // 电机数量（12个）
+        frame.push_back(0x10);  // 电机数量: 0x10（12个绳驱电机，3个手部电机，1个RESET指令）
 
-        // 2. 提取snake_control_1_array的值，并添加到数据帧中
-        for (int i = 0; i < 12; ++i)  // 12个电机
+        // 2. 提取snake_control_1_array的值，手部电机的值,并添加到数据帧中
+        for (int i = 0; i < 12; ++i)  // 12个绳驱电机
         {
-            int32_t speed = msg->snake_control_1_array[i];  // 提取速度值
+            int32_t snake_motors_position = msg->snake_control_1_array[i];  // 提取速度值
             uint8_t motor_address = 0x01 + i;  // 电机地址从0x01开始
-
-            if (i == 0)
-            {
-                RCLCPP_INFO(this->get_logger(), "Speed%d:%d",i,speed);
-            }
-            
-            
 
             frame.push_back(motor_address);  // 添加电机地址
 
             uint8_t bytes[4];  // 用于存储4个字节的数组
-
             // 分解 int32_t 变量为4个字节
-            bytes[0] = (speed >> 24) & 0xFF;  // 最高有效字节 (MSB)
-            bytes[1] = (speed >> 16) & 0xFF;  // 次高有效字节
-            bytes[2] = (speed >> 8) & 0xFF;   // 次低有效字节
-            bytes[3] = speed & 0xFF;          // 最低有效字节 (LSB)
+            bytes[0] = (snake_motors_position >> 24) & 0xFF;  // 最高有效字节 (MSB)
+            bytes[1] = (snake_motors_position >> 16) & 0xFF;  // 次高有效字节
+            bytes[2] = (snake_motors_position >> 8) & 0xFF;   // 次低有效字节
+            bytes[3] = snake_motors_position & 0xFF;          // 最低有效字节 (LSB)
 
             frame.push_back(bytes[0]);  
             frame.push_back(bytes[1]);   
             frame.push_back(bytes[2]);
             frame.push_back(bytes[3]);
         }
+        
+        // Gripper GM6020
+        frame.push_back(0x0D);  // 添加电机地址
+        frame.push_back((msg->gripper_gm6020_position_1 >> 8) & 0xFF);
+        frame.push_back(msg->gripper_gm6020_position_1 & 0xFF);
+
+        // Gripper C610
+        frame.push_back(0x0E);  // 添加电机地址
+        frame.push_back((msg->gripper_c610_position_1 >> 8) & 0xFF);
+        frame.push_back(msg->gripper_c610_position_1 & 0xFF);
+
+        // Gripper STS3032
+        frame.push_back(0x0F);  // 添加电机地址
+        frame.push_back((msg->gripper_sts3032_position_1 >> 8) & 0xFF);
+        frame.push_back(msg->gripper_sts3032_position_1 & 0xFF);
+
+        // RESET
+        frame.push_back(0x10);  // 添加RESET地址
+        frame.push_back(msg->robomaster_1_reset & 0xFF);
 
         // 3. 计算CRC-16 Modbus校验码
         uint16_t crc = calculate_crc16(frame, 0, frame.size());
