@@ -77,8 +77,8 @@ public:
     {
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
-            // serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyRobomaster1");  // 这里的路径需要根据您的设备进行更改
-            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
+            serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyRobomaster1");  // 这里的路径需要根据您的设备进行更改
+            // serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
             serial_port_->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
         }
         catch (const std::exception &e) {
