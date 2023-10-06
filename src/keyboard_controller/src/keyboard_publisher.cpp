@@ -137,19 +137,19 @@ int main(int argc, char * argv[])
       msg->gripper_gm6020_position_1 = 180; // 
       publisher->publish(*msg);  // 发布消息      
     }else if (key == 's') {  // 检查是否按下了's'
-      msg->gripper_c610_position_1 = 180; // 
+      msg->gripper_c610_position_1 = 180*36; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'd') {  // 检查是否按下了'd'
-      msg->gripper_sts3032_position_1 = 180; // 
+      msg->gripper_sts3032_position_1 = 360; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'f') {  // 检查是否按下了'f'
-      msg->gripper_gm6020_position_2 = 180; // 
+      msg->gripper_gm6020_position_2 = 20; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'g') {  // 检查是否按下了'g'
-      msg->gripper_c610_position_2 = 180; // 
+      msg->gripper_c610_position_2 = 20; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'h') {  // 检查是否按下了'h'
-      msg->gripper_sts3032_position_2 = 180; // 
+      msg->gripper_sts3032_position_2 = 20; // 
       publisher->publish(*msg);  // 发布消息
     }
 
