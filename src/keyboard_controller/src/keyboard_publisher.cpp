@@ -51,9 +51,20 @@ int main(int argc, char * argv[])
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: -1");  // 打印日志
     }
     else if (key == '0') {  // 检查是否按下了'0'
+      msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->gripper_gm6020_position_1 = 0;
+      msg->gripper_c610_position_1 = 0;
+      msg->gripper_sts3032_position_1 = 0;
+
+      msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->gripper_gm6020_position_2 = 0;
+      msg->gripper_c610_position_2 = 0;
+      msg->gripper_sts3032_position_2 = 0;
+
       msg->elevator_control = 0;
       msg->lower_linear_module_control = 0;
       msg->upper_linear_module_control = 0;
+  
 
       msg->pull_push_sensors_reset = 1;
       msg->elevator_counter_reset = 1; // reset to be 1
@@ -134,13 +145,13 @@ int main(int argc, char * argv[])
     msg->gripper_sts3032_position_2 = 1;
 
     if (key == 'a') {  // 检查是否按下了'a'
-      msg->gripper_gm6020_position_1 = 180; // 
+      msg->gripper_gm6020_position_1 = 30; // 
       publisher->publish(*msg);  // 发布消息      
     }else if (key == 's') {  // 检查是否按下了's'
-      msg->gripper_c610_position_1 = 180*36; // 
+      msg->gripper_c610_position_1 = 60*36; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'd') {  // 检查是否按下了'd'
-      msg->gripper_sts3032_position_1 = 360; // 
+      msg->gripper_sts3032_position_1 = 180; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'f') {  // 检查是否按下了'f'
       msg->gripper_gm6020_position_2 = 20; // 
