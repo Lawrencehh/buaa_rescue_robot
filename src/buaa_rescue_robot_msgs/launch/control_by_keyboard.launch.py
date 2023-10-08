@@ -16,5 +16,19 @@ def generate_launch_description():
             executable='serial_sender',
             name='serial_sender',
             output='screen'
+        ),
+        # 启动serial_robomaster_1节点
+        Node(
+            package='serial',
+            executable='serial_robomaster_1',
+            name='serial_robomaster_1',
+            output='screen'
+        ),
+        # 启动serial_PullPushSensors_1节点
+        Node(
+            package='serial',
+            executable='serial_PullPushSensors_1',
+            name='serial_PullPushSensors_1',
+            output='screen'
         )
     ])

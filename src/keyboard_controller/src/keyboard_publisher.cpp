@@ -95,7 +95,7 @@ int main(int argc, char * argv[])
 
     // publish snake_motors_control
     for (int i = 0; i < 12; ++i) {
-    msg->snake_control_1_array[i] = 1;
+    msg->snake_control_1_array[i] = 0;
     }
 
     if (key == 'q') {  // 检查是否按下了'q'
@@ -137,21 +137,21 @@ int main(int argc, char * argv[])
     }
 
     // publish gripper motors control
-    msg->gripper_gm6020_position_1 = 1;
-    msg->gripper_c610_position_1 = 1;
-    msg->gripper_sts3032_position_1 = 1;
-    msg->gripper_gm6020_position_2 = 1;
-    msg->gripper_c610_position_2 = 1;
-    msg->gripper_sts3032_position_2 = 1;
+    msg->gripper_gm6020_position_1 = 0;
+    msg->gripper_c610_position_1 = 0;
+    msg->gripper_sts3032_position_1 = 0;
+    msg->gripper_gm6020_position_2 = 0;
+    msg->gripper_c610_position_2 = 0;
+    msg->gripper_sts3032_position_2 = 0;
 
     if (key == 'a') {  // 检查是否按下了'a'
       msg->gripper_gm6020_position_1 = 30; // 
       publisher->publish(*msg);  // 发布消息      
     }else if (key == 's') {  // 检查是否按下了's'
-      msg->gripper_c610_position_1 = 60*36; // 
+      msg->gripper_c610_position_1 = 30*36; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'd') {  // 检查是否按下了'd'
-      msg->gripper_sts3032_position_1 = 180; // 
+      msg->gripper_sts3032_position_1 = 30; // 
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'f') {  // 检查是否按下了'f'
       msg->gripper_gm6020_position_2 = 20; // 
