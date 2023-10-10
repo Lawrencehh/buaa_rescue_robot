@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     auto node = std::make_shared<rclcpp::Node>("buaa_rescue_robot_gui_node");
-    snakePositionControlModel1 = new QStringListModel(this);  // 新增这一行
-    ui->snakePositionControlListView1->setModel(snakePositionControlModel1);  // 新增这一行
+    ControlListView = new QStringListModel(this);  
+    ui->NewControlListView->setModel(ControlListView);  
 }
 
 MainWindow::~MainWindow()

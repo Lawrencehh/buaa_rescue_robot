@@ -17,13 +17,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    void updateSnakePositionControlModel1(const QStringList &list) {
-        snakePositionControlModel1->setStringList(list);
+    void updateControlListView(const QStringList &list) {
+        ControlListView->setStringList(list);
     }
 
 private:
     Ui::MainWindow *ui;
     rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr ControlMessageSubscription_;
-    QStringListModel *snakePositionControlModel1;  // 新增这一行
+    QStringListModel *ControlListView;  // 新增这一行
 };
 #endif // MAINWINDOW_H

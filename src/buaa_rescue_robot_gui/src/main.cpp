@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
             list << QString::number(msg->elevator_counter_reset);
             list << QString::number(msg->lower_linear_module_encorder_reset);
             list << QString::number(msg->upper_linear_module_encorder_reset);
-            mainWindow.updateSnakePositionControlModel1(list);  // 通过MainWindow实例来更新
+            mainWindow.updateControlListView(list);  // 通过MainWindow实例来更新
         }
     );
 
