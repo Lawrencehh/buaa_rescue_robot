@@ -39,9 +39,20 @@ int main(int argc, char * argv[])
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: 1");  // 打印日志
     }
     else if (key == '5') {  // 检查是否按下了'5'
+      msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->gripper_gm6020_position_1 = 0;
+      msg->gripper_c610_position_1 = 0;
+      msg->gripper_sts3032_position_1 = 0;
+
+      msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->gripper_gm6020_position_2 = 0;
+      msg->gripper_c610_position_2 = 0;
+      msg->gripper_sts3032_position_2 = 0;
+
       msg->elevator_control = 0;
       msg->lower_linear_module_control = 0;
       msg->upper_linear_module_control = 0;
+
       publisher->publish(*msg);  // 发布消息
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: 0");  // 打印日志
     }
