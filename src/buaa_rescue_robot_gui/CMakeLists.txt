@@ -7,6 +7,9 @@ find_package(rclcpp REQUIRED)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(buaa_rescue_robot_msgs REQUIRED)
+find_package(OpenCV REQUIRED)
+include_directories(${OpenCV_INCLUDE_DIRS})
+
 
 # Enable Qt MOC
 set(CMAKE_AUTOMOC ON)
@@ -22,7 +25,7 @@ add_executable(buaa_rescue_robot_gui_node src/main.cpp src/mainwindow.cpp ${UIC_
 ament_target_dependencies(buaa_rescue_robot_gui_node rclcpp std_msgs buaa_rescue_robot_msgs)
 
 # Link libraries
-target_link_libraries(buaa_rescue_robot_gui_node Qt5::Widgets)
+target_link_libraries(buaa_rescue_robot_gui_node ${OpenCV_LIBS} Qt5::Widgets)
 
 # Include directories
 target_include_directories(buaa_rescue_robot_gui_node PRIVATE
