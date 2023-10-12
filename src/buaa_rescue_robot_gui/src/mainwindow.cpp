@@ -12,19 +12,43 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     cap.open(0);  // 打开默认摄像头
-
     scene = new QGraphicsScene(this);
     ui->camera->setScene(scene);
 
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCameraFrame()));
-    timer->start(33); // 30 fps
+    timer->start(100); // 10 fps
 
-
-    
+    // 初始化 ControlMessageDisplay
     ControlMessageDisplay = new QStringListModel(this);  
     ui->ControlMessageDisplay->setModel(ControlMessageDisplay); 
-    node = std::make_shared<rclcpp::Node>("buaa_rescue_robot_gui_ui_node");
+
+    // 初始化 SensorsMessageDisplay_1
+    SensorsMessageDisplay_1 = new QStringListModel(this);
+    // 将模型与视图关联
+    ui->SensorsMessageDisplay_1->setModel(SensorsMessageDisplay_1);
+
+    // 初始化 SensorsMessageDisplay_2
+    SensorsMessageDisplay_2 = new QStringListModel(this);
+    // 将模型与视图关联
+    ui->SensorsMessageDisplay_2->setModel(SensorsMessageDisplay_2);
+
+    // 初始化 SensorsMessageDisplay_3
+    SensorsMessageDisplay_3 = new QStringListModel(this);
+    // 将模型与视图关联
+    ui->SensorsMessageDisplay_3->setModel(SensorsMessageDisplay_3);
+
+    // 初始化 SensorsMessageDisplay_4
+    SensorsMessageDisplay_4 = new QStringListModel(this);
+    // 将模型与视图关联
+    ui->SensorsMessageDisplay_4->setModel(SensorsMessageDisplay_4);
+
+    // 初始化 SensorsMessageDisplay_5
+    SensorsMessageDisplay_5 = new QStringListModel(this);
+    // 将模型与视图关联
+    ui->SensorsMessageDisplay_5->setModel(SensorsMessageDisplay_5);
+
+    node = std::make_shared<rclcpp::Node>("mainwindow_node");
 
     // 初始化ROS 2发布器
     control_topic_publisher = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10);

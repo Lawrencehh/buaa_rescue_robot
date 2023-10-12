@@ -20,7 +20,6 @@ qt5_wrap_ui(UIC_FILES src/mainwindow.ui)
 # Add executable
 add_executable(buaa_rescue_robot_gui_node src/main.cpp src/mainwindow.cpp ${UIC_FILES})
 
-
 # Add dependencies
 ament_target_dependencies(buaa_rescue_robot_gui_node rclcpp std_msgs buaa_rescue_robot_msgs)
 
@@ -31,6 +30,7 @@ target_link_libraries(buaa_rescue_robot_gui_node ${OpenCV_LIBS} Qt5::Widgets)
 target_include_directories(buaa_rescue_robot_gui_node PRIVATE
   ${CMAKE_CURRENT_BINARY_DIR}
 )
+
 
 # 安装所有可执行文件
 install(TARGETS

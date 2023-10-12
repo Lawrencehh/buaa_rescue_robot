@@ -153,33 +153,33 @@ private:    // 私有成员函数和变量
             // 计算CRC校验码
             uint16_t calculated_crc = calculate_crc16(frame, 0, frame.size() - 2);
             // 使用std::cout输出CRC值
-            std::cout << "Calculated CRC16: 0x" << std::hex << calculated_crc << std::endl;
+            // std::cout << "Calculated CRC16: 0x" << std::hex << calculated_crc << std::endl;
             calculated_crc = swap_endian(calculated_crc);
             // 检查CRC校验码是否匹配
             if (received_crc == calculated_crc) {
-                std::cout << "CRC check passed. Data: ";
-                for (auto byte : data) {
-                    std::cout << "0x" << std::hex << static_cast<int>(byte) << " ";
-                }
-                std::cout << std::endl;
+                // std::cout << "CRC check passed. Data: ";
+                // for (auto byte : data) {
+                //     std::cout << "0x" << std::hex << static_cast<int>(byte) << " ";
+                // }
+                // std::cout << std::endl;
                 // 打印data的值
-                std::cout << "Data for elevator_counter: ";
+                // std::cout << "Data for elevator_counter: ";
                 if (data.size() >= 4) {
-                    std::cout << "0x" << std::hex << static_cast<int>(data[0]) << " 0x" << std::hex << static_cast<int>(data[1])<< " 0x" << std::hex << static_cast<int>(data[2])<< " 0x" << std::hex << static_cast<int>(data[3]);
+                    // std::cout << "0x" << std::hex << static_cast<int>(data[0]) << " 0x" << std::hex << static_cast<int>(data[1])<< " 0x" << std::hex << static_cast<int>(data[2])<< " 0x" << std::hex << static_cast<int>(data[3]);
                 } else {
-                    std::cout << "Insufficient data size";
+                    // std::cout << "Insufficient data size";
                 }
-                std::cout << std::endl;
+                // std::cout << std::endl;
                 // 解析数据段                
                 if (data.size() >= 4) {
                     elevator_counter = static_cast<int32_t>(data[0] << 24 | data[1] << 16 | data[2] << 8 | data[3]);                    
                 }
             } 
             else {
-                std::cout << "CRC check failed." << std::endl;
+                // std::cout << "CRC check failed." << std::endl;
             }
         } else {
-            std::cout << "Invalid header." << std::endl;
+            // std::cout << "Invalid header." << std::endl;
         }
         return elevator_counter;
     }
@@ -216,13 +216,13 @@ private:    // 私有成员函数和变量
                         static_cast<uint64_t>(data[0]) << 8 
                     );
                 } else {
-                    std::cout << "Insufficient data size for encoder." << std::endl;
+                    // std::cout << "Insufficient data size for encoder." << std::endl;
                 }
             } else {
-                std::cout << "CRC check failed for encoder." << std::endl;
+                // std::cout << "CRC check failed for encoder." << std::endl;
             }
         } else {
-            std::cout << "Invalid header for encoder." << std::endl;
+            // std::cout << "Invalid header for encoder." << std::endl;
         }
 
         return lower_encoder;
@@ -292,11 +292,11 @@ private:    // 私有成员函数和变量
                 if (!error) 
                 {
                     // 打印发送的Modbus帧内容
-                    std::string msg_str = "";
-                    for (auto &byte : received_modbus_frame_) {
-                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-                    }
-                    RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
+                    // std::string msg_str = "";
+                    // for (auto &byte : received_modbus_frame_) {
+                    //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+                    // }
+                    // RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
 
 
                     // 创建一个包含数据头的vector
@@ -414,7 +414,7 @@ private:    // 私有成员函数和变量
             async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
-        else if (msg->elevator_counter_reset == 1)  //elavator stop and reset the counter
+        if (msg->elevator_counter_reset == 1)  //elavator stop and reset the counter
         {
             modbus_frame_ = {0x01, 0x05, 0x00, 0x00, 0x00, 0x00, 0xCD, 0xCA};   // turn off J1
             async_write_to_serial(modbus_frame_);
@@ -466,7 +466,7 @@ private:    // 私有成员函数和变量
             async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
-        else if (msg->lower_linear_module_encorder_reset == 1)  //lower linear module stop and reset the encorder
+        if (msg->lower_linear_module_encorder_reset == 1)  //lower linear module stop and reset the encorder
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x02, 0x06, 0x05, 0x1C, 0x00, 0x00, 0x48, 0xF3};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
@@ -523,7 +523,7 @@ private:    // 私有成员函数和变量
             async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
         }
-        else if (msg->upper_linear_module_encorder_reset == 1)  //upper linear module stop and reset the encorder
+        if (msg->upper_linear_module_encorder_reset == 1)  //upper linear module stop and reset the encorder
         {
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x03, 0x06, 0x05, 0x1C, 0x00, 0x00, 0x49, 0x22};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
@@ -553,11 +553,11 @@ private:    // 私有成员函数和变量
 
         // 打印vector的内容
         // 打印发送的Modbus帧内容
-        std::string msg_str = "";
-        for (auto &byte : reading_counter_modbus_frame_) {
-            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-        }
-        RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());  
+        // std::string msg_str = "";
+        // for (auto &byte : reading_counter_modbus_frame_) {
+        //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        // }
+        // RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());  
 
         // 发送读取下层编码器的指令
         std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
@@ -567,11 +567,11 @@ private:    // 私有成员函数和变量
        
         // 打印vector的内容
         // 打印发送的Modbus帧内容
-        msg_str = "";
-        for (auto &byte : reading_lower_encorder_modbus_frame_) {
-            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-        }
-        RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());
+        // msg_str = "";
+        // for (auto &byte : reading_lower_encorder_modbus_frame_) {
+        //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        // }
+        // RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());
 
         // 发送读取上层编码器的指令
         std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
@@ -581,11 +581,11 @@ private:    // 私有成员函数和变量
        
         // 打印vector的内容
         // 打印发送的Modbus帧内容
-        msg_str = "";
-        for (auto &byte : reading_upper_encorder_modbus_frame_) {
-            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-        }
-        RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());          
+        // msg_str = "";
+        // for (auto &byte : reading_upper_encorder_modbus_frame_) {
+        //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        // }
+        // RCLCPP_INFO(this->get_logger(), "Sent message: %s", msg_str.c_str());          
     }
 
 

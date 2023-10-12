@@ -201,10 +201,10 @@ private:    // 私有成员函数和变量
                     data_buffer_.insert(data_buffer_.end(), received_modbus_frame_.begin(), received_modbus_frame_.end());
 
                     // 打印data_buffer_内容
-                    std::string msg_str = "";
-                    for (auto &byte : data_buffer_) {
-                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-                    }
+                    // std::string msg_str = "";
+                    // for (auto &byte : data_buffer_) {
+                    //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+                    // }
                     // RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
 
 
@@ -257,10 +257,10 @@ private:    // 私有成员函数和变量
             // robomaster_1, snake pull push sensors reset control
             std::vector<uint8_t> frame = {0xFE,0x01,0x56,0xFF,0xE0,0x5F,0xCF,0xFC,0xCC,0xFF};
             // 打印发送的Modbus帧内容
-            std::string frame_str = "";
-            for (auto &byte : frame) {
-                frame_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-            }
+            // std::string frame_str = "";
+            // for (auto &byte : frame) {
+            //     frame_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+            // }
             // RCLCPP_INFO(this->get_logger(), "Sending frame: %s", frame_str.c_str());
             // 通过串口发送数据帧
             async_write_to_serial(frame);
@@ -274,10 +274,10 @@ private:    // 私有成员函数和变量
         // robomaster_1, reading snake pull push sensors
         std::vector<uint8_t> frame = {0xFE,0x01,0x50,0xFF,0x40,0x5C,0xCF,0xFC,0xCC,0xFF};
         // 打印发送的Modbus帧内容
-        std::string frame_str = "";
-        for (auto &byte : frame) {
-            frame_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-        }
+        // std::string frame_str = "";
+        // for (auto &byte : frame) {
+        //     frame_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        // }
         // RCLCPP_INFO(this->get_logger(), "Sending frame: %s", frame_str.c_str());
         // 通过串口发送数据帧
         async_write_to_serial(frame);     

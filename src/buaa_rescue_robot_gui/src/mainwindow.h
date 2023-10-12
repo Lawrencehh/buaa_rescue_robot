@@ -6,8 +6,12 @@
 #include <rclcpp/rclcpp.hpp>  
 #include <QStringListModel>  
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster1.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
 #include <QTimer>
 #include "./ui_mainwindow.h"
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -48,6 +52,36 @@ public:
         list << QString::number(msg->lower_linear_module_encorder_reset);
         list << QString::number(msg->upper_linear_module_encorder_reset);
         ControlMessageDisplay->setStringList(list);
+    }
+
+    void updateSensorsMessageDisplay_1(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1::SharedPtr msg) {
+        QStringList list;
+
+        for (int i = 0; i < 12; ++i) {
+            list << QString::number(msg->snake_motor_encorder_position_1[i]);
+        }
+        list << QString::number(msg->gripper_gm6020_position_1);
+        list << QString::number(msg->gripper_c610_position_1);
+        list << QString::number(msg->gripper_sts3032_position_1);
+        list << QString::number(msg->robomaster_1_reset);
+        SensorsMessageDisplay_1->setStringList(list);
+    }
+
+    void updateSensorsMessageDisplay_3(const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator::SharedPtr msg) {
+        QStringList list;
+        list << QString::number(msg->elevator_counter);
+        list << QString::number(msg->lower_encorder);
+        list << QString::number(msg->upper_encorder);
+        SensorsMessageDisplay_3->setStringList(list);
+    }
+
+    void updateSensorsMessageDisplay_4(const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors::SharedPtr msg) {
+        QStringList list;
+
+        for (int i = 0; i < 12; ++i) {
+            list << QString::number(msg->pull_push_sensors_1[i]);
+        }
+        SensorsMessageDisplay_4->setStringList(list);
     }
 
     void updateControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
@@ -104,9 +138,19 @@ private:
     
     rclcpp::Node::SharedPtr node;  // 添加这一行，声明一个ROS 2节点
     rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr ControlMessageSubscription_;
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr SensorsMessageSubscription_1;
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr SensorsMessageSubscription_2;
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator>::SharedPtr SensorsMessageSubscription_3;
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>::SharedPtr SensorsMessageSubscription_4;
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>::SharedPtr SensorsMessageSubscription_5;
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr control_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
     rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr control_topic_subscription; // ROS 2 subscriber
-    QStringListModel *ControlMessageDisplay;  // 新增这一行
+    QStringListModel *ControlMessageDisplay;  
+    QStringListModel *SensorsMessageDisplay_1;
+    QStringListModel *SensorsMessageDisplay_2;
+    QStringListModel *SensorsMessageDisplay_3;
+    QStringListModel *SensorsMessageDisplay_4;
+    QStringListModel *SensorsMessageDisplay_5;
     Ui::MainWindow *ui;
 
     cv::VideoCapture cap;

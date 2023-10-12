@@ -11,6 +11,7 @@
 #include <vector>
 #include <cstdint>
 #include <termios.h>
+
 // 命名空间
 using namespace std;
 using asio::ip::tcp;
@@ -146,11 +147,11 @@ private:    // 私有成员函数和变量
         std::int16_t  reset_encorder_value = 0;  // reset to be 0
 
         // 打印frame帧内容
-        std::string msg_str = "";
-        for (auto &byte : frame) {
-            msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-        }
-        RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());  
+        // std::string msg_str = "";
+        // for (auto &byte : frame) {
+        //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        // }
+        // RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());  
 
         // 检查数据头
         if (std::equal(header.begin(), header.end(), frame.begin())) {
@@ -161,7 +162,7 @@ private:    // 私有成员函数和变量
             // 计算CRC校验码
             uint16_t calculated_crc = calculate_crc16(frame, 0, frame.size() - 2); 
             // 使用ROS 2的日志功能打印这个变量
-            RCLCPP_INFO(this->get_logger(), "Calculated CRC: %u", calculated_crc);
+            // RCLCPP_INFO(this->get_logger(), "Calculated CRC: %u", calculated_crc);
 
 
             // 检查CRC校验码是否匹配
@@ -230,11 +231,12 @@ private:    // 私有成员函数和变量
                     // 将接收到的数据添加到数据缓存区
                     data_buffer_.insert(data_buffer_.end(), received_modbus_frame_.begin(), received_modbus_frame_.end());
 
+
                     // 打印data_buffer_内容
-                    std::string msg_str = "";
-                    for (auto &byte : data_buffer_) {
-                        msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-                    }
+                    // std::string msg_str = "";
+                    // for (auto &byte : data_buffer_) {
+                    //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+                    // }
                     // RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
 
 
@@ -269,6 +271,7 @@ private:    // 私有成员函数和变量
 
                         // 移除这79字节(including the ending 0xCFFCCCFF)及之前的字节
                         data_buffer_.erase(data_buffer_.begin(), it_snake_encorders + 79);
+
                     }
                     received_modbus_frame_.clear();
                     // 递归调用以持续接收
@@ -347,11 +350,11 @@ private:    // 私有成员函数和变量
         frame.push_back(crc_low_byte);
         
         // 打印发送的Modbus帧内容
-        std::string frame_str = "";
-        for (auto &byte : frame) {
-            frame_str += "0x" + to_string(static_cast<int>(byte)) + " ";
-        }
-        RCLCPP_INFO(this->get_logger(), "Sending frame: %s", frame_str.c_str());
+        // std::string frame_str = "";
+        // for (auto &byte : frame) {
+        //     frame_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        // }
+        // RCLCPP_INFO(this->get_logger(), "Sending frame: %s", frame_str.c_str());
 
         // 5. 通过串口发送数据帧
         async_write_to_serial(frame);
