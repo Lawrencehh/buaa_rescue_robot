@@ -38,6 +38,10 @@ source install/setup.bash
 ```
 
 ## Usage
+### launch the gui
+```bash
+ros2 launch buaa_rescue_robot_msgs control_by_keyboard.launch.py 
+```
 ### keyboard_controller  
 Run the keyboard_publisher node:
 ```bash
