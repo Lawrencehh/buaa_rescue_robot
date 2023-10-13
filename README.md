@@ -48,28 +48,7 @@ Run the keyboard_publisher node:
 ros2 run keyboard_controller keyboard_publisher
 ```
 
-### Talker and Listener  
-Run the talker node:
 
-```bash
-ros2 run cpp_pubsub talker
-```
-
-Run the listener node:
-```bash
-ros2 run cpp_pubsub listener
-```
-
-### Serial Communication
-Run the serial sender node:
-```bash
-ros2 run serial serial_sender
-```
-
-Run the serial receiver node:
-```bash
-ros2 run serial serial_receiver
-```
 The communication protocol for the robot system can be found in the link:  
 https://docs.google.com/document/d/15l8EZoLQ8ltLROfFUyf_mJ9b2J9PZ0hl/edit?usp=sharing&ouid=102832733841320281280&rtpof=true&sd=true
 
