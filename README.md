@@ -37,6 +37,20 @@ colcon build
 source install/setup.bash
 ```
 
+### Serial Devices Rename
+```bash
+sudo gedit /etc/udev/rules.d/99-usb-serial.rules
+```
+```bash
+ KERNEL=="ttyUSB[0-9]*", MODE="0666"
+# Set a fixed name for specific serial devices
+SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0666", SYMLINK+="ttyRobomaster1"
+SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="23a3", MODE="0666", SYMLINK+="ttyPullPushSensors1"
+SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0666", SYMLINK+="ttyElevatorLinearModules"
+```
+
+
+
 ## Usage
 ### launch the gui
 ```bash
