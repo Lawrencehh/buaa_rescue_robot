@@ -27,6 +27,9 @@ git clone https://github.com/Lawrencehh/buaa_rescue_robot.git
 # Navigate to the workspace
 cd buaa_rescue_robot
 
+# install requirements
+rosdep install --from-paths src --ignore-src -r -y
+
 # Build the project
 colcon build
 
