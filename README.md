@@ -35,6 +35,9 @@ colcon build
 
 # Source the setup script
 source install/setup.bash
+
+# remove the brltty
+sudo apt remove brltty
 ```
 
 ### Serial Devices Rename
