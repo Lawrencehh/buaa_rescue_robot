@@ -1,0 +1,7 @@
+#  Copyright Copyright (C) 2001-2021 Force Dimension, Switzerland.
+#  All Rights Reserved.
+#
+#  Force Dimension SDK 3.14.0
+
+# GLFW dependency
+LDLIBS += -lglfw

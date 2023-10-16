@@ -1,0 +1,50 @@
+#  Copyright Copyright (C) 2001-2021 Force Dimension, Switzerland.
+#  All Rights Reserved.
+#
+#  Force Dimension SDK 3.14.0
+
+# target
+CFG     = release
+OS      = lin
+ARCH   ?= $(shell echo `uname -m`)
+
+# compiler
+CC      ?= gcc
+CXX     ?= g++
+COMPILER = $(CC)
+
+# common compiler flags
+CXXFLAGS = -O3 -DLINUX -std=c++11 -I$(INC_DIR) -fsigned-char
+
+# set target architecture
+ifeq ($(ARCH), x86_64)
+    CFLAGS   += -m64 -march=x86-64
+    CXXFLAGS += -m64 -march=x86-64
+else ifneq (,$(filter $(ARCH),i386 i486 i586 i686))
+    CFLAGS   += -m32 -march=$(ARCH) -msse2 -mtune=generic
+    CXXFLAGS += -m32 -march=$(ARCH) -msse2 -mtune=generic
+else ifneq (,$(filter $(ARCH),armv7 armv7l armv7h))
+    CFLAGS   += -march=armv7-a
+    CXXFLAGS += -march=armv7-a
+else ifneq (,$(filter $(ARCH),aarch64 amd64))
+    CFLAGS   += -march=armv8-a
+    CXXFLAGS += -march=armv8-a
+else
+    CFLAGS   += -march=$(ARCH)
+    CXXFLAGS += -march=$(ARCH)
+endif
+
+# library location
+BIN_DIR = $(TOP_DIR)/bin
+INC_DIR = $(TOP_DIR)/include
+LIB_DIR = $(TOP_DIR)/lib/release/$(OS)-$(ARCH)-gcc
+
+# common linker flags
+LDFLAGS += -L$(LIB_DIR)
+LDLIBS  += -ldrd -lpthread -lusb-1.0 -lrt -ldl
+
+# platform-specific dependencies
+GLFW_DIR      = $(TOP_DIR)/externals/GLFW
+CXXFLAGS_GLFW = -I$(GLFW_DIR)/include
+LDFLAGS_GLFW  = -L$(GLFW_DIR)/lib/$(CFG)/$(OS)-$(ARCH)-$(COMPILER)
+LDLIBS_GLFW   = -lGL -lGLU -lglfw -lX11 -lXcursor -lXrandr -lXinerama -ldl

@@ -52,6 +52,18 @@ SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="067b", ATTRS{idProduct}==
 SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0666", SYMLINK+="ttyElevatorLinearModules"
 ```
 
+```bash
+sudo gedit /etc/udev/rules.d/99-force-dimension.rules
+```
+```bash
+# Add permissions
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1451", ATTRS{idProduct}=="0402", MODE="0666", GROUP="plugdev"
+```
+```bash
+sudo udevadm control --reload-rules
+sudo udevadm trigger
+```
+
 
 
 ## Usage
