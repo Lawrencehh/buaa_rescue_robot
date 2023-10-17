@@ -43,6 +43,7 @@ public:
         if (drdOpen () < 0) {
             printf ("error: cannot open device (%s)\n", dhdErrorGetLastStr ());
             dhdSleep (2.0);
+            dhdClose();
         }
 
         // print out device identifier
@@ -95,7 +96,7 @@ public:
         printf ("-----------------------\n");
 
         // 创建发布者
-        command_publisher_ = this->create_publisher<std_msgs::msg::Float64MultiArray>("omega7_sensor", 10);
+        command_publisher_ = this->create_publisher<std_msgs::msg::Float64MultiArray>("omega7_sensor_RH", 10);
         // 创建定时器，500ms为周期，定时发布
         timer_ = this->create_wall_timer(std::chrono::milliseconds(1), std::bind(&Omega7Sensor::timecaller, this));
     }
