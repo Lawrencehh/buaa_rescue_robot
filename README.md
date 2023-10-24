@@ -82,7 +82,7 @@ The communication protocol for the robot system can be found in the link:
 https://docs.google.com/document/d/15l8EZoLQ8ltLROfFUyf_mJ9b2J9PZ0hl/edit?usp=sharing&ouid=102832733841320281280&rtpof=true&sd=true
 
 ## Contributing
-The current code contributor is Dr. Huang Hao and Xiang Yan.
+The current code contributors are Dr. Huang Hao and Xiang Yan.
 
 ## License
 This project is licensed under the MIT License.
