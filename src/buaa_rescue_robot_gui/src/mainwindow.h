@@ -157,6 +157,8 @@ private:
     QGraphicsScene *scene;
     QTimer *timer;
 
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 
     
 };

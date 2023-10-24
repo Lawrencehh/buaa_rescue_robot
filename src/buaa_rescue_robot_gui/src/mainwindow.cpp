@@ -1,8 +1,40 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
+#include <QKeyEvent>  // 引入QKeyEvent头文件
 
-
+// 重载keyPressEvent方法
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    // Initialize msg before switch statement
+    std::shared_ptr<buaa_rescue_robot_msgs::msg::ControlMessage> msg;
+    // 判断按下的键
+    switch(event->key()) {
+        case Qt::Key_Up:
+            // 上箭头键被按下
+            // msg->elevator_control = 1;  // 举例，设定电梯控制为1
+            // control_topic_publisher->publish(*msg);
+            qDebug() << "Up Arrow Pressed and control message published!";
+            break;
+        case Qt::Key_Down:
+            // 下箭头键被按下
+            // TODO: 你的代码
+            qDebug() << "Down Arrow Pressed!";
+            break;
+        case Qt::Key_Left:
+            // 左箭头键被按下
+            // TODO: 你的代码
+            qDebug() << "Left Arrow Pressed!";
+            break;
+        case Qt::Key_Right:
+            // 右箭头键被按下
+            // TODO: 你的代码
+            qDebug() << "Right Arrow Pressed!";
+            break;
+        default:
+            QMainWindow::keyPressEvent(event);  // 如果其他键被按下，调用默认处理
+    }
+}
 
 
 MainWindow::MainWindow(QWidget *parent)

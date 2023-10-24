@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"com.forcedimension.sdk","l":"DHD"},{"p":"com.forcedimension.sdk","l":"DRD"}]
