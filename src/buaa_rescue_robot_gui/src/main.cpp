@@ -39,8 +39,6 @@ int main(int argc, char **argv) {
         10,
         [&](const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
 
-            mainWindow.updateControlMessageDisplay(msg);  // 通过MainWindow实例来更新
-
             // 在这里更新QSpinBox的值
             mainWindow.updateControlIndicator(msg);     
         }

@@ -26,34 +26,6 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void updateControlMessageDisplay(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
-        QStringList list;
-        for (int i = 0; i < 12; ++i) {
-            list << QString::number(msg->snake_control_1_array[i]);
-        }
-        list << QString::number(msg->gripper_gm6020_position_1);
-        list << QString::number(msg->gripper_c610_position_1);
-        list << QString::number(msg->gripper_sts3032_position_1);
-        list << QString::number(msg->robomaster_1_reset);
-        list << "";
-        for (int i = 0; i < 12; ++i) {
-            list << QString::number(msg->snake_control_2_array[i]);
-        }
-        list << QString::number(msg->gripper_gm6020_position_2);
-        list << QString::number(msg->gripper_c610_position_2);
-        list << QString::number(msg->gripper_sts3032_position_2);
-        list << QString::number(msg->robomaster_2_reset);
-        list << "";
-        list << QString::number(msg->elevator_control);
-        list << QString::number(msg->lower_linear_module_control);
-        list << QString::number(msg->upper_linear_module_control);
-        list << QString::number(msg->pull_push_sensors_reset);
-        list << QString::number(msg->elevator_counter_reset);
-        list << QString::number(msg->lower_linear_module_encorder_reset);
-        list << QString::number(msg->upper_linear_module_encorder_reset);
-        ControlMessageDisplay->setStringList(list);
-    }
-
     void updateSensorsMessageDisplay_1(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1::SharedPtr msg) {
         QStringList list;
 
@@ -80,7 +52,7 @@ public:
 
         for (int i = 0; i < 12; ++i) {
             list << QString::number(msg->pull_push_sensors_1[i]);
-        }
+        }    
         SensorsMessageDisplay_4->setStringList(list);
     }
 
@@ -103,6 +75,7 @@ public:
         ui->gripper_c610_position_1_control->setValue(msg->gripper_c610_position_1);
         ui->gripper_sts3032_position_1_control->setValue(msg->gripper_sts3032_position_1);
         ui->robomaster1_sensors_reset->setValue(msg->robomaster_1_reset);
+        
         // robomaster 2
         ui->robomaster2_snake_motor_position_control_1->setValue(msg->snake_control_2_array[0]);  
         ui->robomaster2_snake_motor_position_control_2->setValue(msg->snake_control_2_array[1]);

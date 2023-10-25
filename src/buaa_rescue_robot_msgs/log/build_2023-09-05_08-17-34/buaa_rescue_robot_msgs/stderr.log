@@ -1,8 +1,0 @@
-[31mCMake Error at /opt/ros/humble/share/rosidl_cmake/cmake/rosidl_generate_interfaces.cmake:93 (message):
-  rosidl_generate_interfaces() the passed file 'msg/YourMessage.msg' doesn't
-  exist relative to the CMAKE_CURRENT_SOURCE_DIR
-  '/home/rescue_robot/buaa_rescue_robot/src/buaa_rescue_robot_msgs'
-Call Stack (most recent call first):
-  CMakeLists.txt:14 (rosidl_generate_interfaces)
-
-[0m

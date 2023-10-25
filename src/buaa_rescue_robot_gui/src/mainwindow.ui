@@ -33,91 +33,6 @@
      <string>publishButton</string>
     </property>
    </widget>
-   <widget class="QListView" name="ControlMessageDisplay">
-    <property name="geometry">
-     <rect>
-      <x>310</x>
-      <y>70</y>
-      <width>81</width>
-      <height>721</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: transparent;
- border: none;
-
-</string>
-    </property>
-   </widget>
-   <widget class="QTextEdit" name="textEdit">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>31</y>
-      <width>310</width>
-      <height>780</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">background: transparent;
- border: none;
-
-</string>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-    <property name="html">
-     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:600; color:#e01b24;&quot;&gt;Control Message  Display              &lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#e01b24;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1:    snake motor position 1:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 2:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 3:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 4:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 5:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 6:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 7:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 8:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_1:    snake motor position 9:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1:  snake motor position 10:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1:  snake motor position 11:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1:  snake motor position 12:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1: gripper gm6020 position:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1:        gripper c610 position:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1:  gripper sts3032 position:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_1:                        sensors reset:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#e01b24;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2:    snake motor position 1:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 2:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 3:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 4:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 5:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 6:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 7:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 8:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;   robomaster_2:    snake motor position 9:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2:  snake motor position 10:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2:  snake motor position 11:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2:  snake motor position 12:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2: gripper gm6020 position:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2:        gripper c610 position:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2:  gripper sts3032 position:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;robomaster_2:                        sensors reset:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; color:#e01b24;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#1a5fb4;&quot;&gt;Master:                         elevator speed:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#1a5fb4;&quot;&gt;Master:                        lower LM speed:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#1a5fb4;&quot;&gt;Master:                       upper LM speed:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#1a5fb4;&quot;&gt;Master:                       PP sensors reset:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#1a5fb4;&quot;&gt;Master:              elevator counter reset:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#1a5fb4;&quot;&gt;Master:           lower LM encorder reset:&lt;/span&gt;&lt;/p&gt;
-&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#1a5fb4;&quot;&gt;Master:          upper LM encorder reset:&lt;/span&gt;&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'Droid Sans Mono','monospace','monospace'; font-size:14px; color:#cccccc;&quot;&gt;&lt;br /&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QTextEdit" name="textEdit_2">
     <property name="geometry">
      <rect>
@@ -246,6 +161,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -279,6 +197,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -314,6 +235,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -347,6 +271,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -382,6 +309,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -415,6 +345,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -450,6 +383,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -483,6 +419,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -518,6 +457,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -551,6 +493,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -586,6 +531,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -619,6 +567,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -654,6 +605,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -687,6 +641,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -722,6 +679,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -756,6 +716,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -763,13 +726,13 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </widget>
-   <widget class="QGraphicsView" name="camera">
+   <widget class="QGraphicsView" name="camera1">
     <property name="geometry">
      <rect>
-      <x>1290</x>
-      <y>600</y>
-      <width>621</width>
-      <height>421</height>
+      <x>10</x>
+      <y>130</y>
+      <width>401</width>
+      <height>241</height>
      </rect>
     </property>
    </widget>
@@ -832,6 +795,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -865,6 +831,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -900,6 +869,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -933,6 +905,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -968,6 +943,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1001,6 +979,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1036,6 +1017,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1069,6 +1053,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1104,6 +1091,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1137,6 +1127,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1172,6 +1165,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1205,6 +1201,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1240,6 +1239,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1273,6 +1275,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1308,6 +1313,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1341,6 +1349,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1409,6 +1420,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1448,6 +1462,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1489,6 +1506,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1528,6 +1548,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1569,6 +1592,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1609,6 +1635,9 @@ p, li { white-space: pre-wrap; }
        <property name="styleSheet">
         <string notr="true"/>
        </property>
+       <property name="minimum">
+        <number>-999999999</number>
+       </property>
        <property name="maximum">
         <number>999999999</number>
        </property>
@@ -1648,6 +1677,9 @@ p, li { white-space: pre-wrap; }
        </property>
        <property name="styleSheet">
         <string notr="true"/>
+       </property>
+       <property name="minimum">
+        <number>-999999999</number>
        </property>
        <property name="maximum">
         <number>999999999</number>
@@ -1858,6 +1890,277 @@ p, li { white-space: pre-wrap; }
  border: none;
 
 </string>
+    </property>
+   </widget>
+   <widget class="QDial" name="gripper1_gm6020">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>30</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gripper1_GM6020&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GM6020&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(224, 27, 36);
+font: 20pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="notchTarget">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>10</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gripper1_GM6020</string>
+    </property>
+    <property name="buddy">
+     <cstring>gripper1_gm6020</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>10</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gripper1_C610</string>
+    </property>
+    <property name="buddy">
+     <cstring>gripper1_gm6020</cstring>
+    </property>
+   </widget>
+   <widget class="QDial" name="gripper1_c610">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>30</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gripper1_GM6020&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GM6020&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(246, 211, 45);
+font: 20pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="minimum">
+     <number>-1000</number>
+    </property>
+    <property name="maximum">
+     <number>1000</number>
+    </property>
+    <property name="notchTarget">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>10</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gripper1_STS3032</string>
+    </property>
+    <property name="buddy">
+     <cstring>gripper1_gm6020</cstring>
+    </property>
+   </widget>
+   <widget class="QDial" name="gripper1_sts3032">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>30</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gripper1_GM6020&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GM6020&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(53, 132, 228);
+font: 20pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="notchTarget">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDial" name="gripper2_STS3032">
+    <property name="geometry">
+     <rect>
+      <x>290</x>
+      <y>400</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gripper1_GM6020&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GM6020&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(53, 132, 228);
+font: 20pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="notchTarget">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QDial" name="gripper2_c610">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>400</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gripper1_GM6020&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GM6020&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(246, 211, 45);
+font: 20pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="minimum">
+     <number>-1000</number>
+    </property>
+    <property name="maximum">
+     <number>1000</number>
+    </property>
+    <property name="notchTarget">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>380</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gripper2_GM6020</string>
+    </property>
+    <property name="buddy">
+     <cstring>gripper1_gm6020</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>380</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gripper2_C610</string>
+    </property>
+    <property name="buddy">
+     <cstring>gripper1_gm6020</cstring>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>380</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Gripper2_STS3032</string>
+    </property>
+    <property name="buddy">
+     <cstring>gripper1_gm6020</cstring>
+    </property>
+   </widget>
+   <widget class="QDial" name="gripper1_gm6020_2">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>400</y>
+      <width>100</width>
+      <height>100</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Gripper1_GM6020&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;GM6020&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(224, 27, 36);
+font: 20pt &quot;Ubuntu&quot;;</string>
+    </property>
+    <property name="maximum">
+     <number>360</number>
+    </property>
+    <property name="notchTarget">
+     <double>0.000000000000000</double>
+    </property>
+   </widget>
+   <widget class="QGraphicsView" name="camera2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>500</y>
+      <width>401</width>
+      <height>241</height>
+     </rect>
     </property>
    </widget>
   </widget>
