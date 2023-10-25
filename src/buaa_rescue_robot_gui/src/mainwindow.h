@@ -74,6 +74,9 @@ public:
         ui->gripper_gm6020_position_1_control->setValue(msg->gripper_gm6020_position_1);
         ui->gripper_c610_position_1_control->setValue(msg->gripper_c610_position_1);
         ui->gripper_sts3032_position_1_control->setValue(msg->gripper_sts3032_position_1);
+        ui->gripper1_gm6020->setValue(msg->gripper_gm6020_position_1);
+        ui->gripper1_c610->setValue(msg->gripper_c610_position_1);
+        ui->gripper1_sts3032->setValue(msg->gripper_sts3032_position_1);
         ui->robomaster1_sensors_reset->setValue(msg->robomaster_1_reset);
         
         // robomaster 2
@@ -92,6 +95,9 @@ public:
         ui->gripper_gm6020_position_2_control->setValue(msg->gripper_gm6020_position_2);
         ui->gripper_c610_position_2_control->setValue(msg->gripper_c610_position_2);
         ui->gripper_sts3032_position_2_control->setValue(msg->gripper_sts3032_position_2);
+        ui->gripper2_gm6020->setValue(msg->gripper_gm6020_position_2);
+        ui->gripper2_c610->setValue(msg->gripper_c610_position_2);
+        ui->gripper2_sts3032->setValue(msg->gripper_sts3032_position_2);
         ui->robomaster2_sensors_reset->setValue(msg->robomaster_2_reset);
         // master devices
         ui->elevator_speed_control->setValue(msg->elevator_control);
@@ -106,6 +112,7 @@ public:
 public slots:
     void on_publishButton_clicked();
     void updateCameraFrame();
+    void dialValueChanged(int value);
 
 private:
     

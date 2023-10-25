@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
     // show 
     auto subscription_control_topic = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>(
         "control_topic",
-        10,
+        100,
         [&](const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
 
             // 在这里更新QSpinBox的值

@@ -2,6 +2,8 @@
 #include "./ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 #include <QKeyEvent>  // 引入QKeyEvent头文件
+#include <thread>
+#include <chrono>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +18,14 @@ MainWindow::MainWindow(QWidget *parent)
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(updateCameraFrame()));
     timer->start(100); // 10 fps
+
+    // 连接 QDial 的 valueChanged 信号到自定义的槽函数
+    connect(ui->gripper1_gm6020, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
+    connect(ui->gripper1_c610, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
+    connect(ui->gripper1_sts3032, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
+    connect(ui->gripper2_gm6020, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
+    connect(ui->gripper2_c610, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
+    connect(ui->gripper2_sts3032, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
 
     // 初始化 SensorsMessageDisplay_1
     SensorsMessageDisplay_1 = new QStringListModel(this);
@@ -199,6 +209,69 @@ void MainWindow::updateCameraFrame()
         scene->addPixmap(pixmap);
         ui->camera1->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
     }
+}
+
+// 自定义槽函数：当 QDial 的值改变时会被调用
+void MainWindow::dialValueChanged(int value)
+{
+    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 延时100毫秒
+    auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
+    // snake motors control for robomaster 1
+    msg-> snake_control_1_array[0]  = ui->robomaster1_snake_motor_position_control_1->value();
+    msg-> snake_control_1_array[1]  = ui->robomaster1_snake_motor_position_control_2->value();
+    msg-> snake_control_1_array[2]  = ui->robomaster1_snake_motor_position_control_3->value();
+    msg-> snake_control_1_array[3]  = ui->robomaster1_snake_motor_position_control_4->value();
+    msg-> snake_control_1_array[4]  = ui->robomaster1_snake_motor_position_control_5->value();
+    msg-> snake_control_1_array[5]  = ui->robomaster1_snake_motor_position_control_6->value();
+    msg-> snake_control_1_array[6]  = ui->robomaster1_snake_motor_position_control_7->value();
+    msg-> snake_control_1_array[7]  = ui->robomaster1_snake_motor_position_control_8->value();
+    msg-> snake_control_1_array[8]  = ui->robomaster1_snake_motor_position_control_9->value();
+    msg-> snake_control_1_array[9]  = ui->robomaster1_snake_motor_position_control_10->value();
+    msg-> snake_control_1_array[10] = ui->robomaster1_snake_motor_position_control_11->value();
+    msg-> snake_control_1_array[11] = ui->robomaster1_snake_motor_position_control_12->value();
+    // gripper control for robomaster 1
+    // msg->gripper_gm6020_position_1 = ui->gripper_gm6020_position_1_control->value();
+    // msg->gripper_c610_position_1 = ui->gripper_c610_position_1_control->value();
+    // msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
+    msg->robomaster_1_reset = ui->robomaster1_sensors_reset->value();
+    // snake motors control for robomaster 2
+    msg-> snake_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
+    msg-> snake_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
+    msg-> snake_control_2_array[2]  = ui->robomaster2_snake_motor_position_control_3->value();
+    msg-> snake_control_2_array[3]  = ui->robomaster2_snake_motor_position_control_4->value();
+    msg-> snake_control_2_array[4]  = ui->robomaster2_snake_motor_position_control_5->value();
+    msg-> snake_control_2_array[5]  = ui->robomaster2_snake_motor_position_control_6->value();
+    msg-> snake_control_2_array[6]  = ui->robomaster2_snake_motor_position_control_7->value();
+    msg-> snake_control_2_array[7]  = ui->robomaster2_snake_motor_position_control_8->value();
+    msg-> snake_control_2_array[8]  = ui->robomaster2_snake_motor_position_control_9->value();
+    msg-> snake_control_2_array[9]  = ui->robomaster2_snake_motor_position_control_10->value();
+    msg-> snake_control_2_array[10] = ui->robomaster2_snake_motor_position_control_11->value();
+    msg-> snake_control_2_array[11] = ui->robomaster2_snake_motor_position_control_12->value();
+    // gripper control for robomaster 1
+    // msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();
+    // msg->gripper_c610_position_2 = ui->gripper_c610_position_2_control->value();
+    // msg->gripper_sts3032_position_2 = ui->gripper_sts3032_position_2_control->value();
+    msg->robomaster_2_reset = ui->robomaster2_sensors_reset->value();
+    // master devices control
+    msg->elevator_control = ui->elevator_speed_control->value();
+    msg->lower_linear_module_control = ui->lower_LM_speed_control->value();
+    msg->upper_linear_module_control = ui->upper_LM_speed_control->value();
+    msg->pull_push_sensors_reset = ui->PP_sensors_reset->value();
+    msg->elevator_counter_reset = ui->elevator_counter_reset->value();
+    msg->lower_linear_module_encorder_reset = ui->lower_LM_encorder_reset->value();
+    msg->upper_linear_module_encorder_reset = ui->upper_LM_encorder_reset->value();
+    // 从 QDial 读取值并设置到 ROS2 消息中
+    // gripper control for robomaster 1
+    msg->gripper_gm6020_position_1 = ui->gripper1_gm6020->value();
+    msg->gripper_c610_position_1 = ui->gripper1_c610->value();
+    msg->gripper_sts3032_position_1 = ui->gripper1_sts3032->value();
+    // gripper control for robomaster 2
+    msg->gripper_gm6020_position_2 = ui->gripper2_gm6020->value();
+    msg->gripper_c610_position_2 = ui->gripper2_c610->value();
+    msg->gripper_sts3032_position_2 = ui->gripper2_sts3032->value();
+
+    // 发布 ROS2 消息
+    control_topic_publisher->publish(*msg);
 }
 
 void MainWindow::on_publishButton_clicked()
