@@ -84,7 +84,9 @@
         "variant": "cpp",
         "*.ipp": "cpp",
         "strstream": "cpp",
-        "cfenv": "cpp"
+        "cfenv": "cpp",
+        "hash_map": "cpp",
+        "valarray": "cpp"
     },
     "cmake.configureOnOpen": false,
     

@@ -2,8 +2,12 @@
 #include "./ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 #include <QKeyEvent>  // 引入QKeyEvent头文件
-#include <thread>
-#include <chrono>
+// #include <thread>
+// #include <chrono>
+#include <QTime>
+
+QTime lastTime = QTime::currentTime(); // 防抖动
+bool reset_flag = false;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -116,6 +120,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     if (byteArray.size() == 1) {
         // 判断按下的键
         switch(event->key()) {
+            
             case '8':
                 msg->elevator_control = 1;  // 举例，设定电梯控制为1
                 control_topic_publisher->publish(*msg);
@@ -140,7 +145,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->upper_linear_module_control = -1; // backward direction
                 control_topic_publisher->publish(*msg);
                 break;
-            case '5':
+            case '5': // turn the reset_flag = 0
+                reset_flag = false;
                 msg->elevator_control = 0;
                 msg->lower_linear_module_control = 0;
                 msg->upper_linear_module_control = 0;
@@ -153,6 +159,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 control_topic_publisher->publish(*msg);
                 break;
             case '0': // reset the sensors
+                reset_flag = true;
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
                 msg->gripper_gm6020_position_1 = 0;
                 msg->gripper_c610_position_1 = 0;
@@ -214,7 +221,19 @@ void MainWindow::updateCameraFrame()
 // 自定义槽函数：当 QDial 的值改变时会被调用
 void MainWindow::dialValueChanged(int value)
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 延时100毫秒
+    QTime currentTime = QTime::currentTime();
+    int elapsed = lastTime.msecsTo(currentTime);
+
+    if (elapsed < 100) {  // 100 毫秒的防抖动时间
+        return;
+    }
+
+    if (reset_flag == true) {
+        return;
+    }
+
+    lastTime = currentTime;
+
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
     // snake motors control for robomaster 1
     msg-> snake_control_1_array[0]  = ui->robomaster1_snake_motor_position_control_1->value();
