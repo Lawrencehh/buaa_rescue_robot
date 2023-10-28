@@ -163,7 +163,7 @@ public:
 
         // 创建发布者
         command_publisher_ = this->create_publisher<std_msgs::msg::Float64MultiArray>("omega7_sensor", 100);
-        // 创建定时器，500ms为周期，定时发布
+        // 创建定时器，10ms为周期，定时发布
         timer_ = this->create_wall_timer(std::chrono::milliseconds(5), std::bind(&Omega7Sensor::timecaller, this));
     }
 
