@@ -9,9 +9,15 @@
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster1.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
+#include "std_msgs/msg/float64_multi_array.hpp"
 #include <QTimer>
 #include "./ui_mainwindow.h"
 #include <QDebug>
+#include <cmath> // 为了使用 fabs 和 M_PI
+
+#include <iostream>
+#include <array>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -108,6 +114,147 @@ public:
         ui->lower_LM_encorder_reset->setValue(msg->lower_linear_module_encorder_reset);
         ui->upper_LM_encorder_reset->setValue(msg->upper_linear_module_encorder_reset);
     }
+
+    void updateJointSpaceIndicator(const std_msgs::msg::Float64MultiArray::SharedPtr theta_msg) {
+        // 在这里更新QSpinBox的值, rad to degree
+        ui->robomaster1_theta_1->setValue(theta_msg->data[0] * 180 / M_PI);  
+        ui->robomaster1_theta_2->setValue(theta_msg->data[1] * 180 / M_PI);
+        ui->robomaster1_theta_3->setValue(theta_msg->data[2] * 180 / M_PI);
+        ui->robomaster1_theta_4->setValue(theta_msg->data[3] * 180 / M_PI);
+        ui->robomaster1_theta_5->setValue(theta_msg->data[4] * 180 / M_PI);
+        ui->robomaster1_theta_6->setValue(theta_msg->data[5] * 180 / M_PI);
+        ui->robomaster2_theta_1->setValue(theta_msg->data[6] * 180 / M_PI);
+        ui->robomaster2_theta_2->setValue(theta_msg->data[7] * 180 / M_PI);
+        ui->robomaster2_theta_3->setValue(theta_msg->data[8] * 180 / M_PI);
+        ui->robomaster2_theta_4->setValue(theta_msg->data[9] * 180 / M_PI);
+        ui->robomaster2_theta_5->setValue(theta_msg->data[10] * 180 / M_PI);
+        ui->robomaster2_theta_6->setValue(theta_msg->data[11] * 180 / M_PI);
+
+        std::array<double, 6> theta_1;
+        std::array<double, 6> theta_2;
+        std::array<double, 6> theta_initial = {0,0,0,0,0,0};
+        for (size_t i = 0; i < 6; i++)
+        {
+            theta_1[i] = theta_msg->data[i];
+        }
+        for (size_t i = 6; i < 12; i++)
+        {
+            theta_2[i-6] = theta_msg->data[i];
+        }
+        std::array<double, 12> rope_1 = theta2rope(theta_1);
+        std::array<double, 12> rope_2 = theta2rope(theta_2);
+        std::array<double, 12> rope_initial = theta2rope(theta_initial);
+
+        auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
+        // snake motors control for robomaster 1
+        for (size_t i = 0; i < 12; i++)
+        {
+            msg-> snake_control_1_array[i]  = (rope_initial[i] - rope_1[i]) * 65536/4; // mm transformed to pulse
+        }
+
+        // gripper control for robomaster 1
+        msg->gripper_gm6020_position_1 = ui->gripper_gm6020_position_1_control->value();
+        msg->gripper_c610_position_1 = ui->gripper_c610_position_1_control->value();
+        msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
+        msg->robomaster_1_reset = ui->robomaster1_sensors_reset->value();
+        // snake motors control for robomaster 2
+        for (size_t i = 0; i < 12; i++)
+        {
+            msg-> snake_control_2_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
+        }
+        // gripper control for robomaster 2
+        msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();
+        msg->gripper_c610_position_2 = ui->gripper_c610_position_2_control->value();
+        msg->gripper_sts3032_position_2 = ui->gripper_sts3032_position_2_control->value();
+        msg->robomaster_2_reset = ui->robomaster2_sensors_reset->value();
+        // master devices control
+        msg->elevator_control = ui->elevator_speed_control->value();
+        msg->lower_linear_module_control = ui->lower_LM_speed_control->value();
+        msg->upper_linear_module_control = ui->upper_LM_speed_control->value();
+        msg->pull_push_sensors_reset = ui->PP_sensors_reset->value();
+        msg->elevator_counter_reset = ui->elevator_counter_reset->value();
+        msg->lower_linear_module_encorder_reset = ui->lower_LM_encorder_reset->value();
+        msg->upper_linear_module_encorder_reset = ui->upper_LM_encorder_reset->value();
+
+        // 发布消息
+        control_topic_publisher->publish(*msg);
+
+    }
+
+// theta to rope
+std::array<double, 12> theta2rope(const std::array<double, 6>& theta) {
+    // 定义各间隙变量，并赋予固定值
+    std::array<double, 12> Gap_1 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    std::array<double, 12> Gap_2 = {29.63, 29.63, 29.09, 29.09, 29.63, 29.63, 29.63, 29.63, 29.09, 29.09, 29.63, 29.63};
+    std::array<double, 12> Gap_3 = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    std::array<double, 12> Gap_4 = {29.63, 29.63, 29.09, 29.09, 29.63, 29.63, 29.63, 29.63, 29.09, 29.09, 29.63, 29.63};
+    std::array<double, 12> Gap_base = {24.57, 24.57, 26.11, 26.11, 28.12, 28.12, 28.12, 28.12, 26.11, 26.11, 24.57, 24.57};
+    
+    std::array<double, 12> Rope_length = {0}; // 初始化为0
+    double beta = M_PI * 50 / 180; // 初始角度
+    std::array<double, 12> R_Gap_1 = {23.03, 23.03, 18.82, 18.82, 13.33, 13.33, 13.33, 13.33, 18.82, 18.82, 23.03, 23.03};
+    std::array<double, 12> R_Gap_3 = {13.33, 13.33, 18.82, 18.82, 23.03, 23.03, 23.03, 23.03, 18.82, 18.82, 13.33, 13.33};
+
+    for (int N = 0; N < 5; ++N) {
+        for (int i = 0; i < 12; ++i) {
+            // 计算第一节的Gap1和Gap3
+            if (i > 6) {
+                Gap_1[i] = sin((beta - theta[0]) / 2) * 2 * R_Gap_1[i];
+            } else {
+                Gap_1[i] = sin((beta + theta[0]) / 2) * 2 * R_Gap_1[i];
+            }
+
+            if (i % 2 == 0) {
+                Gap_3[i] = sin((beta + theta[1]) / 2) * 2 * R_Gap_3[i];
+            } else {
+                Gap_3[i] = sin((beta - theta[1]) / 2) * 2 * R_Gap_3[i];
+            }
+
+            Rope_length[i] += Gap_1[i] + Gap_2[i] + Gap_3[i] + Gap_4[i] + Gap_base[i];
+
+            // 计算第二节的Gap1和Gap3，除了1,2,11,12
+            if (i != 0 && i != 1 && i != 10 && i != 11) {
+                if (i > 6) {
+                    Gap_1[i] = sin((beta - theta[2]) / 2) * 2 * R_Gap_1[i];
+                } else {
+                    Gap_1[i] = sin((beta + theta[2]) / 2) * 2 * R_Gap_1[i];
+                }
+
+                if (i % 2 == 0) {
+                    Gap_3[i] = sin((beta + theta[3]) / 2) * 2 * R_Gap_3[i];
+                } else {
+                    Gap_3[i] = sin((beta - theta[3]) / 2) * 2 * R_Gap_3[i];
+                }
+
+                Rope_length[i] += Gap_1[i] + Gap_2[i] + Gap_3[i] + Gap_4[i];
+            }
+
+            // 计算第三节的Gap1和Gap3，除了1,2,11,12,3,4,9,10
+            if (i != 0 && i != 1 && i != 10 && i != 11 && i != 2 && i != 3 && i != 8 && i != 9) {
+                if (i > 6) {
+                    Gap_1[i] = sin((beta - theta[4]) / 2) * 2 * R_Gap_1[i];
+                } else {
+                    Gap_1[i] = sin((beta + theta[4]) / 2) * 2 * R_Gap_1[i];
+                }
+
+                if (i % 2 == 0) {
+                    Gap_3[i] = sin((beta + theta[5]) / 2) * 2 * R_Gap_3[i];
+                } else {
+                    Gap_3[i] = sin((beta - theta[5]) / 2) * 2 * R_Gap_3[i];
+                }
+
+                Rope_length[i] += Gap_1[i] + Gap_2[i] + Gap_3[i] + Gap_4[i];
+            }
+        }
+    }
+
+    // 所有关节都计算完之后，每个关节和下一个关节连接处的圆盘内绳长需减掉一截Gap_4
+    for (int i = 0; i < 12; ++i) {
+        Rope_length[i] -= Gap_4[i];
+    }
+
+    return Rope_length;
+}
 
 public slots:
     void on_publishButton_clicked();

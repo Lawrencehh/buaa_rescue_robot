@@ -106,6 +106,18 @@ private:
             joint_space_pub_->publish(joint_space_msg);
         }
 
+        if (fabs(msg->data[6]) > 0.4 && fabs(msg->data[13]) > 0.4){  // reset 0
+            for (size_t i = 0; i < 12; i++)
+            {
+                theta[i] = 0;
+            }  
+            // 创建一个Float64MultiArray消息并发布
+            std_msgs::msg::Float64MultiArray joint_space_msg;
+            joint_space_msg.data.assign(theta, theta + 12);  // 把12维的theta数据填充到joint_space_msg
+            // 发布消息
+            joint_space_pub_->publish(joint_space_msg);          
+        }
+
     }
 
     double omega7_data_upper_boundary[14]; //上边界

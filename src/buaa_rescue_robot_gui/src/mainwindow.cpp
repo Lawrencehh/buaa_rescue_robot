@@ -64,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->publishButton, SIGNAL(clicked()), this, SLOT(on_publishButton_clicked()));
 }
 
+
+
 // 重载keyPressEvent方法, control the robot by keyboard
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
@@ -217,6 +219,8 @@ void MainWindow::updateCameraFrame()
         ui->camera1->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
     }
 }
+
+
 
 // 自定义槽函数：当 QDial 的值改变时会被调用
 void MainWindow::dialValueChanged(int value)

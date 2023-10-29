@@ -17,6 +17,7 @@
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster1.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
+#include "std_msgs/msg/float64_multi_array.hpp"
 
 
 
@@ -41,6 +42,17 @@ int main(int argc, char **argv) {
 
             // 在这里更新QSpinBox的值
             mainWindow.updateControlIndicator(msg);     
+        }
+    );
+
+    auto subscription_joint_space_topic = node->create_subscription<std_msgs::msg::Float64MultiArray>(
+        "joint_space_topic",
+        10,
+        [&](const std_msgs::msg::Float64MultiArray::SharedPtr msg) {
+
+            // 在这里更新QSpinBox的值
+            mainWindow.updateJointSpaceIndicator(msg);     
+
         }
     );
 
