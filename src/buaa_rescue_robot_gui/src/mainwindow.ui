@@ -32,6 +32,9 @@
     <property name="text">
      <string>publishButton</string>
     </property>
+    <property name="shortcut">
+     <string>Return</string>
+    </property>
    </widget>
    <widget class="QTextEdit" name="textEdit_2">
     <property name="geometry">
@@ -2327,7 +2330,7 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>220</x>
