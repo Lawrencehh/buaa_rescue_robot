@@ -100,7 +100,8 @@ public:
 
 
         // 在构造函数中启动接收
-        start_receive();
+        start_receive_1();
+        start_receive_2();
        
     }
 
@@ -200,30 +201,30 @@ private:    // 私有成员函数和变量
     }
 
     // 重构后的 start_receive 函数
-    std::vector<uint8_t> received_modbus_frame_; 
+    std::vector<uint8_t> received_modbus_frame_1; 
     // ROS 2 Humble版本的start_receive函数
-    void start_receive() 
+    void start_receive_1() 
     {
         // received_modbus_frame_初始化大小
-        received_modbus_frame_.clear();
-        received_modbus_frame_.resize(256);
+        received_modbus_frame_1.clear();
+        received_modbus_frame_1.resize(256);
 
         // 异步读取串口数据serial_port_1
-        serial_port_1->async_read_some(asio::buffer(received_modbus_frame_, 256),
+        serial_port_1->async_read_some(asio::buffer(received_modbus_frame_1, 256),
             [this](const asio::error_code& error, std::size_t bytes_transferred)
             {
                 // 调整received_modbus_frame_的大小以匹配实际接收到的字节数
-                received_modbus_frame_.resize(bytes_transferred);
+                received_modbus_frame_1.resize(bytes_transferred);
 
                 // 检查是否有错误
                 if (!error) 
                 {
                     // 将接收到的数据添加到数据缓存区
-                    data_buffer_.insert(data_buffer_.end(), received_modbus_frame_.begin(), received_modbus_frame_.end());
+                    data_buffer_1.insert(data_buffer_1.end(), received_modbus_frame_1.begin(), received_modbus_frame_1.end());
 
                     // 打印data_buffer_内容
                     // std::string msg_str = "";
-                    // for (auto &byte : data_buffer_) {
+                    // for (auto &byte : data_buffer_1) {
                     //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
                     // }
                     // RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
@@ -232,10 +233,10 @@ private:    // 私有成员函数和变量
                     // 创建一个包含数据头的vector
                     std::vector<uint8_t> pull_push_sensors_header = {0xFE,0x01,0x50,0xFF};
                     // 搜索数据头
-                    auto it_pull_push_encorder = std::search(data_buffer_.begin(), data_buffer_.end(), pull_push_sensors_header.begin(), pull_push_sensors_header.end());
+                    auto it_pull_push_encorder = std::search(data_buffer_1.begin(), data_buffer_1.end(), pull_push_sensors_header.begin(), pull_push_sensors_header.end());
 
                     // 如果找到了数据头，并且有足够的字节用于完整的34字节帧 (excluding the ending 0xCFFCCCFF)
-                    if (it_pull_push_encorder != data_buffer_.end() && std::distance(it_pull_push_encorder, data_buffer_.end()) >= 34)
+                    if (it_pull_push_encorder != data_buffer_1.end() && std::distance(it_pull_push_encorder, data_buffer_1.end()) >= 34)
                     {
                         // 提取30字节帧
                         std::vector<uint8_t> frame(it_pull_push_encorder+1, it_pull_push_encorder + 30);
@@ -249,9 +250,15 @@ private:    // 私有成员函数和变量
                         }
 
                         // 移除这34字节(including the ending 0xCFFCCCFF)及之前的字节
-                        data_buffer_.erase(data_buffer_.begin(), it_pull_push_encorder + 34);
+                        data_buffer_1.erase(data_buffer_1.begin(), it_pull_push_encorder + 34);
                     }
-                    received_modbus_frame_.clear();
+                    received_modbus_frame_1.clear();
+                    auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors();       
+                    msg.pull_push_sensors_1 = pull_push_sensors_1;
+                    publisher_->publish(msg);
+
+                    // 递归调用以持续接收
+                    start_receive_1();
                 }
                 else 
                 {
@@ -259,23 +266,32 @@ private:    // 私有成员函数和变量
                 }
             }
         );
+    }
 
-        // 异步读取串口数据serial_port_2
-        serial_port_2->async_read_some(asio::buffer(received_modbus_frame_, 256),
+    // 重构后的 start_receive 函数
+    std::vector<uint8_t> received_modbus_frame_2; 
+    void start_receive_2() 
+    {
+        // received_modbus_frame_初始化大小
+        received_modbus_frame_2.clear();
+        received_modbus_frame_2.resize(256);
+
+        // 异步读取串口数据serial_port_1
+        serial_port_2->async_read_some(asio::buffer(received_modbus_frame_2, 256),
             [this](const asio::error_code& error, std::size_t bytes_transferred)
             {
-                // 调整received_modbus_frame_的大小以匹配实际接收到的字节数
-                received_modbus_frame_.resize(bytes_transferred);
+                // 调整received_modbus_frame_2的大小以匹配实际接收到的字节数
+                received_modbus_frame_2.resize(bytes_transferred);
 
                 // 检查是否有错误
                 if (!error) 
                 {
                     // 将接收到的数据添加到数据缓存区
-                    data_buffer_.insert(data_buffer_.end(), received_modbus_frame_.begin(), received_modbus_frame_.end());
+                    data_buffer_2.insert(data_buffer_2.end(), received_modbus_frame_2.begin(), received_modbus_frame_2.end());
 
-                    // 打印data_buffer_内容
+                    // 打印data_buffer_2内容
                     // std::string msg_str = "";
-                    // for (auto &byte : data_buffer_) {
+                    // for (auto &byte : data_buffer_2) {
                     //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
                     // }
                     // RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
@@ -284,10 +300,10 @@ private:    // 私有成员函数和变量
                     // 创建一个包含数据头的vector
                     std::vector<uint8_t> pull_push_sensors_header = {0xFE,0x01,0x50,0xFF};
                     // 搜索数据头
-                    auto it_pull_push_encorder = std::search(data_buffer_.begin(), data_buffer_.end(), pull_push_sensors_header.begin(), pull_push_sensors_header.end());
+                    auto it_pull_push_encorder = std::search(data_buffer_2.begin(), data_buffer_2.end(), pull_push_sensors_header.begin(), pull_push_sensors_header.end());
 
                     // 如果找到了数据头，并且有足够的字节用于完整的34字节帧 (excluding the ending 0xCFFCCCFF)
-                    if (it_pull_push_encorder != data_buffer_.end() && std::distance(it_pull_push_encorder, data_buffer_.end()) >= 34)
+                    if (it_pull_push_encorder != data_buffer_2.end() && std::distance(it_pull_push_encorder, data_buffer_2.end()) >= 34)
                     {
                         // 提取30字节帧
                         std::vector<uint8_t> frame(it_pull_push_encorder+1, it_pull_push_encorder + 30);
@@ -301,9 +317,15 @@ private:    // 私有成员函数和变量
                         }
 
                         // 移除这34字节(including the ending 0xCFFCCCFF)及之前的字节
-                        data_buffer_.erase(data_buffer_.begin(), it_pull_push_encorder + 34);
+                        data_buffer_2.erase(data_buffer_2.begin(), it_pull_push_encorder + 34);
                     }
-                    received_modbus_frame_.clear();
+                    received_modbus_frame_2.clear();
+                    auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors();       
+                    msg.pull_push_sensors_1 = pull_push_sensors_1;
+                    publisher_->publish(msg);
+
+                    // 递归调用以持续接收
+                    start_receive_2();
                 }
                 else 
                 {
@@ -311,14 +333,6 @@ private:    // 私有成员函数和变量
                 }
             }
         );
-
-        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors();       
-        msg.pull_push_sensors_1 = pull_push_sensors_1;
-        publisher_->publish(msg);
-
-        // 递归调用以持续接收
-        start_receive();
-
     }
 
  
@@ -371,7 +385,8 @@ private:    // 私有成员函数和变量
     std::array<int32_t, 12> pull_push_sensors_1;
     std::array<int32_t, 6> pull_push_sensors_1_part;
 
-    std::vector<uint8_t> data_buffer_;  // 数据缓存区
+    std::vector<uint8_t> data_buffer_1;  // 数据缓存区
+    std::vector<uint8_t> data_buffer_2;  // 数据缓存区
 };
 
 int main(int argc, char **argv) // 主函数
