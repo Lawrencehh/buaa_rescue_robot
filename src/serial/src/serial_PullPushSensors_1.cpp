@@ -350,8 +350,8 @@ private:    // 私有成员函数和变量
             // }
             // RCLCPP_INFO(this->get_logger(), "Sending frame: %s", frame_str.c_str());
             // 通过串口发送数据帧
-            async_write_to_serial_1(frame);
-            async_write_to_serial_2(frame); 
+            // async_write_to_serial_1(frame);
+            // async_write_to_serial_2(frame); 
         }
         std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒   
     }
