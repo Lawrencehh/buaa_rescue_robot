@@ -160,7 +160,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_reset = 0; // robomaster 2 motor encorders to be 1
                 control_topic_publisher->publish(*msg);
                 break;
-            case '0': // reset the sensors
+            case 'z': // reset the sensors
                 reset_flag = true;
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
                 msg->gripper_gm6020_position_1 = 0;
@@ -209,7 +209,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 void MainWindow::keyReleaseEvent(QKeyEvent *event){
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
     switch (event->key()) {
-        case Qt::Key_0:
+        case Qt::Key_Z:
             reset_flag = false;
             msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
             msg->gripper_gm6020_position_1 = 0;
