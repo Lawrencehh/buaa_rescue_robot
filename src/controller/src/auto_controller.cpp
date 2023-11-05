@@ -77,7 +77,7 @@ private:
         }
 
         // 然后发布新的控制消息
-        std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 10ms
+        std::this_thread::sleep_for(std::chrono::milliseconds(50)); // sleep for 50ms
         publisher_control_topic_->publish(*msg);
 
       } else {

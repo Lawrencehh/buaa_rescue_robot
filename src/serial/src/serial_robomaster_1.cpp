@@ -11,6 +11,7 @@
 #include <vector>
 #include <cstdint>
 #include <termios.h>
+#include <array>
 
 // 命名空间
 using namespace std;
@@ -116,6 +117,7 @@ private:    // 私有成员函数和变量
     asio::streambuf write_buffer_;  // 新添加的写缓冲区
     std::vector<uint8_t> last_received_message_;  // 添加一个新的私有成员变量来存储最后接收到的消息
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>::SharedPtr publisher_;   // add a publisher of SensorsMessage
+    std::array<int32_t, 12> snake_encorder_offset={0,0,0,0,0,0,0,0,0,0,0,0};
 
     // ROS 2 Humble版本的异步写入封装函数
     void async_write_to_serial(const std::vector<uint8_t>& data_to_write)
@@ -140,7 +142,7 @@ private:    // 私有成员函数和变量
     std::tuple<std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
          // 数据头
         const std::vector<uint8_t> header = {0xAA,0x55,0x01,0x4B,0x41,0x10};
-        std::array<int32_t, 12>  snake_motor_encorder_position_value = {0,0,0,0,0,0,0,0,0,0,0,0};  // 初始化编码器数据为0
+        std::array<int32_t, 12>  snake_motor_encorder_position_value = {};
         std::int16_t  gripper_gm6020_encorder_position_value = 0;  // 初始化gm6020编码器数据为0
         std::int16_t  gripper_c610_encorder_position_value = 0;  // 初始化c610编码器数据为0
         std::int16_t  gripper_sts3032_encorder_position_value = 0;  // 初始化sts3032编码器数据为0
@@ -255,7 +257,7 @@ private:    // 私有成员函数和变量
                         // 调用函数并获取返回的 std::tuple
                         auto result = process_modbus_frame_for_snake_encorders(frame);
                         // 使用 std::get 从 std::tuple 中提取值
-                        auto snake_motor_encorder_position_value = std::get<0>(result);
+                        auto snake_motor_encorder_position_raw_value = std::get<0>(result);
                         auto gripper_gm6020_encorder_position_value = std::get<1>(result);
                         auto gripper_c610_encorder_position_value = std::get<2>(result);
                         auto gripper_sts3032_encorder_position_value = std::get<3>(result);
@@ -263,8 +265,8 @@ private:    // 私有成员函数和变量
                         auto crc_verificated = std::get<5>(result);
 
                         // 发布到sensors_data话题
-                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster();       
-                        msg.snake_motor_encorder_position = snake_motor_encorder_position_value;
+                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster(); 
+                        msg.snake_motor_encorder_position = snake_motor_encorder_position_raw_value;
                         msg.gripper_gm6020_position = gripper_gm6020_encorder_position_value;
                         msg.gripper_c610_position = gripper_c610_encorder_position_value;
                         msg.gripper_sts3032_position = gripper_sts3032_encorder_position_value;
@@ -362,7 +364,7 @@ private:    // 私有成员函数和变量
         // RCLCPP_INFO(this->get_logger(), "Sending frame: %s", frame_str.c_str());
 
         // 5. 通过串口发送数据帧
-        async_write_to_serial(frame);
+        async_write_to_serial(frame);   
     }
 
     void timer_callback()

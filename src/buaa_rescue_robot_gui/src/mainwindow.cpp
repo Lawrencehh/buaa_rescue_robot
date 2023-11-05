@@ -307,6 +307,32 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
             control_topic_publisher->publish(*msg);  // 发布消息
             RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 0");  // 打印日志
             break;
+        case Qt::Key_A:
+            reset_flag = false;
+            msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+            msg->gripper_gm6020_position_1 = 0;
+            msg->gripper_c610_position_1 = 0;
+            msg->gripper_sts3032_position_1 = 0;
+
+            msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+            msg->gripper_gm6020_position_2 = 0;
+            msg->gripper_c610_position_2 = 0;
+            msg->gripper_sts3032_position_2 = 0;
+
+            msg->elevator_control = 0;
+            msg->lower_linear_module_control = 0;
+            msg->upper_linear_module_control = 0;
+        
+
+            msg->pull_push_sensors_reset = 0;
+            msg->elevator_counter_reset = 0; 
+            msg->lower_linear_module_encorder_reset = 0; 
+            msg->upper_linear_module_encorder_reset = 0; 
+            msg->robomaster_1_reset = 0; 
+            msg->robomaster_2_reset = 0; 
+            control_topic_publisher->publish(*msg);  // 发布消息
+            RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 0");  // 打印日志
+            break;
         // ... 其他按键
         default:
         QMainWindow::keyReleaseEvent(event);
