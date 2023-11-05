@@ -15,7 +15,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ControlMessage.msg"
   "msg/SensorsMessageMasterDeviceElevator.msg"
   "msg/SensorsMessageMasterDevicePullPushSensors.msg"
-  "msg/SensorsMessageRobomaster1.msg"
+  "msg/SensorsMessageRobomaster.msg"
 )
 
 # 安装launch文件

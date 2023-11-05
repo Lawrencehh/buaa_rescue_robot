@@ -160,6 +160,30 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_reset = 0; // robomaster 2 motor encorders to be 1
                 control_topic_publisher->publish(*msg);
                 break;
+             case Qt::Key_C: // Calibration
+                msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+                msg->gripper_gm6020_position_1 = 0;
+                msg->gripper_c610_position_1 = 0;
+                msg->gripper_sts3032_position_1 = 0;
+
+                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+                msg->gripper_gm6020_position_2 = 0;
+                msg->gripper_c610_position_2 = 0;
+                msg->gripper_sts3032_position_2 = 0;
+
+                msg->elevator_control = 0;
+                msg->lower_linear_module_control = 0;
+                msg->upper_linear_module_control = 0;
+            
+
+                msg->pull_push_sensors_reset = 0;
+                msg->elevator_counter_reset = 0; // reset to be 1
+                msg->lower_linear_module_encorder_reset = 0; // reset to be 1
+                msg->upper_linear_module_encorder_reset = 0; // reset to be 1
+                msg->robomaster_1_reset = 2; // Calibration
+                msg->robomaster_2_reset = 2; // Calibration
+                control_topic_publisher->publish(*msg);  // 发布消息
+                break;
             case Qt::Key_A: // enable
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
                 msg->gripper_gm6020_position_1 = 0;

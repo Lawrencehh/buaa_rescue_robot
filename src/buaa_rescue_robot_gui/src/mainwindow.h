@@ -6,7 +6,7 @@
 #include <rclcpp/rclcpp.hpp>  
 #include <QStringListModel>  
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
-#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster1.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
 #include "std_msgs/msg/float64_multi_array.hpp"
@@ -32,16 +32,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void updateSensorsMessageDisplay_1(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1::SharedPtr msg) {
+    void updateSensorsMessageDisplay_1(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
         QStringList list;
 
         for (int i = 0; i < 12; ++i) {
-            list << QString::number(msg->snake_motor_encorder_position_1[i]);
+            list << QString::number(msg->snake_motor_encorder_position[i]);
         }
-        list << QString::number(msg->gripper_gm6020_position_1);
-        list << QString::number(msg->gripper_c610_position_1);
-        list << QString::number(msg->gripper_sts3032_position_1);
-        list << QString::number(msg->robomaster_1_reset);
+        list << QString::number(msg->gripper_gm6020_position);
+        list << QString::number(msg->gripper_c610_position);
+        list << QString::number(msg->gripper_sts3032_position);
+        list << QString::number(msg->robomaster_reset);
         SensorsMessageDisplay_1->setStringList(list);
     }
 

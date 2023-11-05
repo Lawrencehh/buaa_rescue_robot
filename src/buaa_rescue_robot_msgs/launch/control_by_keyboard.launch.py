@@ -3,11 +3,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     return launch.LaunchDescription([
-        # 启动serial_sender节点
+        # 启动serial_master_devices节点
         Node(
             package='serial',
-            executable='serial_sender',
-            name='serial_sender',
+            executable='serial_master_devices',
+            name='serial_master_devices',
             output='screen'
         ),
         # 启动serial_robomaster_1节点

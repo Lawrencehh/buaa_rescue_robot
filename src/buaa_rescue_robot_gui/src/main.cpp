@@ -14,7 +14,7 @@
 
 #include <std_msgs/msg/string.hpp>
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
-#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster1.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
 #include "std_msgs/msg/float64_multi_array.hpp"
@@ -56,10 +56,10 @@ int main(int argc, char **argv) {
         }
     );
 
-    auto subscription_sensors_topic_1 = node->create_subscription<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1>(
+    auto subscription_sensors_topic_1 = node->create_subscription<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>(
         "Sensors_Robomaster_1",
         10,
-        [&](const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1::SharedPtr msg) {
+        [&](const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
             mainWindow.updateSensorsMessageDisplay_1(msg);  // 通过MainWindow实例来更新 
         }
     );

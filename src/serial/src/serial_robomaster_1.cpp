@@ -3,7 +3,7 @@
 #include <asio.hpp> // 引入ASIO库，用于串口通信
 #include <std_msgs/msg/string.hpp>  // 引入标准消息类型
 #include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
-#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster1.hpp"   // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"   // 引入自定义消息类型
 #include <thread>   // 用于线程中的sleep_for函数
 #include <chrono>   // 用于时间表示
 #include <iostream>
@@ -96,7 +96,7 @@ public:
           std::bind(&serial_robomaster_1::callback, this, std::placeholders::_1));
 
         // 在serial_robomaster_1的构造函数中初始化这个发布器
-        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1>("Sensors_Robomaster_1", 10);
+        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>("Sensors_Robomaster_1", 10);
 
 
         // 在构造函数中启动接收
@@ -115,7 +115,7 @@ private:    // 私有成员函数和变量
     asio::streambuf read_buffer_;
     asio::streambuf write_buffer_;  // 新添加的写缓冲区
     std::vector<uint8_t> last_received_message_;  // 添加一个新的私有成员变量来存储最后接收到的消息
-    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1>::SharedPtr publisher_;   // add a publisher of SensorsMessage
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>::SharedPtr publisher_;   // add a publisher of SensorsMessage
 
     // ROS 2 Humble版本的异步写入封装函数
     void async_write_to_serial(const std::vector<uint8_t>& data_to_write)
@@ -261,12 +261,12 @@ private:    // 私有成员函数和变量
                         auto reset_encorder_value = std::get<4>(result);
 
                         // 发布到sensors_data话题
-                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster1();       
-                        msg.snake_motor_encorder_position_1 = snake_motor_encorder_position_value;
-                        msg.gripper_gm6020_position_1 = gripper_gm6020_encorder_position_value;
-                        msg.gripper_c610_position_1 = gripper_c610_encorder_position_value;
-                        msg.gripper_sts3032_position_1 = gripper_sts3032_encorder_position_value;
-                        msg.robomaster_1_reset = reset_encorder_value;
+                        auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster();       
+                        msg.snake_motor_encorder_position = snake_motor_encorder_position_value;
+                        msg.gripper_gm6020_position = gripper_gm6020_encorder_position_value;
+                        msg.gripper_c610_position = gripper_c610_encorder_position_value;
+                        msg.gripper_sts3032_position = gripper_sts3032_encorder_position_value;
+                        msg.robomaster_reset = reset_encorder_value;
                         publisher_->publish(msg);
 
                         // 移除这79字节(including the ending 0xCFFCCCFF)及之前的字节
