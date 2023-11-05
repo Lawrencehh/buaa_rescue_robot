@@ -76,11 +76,11 @@ uint16_t swap_endian(uint16_t value) {
     return (low_byte << 8) | high_byte;  // 交换高低8位并返回
 }
 
-// 创建一个继承自rclcpp::Node的SerialSender类，并在构造函数中进行初始化。
-class SerialSender : public rclcpp::Node
+// 创建一个继承自rclcpp::Node的SerialMasterDevices类，并在构造函数中进行初始化。
+class SerialMasterDevices : public rclcpp::Node
 {
 public:
-    SerialSender() : Node("serial_sender")
+    SerialMasterDevices() : Node("serial_master_devices")
     {
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
@@ -94,13 +94,13 @@ public:
 
         // 创建定时器，定时发送消息
         timer_ = this->create_wall_timer(std::chrono::milliseconds(100),  // 100毫秒，即10 Hz
-            std::bind(&SerialSender::timer_callback, this));
+            std::bind(&SerialMasterDevices::timer_callback, this));
         
         // 创建订阅器，订阅名为"control_topic"的话题
           subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10, 
-          std::bind(&SerialSender::callback, this, std::placeholders::_1));
+          std::bind(&SerialMasterDevices::callback, this, std::placeholders::_1));
 
-        // 在SerialSender的构造函数中初始化这个发布器
+        // 在SerialMasterDevices的构造函数中初始化这个发布器
         publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator>("Sensors_Elevator_LinearModules", 10);
 
         // 在构造函数中启动接收
@@ -607,14 +607,14 @@ int main(int argc, char **argv) // 主函数
 {
     rclcpp::init(argc, argv);  // 初始化ROS 2
 
-    auto serial_sender = std::make_shared<SerialSender>();  // 创建SerialSender对象
+    auto serial_master_devices = std::make_shared<SerialMasterDevices>();  // 创建SerialMasterDevices对象
 
     // 创建一个新线程来运行ASIO的io_service
     std::thread asio_thread([&]() {
-        serial_sender->get_io_service().run();
+        serial_master_devices->get_io_service().run();
     });
 
-    rclcpp::spin(serial_sender);  // 开始ROS的事件循环
+    rclcpp::spin(serial_master_devices);  // 开始ROS的事件循环
 
     rclcpp::shutdown();  // 关闭ROS 2
 

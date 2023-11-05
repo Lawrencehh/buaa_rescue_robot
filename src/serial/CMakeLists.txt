@@ -20,10 +20,10 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(buaa_rescue_robot_msgs REQUIRED)  # 已经添加了这个依赖
 
 
-# 创建 serial_sender 可执行文件
-add_executable(serial_sender src/serial_sender.cpp)
-# 为 serial_sender 添加依赖
-ament_target_dependencies(serial_sender rclcpp std_msgs buaa_rescue_robot_msgs) 
+# 创建 serial_master_devices 可执行文件
+add_executable(serial_master_devices src/serial_master_devices.cpp)
+# 为 serial_master_devices 添加依赖
+ament_target_dependencies(serial_master_devices rclcpp std_msgs buaa_rescue_robot_msgs) 
 
 # 创建 serial_receiver 可执行文件
 add_executable(serial_receiver src/serial_receiver.cpp)
@@ -41,7 +41,7 @@ ament_target_dependencies(serial_PullPushSensors_1 rclcpp std_msgs buaa_rescue_r
 
 # 安装目标
 install(TARGETS
-  serial_sender
+  serial_master_devices
   serial_receiver
   serial_robomaster_1
   serial_PullPushSensors_1

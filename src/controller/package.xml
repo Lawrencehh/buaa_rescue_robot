@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>keyboard_controller</name>
+  <name>controller</name>
   <version>0.0.1</version>
-  <description>A package for keyboard-based control</description>
+  <description>A package for robot control</description>
 
-  <maintainer email="youremail@example.com">Huang Hao</maintainer>
+  <maintainer email="sy1607511@buaa.edu.cn">Huang Hao</maintainer>
 
   <license>TODO: License declaration</license>
 
