@@ -30,5 +30,12 @@ def generate_launch_description():
             executable='buaa_rescue_robot_gui_node',
             name='buaa_rescue_robot_gui_node',
             output='screen'
+        ),
+        # 启动auto_controller节点
+        Node(
+            package='controller',
+            executable='auto_controller',
+            name='auto_controller',
+            output='screen'
         )
     ])

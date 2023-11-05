@@ -137,7 +137,7 @@ private:    // 私有成员函数和变量
     }
 
     // 处理接收到的Modbus帧
-    std::tuple<std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
+    std::tuple<std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
          // 数据头
         const std::vector<uint8_t> header = {0xAA,0x55,0x01,0x4B,0x41,0x10};
         std::array<int32_t, 12>  snake_motor_encorder_position_value = {0,0,0,0,0,0,0,0,0,0,0,0};  // 初始化编码器数据为0
@@ -145,6 +145,7 @@ private:    // 私有成员函数和变量
         std::int16_t  gripper_c610_encorder_position_value = 0;  // 初始化c610编码器数据为0
         std::int16_t  gripper_sts3032_encorder_position_value = 0;  // 初始化sts3032编码器数据为0
         std::int16_t  reset_encorder_value = 0;  // reset to be 0
+        std::int16_t  crc_verificated = 0;
 
         // 打印frame帧内容
         // std::string msg_str = "";
@@ -167,7 +168,7 @@ private:    // 私有成员函数和变量
 
             // 检查CRC校验码是否匹配
             if (received_crc == calculated_crc) {
-
+                crc_verificated = 1;
                 // 解析数据段
                 if (data.size() == 71) {
                     for (size_t i = 0; i < 12; i++)
@@ -206,7 +207,7 @@ private:    // 私有成员函数和变量
         }
 
         // 使用 std::make_tuple 创建一个包含所有返回值的元组
-        return std::make_tuple(snake_motor_encorder_position_value, gripper_gm6020_encorder_position_value, gripper_c610_encorder_position_value, gripper_sts3032_encorder_position_value, reset_encorder_value);   
+        return std::make_tuple(snake_motor_encorder_position_value, gripper_gm6020_encorder_position_value, gripper_c610_encorder_position_value, gripper_sts3032_encorder_position_value, reset_encorder_value, crc_verificated);   
     }
 
     // 重构后的 start_receive 函数
@@ -259,6 +260,7 @@ private:    // 私有成员函数和变量
                         auto gripper_c610_encorder_position_value = std::get<2>(result);
                         auto gripper_sts3032_encorder_position_value = std::get<3>(result);
                         auto reset_encorder_value = std::get<4>(result);
+                        auto crc_verificated = std::get<5>(result);
 
                         // 发布到sensors_data话题
                         auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster();       
@@ -267,7 +269,10 @@ private:    // 私有成员函数和变量
                         msg.gripper_c610_position = gripper_c610_encorder_position_value;
                         msg.gripper_sts3032_position = gripper_sts3032_encorder_position_value;
                         msg.robomaster_reset = reset_encorder_value;
-                        publisher_->publish(msg);
+                        if(crc_verificated == 1){
+                            publisher_->publish(msg);
+                        }
+                        
 
                         // 移除这79字节(including the ending 0xCFFCCCFF)及之前的字节
                         data_buffer_.erase(data_buffer_.begin(), it_snake_encorders + 79);

@@ -24,6 +24,7 @@ ament_target_dependencies(auto_controller rclcpp std_msgs buaa_rescue_robot_msgs
 
 install(TARGETS
   keyboard_publisher
+  auto_controller
   DESTINATION lib/${PROJECT_NAME}
 )
 
