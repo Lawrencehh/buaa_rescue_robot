@@ -47,8 +47,15 @@ sudo gedit /etc/udev/rules.d/99-usb-serial.rules
 ```bash
  KERNEL=="ttyUSB[0-9]*", MODE="0666"
 # Set a fixed name for specific serial devices
-SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0666", SYMLINK+="ttyRobomaster1"
-SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="23a3", MODE="0666", SYMLINK+="ttyPullPushSensors1"
+
+# Robomaster 1
+SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="3-1.4", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0666", SYMLINK+="ttyRobomaster1"
+SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="3-1.3", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="23a3", MODE="0666", SYMLINK+="ttyPullPushSensors1"
+SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="3-1.1", ATTRS{idVendor}=="067b", ATTRS{idProduct}=="23a3", MODE="0666", SYMLINK+="ttyPullPushSensors2"
+
+# Robomaster 2
+SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="5-1.4", ATTRS{idVendor}=="1a86", ATTRS{idProduct}=="7523", MODE="0666", SYMLINK+="ttyRobomaster2"
+
 SUBSYSTEM=="tty", SUBSYSTEMS=="usb", ATTRS{idVendor}=="0403", ATTRS{idProduct}=="6001", MODE="0666", SYMLINK+="ttyElevatorLinearModules"
 ```
 
