@@ -46,7 +46,7 @@ private:
           
           // forward
           if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] < encorder_zero_down_limit[i]){
-            if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_down_limit[i]) > 10){
+            if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_down_limit[i]) > error_threshold){
               delta = coarse_delta;
             } else{
               delta = fine_delta;
@@ -58,7 +58,7 @@ private:
 
           // backward
           if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] > encorder_zero_up_limit[i]){
-            if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_up_limit[i]) > 10){
+            if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_up_limit[i]) > error_threshold){
               delta = coarse_delta;
             } else{
               delta = fine_delta;
@@ -77,7 +77,7 @@ private:
         }
 
         // 然后发布新的控制消息
-        std::this_thread::sleep_for(std::chrono::milliseconds(50)); // sleep for 50ms
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms
         publisher_control_topic_->publish(*msg);
 
       } else {
@@ -94,10 +94,44 @@ private:
     received_sensors_robomaster_1 = true;
   }
 
-  void sensors_pull_push_1_callback(const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors::SharedPtr msg) {
+  void sensors_pull_push_1_callback(const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors::SharedPtr pull_push_sensors_msg) {
     // 保存拉推传感器数据
-    last_sensors_pull_push_data_1 = *msg;
+    last_sensors_pull_push_data_1 = *pull_push_sensors_msg;
     received_sensors_pull_push_1 = true;
+    auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
+    for (size_t i = 0; i < 12; i++)
+    {
+      if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > 500)
+      {
+        msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+        msg->gripper_gm6020_position_1 = 0;
+        msg->gripper_c610_position_1 = 0;
+        msg->gripper_sts3032_position_1 = 0;
+
+        msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+        msg->gripper_gm6020_position_2 = 0;
+        msg->gripper_c610_position_2 = 0;
+        msg->gripper_sts3032_position_2 = 0;
+
+        msg->elevator_control = 0;
+        msg->lower_linear_module_control = 0;
+        msg->upper_linear_module_control = 0;
+    
+
+        msg->pull_push_sensors_reset = 0;
+        msg->elevator_counter_reset = 0; // reset to be 1
+        msg->lower_linear_module_encorder_reset = 0; // reset to be 1
+        msg->upper_linear_module_encorder_reset = 0; // reset to be 1
+        msg->robomaster_1_reset = 6; // quit
+        msg->robomaster_2_reset = 6; // quit
+        // 然后发布新的控制消息
+        std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 100ms
+        publisher_control_topic_->publish(*msg);
+      }
+      
+      
+    }
+    
   }
 
   rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr subscriber_control_topic_1;
@@ -114,10 +148,11 @@ private:
   bool received_sensors_pull_push_1 = false;
 
   // 定义一个std::array类型的变量，大小为12
-  std::array<int32_t, 12> encorder_zero_up_limit = {5,5,5,5,5,5,5,5,5,5,5,5}; // 所有元素都将初始化为0
-  std::array<int32_t, 12> encorder_zero_down_limit = {0,0,0,0,0,0,0,0,0,0,0,0}; // 所有元素都将初始化为0
+  std::array<int32_t, 12> encorder_zero_up_limit = {75,75,75,75,75,75,75,75,75,75,75,75}; // 所有元素都将初始化为0
+  std::array<int32_t, 12> encorder_zero_down_limit = {70,70,70,70,70,70,70,70,70,70,70,70}; // 所有元素都将初始化为0
   int32_t fine_delta = 100;
   int32_t coarse_delta = 2000;
+  int32_t error_threshold = 5;
 };
 
 int main(int argc, char *argv[]) {

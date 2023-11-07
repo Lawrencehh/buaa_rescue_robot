@@ -80,7 +80,7 @@ public:
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
             serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyRobomaster1");  // 这里的路径需要根据您的设备进行更改
-            // serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB0");  // 这里的路径需要根据您的设备进行更改
+            // serial_port_ = std::make_shared<asio::serial_port>(io_, "/dev/ttyUSB3");  // 这里的路径需要根据您的设备进行更改
             serial_port_->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
         }
         catch (const std::exception &e) {
@@ -89,7 +89,7 @@ public:
         }
 
         // 创建定时器，定时发送消息
-        timer_ = this->create_wall_timer(std::chrono::milliseconds(100),  // 100毫秒，即10 Hz
+        timer_ = this->create_wall_timer(std::chrono::milliseconds(20),  // 20毫秒
             std::bind(&serial_robomaster_1::timer_callback, this));
         
         // 创建订阅器，订阅名为"control_topic"的话题
@@ -118,6 +118,7 @@ private:    // 私有成员函数和变量
     std::vector<uint8_t> last_received_message_;  // 添加一个新的私有成员变量来存储最后接收到的消息
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>::SharedPtr publisher_;   // add a publisher of SensorsMessage
     std::array<int32_t, 12> snake_encorder_offset={0,0,0,0,0,0,0,0,0,0,0,0};
+    int32_t crc_error_count = 0;
 
     // ROS 2 Humble版本的异步写入封装函数
     void async_write_to_serial(const std::vector<uint8_t>& data_to_write)
@@ -202,7 +203,16 @@ private:    // 私有成员函数和变量
                     std::cout << "Insufficient data size for encoder." << std::endl;
                 }
             } else {
-                std::cout << "CRC check failed for encoder." << std::endl;
+                crc_error_count++; 
+                std::cout << "CRC check failed for encoder. Error count: " << crc_error_count << std::endl;
+                // 打印frame帧内容
+                std::string msg_str = "";
+                int count = 0; // 初始化计数器
+                for (auto &byte : frame) {
+                    // 对于每个字节，添加带方括号的计数值和字节的十六进制表示到msg_str
+                    msg_str += "[" + std::to_string(count++) + "]:0x" + to_string(static_cast<int>(byte)) + " ";
+                }
+                RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());
             }
         } else {
             std::cout << "Invalid header for encoder." << std::endl;
@@ -228,20 +238,25 @@ private:    // 私有成员函数和变量
                 // 调整received_modbus_frame_的大小以匹配实际接收到的字节数
                 received_modbus_frame_.resize(bytes_transferred);
 
+                // 打印received_modbus_frame_帧内容
+                // std::string msg_str = "";
+                // for (auto &byte : received_modbus_frame_) {
+                //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+                // }
+                // RCLCPP_INFO(this->get_logger(), "received_modbus_frame_: %s", msg_str.c_str());  
+
                 // 检查是否有错误
                 if (!error) 
                 {
                     // 将接收到的数据添加到数据缓存区
                     data_buffer_.insert(data_buffer_.end(), received_modbus_frame_.begin(), received_modbus_frame_.end());
 
-
-                    // 打印data_buffer_内容
+                    // 打印data_buffer_帧内容
                     // std::string msg_str = "";
                     // for (auto &byte : data_buffer_) {
                     //     msg_str += "0x" + to_string(static_cast<int>(byte)) + " ";
                     // }
-                    // RCLCPP_INFO(this->get_logger(), "Receive message: %s", msg_str.c_str());  
-
+                    // RCLCPP_INFO(this->get_logger(), "data_buffer_: %s", msg_str.c_str());  
 
                     // 创建一个包含数据头的vector
                     std::vector<uint8_t> snake_encorders_header = {0xAA,0x55,0x01,0x4B,0x41,0x10};
@@ -355,13 +370,16 @@ private:    // 私有成员函数和变量
         // 4. 添加校验码到数据帧, first low byte, and then high byte
         frame.push_back(crc_high_byte);
         frame.push_back(crc_low_byte);
-        
-        // 打印发送的Modbus帧内容
-        // std::string frame_str = "";
+
+        // 打印frame帧内容
+        // std::string msg_str = "";
+        // int count = 0; // 初始化计数器
         // for (auto &byte : frame) {
-        //     frame_str += "0x" + to_string(static_cast<int>(byte)) + " ";
+        //     // 对于每个字节，添加带方括号的计数值和字节的十六进制表示到msg_str
+        //     msg_str += "[" + std::to_string(count++) + "]:0x" + to_string(static_cast<int>(byte)) + " ";
         // }
-        // RCLCPP_INFO(this->get_logger(), "Sending frame: %s", frame_str.c_str());
+        // RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());
+
 
         // 5. 通过串口发送数据帧
         async_write_to_serial(frame);   
