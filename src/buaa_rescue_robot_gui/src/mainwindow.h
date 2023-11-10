@@ -41,7 +41,7 @@ public:
         list << QString::number(msg->gripper_gm6020_position);
         list << QString::number(msg->gripper_c610_position);
         list << QString::number(msg->gripper_sts3032_position);
-        list << QString::number(msg->robomaster_reset);
+        list << QString::number(msg->robomaster_mode);
         SensorsMessageDisplay_1->setStringList(list);
     }
 
@@ -83,7 +83,7 @@ public:
         ui->gripper1_gm6020->setValue(msg->gripper_gm6020_position_1);
         ui->gripper1_c610->setValue(msg->gripper_c610_position_1);
         ui->gripper1_sts3032->setValue(msg->gripper_sts3032_position_1);
-        ui->robomaster1_sensors_reset->setValue(msg->robomaster_1_reset);
+        ui->robomaster1_mode->setValue(msg->robomaster_1_mode);
         
         // robomaster 2
         ui->robomaster2_snake_motor_position_control_1->setValue(msg->snake_control_2_array[0]);  
@@ -104,7 +104,7 @@ public:
         ui->gripper2_gm6020->setValue(msg->gripper_gm6020_position_2);
         ui->gripper2_c610->setValue(msg->gripper_c610_position_2);
         ui->gripper2_sts3032->setValue(msg->gripper_sts3032_position_2);
-        ui->robomaster2_sensors_reset->setValue(msg->robomaster_2_reset);
+        ui->robomaster2_mode->setValue(msg->robomaster_2_mode);
         // master devices
         ui->elevator_speed_control->setValue(msg->elevator_control);
         ui->lower_LM_speed_control->setValue(msg->lower_linear_module_control);
@@ -156,7 +156,7 @@ public:
         msg->gripper_gm6020_position_1 = ui->gripper_gm6020_position_1_control->value();
         msg->gripper_c610_position_1 = ui->gripper_c610_position_1_control->value();
         msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
-        msg->robomaster_1_reset = ui->robomaster1_sensors_reset->value();
+        msg->robomaster_1_mode = ui->robomaster1_mode->value();
         // snake motors control for robomaster 2
         for (size_t i = 0; i < 12; i++)
         {
@@ -166,7 +166,7 @@ public:
         msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();
         msg->gripper_c610_position_2 = ui->gripper_c610_position_2_control->value();
         msg->gripper_sts3032_position_2 = ui->gripper_sts3032_position_2_control->value();
-        msg->robomaster_2_reset = ui->robomaster2_sensors_reset->value();
+        msg->robomaster_2_mode = ui->robomaster2_mode->value();
         // master devices control
         msg->elevator_control = ui->elevator_speed_control->value();
         msg->lower_linear_module_control = ui->lower_LM_speed_control->value();

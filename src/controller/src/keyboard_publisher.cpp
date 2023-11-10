@@ -31,8 +31,8 @@ int main(int argc, char * argv[])
     msg->elevator_counter_reset = 0; // reset to be 0
     msg->lower_linear_module_encorder_reset = 0; // reset to be 0
     msg->upper_linear_module_encorder_reset = 0; // reset to be 0
-    msg->robomaster_1_reset = 0; // robomaster 1 motor encorders to be 0
-    msg->robomaster_2_reset = 0; // robomaster 2 motor encorders to be 0
+    msg->robomaster_1_mode = 0; // robomaster 1 motor encorders to be 0
+    msg->robomaster_2_mode = 0; // robomaster 2 motor encorders to be 0
     if (key == '8') {  // 检查是否按下了'8'
       msg->elevator_control = 1;
       publisher->publish(*msg);  // 发布消息
@@ -81,8 +81,8 @@ int main(int argc, char * argv[])
       msg->elevator_counter_reset = 1; // reset to be 1
       msg->lower_linear_module_encorder_reset = 1; // reset to be 1
       msg->upper_linear_module_encorder_reset = 1; // reset to be 1
-      msg->robomaster_1_reset = 1; // robomaster 1 motor encorders to be 1
-      msg->robomaster_2_reset = 1; // robomaster 2 motor encorders to be 1
+      msg->robomaster_1_mode = 1; // robomaster 1 motor encorders to be 1
+      msg->robomaster_2_mode = 1; // robomaster 2 motor encorders to be 1
       publisher->publish(*msg);  // 发布消息
       RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 1");  // 打印日志
     }else if (key == '4') {  // 检查是否按下了'4'

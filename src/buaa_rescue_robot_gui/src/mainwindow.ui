@@ -691,7 +691,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="robomaster2_sensors_reset">
+      <widget class="QSpinBox" name="robomaster2_mode">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -1325,7 +1325,7 @@ p, li { white-space: pre-wrap; }
       </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="robomaster1_sensors_reset">
+      <widget class="QSpinBox" name="robomaster1_mode">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
          <horstretch>0</horstretch>

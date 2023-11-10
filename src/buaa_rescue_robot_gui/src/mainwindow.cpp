@@ -5,6 +5,8 @@
 // #include <thread>
 // #include <chrono>
 #include <QTime>
+#include <chrono>
+#include <rclcpp/rclcpp.hpp>
 
 QTime lastTime = QTime::currentTime(); // 防抖动
 bool reset_flag = false;
@@ -87,7 +89,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     msg->gripper_gm6020_position_1 = ui->gripper_gm6020_position_1_control->value();
     msg->gripper_c610_position_1 = ui->gripper_c610_position_1_control->value();
     msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
-    msg->robomaster_1_reset = ui->robomaster1_sensors_reset->value();
+    msg->robomaster_1_mode = ui->robomaster1_mode->value();
     // snake motors control for robomaster 2
     msg-> snake_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
     msg-> snake_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
@@ -105,7 +107,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();
     msg->gripper_c610_position_2 = ui->gripper_c610_position_2_control->value();
     msg->gripper_sts3032_position_2 = ui->gripper_sts3032_position_2_control->value();
-    msg->robomaster_2_reset = ui->robomaster2_sensors_reset->value();
+    msg->robomaster_2_mode = ui->robomaster2_mode->value();
     // master devices control
     msg->elevator_control = ui->elevator_speed_control->value();
     msg->lower_linear_module_control = ui->lower_LM_speed_control->value();
@@ -147,173 +149,54 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->upper_linear_module_control = -1; // backward direction
                 control_topic_publisher->publish(*msg);
                 break;
-            case '5': // turn the reset_flag = 0
+            case '5': // stop the master devices motors
                 reset_flag = false;
                 msg->elevator_control = 0;
                 msg->lower_linear_module_control = 0;
                 msg->upper_linear_module_control = 0;
-                msg->pull_push_sensors_reset = 0;
-                msg->elevator_counter_reset = 0; // reset to be 1
-                msg->lower_linear_module_encorder_reset = 0; // reset to be 1
-                msg->upper_linear_module_encorder_reset = 0; // reset to be 1
-                msg->robomaster_1_reset = 0; // robomaster 1 motor encorders to be 1
-                msg->robomaster_2_reset = 0; // robomaster 2 motor encorders to be 1
                 control_topic_publisher->publish(*msg);
                 break;
              case Qt::Key_C: // Calibration, Mode 2
-                msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_1 = 0;
-                msg->gripper_c610_position_1 = 0;
-                msg->gripper_sts3032_position_1 = 0;
-
-                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_2 = 0;
-                msg->gripper_c610_position_2 = 0;
-                msg->gripper_sts3032_position_2 = 0;
-
-                msg->elevator_control = 0;
-                msg->lower_linear_module_control = 0;
-                msg->upper_linear_module_control = 0;
-            
-
-                msg->pull_push_sensors_reset = 0;
-                msg->elevator_counter_reset = 0; // reset to be 1
-                msg->lower_linear_module_encorder_reset = 0; // reset to be 1
-                msg->upper_linear_module_encorder_reset = 0; // reset to be 1
-                msg->robomaster_1_reset = 2; // Calibration
-                msg->robomaster_2_reset = 2; // Calibration
+                msg->robomaster_1_mode = 2; // Calibration
+                msg->robomaster_2_mode = 2; // Calibration
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
             case Qt::Key_E: // Calibration, Mode 12
-                msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_1 = 0;
-                msg->gripper_c610_position_1 = 0;
-                msg->gripper_sts3032_position_1 = 0;
-
-                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_2 = 0;
-                msg->gripper_c610_position_2 = 0;
-                msg->gripper_sts3032_position_2 = 0;
-
-                msg->elevator_control = 0;
-                msg->lower_linear_module_control = 0;
-                msg->upper_linear_module_control = 0;
-            
-
-                msg->pull_push_sensors_reset = 0;
-                msg->elevator_counter_reset = 0; // reset to be 1
-                msg->lower_linear_module_encorder_reset = 0; // reset to be 1
-                msg->upper_linear_module_encorder_reset = 0; // reset to be 1
-                msg->robomaster_1_reset = 12; // Calibration at zero
-                msg->robomaster_2_reset = 12; // Calibration at zero
+                msg->robomaster_1_mode = 12; // Calibration at zero
+                msg->robomaster_2_mode = 12; // Calibration at zero
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
-            case Qt::Key_R: // Calibration, Mode 3
+            case Qt::Key_R: // Release, Mode 0
                 for (size_t i = 0; i < 12; i++)
                 {
                      msg->snake_control_1_array[i] = -200000;
                      msg->snake_control_2_array[i] = -200000;
                 }                
-                msg->gripper_gm6020_position_1 = 0;
-                msg->gripper_c610_position_1 = 0;
-                msg->gripper_sts3032_position_1 = 0;
-
-                msg->gripper_gm6020_position_2 = 0;
-                msg->gripper_c610_position_2 = 0;
-                msg->gripper_sts3032_position_2 = 0;
-
-                msg->elevator_control = 0;
-                msg->lower_linear_module_control = 0;
-                msg->upper_linear_module_control = 0;
-            
-
-                msg->pull_push_sensors_reset = 0;
-                msg->elevator_counter_reset = 0; 
-                msg->lower_linear_module_encorder_reset = 0; 
-                msg->upper_linear_module_encorder_reset = 0; 
-                msg->robomaster_1_reset = 3; // Release
-                msg->robomaster_2_reset = 3; // Release
+                msg->robomaster_1_mode = 0; // Release
+                msg->robomaster_2_mode = 0; // Release
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
             case Qt::Key_A: // enable, Mode 9
-                msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_1 = 0;
-                msg->gripper_c610_position_1 = 0;
-                msg->gripper_sts3032_position_1 = 0;
-
-                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_2 = 0;
-                msg->gripper_c610_position_2 = 0;
-                msg->gripper_sts3032_position_2 = 0;
-
-                msg->elevator_control = 0;
-                msg->lower_linear_module_control = 0;
-                msg->upper_linear_module_control = 0;
-            
-
-                msg->pull_push_sensors_reset = 0;
-                msg->elevator_counter_reset = 0; // reset to be 1
-                msg->lower_linear_module_encorder_reset = 0; // reset to be 1
-                msg->upper_linear_module_encorder_reset = 0; // reset to be 1
-                msg->robomaster_1_reset = 9; // enable
-                msg->robomaster_2_reset = 9; // enable
+                msg->robomaster_1_mode = 9; // enable
+                msg->robomaster_2_mode = 9; // enable
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
             case Qt::Key_Q: // quit, Mode 6
-                msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_1 = 0;
-                msg->gripper_c610_position_1 = 0;
-                msg->gripper_sts3032_position_1 = 0;
-
-                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_2 = 0;
-                msg->gripper_c610_position_2 = 0;
-                msg->gripper_sts3032_position_2 = 0;
-
-                msg->elevator_control = 0;
-                msg->lower_linear_module_control = 0;
-                msg->upper_linear_module_control = 0;
-            
-
-                msg->pull_push_sensors_reset = 0;
-                msg->elevator_counter_reset = 0; // reset to be 1
-                msg->lower_linear_module_encorder_reset = 0; // reset to be 1
-                msg->upper_linear_module_encorder_reset = 0; // reset to be 1
-                msg->robomaster_1_reset = 6; // quit
-                msg->robomaster_2_reset = 6; // quit
+                msg->robomaster_1_mode = 6; // quit
+                msg->robomaster_2_mode = 6; // quit
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
-            case Qt::Key_Z: // reset the sensors, Mode 1
+            case Qt::Key_Z: // reset the snake sensors, Mode 1
                 reset_flag = true;
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_1 = 0;
-                msg->gripper_c610_position_1 = 0;
-                msg->gripper_sts3032_position_1 = 0;
+                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};            
 
-                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-                msg->gripper_gm6020_position_2 = 0;
-                msg->gripper_c610_position_2 = 0;
-                msg->gripper_sts3032_position_2 = 0;
-
-                msg->elevator_control = 0;
-                msg->lower_linear_module_control = 0;
-                msg->upper_linear_module_control = 0;
-            
-
-                msg->pull_push_sensors_reset = 1;
-                msg->elevator_counter_reset = 1; // reset to be 1
-                msg->lower_linear_module_encorder_reset = 1; // reset to be 1
-                msg->upper_linear_module_encorder_reset = 1; // reset to be 1
-                msg->robomaster_1_reset = 1; // robomaster 1 motor encorders to be 1
-                msg->robomaster_2_reset = 1; // robomaster 2 motor encorders to be 1
+                msg->robomaster_1_mode = 1; // robomaster 1 motor encorders to be 1
+                msg->robomaster_2_mode = 1; // robomaster 2 motor encorders to be 1
                 control_topic_publisher->publish(*msg);  // 发布消息
-                RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 1");  // 打印日志
                 break;
-            case Qt::Key_P: // reset the Pull-Push force sensors, Mode 4
-                reset_flag = true;    
-                msg->elevator_control = 0;
-                msg->lower_linear_module_control = 0;
-                msg->upper_linear_module_control = 0;           
+            case Qt::Key_P: // reset the Pull-Push force sensors
+                reset_flag = true;           
                 msg->pull_push_sensors_reset = 1;
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
@@ -339,64 +222,68 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 // 重载keyReleaseEvent方法来检测按键松开事件
 void MainWindow::keyReleaseEvent(QKeyEvent *event){
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
+    // snake motors control for robomaster 1
+    msg-> snake_control_1_array[0]  = ui->robomaster1_snake_motor_position_control_1->value();
+    msg-> snake_control_1_array[1]  = ui->robomaster1_snake_motor_position_control_2->value();
+    msg-> snake_control_1_array[2]  = ui->robomaster1_snake_motor_position_control_3->value();
+    msg-> snake_control_1_array[3]  = ui->robomaster1_snake_motor_position_control_4->value();
+    msg-> snake_control_1_array[4]  = ui->robomaster1_snake_motor_position_control_5->value();
+    msg-> snake_control_1_array[5]  = ui->robomaster1_snake_motor_position_control_6->value();
+    msg-> snake_control_1_array[6]  = ui->robomaster1_snake_motor_position_control_7->value();
+    msg-> snake_control_1_array[7]  = ui->robomaster1_snake_motor_position_control_8->value();
+    msg-> snake_control_1_array[8]  = ui->robomaster1_snake_motor_position_control_9->value();
+    msg-> snake_control_1_array[9]  = ui->robomaster1_snake_motor_position_control_10->value();
+    msg-> snake_control_1_array[10] = ui->robomaster1_snake_motor_position_control_11->value();
+    msg-> snake_control_1_array[11] = ui->robomaster1_snake_motor_position_control_12->value();
+    // gripper control for robomaster 1
+    msg->gripper_gm6020_position_1 = ui->gripper_gm6020_position_1_control->value();
+    msg->gripper_c610_position_1 = ui->gripper_c610_position_1_control->value();
+    msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
+    msg->robomaster_1_mode = ui->robomaster1_mode->value();
+    // snake motors control for robomaster 2
+    msg-> snake_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
+    msg-> snake_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
+    msg-> snake_control_2_array[2]  = ui->robomaster2_snake_motor_position_control_3->value();
+    msg-> snake_control_2_array[3]  = ui->robomaster2_snake_motor_position_control_4->value();
+    msg-> snake_control_2_array[4]  = ui->robomaster2_snake_motor_position_control_5->value();
+    msg-> snake_control_2_array[5]  = ui->robomaster2_snake_motor_position_control_6->value();
+    msg-> snake_control_2_array[6]  = ui->robomaster2_snake_motor_position_control_7->value();
+    msg-> snake_control_2_array[7]  = ui->robomaster2_snake_motor_position_control_8->value();
+    msg-> snake_control_2_array[8]  = ui->robomaster2_snake_motor_position_control_9->value();
+    msg-> snake_control_2_array[9]  = ui->robomaster2_snake_motor_position_control_10->value();
+    msg-> snake_control_2_array[10] = ui->robomaster2_snake_motor_position_control_11->value();
+    msg-> snake_control_2_array[11] = ui->robomaster2_snake_motor_position_control_12->value();
+    // gripper control for robomaster 1
+    msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();
+    msg->gripper_c610_position_2 = ui->gripper_c610_position_2_control->value();
+    msg->gripper_sts3032_position_2 = ui->gripper_sts3032_position_2_control->value();
+    msg->robomaster_2_mode = ui->robomaster2_mode->value();
+    // master devices control
+    msg->elevator_control = ui->elevator_speed_control->value();
+    msg->lower_linear_module_control = ui->lower_LM_speed_control->value();
+    msg->upper_linear_module_control = ui->upper_LM_speed_control->value();
+    msg->pull_push_sensors_reset = ui->PP_sensors_reset->value();
+    msg->elevator_counter_reset = ui->elevator_counter_reset->value();
+    msg->lower_linear_module_encorder_reset = ui->lower_LM_encorder_reset->value();
+    msg->upper_linear_module_encorder_reset = ui->upper_LM_encorder_reset->value();
     switch (event->key()) {
-        case Qt::Key_Z:
+        case Qt::Key_Z: // reset the snake sensors, Mode be reset back to 0
             reset_flag = false;
             msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-            msg->gripper_gm6020_position_1 = 0;
-            msg->gripper_c610_position_1 = 0;
-            msg->gripper_sts3032_position_1 = 0;
-
             msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-            msg->gripper_gm6020_position_2 = 0;
-            msg->gripper_c610_position_2 = 0;
-            msg->gripper_sts3032_position_2 = 0;
 
-            msg->elevator_control = 0;
-            msg->lower_linear_module_control = 0;
-            msg->upper_linear_module_control = 0;
-        
-
-            msg->pull_push_sensors_reset = 0;
-            msg->elevator_counter_reset = 0; 
-            msg->lower_linear_module_encorder_reset = 0; 
-            msg->upper_linear_module_encorder_reset = 0; 
-            msg->robomaster_1_reset = 0; 
-            msg->robomaster_2_reset = 0; 
+            msg->robomaster_1_mode = 0; 
+            msg->robomaster_2_mode = 0; 
             control_topic_publisher->publish(*msg);  // 发布消息
-            RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 0");  // 打印日志
             break;
-        case Qt::Key_A:
+        case Qt::Key_A: // enable the snake sensors, Mode be reset back to 0
             reset_flag = false;
-            msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-            msg->gripper_gm6020_position_1 = 0;
-            msg->gripper_c610_position_1 = 0;
-            msg->gripper_sts3032_position_1 = 0;
-
-            msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-            msg->gripper_gm6020_position_2 = 0;
-            msg->gripper_c610_position_2 = 0;
-            msg->gripper_sts3032_position_2 = 0;
-
-            msg->elevator_control = 0;
-            msg->lower_linear_module_control = 0;
-            msg->upper_linear_module_control = 0;
-        
-
-            msg->pull_push_sensors_reset = 0;
-            msg->elevator_counter_reset = 0; 
-            msg->lower_linear_module_encorder_reset = 0; 
-            msg->upper_linear_module_encorder_reset = 0; 
-            msg->robomaster_1_reset = 0; 
-            msg->robomaster_2_reset = 0; 
+            msg->robomaster_1_mode = 0; 
+            msg->robomaster_2_mode = 0; 
             control_topic_publisher->publish(*msg);  // 发布消息
-            RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 0");  // 打印日志
             break;
-        case Qt::Key_P: // reset the Pull-Push force sensors, Mode 4
-            reset_flag = false;    
-            msg->elevator_control = 0;
-            msg->lower_linear_module_control = 0;
-            msg->upper_linear_module_control = 0;           
+        case Qt::Key_P: // reset the Pull-Push force sensors, Mode 0
+            reset_flag = false;        
             msg->pull_push_sensors_reset = 0;
             control_topic_publisher->publish(*msg);  // 发布消息
             break;
@@ -457,7 +344,7 @@ void MainWindow::dialValueChanged(int value)
     // msg->gripper_gm6020_position_1 = ui->gripper_gm6020_position_1_control->value();
     // msg->gripper_c610_position_1 = ui->gripper_c610_position_1_control->value();
     // msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
-    msg->robomaster_1_reset = ui->robomaster1_sensors_reset->value();
+    msg->robomaster_1_mode = ui->robomaster1_mode->value();
     // snake motors control for robomaster 2
     msg-> snake_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
     msg-> snake_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
@@ -475,7 +362,7 @@ void MainWindow::dialValueChanged(int value)
     // msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();
     // msg->gripper_c610_position_2 = ui->gripper_c610_position_2_control->value();
     // msg->gripper_sts3032_position_2 = ui->gripper_sts3032_position_2_control->value();
-    msg->robomaster_2_reset = ui->robomaster2_sensors_reset->value();
+    msg->robomaster_2_mode = ui->robomaster2_mode->value();
     // master devices control
     msg->elevator_control = ui->elevator_speed_control->value();
     msg->lower_linear_module_control = ui->lower_LM_speed_control->value();
@@ -518,7 +405,7 @@ void MainWindow::on_publishButton_clicked()
     msg->gripper_gm6020_position_1 = ui->gripper_gm6020_position_1_control->value();
     msg->gripper_c610_position_1 = ui->gripper_c610_position_1_control->value();
     msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
-    msg->robomaster_1_reset = ui->robomaster1_sensors_reset->value();
+    msg->robomaster_1_mode = ui->robomaster1_mode->value();
     // snake motors control for robomaster 2
     msg-> snake_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
     msg-> snake_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
@@ -536,7 +423,7 @@ void MainWindow::on_publishButton_clicked()
     msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();
     msg->gripper_c610_position_2 = ui->gripper_c610_position_2_control->value();
     msg->gripper_sts3032_position_2 = ui->gripper_sts3032_position_2_control->value();
-    msg->robomaster_2_reset = ui->robomaster2_sensors_reset->value();
+    msg->robomaster_2_mode = ui->robomaster2_mode->value();
     // master devices control
     msg->elevator_control = ui->elevator_speed_control->value();
     msg->lower_linear_module_control = ui->lower_LM_speed_control->value();

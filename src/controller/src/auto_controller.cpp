@@ -28,12 +28,12 @@ public:
 
 private:
   void control_topic_callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
-    if(msg->robomaster_1_reset == 2 || msg->robomaster_1_reset == 12){ // reset the encorders
-      if(msg->robomaster_1_reset == 2){
+    if(msg->robomaster_1_mode == 2 || msg->robomaster_1_mode == 12){ // reset the encorders
+      if(msg->robomaster_1_mode == 2){
             encorder_zero_up_limit = {600,600,600,600,600,600,600,600,600,600,600,600}; // 所有元素都将初始化为0
             encorder_zero_down_limit = {500,500,500,500,500,500,500,500,500,500,500,500}; // 所有元素都将初始化为0
       }
-      if(msg->robomaster_1_reset == 12){
+      if(msg->robomaster_1_mode == 12){
         for (size_t i = 0; i < 12; i++)
         {
           encorder_zero_down_limit[i] = 20;
@@ -82,20 +82,31 @@ private:
         }
 
         if (running_flag == 12) {
-          msg->robomaster_1_reset = 0;
-          msg->robomaster_2_reset = 0;
+          msg->robomaster_1_mode = 0;
+          msg->robomaster_2_mode = 0;
           received_sensors_robomaster_1 = false;
           received_sensors_pull_push_1 = false;
         }
 
-        // 然后发布新的控制消息
-        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms
-        publisher_control_topic_->publish(*msg);
+        if (auto_lock == 0)
+        {
+          // 然后发布新的控制消息
+          std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
+          publisher_control_topic_->publish(*msg);
+        }
 
       } else {
         RCLCPP_INFO(this->get_logger(), "Waiting for all sensor data before processing control message");
       }
     } else {
+      if ((msg->robomaster_1_mode == 6) || (msg->robomaster_2_mode == 6))// mode 6, to quit
+      {
+        auto_lock = 1;
+      }else{
+        auto_lock = 0;
+      }
+      
+
 
     }
 
@@ -132,11 +143,11 @@ private:
     
 
         msg->pull_push_sensors_reset = 0;
-        msg->elevator_counter_reset = 0; // reset to be 1
-        msg->lower_linear_module_encorder_reset = 0; // reset to be 1
-        msg->upper_linear_module_encorder_reset = 0; // reset to be 1
-        msg->robomaster_1_reset = 6; // quit
-        msg->robomaster_2_reset = 6; // quit
+        msg->elevator_counter_reset = 0; // reset to be 0
+        msg->lower_linear_module_encorder_reset = 0; // reset to be 0
+        msg->upper_linear_module_encorder_reset = 0; // reset to be 0
+        msg->robomaster_1_mode = 6; // quit
+        msg->robomaster_2_mode = 6; // quit
         // 然后发布新的控制消息
         std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 100ms
         publisher_control_topic_->publish(*msg);
@@ -166,6 +177,7 @@ private:
   int32_t fine_delta = 500;
   int32_t coarse_delta = 5000;
   int32_t error_threshold = 2;
+  int32_t auto_lock = 0;
 };
 
 int main(int argc, char *argv[]) {

@@ -88,9 +88,7 @@ public:
             return;
         }
 
-        // 创建定时器，定时发送消息
-        timer_ = this->create_wall_timer(std::chrono::milliseconds(20),  // 20毫秒
-            std::bind(&serial_robomaster_1::timer_callback, this));
+
         
         // 创建订阅器，订阅名为"control_topic"的话题
           subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10, 
@@ -226,7 +224,7 @@ private:    // 私有成员函数和变量
     std::vector<uint8_t> received_modbus_frame_; 
     // ROS 2 Humble版本的start_receive函数
     void start_receive() 
-    {
+    {    
         // received_modbus_frame_初始化大小
         received_modbus_frame_.clear();
         received_modbus_frame_.resize(256);
@@ -285,15 +283,13 @@ private:    // 私有成员函数和变量
                         msg.gripper_gm6020_position = gripper_gm6020_encorder_position_value;
                         msg.gripper_c610_position = gripper_c610_encorder_position_value;
                         msg.gripper_sts3032_position = gripper_sts3032_encorder_position_value;
-                        msg.robomaster_reset = reset_encorder_value;
+                        msg.robomaster_mode = reset_encorder_value;
                         if(crc_verificated == 1){
                             publisher_->publish(msg);
-                        }
-                        
+                        }                       
 
                         // 移除这79字节(including the ending 0xCFFCCCFF)及之前的字节
                         data_buffer_.erase(data_buffer_.begin(), it_snake_encorders + 79);
-
                     }
                     received_modbus_frame_.clear();
                     // 递归调用以持续接收
@@ -309,7 +305,7 @@ private:    // 私有成员函数和变量
     }
 
  
-    void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg){        
+    void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg){   
         // 1. 准备数据帧的头部, robomaster_1, snake control
         std::vector<uint8_t> frame = {0xAA, 0x55, 0x01};
 
@@ -358,7 +354,7 @@ private:    // 私有成员函数和变量
 
         // RESET
         frame.push_back(0x10);  // 添加RESET地址
-        frame.push_back(msg->robomaster_1_reset & 0xFF);
+        frame.push_back(msg->robomaster_1_mode & 0xFF);
 
         // 3. 计算CRC-16 Modbus校验码
         uint16_t crc = calculate_crc16(frame, 0, frame.size());
@@ -384,12 +380,6 @@ private:    // 私有成员函数和变量
         // 5. 通过串口发送数据帧
         async_write_to_serial(frame);   
     }
-
-    void timer_callback()
-    {
-             
-    }
-
 
     rclcpp::TimerBase::SharedPtr timer_;    // 定时器
 
