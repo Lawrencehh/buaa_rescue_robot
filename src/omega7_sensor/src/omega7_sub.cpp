@@ -3,7 +3,7 @@
 #include <cmath> // 为了使用 fabs 和 M_PI
 
 // 定义增量和边界
-const double delta = (M_PI * 50 / 180) / 10000; // 增量
+const double delta = (M_PI * 50 / 180) / 20000; // 增量
 const double upper_limit = M_PI * 50 / 180; // 上限
 const double lower_limit = -M_PI * 50 / 180; // 下限
 

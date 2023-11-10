@@ -212,12 +212,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 for (size_t i = 0; i < 12; i++)
                 {
                      msg->snake_control_1_array[i] = -200000;
+                     msg->snake_control_2_array[i] = -200000;
                 }                
                 msg->gripper_gm6020_position_1 = 0;
                 msg->gripper_c610_position_1 = 0;
                 msg->gripper_sts3032_position_1 = 0;
 
-                msg->snake_control_2_array = {-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000};
                 msg->gripper_gm6020_position_2 = 0;
                 msg->gripper_c610_position_2 = 0;
                 msg->gripper_sts3032_position_2 = 0;
@@ -309,6 +309,14 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 control_topic_publisher->publish(*msg);  // 发布消息
                 RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 1");  // 打印日志
                 break;
+            case Qt::Key_P: // reset the Pull-Push force sensors, Mode 4
+                reset_flag = true;    
+                msg->elevator_control = 0;
+                msg->lower_linear_module_control = 0;
+                msg->upper_linear_module_control = 0;           
+                msg->pull_push_sensors_reset = 1;
+                control_topic_publisher->publish(*msg);  // 发布消息
+                break;
             case Qt::Key_Left:
                 // 左箭头键被按下
                 // TODO: 你的代码
@@ -383,6 +391,14 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
             msg->robomaster_2_reset = 0; 
             control_topic_publisher->publish(*msg);  // 发布消息
             RCLCPP_INFO(node->get_logger(), "Published control message to reset the sensors: 0");  // 打印日志
+            break;
+        case Qt::Key_P: // reset the Pull-Push force sensors, Mode 4
+            reset_flag = false;    
+            msg->elevator_control = 0;
+            msg->lower_linear_module_control = 0;
+            msg->upper_linear_module_control = 0;           
+            msg->pull_push_sensors_reset = 0;
+            control_topic_publisher->publish(*msg);  // 发布消息
             break;
         // ... 其他按键
         default:

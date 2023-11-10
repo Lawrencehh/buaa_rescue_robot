@@ -130,8 +130,8 @@ public:
         ui->robomaster2_theta_5->setValue(theta_msg->data[10] * 180 / M_PI);
         ui->robomaster2_theta_6->setValue(theta_msg->data[11] * 180 / M_PI);
 
-        std::array<double, 6> theta_1;
-        std::array<double, 6> theta_2;
+        std::array<double, 6> theta_1; // left hand omega7 
+        std::array<double, 6> theta_2; // right hand omega7 
         std::array<double, 6> theta_initial = {0,0,0,0,0,0};
         for (size_t i = 0; i < 6; i++)
         {
@@ -198,7 +198,7 @@ std::array<double, 12> theta2rope(const std::array<double, 6>& theta) {
     for (int N = 0; N < 5; ++N) {
         for (int i = 0; i < 12; ++i) {
             // 计算第一节的Gap1和Gap3
-            if (i > 6) {
+            if (i > 5) {
                 Gap_1[i] = sin((beta - theta[0]) / 2) * 2 * R_Gap_1[i];
             } else {
                 Gap_1[i] = sin((beta + theta[0]) / 2) * 2 * R_Gap_1[i];
@@ -214,7 +214,7 @@ std::array<double, 12> theta2rope(const std::array<double, 6>& theta) {
 
             // 计算第二节的Gap1和Gap3，除了1,2,11,12
             if (i != 0 && i != 1 && i != 10 && i != 11) {
-                if (i > 6) {
+                if (i > 5) {
                     Gap_1[i] = sin((beta - theta[2]) / 2) * 2 * R_Gap_1[i];
                 } else {
                     Gap_1[i] = sin((beta + theta[2]) / 2) * 2 * R_Gap_1[i];
@@ -231,7 +231,7 @@ std::array<double, 12> theta2rope(const std::array<double, 6>& theta) {
 
             // 计算第三节的Gap1和Gap3，除了1,2,11,12,3,4,9,10
             if (i != 0 && i != 1 && i != 10 && i != 11 && i != 2 && i != 3 && i != 8 && i != 9) {
-                if (i > 6) {
+                if (i > 5) {
                     Gap_1[i] = sin((beta - theta[4]) / 2) * 2 * R_Gap_1[i];
                 } else {
                     Gap_1[i] = sin((beta + theta[4]) / 2) * 2 * R_Gap_1[i];

@@ -36,8 +36,8 @@ private:
       if(msg->robomaster_1_reset == 12){
         for (size_t i = 0; i < 12; i++)
         {
-          encorder_zero_down_limit[i] = 30;
-          encorder_zero_up_limit[i] = 60;
+          encorder_zero_down_limit[i] = 20;
+          encorder_zero_up_limit[i] = 50;
         } 
       }
 
