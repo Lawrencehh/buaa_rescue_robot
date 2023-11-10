@@ -160,7 +160,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_reset = 0; // robomaster 2 motor encorders to be 1
                 control_topic_publisher->publish(*msg);
                 break;
-             case Qt::Key_C: // Calibration
+             case Qt::Key_C: // Calibration, Mode 2
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
                 msg->gripper_gm6020_position_1 = 0;
                 msg->gripper_c610_position_1 = 0;
@@ -184,7 +184,58 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_reset = 2; // Calibration
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
-            case Qt::Key_A: // enable
+            case Qt::Key_E: // Calibration, Mode 12
+                msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+                msg->gripper_gm6020_position_1 = 0;
+                msg->gripper_c610_position_1 = 0;
+                msg->gripper_sts3032_position_1 = 0;
+
+                msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+                msg->gripper_gm6020_position_2 = 0;
+                msg->gripper_c610_position_2 = 0;
+                msg->gripper_sts3032_position_2 = 0;
+
+                msg->elevator_control = 0;
+                msg->lower_linear_module_control = 0;
+                msg->upper_linear_module_control = 0;
+            
+
+                msg->pull_push_sensors_reset = 0;
+                msg->elevator_counter_reset = 0; // reset to be 1
+                msg->lower_linear_module_encorder_reset = 0; // reset to be 1
+                msg->upper_linear_module_encorder_reset = 0; // reset to be 1
+                msg->robomaster_1_reset = 12; // Calibration at zero
+                msg->robomaster_2_reset = 12; // Calibration at zero
+                control_topic_publisher->publish(*msg);  // 发布消息
+                break;
+            case Qt::Key_R: // Calibration, Mode 3
+                for (size_t i = 0; i < 12; i++)
+                {
+                     msg->snake_control_1_array[i] = -200000;
+                }                
+                msg->gripper_gm6020_position_1 = 0;
+                msg->gripper_c610_position_1 = 0;
+                msg->gripper_sts3032_position_1 = 0;
+
+                msg->snake_control_2_array = {-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000,-500000};
+                msg->gripper_gm6020_position_2 = 0;
+                msg->gripper_c610_position_2 = 0;
+                msg->gripper_sts3032_position_2 = 0;
+
+                msg->elevator_control = 0;
+                msg->lower_linear_module_control = 0;
+                msg->upper_linear_module_control = 0;
+            
+
+                msg->pull_push_sensors_reset = 0;
+                msg->elevator_counter_reset = 0; 
+                msg->lower_linear_module_encorder_reset = 0; 
+                msg->upper_linear_module_encorder_reset = 0; 
+                msg->robomaster_1_reset = 3; // Release
+                msg->robomaster_2_reset = 3; // Release
+                control_topic_publisher->publish(*msg);  // 发布消息
+                break;
+            case Qt::Key_A: // enable, Mode 9
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
                 msg->gripper_gm6020_position_1 = 0;
                 msg->gripper_c610_position_1 = 0;
@@ -208,7 +259,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_reset = 9; // enable
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
-            case Qt::Key_Q: // quit
+            case Qt::Key_Q: // quit, Mode 6
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
                 msg->gripper_gm6020_position_1 = 0;
                 msg->gripper_c610_position_1 = 0;
@@ -232,7 +283,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_reset = 6; // quit
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
-            case Qt::Key_Z: // reset the sensors
+            case Qt::Key_Z: // reset the sensors, Mode 1
                 reset_flag = true;
                 msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
                 msg->gripper_gm6020_position_1 = 0;

@@ -54,7 +54,7 @@ public:
     // 构造函数,有一个参数为节点名称
     Omega7Sensor(std::string name) : Node(name)
     {
-        RCLCPP_INFO(this->get_logger(), "%s节点已经启动.", name.c_str());
+        // RCLCPP_INFO(this->get_logger(), "%s节点已经启动.", name.c_str());
 
         //get device ID
         deviceCount = dhdGetDeviceCount ();

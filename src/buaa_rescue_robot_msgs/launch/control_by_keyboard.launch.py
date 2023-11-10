@@ -37,5 +37,19 @@ def generate_launch_description():
             executable='auto_controller',
             name='auto_controller',
             output='screen'
+        ),
+        # 启动omega7_sensor节点
+        Node(
+            package='omega7_sensor',
+            executable='omega7_sensor',
+            name='omega7_sensor',
+            output='screen'
+        ),
+        # 启动auto_controller节点
+        Node(
+            package='omega7_sensor',
+            executable='omega7_sub',
+            name='omega7_sub',
+            output='screen'
         )
     ])

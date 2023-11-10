@@ -28,7 +28,19 @@ public:
 
 private:
   void control_topic_callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
-    if(msg->robomaster_1_reset == 2){ // reset the encorders
+    if(msg->robomaster_1_reset == 2 || msg->robomaster_1_reset == 12){ // reset the encorders
+      if(msg->robomaster_1_reset == 2){
+            encorder_zero_up_limit = {600,600,600,600,600,600,600,600,600,600,600,600}; // 所有元素都将初始化为0
+            encorder_zero_down_limit = {500,500,500,500,500,500,500,500,500,500,500,500}; // 所有元素都将初始化为0
+      }
+      if(msg->robomaster_1_reset == 12){
+        for (size_t i = 0; i < 12; i++)
+        {
+          encorder_zero_down_limit[i] = 30;
+          encorder_zero_up_limit[i] = 60;
+        } 
+      }
+
       // 操作控制消息和其他传感器数据
       // 首先确保我们已经接收到了其他传感器的数据
       if (received_sensors_robomaster_1 && received_sensors_pull_push_1) {
@@ -83,8 +95,9 @@ private:
       } else {
         RCLCPP_INFO(this->get_logger(), "Waiting for all sensor data before processing control message");
       }
-    }
+    } else {
 
+    }
 
   }
 
@@ -101,7 +114,7 @@ private:
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
     for (size_t i = 0; i < 12; i++)
     {
-      if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > 500)
+      if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > 1800)
       {
         msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
         msg->gripper_gm6020_position_1 = 0;
@@ -148,11 +161,11 @@ private:
   bool received_sensors_pull_push_1 = false;
 
   // 定义一个std::array类型的变量，大小为12
-  std::array<int32_t, 12> encorder_zero_up_limit = {75,75,75,75,75,75,75,75,75,75,75,75}; // 所有元素都将初始化为0
-  std::array<int32_t, 12> encorder_zero_down_limit = {70,70,70,70,70,70,70,70,70,70,70,70}; // 所有元素都将初始化为0
-  int32_t fine_delta = 100;
-  int32_t coarse_delta = 2000;
-  int32_t error_threshold = 5;
+  std::array<int32_t, 12> encorder_zero_up_limit = {1100,1100,800,800,800,800,800,800,800,800,1100,1100}; // 所有元素都将初始化为0
+  std::array<int32_t, 12> encorder_zero_down_limit = {1000,1000,700,700,700,700,700,700,700,700,1000,1000}; // 所有元素都将初始化为0
+  int32_t fine_delta = 500;
+  int32_t coarse_delta = 5000;
+  int32_t error_threshold = 2;
 };
 
 int main(int argc, char *argv[]) {

@@ -12,7 +12,7 @@ class Omaga7_to_joint_space : public rclcpp::Node
 public:
     Omaga7_to_joint_space(std::string name) : Node(name)
     {
-        RCLCPP_INFO(this->get_logger(), "大家好，我是%s.", name.c_str());
+        // RCLCPP_INFO(this->get_logger(), "大家好，我是%s.", name.c_str());
         // 创建一个订阅者订阅话题
         omega7_subscribe_ = this->create_subscription<std_msgs::msg::Float64MultiArray>("omega7_sensor", 10, std::bind(&Omaga7_to_joint_space::joint_space_callback, this, std::placeholders::_1));
         // 创建一个发布者发布到joint_space_topic话题
@@ -47,9 +47,9 @@ private:
      // 收到话题数据的回调函数
     void joint_space_callback(const std_msgs::msg::Float64MultiArray::SharedPtr msg)
     {
-        RCLCPP_INFO(this->get_logger(), "收到:%f %f %f %f %f %f %f %f %f %f %f %f %f %f", 
-        msg->data[0],msg->data[1],msg->data[2],msg->data[3],msg->data[4],msg->data[5],msg->data[6],
-        msg->data[7],msg->data[8],msg->data[9],msg->data[10],msg->data[11],msg->data[12],msg->data[13]);
+        // RCLCPP_INFO(this->get_logger(), "收到:%f %f %f %f %f %f %f %f %f %f %f %f %f %f", 
+        // msg->data[0],msg->data[1],msg->data[2],msg->data[3],msg->data[4],msg->data[5],msg->data[6],
+        // msg->data[7],msg->data[8],msg->data[9],msg->data[10],msg->data[11],msg->data[12],msg->data[13]);
 
         // 判断gripper作为使能变量
         if (fabs(msg->data[6]) < 0.1)  // omega7_left
