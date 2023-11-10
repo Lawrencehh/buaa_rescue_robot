@@ -30,8 +30,8 @@ private:
   void control_topic_callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
     if(msg->robomaster_1_mode == 2 || msg->robomaster_1_mode == 12){ // reset the encorders
       if(msg->robomaster_1_mode == 2){
-            encorder_zero_up_limit = {600,600,600,600,600,600,600,600,600,600,600,600}; // 所有元素都将初始化为0
-            encorder_zero_down_limit = {500,500,500,500,500,500,500,500,500,500,500,500}; // 所有元素都将初始化为0
+            encorder_zero_up_limit = {800,800,700,700,600,600,600,600,700,700,800,800}; // 所有元素都将初始化为0
+            encorder_zero_down_limit = {700,700,600,600,500,500,500,500,600,600,700,700}; // 所有元素都将初始化为0
       }
       if(msg->robomaster_1_mode == 12){
         for (size_t i = 0; i < 12; i++)
@@ -81,7 +81,7 @@ private:
           }
         }
 
-        if (running_flag == 12) {
+        if (running_flag == 12) {         
           msg->robomaster_1_mode = 0;
           msg->robomaster_2_mode = 0;
           received_sensors_robomaster_1 = false;
@@ -106,8 +106,6 @@ private:
         auto_lock = 0;
       }
       
-
-
     }
 
   }

@@ -99,9 +99,17 @@ private:
         }
 
         if (fabs(msg->data[6]) < 0.1 || fabs(msg->data[13]) < 0.1){  // 这里0.1是一个阈值，可以根据需要更改
+            // theta[3] = -theta[3];
+            // theta[5] = -theta[5];
+            // theta[9] = -theta[9];
+            // theta[11] = -theta[11];
             // 创建一个Float64MultiArray消息并发布
             std_msgs::msg::Float64MultiArray joint_space_msg;
             joint_space_msg.data.assign(theta, theta + 12);  // 把12维的theta数据填充到joint_space_msg
+            joint_space_msg.data[3]= - joint_space_msg.data[3];
+            joint_space_msg.data[5]= - joint_space_msg.data[5];
+            joint_space_msg.data[9]= - joint_space_msg.data[9];
+            joint_space_msg.data[11]= - joint_space_msg.data[-11];
             // 发布消息
             joint_space_pub_->publish(joint_space_msg);
         }

@@ -319,7 +319,8 @@ private:    // 私有成员函数和变量
         // 2. 提取snake_control_1_array的值，手部电机的值,并添加到数据帧中
         for (int i = 0; i < 12; ++i)  // 12个绳驱电机
         {
-            int32_t snake_motors_position = msg->snake_control_1_array[i];  // 提取速度值
+            
+            int32_t snake_motors_position = msg->snake_control_1_array[i];  
             uint8_t motor_address = 0x01 + i;  // 电机地址从0x01开始
 
             frame.push_back(motor_address);  // 添加电机地址
