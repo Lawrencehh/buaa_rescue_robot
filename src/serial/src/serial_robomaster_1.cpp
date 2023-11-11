@@ -316,14 +316,14 @@ private:    // 私有成员函数和变量
         frame.push_back(0x31);  // 功能码
         frame.push_back(0x10);  // 电机数量: 0x10（12个绳驱电机，3个手部电机，1个RESET指令）
 
-        // 2. 提取snake_control_1_array的值，手部电机的值,并添加到数据帧中
+        // 2. 提取snake_position_control_1_array的值，手部电机的值,并添加到数据帧中
         for (int i = 0; i < 12; ++i)  // 12个绳驱电机
         {
             
-            int32_t snake_motors_position = msg->snake_control_1_array[i];  
-            uint8_t motor_address = 0x01 + i;  // 电机地址从0x01开始
+            int32_t snake_motors_position = msg->snake_position_control_1_array[i];  
+            uint8_t snake_motors_speed = msg->snake_speed_control_1_array[i];  // 电机speed
 
-            frame.push_back(motor_address);  // 添加电机地址
+            frame.push_back(snake_motors_speed & 0xFF);  // 添加电机speed
 
             uint8_t bytes[4];  // 用于存储4个字节的数组
             // 分解 int32_t 变量为4个字节

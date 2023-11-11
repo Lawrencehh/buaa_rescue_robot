@@ -65,18 +65,18 @@ public:
     void updateControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
         // 在这里更新QSpinBox的值
         // robomaster 1
-        ui->robomaster1_snake_motor_position_control_1->setValue(msg->snake_control_1_array[0]);  
-        ui->robomaster1_snake_motor_position_control_2->setValue(msg->snake_control_1_array[1]);
-        ui->robomaster1_snake_motor_position_control_3->setValue(msg->snake_control_1_array[2]);
-        ui->robomaster1_snake_motor_position_control_4->setValue(msg->snake_control_1_array[3]);
-        ui->robomaster1_snake_motor_position_control_5->setValue(msg->snake_control_1_array[4]);
-        ui->robomaster1_snake_motor_position_control_6->setValue(msg->snake_control_1_array[5]);
-        ui->robomaster1_snake_motor_position_control_7->setValue(msg->snake_control_1_array[6]);
-        ui->robomaster1_snake_motor_position_control_8->setValue(msg->snake_control_1_array[7]);
-        ui->robomaster1_snake_motor_position_control_9->setValue(msg->snake_control_1_array[8]);
-        ui->robomaster1_snake_motor_position_control_10->setValue(msg->snake_control_1_array[9]);
-        ui->robomaster1_snake_motor_position_control_11->setValue(msg->snake_control_1_array[10]);
-        ui->robomaster1_snake_motor_position_control_12->setValue(msg->snake_control_1_array[11]);
+        ui->robomaster1_snake_motor_position_control_1->setValue(msg->snake_position_control_1_array[0]);  
+        ui->robomaster1_snake_motor_position_control_2->setValue(msg->snake_position_control_1_array[1]);
+        ui->robomaster1_snake_motor_position_control_3->setValue(msg->snake_position_control_1_array[2]);
+        ui->robomaster1_snake_motor_position_control_4->setValue(msg->snake_position_control_1_array[3]);
+        ui->robomaster1_snake_motor_position_control_5->setValue(msg->snake_position_control_1_array[4]);
+        ui->robomaster1_snake_motor_position_control_6->setValue(msg->snake_position_control_1_array[5]);
+        ui->robomaster1_snake_motor_position_control_7->setValue(msg->snake_position_control_1_array[6]);
+        ui->robomaster1_snake_motor_position_control_8->setValue(msg->snake_position_control_1_array[7]);
+        ui->robomaster1_snake_motor_position_control_9->setValue(msg->snake_position_control_1_array[8]);
+        ui->robomaster1_snake_motor_position_control_10->setValue(msg->snake_position_control_1_array[9]);
+        ui->robomaster1_snake_motor_position_control_11->setValue(msg->snake_position_control_1_array[10]);
+        ui->robomaster1_snake_motor_position_control_12->setValue(msg->snake_position_control_1_array[11]);
         ui->gripper_gm6020_position_1_control->setValue(msg->gripper_gm6020_position_1);
         ui->gripper_c610_position_1_control->setValue(msg->gripper_c610_position_1);
         ui->gripper_sts3032_position_1_control->setValue(msg->gripper_sts3032_position_1);
@@ -86,18 +86,18 @@ public:
         ui->robomaster1_mode->setValue(msg->robomaster_1_mode);
         
         // robomaster 2
-        ui->robomaster2_snake_motor_position_control_1->setValue(msg->snake_control_2_array[0]);  
-        ui->robomaster2_snake_motor_position_control_2->setValue(msg->snake_control_2_array[1]);
-        ui->robomaster2_snake_motor_position_control_3->setValue(msg->snake_control_2_array[2]);
-        ui->robomaster2_snake_motor_position_control_4->setValue(msg->snake_control_2_array[3]);
-        ui->robomaster2_snake_motor_position_control_5->setValue(msg->snake_control_2_array[4]);
-        ui->robomaster2_snake_motor_position_control_6->setValue(msg->snake_control_2_array[5]);
-        ui->robomaster2_snake_motor_position_control_7->setValue(msg->snake_control_2_array[6]);
-        ui->robomaster2_snake_motor_position_control_8->setValue(msg->snake_control_2_array[7]);
-        ui->robomaster2_snake_motor_position_control_9->setValue(msg->snake_control_2_array[8]);
-        ui->robomaster2_snake_motor_position_control_10->setValue(msg->snake_control_2_array[9]);
-        ui->robomaster2_snake_motor_position_control_11->setValue(msg->snake_control_2_array[10]);
-        ui->robomaster2_snake_motor_position_control_12->setValue(msg->snake_control_2_array[11]);
+        ui->robomaster2_snake_motor_position_control_1->setValue(msg->snake_position_control_2_array[0]);  
+        ui->robomaster2_snake_motor_position_control_2->setValue(msg->snake_position_control_2_array[1]);
+        ui->robomaster2_snake_motor_position_control_3->setValue(msg->snake_position_control_2_array[2]);
+        ui->robomaster2_snake_motor_position_control_4->setValue(msg->snake_position_control_2_array[3]);
+        ui->robomaster2_snake_motor_position_control_5->setValue(msg->snake_position_control_2_array[4]);
+        ui->robomaster2_snake_motor_position_control_6->setValue(msg->snake_position_control_2_array[5]);
+        ui->robomaster2_snake_motor_position_control_7->setValue(msg->snake_position_control_2_array[6]);
+        ui->robomaster2_snake_motor_position_control_8->setValue(msg->snake_position_control_2_array[7]);
+        ui->robomaster2_snake_motor_position_control_9->setValue(msg->snake_position_control_2_array[8]);
+        ui->robomaster2_snake_motor_position_control_10->setValue(msg->snake_position_control_2_array[9]);
+        ui->robomaster2_snake_motor_position_control_11->setValue(msg->snake_position_control_2_array[10]);
+        ui->robomaster2_snake_motor_position_control_12->setValue(msg->snake_position_control_2_array[11]);
         ui->gripper_gm6020_position_2_control->setValue(msg->gripper_gm6020_position_2);
         ui->gripper_c610_position_2_control->setValue(msg->gripper_c610_position_2);
         ui->gripper_sts3032_position_2_control->setValue(msg->gripper_sts3032_position_2);
@@ -149,7 +149,7 @@ public:
         // snake motors control for robomaster 1
         for (size_t i = 0; i < 12; i++)
         {
-            msg-> snake_control_1_array[i]  = (rope_initial[i] - rope_1[i]) * 65536/4; // mm transformed to pulse
+            msg-> snake_position_control_1_array[i]  = (rope_initial[i] - rope_1[i]) * 65536/4; // mm transformed to pulse
         }
 
         // gripper control for robomaster 1
@@ -160,7 +160,7 @@ public:
         // snake motors control for robomaster 2
         for (size_t i = 0; i < 12; i++)
         {
-            msg-> snake_control_2_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
+            msg-> snake_position_control_2_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
         }
         // gripper control for robomaster 2
         msg->gripper_gm6020_position_2 = ui->gripper_gm6020_position_2_control->value();

@@ -63,8 +63,8 @@ private:
             } else{
               delta = fine_delta;
             }
-            if((msg->snake_control_1_array[i] - last_sensors_robomaster_data_1.snake_motor_encorder_position[i]) < delta){
-              msg->snake_control_1_array[i] = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] + delta;
+            if((msg->snake_position_control_1_array[i] - last_sensors_robomaster_data_1.snake_motor_encorder_position[i]) < delta){
+              msg->snake_position_control_1_array[i] = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] + delta;
             }
           }
 
@@ -75,8 +75,8 @@ private:
             } else{
               delta = fine_delta;
             }
-            if((msg->snake_control_1_array[i] - last_sensors_robomaster_data_1.snake_motor_encorder_position[i]) > -delta){
-              msg->snake_control_1_array[i] = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] - delta;
+            if((msg->snake_position_control_1_array[i] - last_sensors_robomaster_data_1.snake_motor_encorder_position[i]) > -delta){
+              msg->snake_position_control_1_array[i] = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] - delta;
             }
           }
         }
@@ -125,12 +125,12 @@ private:
     {
       if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > 1800)
       {
-        msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+        msg->snake_position_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
         msg->gripper_gm6020_position_1 = 0;
         msg->gripper_c610_position_1 = 0;
         msg->gripper_sts3032_position_1 = 0;
 
-        msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+        msg->snake_position_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
         msg->gripper_gm6020_position_2 = 0;
         msg->gripper_c610_position_2 = 0;
         msg->gripper_sts3032_position_2 = 0;

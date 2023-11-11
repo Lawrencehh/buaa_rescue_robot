@@ -39,12 +39,12 @@ int main(int argc, char * argv[])
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: 1");  // 打印日志
     }
     else if (key == '5') {  // 检查是否按下了'5'
-      msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->snake_position_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
       msg->gripper_gm6020_position_1 = 0;
       msg->gripper_c610_position_1 = 0;
       msg->gripper_sts3032_position_1 = 0;
 
-      msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->snake_position_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
       msg->gripper_gm6020_position_2 = 0;
       msg->gripper_c610_position_2 = 0;
       msg->gripper_sts3032_position_2 = 0;
@@ -62,12 +62,12 @@ int main(int argc, char * argv[])
       RCLCPP_INFO(node->get_logger(), "Published control message with elevator_control: -1");  // 打印日志
     }
     else if (key == '0') {  // 检查是否按下了'0'
-      msg->snake_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->snake_position_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
       msg->gripper_gm6020_position_1 = 0;
       msg->gripper_c610_position_1 = 0;
       msg->gripper_sts3032_position_1 = 0;
 
-      msg->snake_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+      msg->snake_position_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
       msg->gripper_gm6020_position_2 = 0;
       msg->gripper_c610_position_2 = 0;
       msg->gripper_sts3032_position_2 = 0;
@@ -106,44 +106,44 @@ int main(int argc, char * argv[])
 
     // publish snake_motors_control
     for (int i = 0; i < 12; ++i) {
-    msg->snake_control_1_array[i] = 0;
+    msg->snake_position_control_1_array[i] = 0;
     }
 
     if (key == 'q') {  // 检查是否按下了'q'
-      msg->snake_control_1_array[0] = 65536; // backward direction
+      msg->snake_position_control_1_array[0] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息      
     }else if (key == 'w') {  // 检查是否按下了'w'
-      msg->snake_control_1_array[1] = 65536; // backward direction
+      msg->snake_position_control_1_array[1] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'e') {  // 检查是否按下了'e'
-      msg->snake_control_1_array[2] = 65536; // backward direction
+      msg->snake_position_control_1_array[2] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'r') {  // 检查是否按下了'r'
-      msg->snake_control_1_array[3] = 65536; // backward direction
+      msg->snake_position_control_1_array[3] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 't') {  // 检查是否按下了't'
-      msg->snake_control_1_array[4] = 65536; // backward direction
+      msg->snake_position_control_1_array[4] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'y') {  // 检查是否按下了'y'
-      msg->snake_control_1_array[5] = 65536; // backward direction
+      msg->snake_position_control_1_array[5] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'u') {  // 检查是否按下了'u'
-      msg->snake_control_1_array[6] = 65536; // backward direction
+      msg->snake_position_control_1_array[6] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'i') {  // 检查是否按下了'i'
-      msg->snake_control_1_array[7] = 65536; // backward direction
+      msg->snake_position_control_1_array[7] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'o') {  // 检查是否按下了'o'
-      msg->snake_control_1_array[8] = 65536; // backward direction
+      msg->snake_position_control_1_array[8] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == 'p') {  // 检查是否按下了'p'
-      msg->snake_control_1_array[9] = 65536; // backward direction
+      msg->snake_position_control_1_array[9] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == '[') {  // 检查是否按下了'['
-      msg->snake_control_1_array[10] = 65536; // backward direction
+      msg->snake_position_control_1_array[10] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }else if (key == ']') {  // 检查是否按下了']'
-      msg->snake_control_1_array[11] = 65536; // backward direction
+      msg->snake_position_control_1_array[11] = 65536; // backward direction
       publisher->publish(*msg);  // 发布消息
     }
 
