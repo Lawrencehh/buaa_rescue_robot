@@ -202,6 +202,11 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_mode = 12; // Calibration at zero
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
+            case Qt::Key_O: // Calibration, Mode 5
+                msg->robomaster_1_mode = 5; // control by omega7
+                msg->robomaster_2_mode = 5; // control by omega7
+                control_topic_publisher->publish(*msg);  // 发布消息
+                break;
             case Qt::Key_R: // Release, Mode 0
                 for (size_t i = 0; i < 12; i++)
                 {

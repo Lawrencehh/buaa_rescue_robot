@@ -108,6 +108,13 @@ public:
 
 private:
   void control_topic_callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
+    if ((msg->robomaster_1_mode == 6) || (msg->robomaster_2_mode == 6))// mode 6, to quit
+    {
+      auto_lock = 1;
+    }else{
+      auto_lock = 0;
+    }
+
     if(msg->robomaster_1_mode == 2 || msg->robomaster_1_mode == 12){ // Mode 2 and mode 12
       if(msg->robomaster_1_mode == 2){
             encorder_zero_up_limit = {800,800,700,700,600,600,600,600,700,700,800,800}; // 所有元素都将初始化为0
@@ -120,7 +127,6 @@ private:
           encorder_zero_up_limit[i] = 50;
         } 
       }
-
       // 操作控制消息和其他传感器数据
       // 首先确保我们已经接收到了其他传感器的数据
       if (received_sensors_robomaster_1 && received_sensors_pull_push_1) {
@@ -135,7 +141,6 @@ private:
           {
             running_flag = running_flag + 1;
           }
-          
           // forward
           if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] < encorder_zero_down_limit[i]){
             if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_down_limit[i]) > error_threshold){
@@ -147,7 +152,6 @@ private:
               msg->snake_position_control_1_array[i] = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] + delta;
             }
           }
-
           // backward
           if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] > encorder_zero_up_limit[i]){
             if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_up_limit[i]) > error_threshold){
@@ -160,14 +164,14 @@ private:
             }
           }
         }
-
+        // running flag
         if (running_flag == 12) {         
           msg->robomaster_1_mode = 0;
           msg->robomaster_2_mode = 0;
           received_sensors_robomaster_1 = false;
           received_sensors_pull_push_1 = false;
         }
-
+        // mode 6 verified
         if (auto_lock == 0) 
         {
           for (size_t i = 0; i < 12; i++)
@@ -186,12 +190,7 @@ private:
       }
     } 
 
-    if ((msg->robomaster_1_mode == 6) || (msg->robomaster_2_mode == 6))// mode 6, to quit
-    {
-      auto_lock = 1;
-    }else{
-      auto_lock = 0;
-    }
+
       
     
 
@@ -223,8 +222,6 @@ private:
         {
             msg-> snake_position_control_2_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
         }
-        msg->robomaster_1_mode = 5;
-        msg->robomaster_2_mode = 5;
 
         if (auto_lock == 0) {
           // 发布消息
@@ -232,8 +229,10 @@ private:
           publisher_control_topic_->publish(*msg);
           received_joint_space_data = false;
         }
+        
       }
 
+      
     }
 
   }
@@ -244,9 +243,9 @@ private:
     received_sensors_robomaster_1 = true;
   }
 
-  void joint_space_callback(const std_msgs::msg::Float64MultiArray::SharedPtr theat_msg) {
-    // 保存Robomaster传感器数据
-    last_joint_space_data = *theat_msg;
+  void joint_space_callback(const std_msgs::msg::Float64MultiArray::SharedPtr theta_msg) {
+    // 保存joint_space数据
+    last_joint_space_data = *theta_msg;
     received_joint_space_data = true;
   }
 
