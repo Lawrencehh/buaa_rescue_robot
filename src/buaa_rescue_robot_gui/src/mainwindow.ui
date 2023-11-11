@@ -1806,8 +1806,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEdit_4">
     <property name="geometry">
      <rect>
-      <x>1440</x>
-      <y>30</y>
+      <x>1470</x>
+      <y>27</y>
       <width>221</width>
       <height>621</height>
      </rect>
@@ -1866,8 +1866,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QListView" name="SensorsMessageDisplay_4">
     <property name="geometry">
      <rect>
-      <x>1660</x>
-      <y>70</y>
+      <x>1680</x>
+      <y>67</y>
       <width>81</width>
       <height>251</height>
      </rect>
@@ -1882,8 +1882,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QListView" name="SensorsMessageDisplay_5">
     <property name="geometry">
      <rect>
-      <x>1660</x>
-      <y>360</y>
+      <x>1680</x>
+      <y>357</y>
       <width>81</width>
       <height>251</height>
      </rect>
@@ -2406,7 +2406,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>830</x>
-      <y>810</y>
+      <y>800</y>
       <width>431</width>
       <height>201</height>
      </rect>
@@ -2431,6 +2431,7 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#c01c28;&quot;&gt;Mode 2: Physical zero position calibration, Key C;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#c01c28;&quot;&gt;Mode 3: Release, Key R;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#c01c28;&quot;&gt;Mode 4: Reset the Pull-Push force sensors, Key P;&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#c01c28;&quot;&gt;Mode 5: Control via Omega7 joysticks;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#c01c28;&quot;&gt;Mode 6: Quit, Key Q;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#c01c28;&quot;&gt;Mode 9: Enable, Key A;&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt; color:#c01c28;&quot;&gt;Mode 12: Equal zero force calibration, Key E;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -2494,8 +2495,8 @@ p, li { white-space: pre-wrap; }
    <widget class="QTextEdit" name="textEdit_9">
     <property name="geometry">
      <rect>
-      <x>1290</x>
-      <y>45</y>
+      <x>1300</x>
+      <y>47</y>
       <width>141</width>
       <height>526</height>
      </rect>
@@ -2546,14 +2547,37 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; color:#e01b24;&quot;&gt;speed  (RPM):&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>900</x>
       <y>70</y>
       <width>50</width>
-      <height>302</height>
+      <height>205</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>45</width>
+      <height>17</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>50</width>
+      <height>205</height>
+     </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>9</pointsize>
+     </font>
     </property>
     <layout class="QFormLayout" name="formLayout_3">
      <property name="horizontalSpacing">
@@ -2564,9 +2588,27 @@ p, li { white-space: pre-wrap; }
      </property>
      <item row="0" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2579,9 +2621,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="1" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2594,9 +2654,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="2" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2609,9 +2687,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="3" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2624,9 +2720,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="4" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2639,9 +2753,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="5" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2654,9 +2786,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="6" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_7">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2669,9 +2819,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="7" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_8">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2684,9 +2852,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="8" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_9">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2699,9 +2885,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="9" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_10">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2714,9 +2918,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="10" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_11">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2729,9 +2951,27 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="11" column="0">
       <widget class="QSpinBox" name="robomaster1_snake_motor_speed_control_12">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
-         <pointsize>10</pointsize>
+         <pointsize>9</pointsize>
         </font>
        </property>
        <property name="value">
@@ -2744,14 +2984,32 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>901</x>
       <y>358</y>
       <width>50</width>
-      <height>206</height>
+      <height>205</height>
      </rect>
+    </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
+    <property name="minimumSize">
+     <size>
+      <width>45</width>
+      <height>17</height>
+     </size>
+    </property>
+    <property name="maximumSize">
+     <size>
+      <width>50</width>
+      <height>205</height>
+     </size>
     </property>
     <layout class="QFormLayout" name="formLayout_4">
      <property name="sizeConstraint">
@@ -2765,6 +3023,24 @@ p, li { white-space: pre-wrap; }
      </property>
      <item row="0" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2780,6 +3056,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="1" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2795,6 +3089,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="2" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_3">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2810,6 +3122,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="3" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2825,6 +3155,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="4" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_5">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2840,6 +3188,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="5" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_6">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2855,6 +3221,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="6" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_7">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2870,6 +3254,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="7" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_8">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2885,6 +3287,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="8" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_9">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2900,6 +3320,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="9" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_10">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2915,6 +3353,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="10" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_11">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2930,6 +3386,24 @@ p, li { white-space: pre-wrap; }
      </item>
      <item row="11" column="0">
       <widget class="QSpinBox" name="robomaster2_snake_motor_speed_control_12">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>45</width>
+         <height>17</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>50</width>
+         <height>205</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <pointsize>10</pointsize>
@@ -2945,6 +3419,38 @@ p, li { white-space: pre-wrap; }
      </item>
     </layout>
    </widget>
+   <widget class="QListView" name="SensorsMessageDisplay_6">
+    <property name="geometry">
+     <rect>
+      <x>1440</x>
+      <y>70</y>
+      <width>61</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;
+ border: none;
+
+</string>
+    </property>
+   </widget>
+   <widget class="QListView" name="SensorsMessageDisplay_7">
+    <property name="geometry">
+     <rect>
+      <x>1440</x>
+      <y>360</y>
+      <width>61</width>
+      <height>281</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background: transparent;
+ border: none;
+
+</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -2952,7 +3458,7 @@ p, li { white-space: pre-wrap; }
      <x>0</x>
      <y>0</y>
      <width>1920</width>
-     <height>28</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

@@ -58,12 +58,24 @@ MainWindow::MainWindow(QWidget *parent)
     // 将模型与视图关联
     ui->SensorsMessageDisplay_5->setModel(SensorsMessageDisplay_5);
 
+    // 初始化 SensorsMessageDisplay_6
+    SensorsMessageDisplay_6 = new QStringListModel(this);
+    // 将模型与视图关联
+    ui->SensorsMessageDisplay_6->setModel(SensorsMessageDisplay_6);
+
+    // 初始化 SensorsMessageDisplay_7
+    SensorsMessageDisplay_7 = new QStringListModel(this);
+    // 将模型与视图关联
+    ui->SensorsMessageDisplay_7->setModel(SensorsMessageDisplay_7);
+
     node = std::make_shared<rclcpp::Node>("mainwindow_node");
 
     // 初始化ROS 2发布器
     control_topic_publisher = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10);
+    joint_space_topic_publisher = node->create_publisher<std_msgs::msg::Float64MultiArray>("joint_space_topic", 10);
     // 连接Qt信号和槽
     connect(ui->publishButton, SIGNAL(clicked()), this, SLOT(on_publishButton_clicked()));
+    connect(ui->transButton, SIGNAL(clicked()), this, SLOT(on_transButton_clicked()));
 }
 
 
@@ -73,6 +85,18 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
     // snake motors control for robomaster 1
+    msg-> snake_speed_control_1_array[0]  = ui->robomaster1_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_1_array[1]  = ui->robomaster1_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_1_array[2]  = ui->robomaster1_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_1_array[3]  = ui->robomaster1_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_1_array[4]  = ui->robomaster1_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_1_array[5]  = ui->robomaster1_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_1_array[6]  = ui->robomaster1_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_1_array[7]  = ui->robomaster1_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_1_array[8]  = ui->robomaster1_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_1_array[9]  = ui->robomaster1_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_1_array[10] = ui->robomaster1_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_1_array[11] = ui->robomaster1_snake_motor_speed_control_12->value();
     msg-> snake_position_control_1_array[0]  = ui->robomaster1_snake_motor_position_control_1->value();
     msg-> snake_position_control_1_array[1]  = ui->robomaster1_snake_motor_position_control_2->value();
     msg-> snake_position_control_1_array[2]  = ui->robomaster1_snake_motor_position_control_3->value();
@@ -91,6 +115,18 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
     msg->robomaster_1_mode = ui->robomaster1_mode->value();
     // snake motors control for robomaster 2
+    msg-> snake_speed_control_2_array[0]  = ui->robomaster2_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_2_array[1]  = ui->robomaster2_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_2_array[2]  = ui->robomaster2_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_2_array[3]  = ui->robomaster2_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_2_array[4]  = ui->robomaster2_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_2_array[5]  = ui->robomaster2_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_2_array[6]  = ui->robomaster2_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_2_array[7]  = ui->robomaster2_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_2_array[8]  = ui->robomaster2_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_2_array[9]  = ui->robomaster2_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_2_array[10] = ui->robomaster2_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_2_array[11] = ui->robomaster2_snake_motor_speed_control_12->value();
     msg-> snake_position_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
     msg-> snake_position_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
     msg-> snake_position_control_2_array[2]  = ui->robomaster2_snake_motor_position_control_3->value();
@@ -179,6 +215,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             case Qt::Key_A: // enable, Mode 9
                 msg->robomaster_1_mode = 9; // enable
                 msg->robomaster_2_mode = 9; // enable
+                msg->snake_speed_control_1_array = {10,10,10,10,10,10,10,10,10,10,10,10};
+                msg->snake_speed_control_2_array = {10,10,10,10,10,10,10,10,10,10,10,10};
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
             case Qt::Key_Q: // quit, Mode 6
@@ -223,6 +261,18 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 void MainWindow::keyReleaseEvent(QKeyEvent *event){
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
     // snake motors control for robomaster 1
+    msg-> snake_speed_control_1_array[0]  = ui->robomaster1_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_1_array[1]  = ui->robomaster1_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_1_array[2]  = ui->robomaster1_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_1_array[3]  = ui->robomaster1_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_1_array[4]  = ui->robomaster1_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_1_array[5]  = ui->robomaster1_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_1_array[6]  = ui->robomaster1_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_1_array[7]  = ui->robomaster1_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_1_array[8]  = ui->robomaster1_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_1_array[9]  = ui->robomaster1_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_1_array[10] = ui->robomaster1_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_1_array[11] = ui->robomaster1_snake_motor_speed_control_12->value();
     msg-> snake_position_control_1_array[0]  = ui->robomaster1_snake_motor_position_control_1->value();
     msg-> snake_position_control_1_array[1]  = ui->robomaster1_snake_motor_position_control_2->value();
     msg-> snake_position_control_1_array[2]  = ui->robomaster1_snake_motor_position_control_3->value();
@@ -241,6 +291,18 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
     msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
     msg->robomaster_1_mode = ui->robomaster1_mode->value();
     // snake motors control for robomaster 2
+    msg-> snake_speed_control_2_array[0]  = ui->robomaster2_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_2_array[1]  = ui->robomaster2_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_2_array[2]  = ui->robomaster2_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_2_array[3]  = ui->robomaster2_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_2_array[4]  = ui->robomaster2_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_2_array[5]  = ui->robomaster2_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_2_array[6]  = ui->robomaster2_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_2_array[7]  = ui->robomaster2_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_2_array[8]  = ui->robomaster2_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_2_array[9]  = ui->robomaster2_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_2_array[10] = ui->robomaster2_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_2_array[11] = ui->robomaster2_snake_motor_speed_control_12->value();
     msg-> snake_position_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
     msg-> snake_position_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
     msg-> snake_position_control_2_array[2]  = ui->robomaster2_snake_motor_position_control_3->value();
@@ -308,8 +370,6 @@ void MainWindow::updateCameraFrame()
     }
 }
 
-
-
 // 自定义槽函数：当 QDial 的值改变时会被调用
 void MainWindow::dialValueChanged(int value)
 {
@@ -328,6 +388,18 @@ void MainWindow::dialValueChanged(int value)
 
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
     // snake motors control for robomaster 1
+    msg-> snake_speed_control_1_array[0]  = ui->robomaster1_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_1_array[1]  = ui->robomaster1_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_1_array[2]  = ui->robomaster1_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_1_array[3]  = ui->robomaster1_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_1_array[4]  = ui->robomaster1_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_1_array[5]  = ui->robomaster1_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_1_array[6]  = ui->robomaster1_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_1_array[7]  = ui->robomaster1_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_1_array[8]  = ui->robomaster1_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_1_array[9]  = ui->robomaster1_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_1_array[10] = ui->robomaster1_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_1_array[11] = ui->robomaster1_snake_motor_speed_control_12->value();
     msg-> snake_position_control_1_array[0]  = ui->robomaster1_snake_motor_position_control_1->value();
     msg-> snake_position_control_1_array[1]  = ui->robomaster1_snake_motor_position_control_2->value();
     msg-> snake_position_control_1_array[2]  = ui->robomaster1_snake_motor_position_control_3->value();
@@ -346,6 +418,18 @@ void MainWindow::dialValueChanged(int value)
     // msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
     msg->robomaster_1_mode = ui->robomaster1_mode->value();
     // snake motors control for robomaster 2
+    msg-> snake_speed_control_2_array[0]  = ui->robomaster2_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_2_array[1]  = ui->robomaster2_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_2_array[2]  = ui->robomaster2_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_2_array[3]  = ui->robomaster2_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_2_array[4]  = ui->robomaster2_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_2_array[5]  = ui->robomaster2_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_2_array[6]  = ui->robomaster2_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_2_array[7]  = ui->robomaster2_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_2_array[8]  = ui->robomaster2_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_2_array[9]  = ui->robomaster2_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_2_array[10] = ui->robomaster2_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_2_array[11] = ui->robomaster2_snake_motor_speed_control_12->value();
     msg-> snake_position_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
     msg-> snake_position_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
     msg-> snake_position_control_2_array[2]  = ui->robomaster2_snake_motor_position_control_3->value();
@@ -383,6 +467,55 @@ void MainWindow::dialValueChanged(int value)
 
     // 发布 ROS2 消息
     control_topic_publisher->publish(*msg);
+}
+
+void MainWindow::on_transButton_clicked(){
+    // 创建消息
+    auto theta_msg = std_msgs::msg::Float64MultiArray();
+    theta_msg.data = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    theta_msg.data[0] = ui->robomaster1_theta_1->value() * M_PI / 180;
+    theta_msg.data[1] = ui->robomaster1_theta_2->value() * M_PI / 180;
+    theta_msg.data[2] = ui->robomaster1_theta_3->value() * M_PI / 180;
+    theta_msg.data[3] = ui->robomaster1_theta_4->value() * M_PI / 180;
+    theta_msg.data[4] = ui->robomaster1_theta_5->value() * M_PI / 180;
+    theta_msg.data[5] = ui->robomaster1_theta_6->value() * M_PI / 180;
+    theta_msg.data[6] = ui->robomaster2_theta_1->value() * M_PI / 180;
+    theta_msg.data[7] = ui->robomaster2_theta_2->value() * M_PI / 180;
+    theta_msg.data[8] = ui->robomaster2_theta_3->value() * M_PI / 180;
+    theta_msg.data[9] = ui->robomaster2_theta_4->value() * M_PI / 180;
+    theta_msg.data[10] = ui->robomaster2_theta_5->value() * M_PI / 180;
+    theta_msg.data[11] = ui->robomaster2_theta_6->value() * M_PI / 180;
+    // 发布消息
+    joint_space_topic_publisher->publish(theta_msg);
+
+    auto msg = buaa_rescue_robot_msgs::msg::ControlMessage();
+    msg.snake_speed_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+    msg.snake_position_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+    msg.gripper_gm6020_position_1 = 0;
+    msg.gripper_c610_position_1 = 0;
+    msg.gripper_sts3032_position_1 = 0;
+
+    msg.snake_speed_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+    msg.snake_position_control_2_array = {0,0,0,0,0,0,0,0,0,0,0,0};
+    msg.gripper_gm6020_position_2 = 0;
+    msg.gripper_c610_position_2 = 0;
+    msg.gripper_sts3032_position_2 = 0;
+
+    msg.elevator_control = 0;
+    msg.lower_linear_module_control = 0;
+    msg.upper_linear_module_control = 0;
+
+
+    msg.pull_push_sensors_reset = 0;
+    msg.elevator_counter_reset = 0; // reset to be 0
+    msg.lower_linear_module_encorder_reset = 0; // reset to be 0
+    msg.upper_linear_module_encorder_reset = 0; // reset to be 0
+    msg.robomaster_1_mode = 5; // mode 5, control by omega7
+    msg.robomaster_2_mode = 5; // mode 5, control by omega7
+    // 然后发布新的控制消息
+    std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 10ms
+    control_topic_publisher->publish(msg);
+
 }
 
 void MainWindow::on_publishButton_clicked()

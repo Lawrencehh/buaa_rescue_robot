@@ -61,6 +61,7 @@ int main(int argc, char **argv) {
         10,
         [&](const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
             mainWindow.updateSensorsMessageDisplay_1(msg);  // 通过MainWindow实例来更新 
+            mainWindow.updateSensorsMessageDisplay_6(msg);  // 通过MainWindow实例来更新 
         }
     );
 

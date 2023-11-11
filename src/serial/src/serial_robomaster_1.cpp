@@ -138,10 +138,11 @@ private:    // 私有成员函数和变量
     }
 
     // 处理接收到的Modbus帧
-    std::tuple<std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
+    std::tuple<std::array<uint8_t, 12>, std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
          // 数据头
         const std::vector<uint8_t> header = {0xAA,0x55,0x01,0x4B,0x41,0x10};
         std::array<int32_t, 12>  snake_motor_encorder_position_value = {};
+        std::array<uint8_t, 12>  snake_motor_encorder_speed_value = {};
         std::int16_t  gripper_gm6020_encorder_position_value = 0;  // 初始化gm6020编码器数据为0
         std::int16_t  gripper_c610_encorder_position_value = 0;  // 初始化c610编码器数据为0
         std::int16_t  gripper_sts3032_encorder_position_value = 0;  // 初始化sts3032编码器数据为0
@@ -174,6 +175,7 @@ private:    // 私有成员函数和变量
                 if (data.size() == 71) {
                     for (size_t i = 0; i < 12; i++)
                     {
+                        snake_motor_encorder_speed_value[i] = data[5*i];
                         snake_motor_encorder_position_value[i] =  static_cast<int32_t>(     
                         static_cast<uint64_t>(data[5*i+1])  << 24 |
                         static_cast<uint64_t>(data[5*i+2])  << 16 |
@@ -217,7 +219,7 @@ private:    // 私有成员函数和变量
         }
 
         // 使用 std::make_tuple 创建一个包含所有返回值的元组
-        return std::make_tuple(snake_motor_encorder_position_value, gripper_gm6020_encorder_position_value, gripper_c610_encorder_position_value, gripper_sts3032_encorder_position_value, reset_encorder_value, crc_verificated);   
+        return std::make_tuple(snake_motor_encorder_speed_value, snake_motor_encorder_position_value, gripper_gm6020_encorder_position_value, gripper_c610_encorder_position_value, gripper_sts3032_encorder_position_value, reset_encorder_value, crc_verificated);   
     }
 
     // 重构后的 start_receive 函数
@@ -270,15 +272,17 @@ private:    // 私有成员函数和变量
                         // 调用函数并获取返回的 std::tuple
                         auto result = process_modbus_frame_for_snake_encorders(frame);
                         // 使用 std::get 从 std::tuple 中提取值
-                        auto snake_motor_encorder_position_raw_value = std::get<0>(result);
-                        auto gripper_gm6020_encorder_position_value = std::get<1>(result);
-                        auto gripper_c610_encorder_position_value = std::get<2>(result);
-                        auto gripper_sts3032_encorder_position_value = std::get<3>(result);
-                        auto reset_encorder_value = std::get<4>(result);
-                        auto crc_verificated = std::get<5>(result);
+                        auto snake_motor_encorder_speed_raw_value = std::get<0>(result);
+                        auto snake_motor_encorder_position_raw_value = std::get<1>(result);
+                        auto gripper_gm6020_encorder_position_value = std::get<2>(result);
+                        auto gripper_c610_encorder_position_value = std::get<3>(result);
+                        auto gripper_sts3032_encorder_position_value = std::get<4>(result);
+                        auto reset_encorder_value = std::get<5>(result);
+                        auto crc_verificated = std::get<6>(result);
 
                         // 发布到sensors_data话题
                         auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster(); 
+                        msg.snake_motor_encorder_speed = snake_motor_encorder_speed_raw_value;
                         msg.snake_motor_encorder_position = snake_motor_encorder_position_raw_value;
                         msg.gripper_gm6020_position = gripper_gm6020_encorder_position_value;
                         msg.gripper_c610_position = gripper_c610_encorder_position_value;
@@ -319,12 +323,9 @@ private:    // 私有成员函数和变量
         // 2. 提取snake_position_control_1_array的值，手部电机的值,并添加到数据帧中
         for (int i = 0; i < 12; ++i)  // 12个绳驱电机
         {
-            
-            int32_t snake_motors_position = msg->snake_position_control_1_array[i];  
             uint8_t snake_motors_speed = msg->snake_speed_control_1_array[i];  // 电机speed
-
+            int32_t snake_motors_position = msg->snake_position_control_1_array[i];          
             frame.push_back(snake_motors_speed & 0xFF);  // 添加电机speed
-
             uint8_t bytes[4];  // 用于存储4个字节的数组
             // 分解 int32_t 变量为4个字节
             bytes[0] = (snake_motors_position >> 24) & 0xFF;  // 最高有效字节 (MSB)
