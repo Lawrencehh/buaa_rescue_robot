@@ -113,10 +113,21 @@ private:
       auto_lock = 1;
     }
 
-    if ((msg->robomaster_1_mode == 9) || (msg->robomaster_2_mode == 9))// mode 6, to quit
+    if ((msg->robomaster_1_mode == 9) || (msg->robomaster_2_mode == 9))// mode 9, to enable
     {
       auto_lock = 0;
     }
+
+    for (size_t i = 0; i < 12; i++)
+    {
+      if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 500) {
+        msg->snake_speed_control_1_array[i] = 5;
+      }
+      if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 500) {
+        msg->snake_speed_control_1_array[i] = 10;
+      }
+    }
+    
 
     if(msg->robomaster_1_mode == 2 || msg->robomaster_1_mode == 12){ // Mode 2 and mode 12
       if(msg->robomaster_1_mode == 2){
@@ -176,13 +187,7 @@ private:
         }
         // mode 6 verified
         if (auto_lock == 0) 
-        {
-          for (size_t i = 0; i < 12; i++)
-          {
-            msg->snake_speed_control_1_array[i] = 10;
-            msg->snake_speed_control_2_array[i] = 10;
-          }
-          
+        {          
           // 然后发布新的控制消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
           publisher_control_topic_->publish(*msg);
@@ -218,6 +223,7 @@ private:
         for (size_t i = 0; i < 12; i++)
         {
             msg-> snake_position_control_1_array[i]  = (rope_initial[i] - rope_1[i]) * 65536/4; // mm transformed to pulse
+
         }
 
         // snake motors control for robomaster 2
@@ -258,7 +264,7 @@ private:
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
     for (size_t i = 0; i < 12; i++)
     {
-      if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > 1800)
+      if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > tension_limit)
       {
         msg->snake_speed_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
         msg->snake_position_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -317,6 +323,7 @@ private:
   int32_t coarse_delta = 5000;
   int32_t error_threshold = 2;
   int32_t auto_lock = 0;
+  int32_t tension_limit = 2000; 
 };
 
 int main(int argc, char *argv[]) {
