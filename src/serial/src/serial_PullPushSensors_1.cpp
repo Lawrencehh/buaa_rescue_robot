@@ -121,7 +121,7 @@ private:    // 私有成员函数和变量
     void async_write_to_serial_1(const std::vector<uint8_t>& data_to_write)
     {
         asio::async_write(*serial_port_1, asio::buffer(data_to_write),
-            [this](const asio::error_code& error, std::size_t bytes_transferred)
+            [this](const asio::error_code& error, std::size_t /*bytes_transferred*/)
             {
                 // 检查是否有错误
                 if (!error) 
@@ -140,7 +140,7 @@ private:    // 私有成员函数和变量
     void async_write_to_serial_2(const std::vector<uint8_t>& data_to_write)
     {
         asio::async_write(*serial_port_2, asio::buffer(data_to_write),
-            [this](const asio::error_code& error, std::size_t bytes_transferred)
+            [this](const asio::error_code& error, std::size_t /*bytes_transferred*/)
             {
                 // 检查是否有错误
                 if (!error) 

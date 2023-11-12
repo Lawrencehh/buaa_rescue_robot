@@ -122,7 +122,7 @@ private:    // 私有成员函数和变量
     void async_write_to_serial(const std::vector<uint8_t>& data_to_write)
     {
         asio::async_write(*serial_port_, asio::buffer(data_to_write),
-            [this](const asio::error_code& error, std::size_t bytes_transferred)
+            [this](const asio::error_code& error, std::size_t /*bytes_transferred*/)
             {
                 // 检查是否有错误
                 if (!error) 
@@ -138,11 +138,11 @@ private:    // 私有成员函数和变量
     }
 
     // 处理接收到的Modbus帧
-    std::tuple<std::array<uint8_t, 12>, std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
+    std::tuple<std::array<int8_t, 12>, std::array<int32_t, 12>, int16_t, int16_t, int16_t, int16_t, int16_t> process_modbus_frame_for_snake_encorders (const std::vector<uint8_t>& frame) {
          // 数据头
         const std::vector<uint8_t> header = {0xAA,0x55,0x01,0x4B,0x41,0x10};
+        std::array<int8_t, 12>  snake_motor_encorder_speed_value = {};
         std::array<int32_t, 12>  snake_motor_encorder_position_value = {};
-        std::array<uint8_t, 12>  snake_motor_encorder_speed_value = {};
         std::int16_t  gripper_gm6020_encorder_position_value = 0;  // 初始化gm6020编码器数据为0
         std::int16_t  gripper_c610_encorder_position_value = 0;  // 初始化c610编码器数据为0
         std::int16_t  gripper_sts3032_encorder_position_value = 0;  // 初始化sts3032编码器数据为0
@@ -370,13 +370,13 @@ private:    // 私有成员函数和变量
         frame.push_back(crc_low_byte);
 
         // 打印frame帧内容
-        std::string msg_str = "";
-        int count = 0; // 初始化计数器
-        for (auto &byte : frame) {
-            // 对于每个字节，添加带方括号的计数值和字节的十六进制表示到msg_str
-            msg_str += "[" + std::to_string(count++) + "]:0x" + to_string(static_cast<int>(byte)) + " ";
-        }
-        RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());
+        // std::string msg_str = "";
+        // int count = 0; // 初始化计数器
+        // for (auto &byte : frame) {
+        //     // 对于每个字节，添加带方括号的计数值和字节的十六进制表示到msg_str
+        //     msg_str += "[" + std::to_string(count++) + "]:0x" + to_string(static_cast<int>(byte)) + " ";
+        // }
+        // RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());
 
 
         // 5. 通过串口发送数据帧

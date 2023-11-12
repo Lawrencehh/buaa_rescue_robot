@@ -111,7 +111,10 @@ private:
     if ((msg->robomaster_1_mode == 6) || (msg->robomaster_2_mode == 6))// mode 6, to quit
     {
       auto_lock = 1;
-    }else{
+    }
+
+    if ((msg->robomaster_1_mode == 9) || (msg->robomaster_2_mode == 9))// mode 6, to quit
+    {
       auto_lock = 0;
     }
 
@@ -195,7 +198,7 @@ private:
     
 
     if(msg->robomaster_1_mode == 5){ // Mode 5, Omega7 joystick
-      if (received_joint_space_data) {
+      // if (received_joint_space_data) {
         std::array<double, 6> theta_1; // left hand omega7 
         std::array<double, 6> theta_2; // right hand omega7 
         std::array<double, 6> theta_initial = {0,0,0,0,0,0};
@@ -227,10 +230,9 @@ private:
           // 发布消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
           publisher_control_topic_->publish(*msg);
-          received_joint_space_data = false;
         }
         
-      }
+      // }
 
       
     }
