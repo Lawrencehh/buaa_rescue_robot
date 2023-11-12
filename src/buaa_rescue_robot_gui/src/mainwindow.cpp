@@ -532,6 +532,18 @@ void MainWindow::on_publishButton_clicked()
         msg->snake_position_control_2_array[i] = 10;
     }    
     // snake motors control for robomaster 1
+    msg-> snake_speed_control_1_array[0]  = ui->robomaster1_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_1_array[1]  = ui->robomaster1_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_1_array[2]  = ui->robomaster1_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_1_array[3]  = ui->robomaster1_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_1_array[4]  = ui->robomaster1_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_1_array[5]  = ui->robomaster1_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_1_array[6]  = ui->robomaster1_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_1_array[7]  = ui->robomaster1_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_1_array[8]  = ui->robomaster1_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_1_array[9]  = ui->robomaster1_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_1_array[10] = ui->robomaster1_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_1_array[11] = ui->robomaster1_snake_motor_speed_control_12->value();
     msg-> snake_position_control_1_array[0]  = ui->robomaster1_snake_motor_position_control_1->value();
     msg-> snake_position_control_1_array[1]  = ui->robomaster1_snake_motor_position_control_2->value();
     msg-> snake_position_control_1_array[2]  = ui->robomaster1_snake_motor_position_control_3->value();
@@ -550,6 +562,18 @@ void MainWindow::on_publishButton_clicked()
     msg->gripper_sts3032_position_1 = ui->gripper_sts3032_position_1_control->value();
     msg->robomaster_1_mode = ui->robomaster1_mode->value();
     // snake motors control for robomaster 2
+    msg-> snake_speed_control_2_array[0]  = ui->robomaster2_snake_motor_speed_control_1->value();
+    msg-> snake_speed_control_2_array[1]  = ui->robomaster2_snake_motor_speed_control_2->value();
+    msg-> snake_speed_control_2_array[2]  = ui->robomaster2_snake_motor_speed_control_3->value();
+    msg-> snake_speed_control_2_array[3]  = ui->robomaster2_snake_motor_speed_control_4->value();
+    msg-> snake_speed_control_2_array[4]  = ui->robomaster2_snake_motor_speed_control_5->value();
+    msg-> snake_speed_control_2_array[5]  = ui->robomaster2_snake_motor_speed_control_6->value();
+    msg-> snake_speed_control_2_array[6]  = ui->robomaster2_snake_motor_speed_control_7->value();
+    msg-> snake_speed_control_2_array[7]  = ui->robomaster2_snake_motor_speed_control_8->value();
+    msg-> snake_speed_control_2_array[8]  = ui->robomaster2_snake_motor_speed_control_9->value();
+    msg-> snake_speed_control_2_array[9]  = ui->robomaster2_snake_motor_speed_control_10->value();
+    msg-> snake_speed_control_2_array[10] = ui->robomaster2_snake_motor_speed_control_11->value();
+    msg-> snake_speed_control_2_array[11] = ui->robomaster2_snake_motor_speed_control_12->value();
     msg-> snake_position_control_2_array[0]  = ui->robomaster2_snake_motor_position_control_1->value();
     msg-> snake_position_control_2_array[1]  = ui->robomaster2_snake_motor_position_control_2->value();
     msg-> snake_position_control_2_array[2]  = ui->robomaster2_snake_motor_position_control_3->value();

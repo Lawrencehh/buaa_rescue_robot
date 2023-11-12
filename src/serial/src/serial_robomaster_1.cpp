@@ -370,13 +370,13 @@ private:    // 私有成员函数和变量
         frame.push_back(crc_low_byte);
 
         // 打印frame帧内容
-        // std::string msg_str = "";
-        // int count = 0; // 初始化计数器
-        // for (auto &byte : frame) {
-        //     // 对于每个字节，添加带方括号的计数值和字节的十六进制表示到msg_str
-        //     msg_str += "[" + std::to_string(count++) + "]:0x" + to_string(static_cast<int>(byte)) + " ";
-        // }
-        // RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());
+        std::string msg_str = "";
+        int count = 0; // 初始化计数器
+        for (auto &byte : frame) {
+            // 对于每个字节，添加带方括号的计数值和字节的十六进制表示到msg_str
+            msg_str += "[" + std::to_string(count++) + "]:0x" + to_string(static_cast<int>(byte)) + " ";
+        }
+        RCLCPP_INFO(this->get_logger(), "Frame: %s", msg_str.c_str());
 
 
         // 5. 通过串口发送数据帧
