@@ -179,10 +179,24 @@ private:
         {          
           for (size_t i = 0; i < 12; i++) {
             if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 500) {
-              msg->snake_speed_control_1_array[i] = 5;
+              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
+              {
+                msg->snake_speed_control_1_array[i] = 5;
+              }
+              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+              {
+                msg->snake_speed_control_1_array[i] = 10;
+              }
             }
-            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 500) {
-              msg->snake_speed_control_1_array[i] = 10;
+            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 100) {
+              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
+              {
+                msg->snake_speed_control_1_array[i] = 10;
+              }
+              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+              {
+                msg->snake_speed_control_1_array[i] = 5;
+              }
             }
           }
           // 然后发布新的控制消息
