@@ -117,12 +117,88 @@ private:
     {
       auto_lock = 0;
     }   
+    // RCLCPP_INFO(this->get_logger(), "auto_lock: %d", auto_lock);
+
+    for (size_t i = 0; i < 12; i++)
+    {
+      if (i == 0 || i == 1 || i == 10 || i == 11)
+      {
+        encorder_zero_final_up_limit[i] = tension_segment_1;
+      } else if(i == 2 || i == 3 || i == 8 || i == 9) {
+        encorder_zero_final_up_limit[i] = tension_segment_2;
+      } else if(i == 4 || i == 5 || i == 6 || i == 7) {
+        encorder_zero_final_up_limit[i] = tension_segment_3;
+      }
+      encorder_zero_final_down_limit[i] = encorder_zero_final_up_limit[i] - 100;
+    } 
 
     if(msg->robomaster_1_mode == 2 || msg->robomaster_1_mode == 12){ // Mode 2 and mode 12
-      if(msg->robomaster_1_mode == 2){
-            encorder_zero_up_limit = {800,800,700,700,600,600,600,600,700,700,800,800}; // 所有元素都将初始化为0
-            encorder_zero_down_limit = {700,700,600,600,500,500,500,500,600,600,700,700}; // 所有元素都将初始化为0
+      running_flag = 0;
+      for (size_t i = 0; i < 12; i++)
+      {
+        // stop calibration
+        if ((last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= encorder_zero_final_up_limit[i]) && 
+        (last_sensors_pull_push_data_1.pull_push_sensors_1[i] >= encorder_zero_final_down_limit[i]))
+        {
+          running_flag = running_flag + 1;
+        }
       }
+      
+      // RCLCPP_INFO(this->get_logger(), "Running_flag: %d", running_flag);
+
+      if(msg->robomaster_1_mode == 2){
+        
+
+        if (running_flag == 0)
+        {
+          for (size_t i = 0; i < 12; i++)
+          {
+            if (i == 0 || i == 1 || i == 10 || i == 11)
+            {
+              encorder_zero_up_limit[i] = tension_segment_1;
+            } else {
+              encorder_zero_up_limit[i] = 100;
+            }
+
+            encorder_zero_down_limit[i] = encorder_zero_up_limit[i] - 100;
+          } 
+        }
+
+        if (running_flag == 4)
+        {
+          for (size_t i = 0; i < 12; i++)
+          {
+            if (i == 0 || i == 1 || i == 10 || i == 11)
+            {
+              encorder_zero_up_limit[i] = tension_segment_1;
+            } else if(i == 2 || i == 3 || i == 8 || i == 9) {
+              encorder_zero_up_limit[i] = tension_segment_2;
+            } else {
+              encorder_zero_up_limit[i] = 100;
+            }
+
+            encorder_zero_down_limit[i] = encorder_zero_up_limit[i] - 100;
+          } 
+        }
+
+        if (running_flag == 8)
+        {
+          for (size_t i = 0; i < 12; i++)
+          {
+            if (i == 0 || i == 1 || i == 10 || i == 11)
+            {
+              encorder_zero_up_limit[i] = tension_segment_1;
+            } else if(i == 2 || i == 3 || i == 8 || i == 9) {
+              encorder_zero_up_limit[i] = tension_segment_2;
+            } else if(i == 4 || i == 5 || i == 6 || i == 7) {
+              encorder_zero_up_limit[i] = tension_segment_3;
+            }
+
+            encorder_zero_down_limit[i] = encorder_zero_up_limit[i] - 100;
+          } 
+        }
+      }
+
       if(msg->robomaster_1_mode == 12){
         for (size_t i = 0; i < 12; i++)
         {
@@ -134,16 +210,10 @@ private:
       // 首先确保我们已经接收到了其他传感器的数据
       if (received_sensors_robomaster_1 && received_sensors_pull_push_1) {
         // 执行处理逻辑，可能会涉及到控制消息和其他传感器数据
-        int16_t running_flag = 0;
+        
         for (size_t i = 0; i < 12; i++)
         {
-          int16_t delta;
-          // stop calibration
-          if ((last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= encorder_zero_up_limit[i]) && 
-          (last_sensors_pull_push_data_1.pull_push_sensors_1[i] >= encorder_zero_down_limit[i]))
-          {
-            running_flag = running_flag + 1;
-          }
+          int16_t delta;       
           // forward
           if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] < encorder_zero_down_limit[i]){
             if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_down_limit[i]) > error_threshold){
@@ -178,7 +248,7 @@ private:
         if (auto_lock == 0) 
         {          
           for (size_t i = 0; i < 12; i++) {
-            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 500) {
+            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 150) {
               if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
               {
                 msg->snake_speed_control_1_array[i] = 5;
@@ -214,7 +284,6 @@ private:
     
 
     if(msg->robomaster_1_mode == 5){ // Mode 5, Omega7 joystick
-      // if (received_joint_space_data) {
         std::array<double, 6> theta_1; // left hand omega7 
         std::array<double, 6> theta_2; // right hand omega7 
         std::array<double, 6> theta_initial = {0,0,0,0,0,0};
@@ -245,7 +314,7 @@ private:
 
         if (auto_lock == 0) {
           for (size_t i = 0; i < 12; i++) {
-            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 500) {
+            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 150) {
               if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
               {
                 msg->snake_speed_control_1_array[i] = 5;
@@ -269,11 +338,7 @@ private:
           // 发布消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
           publisher_control_topic_->publish(*msg);
-        }
-        
-      // }
-
-      
+        }      
     }
 
   }
@@ -350,13 +415,21 @@ private:
   bool received_joint_space_data = false;
 
   // 定义一个std::array类型的变量，大小为12
-  std::array<int32_t, 12> encorder_zero_up_limit = {1100,1100,800,800,800,800,800,800,800,800,1100,1100}; // 所有元素都将初始化为0
-  std::array<int32_t, 12> encorder_zero_down_limit = {1000,1000,700,700,700,700,700,700,700,700,1000,1000}; // 所有元素都将初始化为0
+  std::array<int32_t, 12> encorder_zero_up_limit = {0,0,0,0,0,0,0,0,0,0,0,0}; // 所有元素都将初始化为0
+  std::array<int32_t, 12> encorder_zero_down_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
+
   int32_t fine_delta = 500;
   int32_t coarse_delta = 5000;
   int32_t error_threshold = 2;
   int32_t auto_lock = 0;
   int32_t tension_limit = 2000; 
+  int16_t running_flag = 0;
+  int16_t tension_segment_1 = 800;
+  int16_t tension_segment_2 = 800;
+  int16_t tension_segment_3 = 800;
+  std::array<int32_t, 12> encorder_zero_final_up_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
+  std::array<int32_t, 12> encorder_zero_final_down_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
+
 };
 
 int main(int argc, char *argv[]) {

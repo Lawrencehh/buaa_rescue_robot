@@ -2,7 +2,7 @@
 #include "./ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 #include <QKeyEvent>  // 引入QKeyEvent头文件
-// #include <thread>
+#include <thread>
 // #include <chrono>
 #include <QTime>
 #include <chrono>
@@ -153,6 +153,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     msg->lower_linear_module_encorder_reset = ui->lower_LM_encorder_reset->value();
     msg->upper_linear_module_encorder_reset = ui->upper_LM_encorder_reset->value();
 
+    // 创建消息
+    auto theta_msg = std_msgs::msg::Float64MultiArray();
+    theta_msg.data = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
     QString keyText = event->text();  // 获取按下键的文本表示
     QByteArray byteArray = keyText.toLocal8Bit();  // 转换为 QByteArray
     char *keyChar = byteArray.data();  // 获取字符指针
@@ -203,9 +207,26 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
             case Qt::Key_O: // Calibration, Mode 5
-                msg->robomaster_1_mode = 5; // control by omega7
-                msg->robomaster_2_mode = 5; // control by omega7
                 control_topic_publisher->publish(*msg);  // 发布消息
+                theta_msg.data[0] = ui->robomaster1_theta_1->value() * M_PI / 180;
+                theta_msg.data[1] = ui->robomaster1_theta_2->value() * M_PI / 180;
+                theta_msg.data[2] = ui->robomaster1_theta_3->value() * M_PI / 180;
+                theta_msg.data[3] = ui->robomaster1_theta_4->value() * M_PI / 180;
+                theta_msg.data[4] = ui->robomaster1_theta_5->value() * M_PI / 180;
+                theta_msg.data[5] = ui->robomaster1_theta_6->value() * M_PI / 180;
+                theta_msg.data[6] = ui->robomaster2_theta_1->value() * M_PI / 180;
+                theta_msg.data[7] = ui->robomaster2_theta_2->value() * M_PI / 180;
+                theta_msg.data[8] = ui->robomaster2_theta_3->value() * M_PI / 180;
+                theta_msg.data[9] = ui->robomaster2_theta_4->value() * M_PI / 180;
+                theta_msg.data[10] = ui->robomaster2_theta_5->value() * M_PI / 180;
+                theta_msg.data[11] = ui->robomaster2_theta_6->value() * M_PI / 180;
+                // 发布消息
+                joint_space_topic_publisher->publish(theta_msg);
+                // 然后发布新的控制消息
+                std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 10ms
+                msg->robomaster_1_mode = 5; 
+                msg->robomaster_2_mode = 5;
+                control_topic_publisher->publish(*msg);  // 发布消息 
                 break;
             case Qt::Key_R: // Release, Mode 0
                 for (size_t i = 0; i < 12; i++)
@@ -333,6 +354,11 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
     msg->elevator_counter_reset = ui->elevator_counter_reset->value();
     msg->lower_linear_module_encorder_reset = ui->lower_LM_encorder_reset->value();
     msg->upper_linear_module_encorder_reset = ui->upper_LM_encorder_reset->value();
+
+    // 创建消息
+    auto theta_msg = std_msgs::msg::Float64MultiArray();
+    theta_msg.data = {0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+
     switch (event->key()) {
         case Qt::Key_Z: // reset the snake sensors, Mode be reset back to 0
             reset_flag = false;
@@ -351,8 +377,25 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
             break;
         case Qt::Key_O: // enable the snake sensors, Mode be reset back to 0
             reset_flag = false;
+            
+            theta_msg.data[0] = ui->robomaster1_theta_1->value() * M_PI / 180;
+            theta_msg.data[1] = ui->robomaster1_theta_2->value() * M_PI / 180;
+            theta_msg.data[2] = ui->robomaster1_theta_3->value() * M_PI / 180;
+            theta_msg.data[3] = ui->robomaster1_theta_4->value() * M_PI / 180;
+            theta_msg.data[4] = ui->robomaster1_theta_5->value() * M_PI / 180;
+            theta_msg.data[5] = ui->robomaster1_theta_6->value() * M_PI / 180;
+            theta_msg.data[6] = ui->robomaster2_theta_1->value() * M_PI / 180;
+            theta_msg.data[7] = ui->robomaster2_theta_2->value() * M_PI / 180;
+            theta_msg.data[8] = ui->robomaster2_theta_3->value() * M_PI / 180;
+            theta_msg.data[9] = ui->robomaster2_theta_4->value() * M_PI / 180;
+            theta_msg.data[10] = ui->robomaster2_theta_5->value() * M_PI / 180;
+            theta_msg.data[11] = ui->robomaster2_theta_6->value() * M_PI / 180;
+            // 发布消息
+            joint_space_topic_publisher->publish(theta_msg); 
+            // 然后发布新的控制消息
+            std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 10ms
             msg->robomaster_1_mode = 5; 
-            msg->robomaster_2_mode = 5; 
+            msg->robomaster_2_mode = 5;
             control_topic_publisher->publish(*msg);  // 发布消息
             break;
         case Qt::Key_P: // reset the Pull-Push force sensors, Mode 0
