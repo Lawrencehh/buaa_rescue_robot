@@ -116,18 +116,7 @@ private:
     if ((msg->robomaster_1_mode == 9) || (msg->robomaster_2_mode == 9))// mode 9, to enable
     {
       auto_lock = 0;
-    }
-
-    for (size_t i = 0; i < 12; i++)
-    {
-      if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 500) {
-        msg->snake_speed_control_1_array[i] = 5;
-      }
-      if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 500) {
-        msg->snake_speed_control_1_array[i] = 10;
-      }
-    }
-    
+    }   
 
     if(msg->robomaster_1_mode == 2 || msg->robomaster_1_mode == 12){ // Mode 2 and mode 12
       if(msg->robomaster_1_mode == 2){
@@ -179,7 +168,7 @@ private:
           }
         }
         // running flag
-        if (running_flag == 12) {         
+        if (running_flag == 12 && msg->robomaster_1_mode == 2) {         
           msg->robomaster_1_mode = 0;
           msg->robomaster_2_mode = 0;
           received_sensors_robomaster_1 = false;
@@ -188,6 +177,14 @@ private:
         // mode 6 verified
         if (auto_lock == 0) 
         {          
+          for (size_t i = 0; i < 12; i++) {
+            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 500) {
+              msg->snake_speed_control_1_array[i] = 5;
+            }
+            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 500) {
+              msg->snake_speed_control_1_array[i] = 10;
+            }
+          }
           // 然后发布新的控制消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
           publisher_control_topic_->publish(*msg);
@@ -233,6 +230,14 @@ private:
         }
 
         if (auto_lock == 0) {
+          for (size_t i = 0; i < 12; i++) {
+            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 500) {
+              msg->snake_speed_control_1_array[i] = 5;
+            }
+            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 500) {
+              msg->snake_speed_control_1_array[i] = 10;
+            }
+          }
           // 发布消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
           publisher_control_topic_->publish(*msg);

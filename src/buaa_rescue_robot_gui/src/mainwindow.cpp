@@ -349,6 +349,12 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
             msg->robomaster_2_mode = 0; 
             control_topic_publisher->publish(*msg);  // 发布消息
             break;
+        case Qt::Key_O: // enable the snake sensors, Mode be reset back to 0
+            reset_flag = false;
+            msg->robomaster_1_mode = 5; 
+            msg->robomaster_2_mode = 5; 
+            control_topic_publisher->publish(*msg);  // 发布消息
+            break;
         case Qt::Key_P: // reset the Pull-Push force sensors, Mode 0
             reset_flag = false;        
             msg->pull_push_sensors_reset = 0;
