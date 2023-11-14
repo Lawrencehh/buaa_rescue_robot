@@ -202,8 +202,8 @@ private:
       if(msg->robomaster_1_mode == 12){
         for (size_t i = 0; i < 12; i++)
         {
-          encorder_zero_down_limit[i] = 20;
-          encorder_zero_up_limit[i] = 50;
+          encorder_zero_down_limit[i] = 10;
+          encorder_zero_up_limit[i] = 20;
         } 
       }
       // 操作控制消息和其他传感器数据
@@ -246,29 +246,79 @@ private:
         }
         // mode 6 verified
         if (auto_lock == 0) 
-        {          
-          for (size_t i = 0; i < 12; i++) {
-            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 150) {
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
+        { 
+          int32_t mean_tension_segment_1 = (last_sensors_pull_push_data_1.pull_push_sensors_1[0] + last_sensors_pull_push_data_1.pull_push_sensors_1[1]
+          + last_sensors_pull_push_data_1.pull_push_sensors_1[10] + last_sensors_pull_push_data_1.pull_push_sensors_1[11]) / 4;
+          int32_t mean_tension_segment_2 = (last_sensors_pull_push_data_1.pull_push_sensors_1[2] + last_sensors_pull_push_data_1.pull_push_sensors_1[3]
+          + last_sensors_pull_push_data_1.pull_push_sensors_1[8] + last_sensors_pull_push_data_1.pull_push_sensors_1[9]) / 4;
+          int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors_1[4] + last_sensors_pull_push_data_1.pull_push_sensors_1[5]
+          + last_sensors_pull_push_data_1.pull_push_sensors_1[6] + last_sensors_pull_push_data_1.pull_push_sensors_1[7]) / 4;
+          int32_t error_tension = 20;
+          for (size_t i = 0; i < 12; i++)
+          {                
+            if (i == 0 || i == 1 || i == 10 || i == 11)
+            {            
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_1) > error_tension)
               {
-                msg->snake_speed_control_1_array[i] = 5;
+                int32_t adjust_speed = (mean_tension_segment_1 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                if (adjust_speed > 5)
+                {
+                  adjust_speed = 5;
+                }
+                if (adjust_speed < -5)
+                {
+                  adjust_speed = -5;
+                }
+                if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+                {
+                  adjust_speed = -adjust_speed;
+                }
+                
+                msg->snake_speed_control_1_array[i] = 10 + adjust_speed;
               }
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+            } 
+            if(i == 2 || i == 3 || i == 8 || i == 9) 
+            {
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_2) > error_tension)
               {
-                msg->snake_speed_control_1_array[i] = 10;
+                int32_t adjust_speed = (mean_tension_segment_2 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                if (adjust_speed > 5)
+                {
+                  adjust_speed = 5;
+                }
+                if (adjust_speed < -5)
+                {
+                  adjust_speed = -5;
+                }
+                if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+                {
+                  adjust_speed = -adjust_speed;
+                }
+                msg->snake_speed_control_1_array[i] = 10 + adjust_speed;
               }
-            }
-            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 100) {
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
+            } 
+            if(i == 4 || i == 5 || i == 6 || i == 7) 
+            {
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_3) > error_tension)
               {
-                msg->snake_speed_control_1_array[i] = 10;
-              }
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
-              {
-                msg->snake_speed_control_1_array[i] = 5;
+                int32_t adjust_speed = (mean_tension_segment_3 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                if (adjust_speed > 5)
+                {
+                  adjust_speed = 5;
+                }
+                if (adjust_speed < -5)
+                {
+                  adjust_speed = -5;
+                }
+                if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+                {
+                  adjust_speed = -adjust_speed;
+                }
+                msg->snake_speed_control_1_array[i] = 10 + adjust_speed;
               }
             }
           }
+
           // 然后发布新的控制消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
           publisher_control_topic_->publish(*msg);
@@ -279,9 +329,26 @@ private:
       }
     } 
 
+    if(msg->robomaster_1_mode == 3){ // Mode 3, Release
 
-      
-    
+      for (size_t i = 0; i < 12; i++)
+      {
+        if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] < 5){
+          msg-> snake_position_control_1_array[i]  = last_sensors_robomaster_data_1.snake_motor_encorder_position[i];
+          msg-> snake_speed_control_1_array[i] = 0;
+        } 
+        if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 5) {
+          msg-> snake_position_control_1_array[i]  = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] - 200000;
+          msg-> snake_speed_control_1_array[i] = 10;
+        }
+      }
+      if (auto_lock == 0)
+      {
+        // 发布消息
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
+        publisher_control_topic_->publish(*msg);
+      }
+    }
 
     if(msg->robomaster_1_mode == 5){ // Mode 5, Omega7 joystick
         std::array<double, 6> theta_1; // left hand omega7 
@@ -313,25 +380,73 @@ private:
         }
 
         if (auto_lock == 0) {
-          for (size_t i = 0; i < 12; i++) {
-            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 150) {
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
+          int32_t mean_tension_segment_1 = (last_sensors_pull_push_data_1.pull_push_sensors_1[0] + last_sensors_pull_push_data_1.pull_push_sensors_1[1]
+          + last_sensors_pull_push_data_1.pull_push_sensors_1[10] + last_sensors_pull_push_data_1.pull_push_sensors_1[11]) / 4;
+          int32_t mean_tension_segment_2 = (last_sensors_pull_push_data_1.pull_push_sensors_1[2] + last_sensors_pull_push_data_1.pull_push_sensors_1[3]
+          + last_sensors_pull_push_data_1.pull_push_sensors_1[8] + last_sensors_pull_push_data_1.pull_push_sensors_1[9]) / 4;
+          int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors_1[4] + last_sensors_pull_push_data_1.pull_push_sensors_1[5]
+          + last_sensors_pull_push_data_1.pull_push_sensors_1[6] + last_sensors_pull_push_data_1.pull_push_sensors_1[7]) / 4;
+          int32_t error_tension = 20;
+          for (size_t i = 0; i < 12; i++)
+          {                
+            if (i == 0 || i == 1 || i == 10 || i == 11)
+            {            
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_1) > error_tension)
               {
-                msg->snake_speed_control_1_array[i] = 5;
+                int32_t adjust_speed = (mean_tension_segment_1 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                if (adjust_speed > 5)
+                {
+                  adjust_speed = 5;
+                }
+                if (adjust_speed < -5)
+                {
+                  adjust_speed = -5;
+                }
+                if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+                {
+                  adjust_speed = -adjust_speed;
+                }
+                msg->snake_speed_control_1_array[i] = 10 + adjust_speed;
               }
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+            } 
+            if(i == 2 || i == 3 || i == 8 || i == 9) 
+            {
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_2) > error_tension)
               {
-                msg->snake_speed_control_1_array[i] = 10;
+                int32_t adjust_speed = (mean_tension_segment_2 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                if (adjust_speed > 5)
+                {
+                  adjust_speed = 5;
+                }
+                if (adjust_speed < -5)
+                {
+                  adjust_speed = -5;
+                }
+                if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+                {
+                  adjust_speed = -adjust_speed;
+                }
+                msg->snake_speed_control_1_array[i] = 10 + adjust_speed;
               }
-            }
-            if (last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= 100) {
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] > 0)
+            } 
+            if(i == 4 || i == 5 || i == 6 || i == 7) 
+            {
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_3) > error_tension)
               {
-                msg->snake_speed_control_1_array[i] = 10;
-              }
-              if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
-              {
-                msg->snake_speed_control_1_array[i] = 5;
+                int32_t adjust_speed = (mean_tension_segment_3 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                if (adjust_speed > 5)
+                {
+                  adjust_speed = 5;
+                }
+                if (adjust_speed < -5)
+                {
+                  adjust_speed = -5;
+                }
+                if (last_sensors_robomaster_data_1.snake_motor_encorder_speed[i] < 0)
+                {
+                  adjust_speed = -adjust_speed;
+                }
+                msg->snake_speed_control_1_array[i] = 10 + adjust_speed;
               }
             }
           }
@@ -424,9 +539,9 @@ private:
   int32_t auto_lock = 0;
   int32_t tension_limit = 2000; 
   int16_t running_flag = 0;
-  int16_t tension_segment_1 = 800;
-  int16_t tension_segment_2 = 800;
-  int16_t tension_segment_3 = 800;
+  int16_t tension_segment_1 = 1100;
+  int16_t tension_segment_2 = 600;
+  int16_t tension_segment_3 = 150;
   std::array<int32_t, 12> encorder_zero_final_up_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
   std::array<int32_t, 12> encorder_zero_final_down_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
 

@@ -228,14 +228,14 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 msg->robomaster_2_mode = 5;
                 control_topic_publisher->publish(*msg);  // 发布消息 
                 break;
-            case Qt::Key_R: // Release, Mode 0
+            case Qt::Key_R: // Release, Mode 3
                 for (size_t i = 0; i < 12; i++)
                 {
                      msg->snake_position_control_1_array[i] = -200000;
                      msg->snake_position_control_2_array[i] = -200000;
                 }                
-                msg->robomaster_1_mode = 0; // Release
-                msg->robomaster_2_mode = 0; // Release
+                msg->robomaster_1_mode = 3; // Release
+                msg->robomaster_2_mode = 3; // Release
                 control_topic_publisher->publish(*msg);  // 发布消息
                 break;
             case Qt::Key_A: // enable, Mode 9
