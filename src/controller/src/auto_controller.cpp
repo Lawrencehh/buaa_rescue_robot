@@ -143,7 +143,6 @@ private:
           running_flag = running_flag + 1;
         }
       }
-      
       // RCLCPP_INFO(this->get_logger(), "Running_flag: %d", running_flag);
 
       if(msg->robomaster_1_mode == 2){
