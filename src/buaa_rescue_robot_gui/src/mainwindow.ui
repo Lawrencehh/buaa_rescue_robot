@@ -2170,7 +2170,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>770</y>
+      <y>765</y>
       <width>201</width>
       <height>231</height>
      </rect>
@@ -2208,7 +2208,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>330</x>
-      <y>770</y>
+      <y>765</y>
       <width>201</width>
       <height>231</height>
      </rect>
@@ -2246,9 +2246,9 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>670</x>
-      <y>800</y>
+      <y>795</y>
       <width>131</width>
-      <height>201</height>
+      <height>196</height>
      </rect>
     </property>
     <property name="layoutDirection">
@@ -2262,7 +2262,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>540</x>
-      <y>810</y>
+      <y>805</y>
       <width>111</width>
       <height>191</height>
      </rect>
@@ -2334,7 +2334,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>810</y>
+      <y>805</y>
       <width>111</width>
       <height>191</height>
      </rect>
@@ -2406,7 +2406,7 @@ p, li { white-space: pre-wrap; }
     <property name="geometry">
      <rect>
       <x>830</x>
-      <y>800</y>
+      <y>795</y>
       <width>431</width>
       <height>201</height>
      </rect>
