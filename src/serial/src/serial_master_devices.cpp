@@ -2,7 +2,7 @@
 #include <rclcpp/rclcpp.hpp>    // 引入ROS 2的核心库
 #include <asio.hpp> // 引入ASIO库，用于串口通信
 #include <std_msgs/msg/string.hpp>  // 引入标准消息类型
-#include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_master.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include <thread>   // 用于线程中的sleep_for函数
 #include <chrono>   // 用于时间表示
@@ -96,8 +96,8 @@ public:
         timer_ = this->create_wall_timer(std::chrono::milliseconds(100),  // 100毫秒，即10 Hz
             std::bind(&SerialMasterDevices::timer_callback, this));
         
-        // 创建订阅器，订阅名为"control_topic"的话题
-          subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10, 
+        // 创建订阅器，订阅名为"master_control_topic"的话题
+          subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageMaster>("master_control_topic", 10, 
           std::bind(&SerialMasterDevices::callback, this, std::placeholders::_1));
 
         // 在SerialMasterDevices的构造函数中初始化这个发布器
@@ -380,7 +380,7 @@ private:    // 私有成员函数和变量
     }
 
  
-    void callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg){        
+    void callback(const buaa_rescue_robot_msgs::msg::ControlMessageMaster::SharedPtr msg){        
         // 直接使用类成员变量
         // 业务逻辑，如控制elevator等
         // serial_port sending control command to the elevator 
@@ -591,7 +591,7 @@ private:    // 私有成员函数和变量
 
     rclcpp::TimerBase::SharedPtr timer_;    // 定时器
 
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr subscription_;  //订阅器
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessageMaster>::SharedPtr subscription_;  //订阅器
     std::shared_ptr<asio::serial_port> serial_port_;    // 串口对象
     asio::io_service io_;   // ASIO I/O服务
     std::vector<uint8_t> modbus_frame_; // 存储Modbus协议帧

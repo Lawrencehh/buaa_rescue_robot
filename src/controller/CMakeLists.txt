@@ -14,16 +14,13 @@ find_package(rosidl_default_generators REQUIRED)
 find_package(buaa_rescue_robot_msgs REQUIRED)
 
 # Create executable
-add_executable(keyboard_publisher src/keyboard_publisher.cpp)
 add_executable(auto_controller src/auto_controller.cpp)
 
 # Add dependencies to the executable target
-ament_target_dependencies(keyboard_publisher rclcpp std_msgs buaa_rescue_robot_msgs)
 ament_target_dependencies(auto_controller rclcpp std_msgs buaa_rescue_robot_msgs)
 
 
 install(TARGETS
-  keyboard_publisher
   auto_controller
   DESTINATION lib/${PROJECT_NAME}
 )

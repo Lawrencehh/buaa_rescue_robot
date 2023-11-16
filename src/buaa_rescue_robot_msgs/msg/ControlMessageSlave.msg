@@ -14,11 +14,3 @@ int16 gripper_c610_position_2 # C610 postion control: 0-8091
 int16 gripper_sts3032_position_2 # STC3032 postion control: 0-4095
 int8 robomaster_2_mode # Mode control for robomaster 2 motor encorders
 
-# Master device
-int16 elevator_control
-int32 lower_linear_module_control
-int32 upper_linear_module_control
-int16 pull_push_sensors_reset # reset control for pull push sensors
-int16 elevator_counter_reset # reset elevator counter
-int16 lower_linear_module_encorder_reset # reset lower_linear_module_encorder
-int16 upper_linear_module_encorder_reset # reset upper_linear_module_encorder

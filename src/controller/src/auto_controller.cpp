@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "buaa_rescue_robot_msgs/msg/control_message.hpp"
+#include "buaa_rescue_robot_msgs/msg/control_message_slave.hpp"
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"
 #include "std_msgs/msg/float64_multi_array.hpp"
@@ -11,9 +11,9 @@ class AutoController : public rclcpp::Node {
 public:
   AutoController() : Node("auto_controller") {
     // 初始化订阅者，订阅各个话题
-    subscriber_control_topic_1 = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>(
-      "control_topic", 10,
-      std::bind(&AutoController::control_topic_callback, this, std::placeholders::_1));
+    subscriber_slave_control_topic_1 = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>(
+      "slave_control_topic", 10,
+      std::bind(&AutoController::slave_control_topic_callback, this, std::placeholders::_1));
 
     subscriber_sensors_robomaster_1 = this->create_subscription<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>(
       "Sensors_Robomaster_1", 10,
@@ -28,7 +28,7 @@ public:
       std::bind(&AutoController::joint_space_callback, this, std::placeholders::_1));
 
     // 初始化发布者
-    publisher_control_topic_ = this->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessage>("control_topic", 10);
+    publisher_slave_control_topic_ = this->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic", 10);
   }
 
   // theta to rope
@@ -107,7 +107,7 @@ public:
   }
 
 private:
-  void control_topic_callback(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
+  void slave_control_topic_callback(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
     if ((msg->robomaster_1_mode == 6) || (msg->robomaster_2_mode == 6))// mode 6, to quit
     {
       auto_lock = 1;
@@ -252,7 +252,7 @@ private:
           + last_sensors_pull_push_data_1.pull_push_sensors_1[8] + last_sensors_pull_push_data_1.pull_push_sensors_1[9]) / 4;
           int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors_1[4] + last_sensors_pull_push_data_1.pull_push_sensors_1[5]
           + last_sensors_pull_push_data_1.pull_push_sensors_1[6] + last_sensors_pull_push_data_1.pull_push_sensors_1[7]) / 4;
-          int32_t error_tension = 20;
+          int32_t error_tension = 5;
           for (size_t i = 0; i < 12; i++)
           {                
             if (i == 0 || i == 1 || i == 10 || i == 11)
@@ -320,7 +320,7 @@ private:
 
           // 然后发布新的控制消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
-          publisher_control_topic_->publish(*msg);
+          publisher_slave_control_topic_->publish(*msg);
         }
 
       } else {
@@ -345,7 +345,7 @@ private:
       {
         // 发布消息
         std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
-        publisher_control_topic_->publish(*msg);
+        publisher_slave_control_topic_->publish(*msg);
       }
     }
 
@@ -385,7 +385,7 @@ private:
           + last_sensors_pull_push_data_1.pull_push_sensors_1[8] + last_sensors_pull_push_data_1.pull_push_sensors_1[9]) / 4;
           int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors_1[4] + last_sensors_pull_push_data_1.pull_push_sensors_1[5]
           + last_sensors_pull_push_data_1.pull_push_sensors_1[6] + last_sensors_pull_push_data_1.pull_push_sensors_1[7]) / 4;
-          int32_t error_tension = 20;
+          int32_t error_tension = 5;
           for (size_t i = 0; i < 12; i++)
           {                
             if (i == 0 || i == 1 || i == 10 || i == 11)
@@ -451,7 +451,7 @@ private:
           }
           // 发布消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
-          publisher_control_topic_->publish(*msg);
+          publisher_slave_control_topic_->publish(*msg);
         }      
     }
 
@@ -473,7 +473,7 @@ private:
     // 保存拉推传感器数据
     last_sensors_pull_push_data_1 = *pull_push_sensors_msg;
     received_sensors_pull_push_1 = true;
-    auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessage>();
+    auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlave>();
     for (size_t i = 0; i < 12; i++)
     {
       if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > tension_limit)
@@ -490,20 +490,11 @@ private:
         msg->gripper_c610_position_2 = 0;
         msg->gripper_sts3032_position_2 = 0;
 
-        msg->elevator_control = 0;
-        msg->lower_linear_module_control = 0;
-        msg->upper_linear_module_control = 0;
-    
-
-        msg->pull_push_sensors_reset = 0;
-        msg->elevator_counter_reset = 0; // reset to be 0
-        msg->lower_linear_module_encorder_reset = 0; // reset to be 0
-        msg->upper_linear_module_encorder_reset = 0; // reset to be 0
         msg->robomaster_1_mode = 6; // quit
         msg->robomaster_2_mode = 6; // quit
         // 然后发布新的控制消息
         std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 100ms
-        publisher_control_topic_->publish(*msg);
+        publisher_slave_control_topic_->publish(*msg);
       }
       
       
@@ -511,11 +502,11 @@ private:
     
   }
 
-  rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr subscriber_control_topic_1;
+  rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr subscriber_slave_control_topic_1;
   rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>::SharedPtr subscriber_sensors_robomaster_1;
   rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>::SharedPtr subscriber_sensors_pull_push_1;
   rclcpp::Subscription<std_msgs::msg::Float64MultiArray>::SharedPtr subscriber_joint_space;
-  rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr publisher_control_topic_;
+  rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr publisher_slave_control_topic_;
 
 
   // 成员变量用于保存最新接收到的传感器数据
@@ -538,6 +529,9 @@ private:
   int32_t auto_lock = 0;
   int32_t tension_limit = 2000; 
   int16_t running_flag = 0;
+  // int16_t tension_segment_1 = 1100;
+  // int16_t tension_segment_2 = 1100;
+  // int16_t tension_segment_3 = 1100;
   int16_t tension_segment_1 = 1100;
   int16_t tension_segment_2 = 600;
   int16_t tension_segment_3 = 150;

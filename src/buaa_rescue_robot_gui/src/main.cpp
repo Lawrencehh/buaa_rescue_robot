@@ -13,7 +13,8 @@
 #include <QTimer>
 
 #include <std_msgs/msg/string.hpp>
-#include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_master.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_slave.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
@@ -35,13 +36,24 @@ int main(int argc, char **argv) {
     mainWindow.show();  // 显示主窗口
 
     // show 
-    auto subscription_control_topic = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessage>(
-        "control_topic",
+    auto subscription_slave_control_topic = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>(
+        "slave_control_topic",
         100,
-        [&](const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
+        [&](const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
 
             // 在这里更新QSpinBox的值
-            mainWindow.updateControlIndicator(msg);     
+            mainWindow.updateSlaveControlIndicator(msg);     
+        }
+    );
+
+    // show 
+    auto subscription_master_control_topic = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageMaster>(
+        "master_control_topic",
+        100,
+        [&](const buaa_rescue_robot_msgs::msg::ControlMessageMaster::SharedPtr msg) {
+
+            // 在这里更新QSpinBox的值
+            mainWindow.updateMasterControlIndicator(msg);     
         }
     );
 

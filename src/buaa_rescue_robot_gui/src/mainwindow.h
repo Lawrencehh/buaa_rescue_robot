@@ -5,7 +5,8 @@
 #include <QMainWindow>
 #include <rclcpp/rclcpp.hpp>  
 #include <QStringListModel>  
-#include "buaa_rescue_robot_msgs/msg/control_message.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_master.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_slave.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
@@ -73,7 +74,7 @@ public:
 
 
 
-    void updateControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessage::SharedPtr msg) {
+    void updateSlaveControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
         // 在这里更新QSpinBox的值
         // robomaster 1
         ui->robomaster1_snake_motor_speed_control_1->setValue(msg->snake_speed_control_1_array[0]);  
@@ -140,6 +141,10 @@ public:
         ui->gripper2_c610->setValue(msg->gripper_c610_position_2);
         ui->gripper2_sts3032->setValue(msg->gripper_sts3032_position_2);
         ui->robomaster2_mode->setValue(msg->robomaster_2_mode);
+    }
+
+    void updateMasterControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessageMaster::SharedPtr msg) {
+        // 在这里更新QSpinBox的值
         // master devices
         ui->elevator_speed_control->setValue(msg->elevator_control);
         ui->lower_LM_speed_control->setValue(msg->lower_linear_module_control);
@@ -176,15 +181,8 @@ public slots:
 private:
     
     rclcpp::Node::SharedPtr node;  // 添加这一行，声明一个ROS 2节点
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr ControlMessageSubscription_;
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr SensorsMessageSubscription_1;
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr SensorsMessageSubscription_2;
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator>::SharedPtr SensorsMessageSubscription_3;
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>::SharedPtr SensorsMessageSubscription_4;
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>::SharedPtr SensorsMessageSubscription_5;
-    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr control_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
-    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessage>::SharedPtr control_topic_subscription; // ROS 2 subscriber
-
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr slave_control_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageMaster>::SharedPtr master_control_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
     rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr joint_space_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
 
     QStringListModel *ControlMessageDisplay;  
