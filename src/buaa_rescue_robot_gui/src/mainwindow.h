@@ -49,8 +49,8 @@ public:
     void updateSensorsMessageDisplay_3(const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator::SharedPtr msg) {
         QStringList list;
         list << QString::number(msg->elevator_counter);
-        list << QString::number(msg->lower_encorder);
-        list << QString::number(msg->upper_encorder);
+        list << QString::number(msg->lower_encorder, 'f', 2);
+        list << QString::number(msg->upper_encorder, 'f', 2);
         SensorsMessageDisplay_3->setStringList(list);
     }
 

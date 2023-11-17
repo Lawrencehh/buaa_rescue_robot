@@ -360,8 +360,8 @@ private:    // 私有成员函数和变量
                     // 发布到sensors_data话题
                         auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator();       
                         msg.elevator_counter = elevator_counter;
-                        msg.lower_encorder = lower_encorder;
-                        msg.upper_encorder = upper_encorder;
+                        msg.lower_encorder = static_cast<double>(lower_encorder * 18.0 / 131072.0);
+                        msg.upper_encorder = static_cast<double>(upper_encorder * 18.0 / 131072.0);
                         publisher_->publish(msg);
 
                     
