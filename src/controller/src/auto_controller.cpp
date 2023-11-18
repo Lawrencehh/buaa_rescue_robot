@@ -137,8 +137,8 @@ private:
       for (size_t i = 0; i < 12; i++)
       {
         // stop calibration
-        if ((last_sensors_pull_push_data_1.pull_push_sensors_1[i] <= encorder_zero_final_up_limit[i]) && 
-        (last_sensors_pull_push_data_1.pull_push_sensors_1[i] >= encorder_zero_final_down_limit[i]))
+        if ((last_sensors_pull_push_data_1.pull_push_sensors[i] <= encorder_zero_final_up_limit[i]) && 
+        (last_sensors_pull_push_data_1.pull_push_sensors[i] >= encorder_zero_final_down_limit[i]))
         {
           running_flag = running_flag + 1;
         }
@@ -214,8 +214,8 @@ private:
         {
           int16_t delta;       
           // forward
-          if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] < encorder_zero_down_limit[i]){
-            if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_down_limit[i]) > error_threshold){
+          if(last_sensors_pull_push_data_1.pull_push_sensors[i] < encorder_zero_down_limit[i]){
+            if(abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - encorder_zero_down_limit[i]) > error_threshold){
               delta = coarse_delta;
             } else{
               delta = fine_delta;
@@ -225,8 +225,8 @@ private:
             }
           }
           // backward
-          if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] > encorder_zero_up_limit[i]){
-            if(abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - encorder_zero_up_limit[i]) > error_threshold){
+          if(last_sensors_pull_push_data_1.pull_push_sensors[i] > encorder_zero_up_limit[i]){
+            if(abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - encorder_zero_up_limit[i]) > error_threshold){
               delta = coarse_delta;
             } else{
               delta = fine_delta;
@@ -246,20 +246,20 @@ private:
         // mode 6 verified
         if (auto_lock == 0) 
         { 
-          int32_t mean_tension_segment_1 = (last_sensors_pull_push_data_1.pull_push_sensors_1[0] + last_sensors_pull_push_data_1.pull_push_sensors_1[1]
-          + last_sensors_pull_push_data_1.pull_push_sensors_1[10] + last_sensors_pull_push_data_1.pull_push_sensors_1[11]) / 4;
-          int32_t mean_tension_segment_2 = (last_sensors_pull_push_data_1.pull_push_sensors_1[2] + last_sensors_pull_push_data_1.pull_push_sensors_1[3]
-          + last_sensors_pull_push_data_1.pull_push_sensors_1[8] + last_sensors_pull_push_data_1.pull_push_sensors_1[9]) / 4;
-          int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors_1[4] + last_sensors_pull_push_data_1.pull_push_sensors_1[5]
-          + last_sensors_pull_push_data_1.pull_push_sensors_1[6] + last_sensors_pull_push_data_1.pull_push_sensors_1[7]) / 4;
+          int32_t mean_tension_segment_1 = (last_sensors_pull_push_data_1.pull_push_sensors[0] + last_sensors_pull_push_data_1.pull_push_sensors[1]
+          + last_sensors_pull_push_data_1.pull_push_sensors[10] + last_sensors_pull_push_data_1.pull_push_sensors[11]) / 4;
+          int32_t mean_tension_segment_2 = (last_sensors_pull_push_data_1.pull_push_sensors[2] + last_sensors_pull_push_data_1.pull_push_sensors[3]
+          + last_sensors_pull_push_data_1.pull_push_sensors[8] + last_sensors_pull_push_data_1.pull_push_sensors[9]) / 4;
+          int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors[4] + last_sensors_pull_push_data_1.pull_push_sensors[5]
+          + last_sensors_pull_push_data_1.pull_push_sensors[6] + last_sensors_pull_push_data_1.pull_push_sensors[7]) / 4;
           int32_t error_tension = 5;
           for (size_t i = 0; i < 12; i++)
           {                
             if (i == 0 || i == 1 || i == 10 || i == 11)
             {            
-              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_1) > error_tension)
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - mean_tension_segment_1) > error_tension)
               {
-                int32_t adjust_speed = (mean_tension_segment_1 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                int32_t adjust_speed = (mean_tension_segment_1 - last_sensors_pull_push_data_1.pull_push_sensors[i]) / error_tension;
                 if (adjust_speed > 5)
                 {
                   adjust_speed = 5;
@@ -278,9 +278,9 @@ private:
             } 
             if(i == 2 || i == 3 || i == 8 || i == 9) 
             {
-              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_2) > error_tension)
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - mean_tension_segment_2) > error_tension)
               {
-                int32_t adjust_speed = (mean_tension_segment_2 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                int32_t adjust_speed = (mean_tension_segment_2 - last_sensors_pull_push_data_1.pull_push_sensors[i]) / error_tension;
                 if (adjust_speed > 5)
                 {
                   adjust_speed = 5;
@@ -298,9 +298,9 @@ private:
             } 
             if(i == 4 || i == 5 || i == 6 || i == 7) 
             {
-              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_3) > error_tension)
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - mean_tension_segment_3) > error_tension)
               {
-                int32_t adjust_speed = (mean_tension_segment_3 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                int32_t adjust_speed = (mean_tension_segment_3 - last_sensors_pull_push_data_1.pull_push_sensors[i]) / error_tension;
                 if (adjust_speed > 5)
                 {
                   adjust_speed = 5;
@@ -332,11 +332,11 @@ private:
 
       for (size_t i = 0; i < 12; i++)
       {
-        if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] < 5){
+        if(last_sensors_pull_push_data_1.pull_push_sensors[i] < 5){
           msg-> snake_position_control_1_array[i]  = last_sensors_robomaster_data_1.snake_motor_encorder_position[i];
           msg-> snake_speed_control_1_array[i] = 0;
         } 
-        if(last_sensors_pull_push_data_1.pull_push_sensors_1[i] > 5) {
+        if(last_sensors_pull_push_data_1.pull_push_sensors[i] > 5) {
           msg-> snake_position_control_1_array[i]  = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] - 200000;
           msg-> snake_speed_control_1_array[i] = 10;
         }
@@ -379,20 +379,20 @@ private:
         }
 
         if (auto_lock == 0) {
-          int32_t mean_tension_segment_1 = (last_sensors_pull_push_data_1.pull_push_sensors_1[0] + last_sensors_pull_push_data_1.pull_push_sensors_1[1]
-          + last_sensors_pull_push_data_1.pull_push_sensors_1[10] + last_sensors_pull_push_data_1.pull_push_sensors_1[11]) / 4;
-          int32_t mean_tension_segment_2 = (last_sensors_pull_push_data_1.pull_push_sensors_1[2] + last_sensors_pull_push_data_1.pull_push_sensors_1[3]
-          + last_sensors_pull_push_data_1.pull_push_sensors_1[8] + last_sensors_pull_push_data_1.pull_push_sensors_1[9]) / 4;
-          int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors_1[4] + last_sensors_pull_push_data_1.pull_push_sensors_1[5]
-          + last_sensors_pull_push_data_1.pull_push_sensors_1[6] + last_sensors_pull_push_data_1.pull_push_sensors_1[7]) / 4;
+          int32_t mean_tension_segment_1 = (last_sensors_pull_push_data_1.pull_push_sensors[0] + last_sensors_pull_push_data_1.pull_push_sensors[1]
+          + last_sensors_pull_push_data_1.pull_push_sensors[10] + last_sensors_pull_push_data_1.pull_push_sensors[11]) / 4;
+          int32_t mean_tension_segment_2 = (last_sensors_pull_push_data_1.pull_push_sensors[2] + last_sensors_pull_push_data_1.pull_push_sensors[3]
+          + last_sensors_pull_push_data_1.pull_push_sensors[8] + last_sensors_pull_push_data_1.pull_push_sensors[9]) / 4;
+          int32_t mean_tension_segment_3 = (last_sensors_pull_push_data_1.pull_push_sensors[4] + last_sensors_pull_push_data_1.pull_push_sensors[5]
+          + last_sensors_pull_push_data_1.pull_push_sensors[6] + last_sensors_pull_push_data_1.pull_push_sensors[7]) / 4;
           int32_t error_tension = 5;
           for (size_t i = 0; i < 12; i++)
           {                
             if (i == 0 || i == 1 || i == 10 || i == 11)
             {            
-              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_1) > error_tension)
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - mean_tension_segment_1) > error_tension)
               {
-                int32_t adjust_speed = (mean_tension_segment_1 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                int32_t adjust_speed = (mean_tension_segment_1 - last_sensors_pull_push_data_1.pull_push_sensors[i]) / error_tension;
                 if (adjust_speed > 5)
                 {
                   adjust_speed = 5;
@@ -410,9 +410,9 @@ private:
             } 
             if(i == 2 || i == 3 || i == 8 || i == 9) 
             {
-              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_2) > error_tension)
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - mean_tension_segment_2) > error_tension)
               {
-                int32_t adjust_speed = (mean_tension_segment_2 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                int32_t adjust_speed = (mean_tension_segment_2 - last_sensors_pull_push_data_1.pull_push_sensors[i]) / error_tension;
                 if (adjust_speed > 5)
                 {
                   adjust_speed = 5;
@@ -430,9 +430,9 @@ private:
             } 
             if(i == 4 || i == 5 || i == 6 || i == 7) 
             {
-              if (abs(last_sensors_pull_push_data_1.pull_push_sensors_1[i] - mean_tension_segment_3) > error_tension)
+              if (abs(last_sensors_pull_push_data_1.pull_push_sensors[i] - mean_tension_segment_3) > error_tension)
               {
-                int32_t adjust_speed = (mean_tension_segment_3 - last_sensors_pull_push_data_1.pull_push_sensors_1[i]) / error_tension;
+                int32_t adjust_speed = (mean_tension_segment_3 - last_sensors_pull_push_data_1.pull_push_sensors[i]) / error_tension;
                 if (adjust_speed > 5)
                 {
                   adjust_speed = 5;
@@ -476,7 +476,7 @@ private:
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlave>();
     for (size_t i = 0; i < 12; i++)
     {
-      if (abs(pull_push_sensors_msg->pull_push_sensors_1[i]) > tension_limit)
+      if (abs(pull_push_sensors_msg->pull_push_sensors[i]) > tension_limit)
       {
         msg->snake_speed_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};
         msg->snake_position_control_1_array = {0,0,0,0,0,0,0,0,0,0,0,0};

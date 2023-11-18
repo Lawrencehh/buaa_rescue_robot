@@ -17,11 +17,25 @@ def generate_launch_description():
             name='serial_robomaster_1',
             output='screen'
         ),
+        # 启动serial_robomaster_2节点
+        Node(
+            package='serial',
+            executable='serial_robomaster_2',
+            name='serial_robomaster_2',
+            output='screen'
+        ),
         # 启动serial_PullPushSensors_1节点
         Node(
             package='serial',
             executable='serial_PullPushSensors_1',
             name='serial_PullPushSensors_1',
+            output='screen'
+        ),
+        # 启动serial_PullPushSensors_2节点
+        Node(
+            package='serial',
+            executable='serial_PullPushSensors_2',
+            name='serial_PullPushSensors_2',
             output='screen'
         ),
         # 启动buaa_rescue_robot_gui_node节点

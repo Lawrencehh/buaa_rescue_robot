@@ -1,1 +1,1 @@
-int32[12] pull_push_sensors_1 #pull_push_sensors of the snake 1 (unit: 10 grams)
+int32[12] pull_push_sensors #pull_push_sensors of the snake (unit: 0.1 kg force)

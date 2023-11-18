@@ -77,6 +77,15 @@ int main(int argc, char **argv) {
         }
     );
 
+    auto subscription_sensors_topic_2 = node->create_subscription<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>(
+        "Sensors_Robomaster_2",
+        10,
+        [&](const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
+            mainWindow.updateSensorsMessageDisplay_2(msg);  // 通过MainWindow实例来更新 
+            mainWindow.updateSensorsMessageDisplay_7(msg);  // 通过MainWindow实例来更新 
+        }
+    );
+
     auto subscription_sensors_topic_3 = node->create_subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator>(
         "Sensors_Elevator_LinearModules",
         10,
@@ -87,6 +96,14 @@ int main(int argc, char **argv) {
 
     auto subscription_sensors_topic_4 = node->create_subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>(
         "Sensors_Pull_Push_Sensors_1",
+        10,
+        [&](const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors::SharedPtr msg) {
+            mainWindow.updateSensorsMessageDisplay_4(msg);  // 通过MainWindow实例来更新 
+        }
+    );
+
+    auto subscription_sensors_topic_5 = node->create_subscription<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>(
+        "Sensors_Pull_Push_Sensors_2",
         10,
         [&](const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors::SharedPtr msg) {
             mainWindow.updateSensorsMessageDisplay_4(msg);  // 通过MainWindow实例来更新 

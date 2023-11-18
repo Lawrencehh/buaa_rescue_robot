@@ -70,16 +70,16 @@ uint16_t swap_endian(uint16_t value) {
 
 // 类定义
 // 创建一个继承自rclcpp::Node的serial_robomaster_1类，并在构造函数中进行初始化。
-class serial_PullPushSensors_1 : public rclcpp::Node
+class serial_PullPushSensors_2 : public rclcpp::Node
 {
 public:
-    serial_PullPushSensors_1() : Node("serial_PullPushSensors_1")
+    serial_PullPushSensors_2() : Node("serial_PullPushSensors_2")
     {
         // 尝试初始化串口，如果出错，记录错误信息。
         try {
-            serial_port_1 = std::make_shared<asio::serial_port>(io_, "/dev/ttyPullPushSensors1");  // 这里的路径需要根据您的设备进行更改
+            serial_port_1 = std::make_shared<asio::serial_port>(io_, "/dev/ttyPullPushSensors3");  // 这里的路径需要根据您的设备进行更改
             serial_port_1->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
-            serial_port_2 = std::make_shared<asio::serial_port>(io_, "/dev/ttyPullPushSensors2");  // 这里的路径需要根据您的设备进行更改
+            serial_port_2 = std::make_shared<asio::serial_port>(io_, "/dev/ttyPullPushSensors4");  // 这里的路径需要根据您的设备进行更改
             serial_port_2->set_option(asio::serial_port::baud_rate(115200));  // 设置波特率
         }
         catch (const std::exception &e) {
@@ -89,14 +89,14 @@ public:
 
         // 创建定时器，定时发送消息
         timer_ = this->create_wall_timer(std::chrono::milliseconds(100),  // 100毫秒，即10 Hz
-            std::bind(&serial_PullPushSensors_1::timer_callback, this));
+            std::bind(&serial_PullPushSensors_2::timer_callback, this));
         
         // 创建订阅器，订阅名为"master_control_topic"的话题
           subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageMaster>("master_control_topic", 10, 
-          std::bind(&serial_PullPushSensors_1::callback, this, std::placeholders::_1));
+          std::bind(&serial_PullPushSensors_2::callback, this, std::placeholders::_1));
 
-        // 在serial_PullPushSensors_1的构造函数中初始化这个发布器
-        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>("Sensors_Pull_Push_Sensors_1", 10);
+        // 在serial_PullPushSensors_2的构造函数中初始化这个发布器
+        publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors>("Sensors_Pull_Push_Sensors_2", 10);
 
 
         // 在构造函数中启动接收
@@ -242,11 +242,11 @@ private:    // 私有成员函数和变量
                         std::vector<uint8_t> frame(it_pull_push_encorder+1, it_pull_push_encorder + 30);
 
                         // 处理Modbus帧并获取elevator_counter
-                        pull_push_sensors_1_part = process_modbus_frame_for_pull_push_sensors(frame);
+                        pull_push_sensors_2_part = process_modbus_frame_for_pull_push_sensors(frame);
 
                         for (size_t i = 0; i < 6; i++)
                         {
-                            pull_push_sensors_1[2*i] = pull_push_sensors_1_part[i];
+                            pull_push_sensors_2[2*i] = pull_push_sensors_2_part[i];
                         }
 
                         // 移除这34字节(including the ending 0xCFFCCCFF)及之前的字节
@@ -254,7 +254,7 @@ private:    // 私有成员函数和变量
                     }
                     received_modbus_frame_1.clear();
                     auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors();       
-                    msg.pull_push_sensors = pull_push_sensors_1;
+                    msg.pull_push_sensors = pull_push_sensors_2;
                     publisher_->publish(msg);
 
                     // 递归调用以持续接收
@@ -309,11 +309,11 @@ private:    // 私有成员函数和变量
                         std::vector<uint8_t> frame(it_pull_push_encorder+1, it_pull_push_encorder + 30);
 
                         // 处理Modbus帧并获取elevator_counter
-                        pull_push_sensors_1_part = process_modbus_frame_for_pull_push_sensors(frame);
+                        pull_push_sensors_2_part = process_modbus_frame_for_pull_push_sensors(frame);
 
                         for (size_t i = 0; i < 6; i++)
                         {
-                            pull_push_sensors_1[2*i+1] = pull_push_sensors_1_part[i];
+                            pull_push_sensors_2[2*i+1] = pull_push_sensors_2_part[i];
                         }
 
                         // 移除这34字节(including the ending 0xCFFCCCFF)及之前的字节
@@ -321,7 +321,7 @@ private:    // 私有成员函数和变量
                     }
                     received_modbus_frame_2.clear();
                     auto msg = buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors();       
-                    msg.pull_push_sensors = pull_push_sensors_1;
+                    msg.pull_push_sensors = pull_push_sensors_2;
                     publisher_->publish(msg);
 
                     // 递归调用以持续接收
@@ -382,8 +382,8 @@ private:    // 私有成员函数和变量
     std::vector<uint8_t> modbus_frame_; // 存储Modbus协议帧
     
     std::vector<uint8_t> frame;  // Modbus协议帧
-    std::array<int32_t, 12> pull_push_sensors_1;
-    std::array<int32_t, 6> pull_push_sensors_1_part;
+    std::array<int32_t, 12> pull_push_sensors_2;
+    std::array<int32_t, 6> pull_push_sensors_2_part;
 
     std::vector<uint8_t> data_buffer_1;  // 数据缓存区
     std::vector<uint8_t> data_buffer_2;  // 数据缓存区
@@ -393,14 +393,14 @@ int main(int argc, char **argv) // 主函数
 {
     rclcpp::init(argc, argv);  // 初始化ROS 2
 
-    auto serial_PullPushSensors_1_node = std::make_shared<serial_PullPushSensors_1>();   // 创建pull_push_sensors_1对象
+    auto serial_PullPushSensors_2_node = std::make_shared<serial_PullPushSensors_2>();   // 创建pull_push_sensors_2对象
 
     // 创建一个新线程来运行ASIO的io_service
     std::thread asio_thread([&]() {
-        serial_PullPushSensors_1_node->get_io_service().run();
+        serial_PullPushSensors_2_node->get_io_service().run();
     });
 
-    rclcpp::spin(serial_PullPushSensors_1_node);  // 开始ROS的事件循环
+    rclcpp::spin(serial_PullPushSensors_2_node);  // 开始ROS的事件循环
 
     rclcpp::shutdown();  // 关闭ROS 2
 
