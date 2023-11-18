@@ -56,7 +56,7 @@ public:
         list << QString::number(msg->gripper_c610_position);
         list << QString::number(msg->gripper_sts3032_position);
         list << QString::number(msg->robomaster_mode);
-        SensorsMessageDisplay_1->setStringList(list);
+        SensorsMessageDisplay_2->setStringList(list);
     }
 
     void updateSensorsMessageDisplay_3(const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDeviceElevator::SharedPtr msg) {
@@ -82,7 +82,7 @@ public:
         for (int i = 0; i < 12; ++i) {
             list << QString::number(msg->pull_push_sensors[i]);
         }    
-        SensorsMessageDisplay_4->setStringList(list);
+        SensorsMessageDisplay_5->setStringList(list);
     }
 
     void updateSensorsMessageDisplay_6(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
@@ -100,7 +100,7 @@ public:
         for (int i = 0; i < 12; ++i) {
             list << QString::number(msg->snake_motor_encorder_speed[i]);
         }    
-        SensorsMessageDisplay_6->setStringList(list);
+        SensorsMessageDisplay_7->setStringList(list);
     }
 
 

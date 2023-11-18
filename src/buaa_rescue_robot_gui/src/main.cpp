@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
         "Sensors_Pull_Push_Sensors_2",
         10,
         [&](const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors::SharedPtr msg) {
-            mainWindow.updateSensorsMessageDisplay_4(msg);  // 通过MainWindow实例来更新 
+            mainWindow.updateSensorsMessageDisplay_5(msg);  // 通过MainWindow实例来更新 
         }
     );
 
