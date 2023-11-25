@@ -810,9 +810,9 @@ private:
   // int16_t tension_segment_1 = 1100;
   // int16_t tension_segment_2 = 1100;
   // int16_t tension_segment_3 = 1100;
-  int16_t tension_segment_1 = 1100;
-  int16_t tension_segment_2 = 600;
-  int16_t tension_segment_3 = 150;
+  int16_t tension_segment_1 = 1200;
+  int16_t tension_segment_2 = 1100;
+  int16_t tension_segment_3 = 1000;
   std::array<int32_t, 12> encorder_zero_final_up_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
   std::array<int32_t, 12> encorder_zero_final_down_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
 
