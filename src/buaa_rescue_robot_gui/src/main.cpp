@@ -36,13 +36,24 @@ int main(int argc, char **argv) {
     mainWindow.show();  // 显示主窗口
 
     // show 
-    auto subscription_slave_control_topic = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>(
-        "slave_control_topic",
-        100,
+    auto subscription_slave_control_topic_1 = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>(
+        "slave_control_topic_1",
+        10,
         [&](const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
 
             // 在这里更新QSpinBox的值
-            mainWindow.updateSlaveControlIndicator(msg);     
+            mainWindow.updateSlaveControlIndicator1(msg);     
+        }
+    );
+
+    // show 
+    auto subscription_slave_control_topic_2 = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>(
+        "slave_control_topic_2",
+        10,
+        [&](const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
+
+            // 在这里更新QSpinBox的值
+            mainWindow.updateSlaveControlIndicator2(msg);     
         }
     );
 

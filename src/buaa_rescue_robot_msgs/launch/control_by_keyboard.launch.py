@@ -45,11 +45,18 @@ def generate_launch_description():
             name='buaa_rescue_robot_gui_node',
             output='screen'
         ),
-        # 启动auto_controller节点
+        # 启动auto_controller_1节点
         Node(
             package='controller',
-            executable='auto_controller',
-            name='auto_controller',
+            executable='auto_controller_1',
+            name='auto_controller_1',
+            output='screen'
+        ),
+        # 启动auto_controller_2节点
+        Node(
+            package='controller',
+            executable='auto_controller_2',
+            name='auto_controller_2',
             output='screen'
         ),
         # 启动omega7_sensor节点
@@ -59,7 +66,7 @@ def generate_launch_description():
             name='omega7_sensor',
             output='screen'
         ),
-        # 启动auto_controller节点
+        # 启动omega7_sensor sub节点
         Node(
             package='omega7_sensor',
             executable='omega7_sub',

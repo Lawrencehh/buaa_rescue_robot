@@ -105,73 +105,75 @@ public:
 
 
 
-    void updateSlaveControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
+    void updateSlaveControlIndicator1(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
         // 在这里更新QSpinBox的值
         // robomaster 1
-        ui->robomaster1_snake_motor_speed_control_1->setValue(msg->snake_speed_control_1_array[0]);  
-        ui->robomaster1_snake_motor_speed_control_2->setValue(msg->snake_speed_control_1_array[1]);
-        ui->robomaster1_snake_motor_speed_control_3->setValue(msg->snake_speed_control_1_array[2]);
-        ui->robomaster1_snake_motor_speed_control_4->setValue(msg->snake_speed_control_1_array[3]);
-        ui->robomaster1_snake_motor_speed_control_5->setValue(msg->snake_speed_control_1_array[4]);
-        ui->robomaster1_snake_motor_speed_control_6->setValue(msg->snake_speed_control_1_array[5]);
-        ui->robomaster1_snake_motor_speed_control_7->setValue(msg->snake_speed_control_1_array[6]);
-        ui->robomaster1_snake_motor_speed_control_8->setValue(msg->snake_speed_control_1_array[7]);
-        ui->robomaster1_snake_motor_speed_control_9->setValue(msg->snake_speed_control_1_array[8]);
-        ui->robomaster1_snake_motor_speed_control_10->setValue(msg->snake_speed_control_1_array[9]);
-        ui->robomaster1_snake_motor_speed_control_11->setValue(msg->snake_speed_control_1_array[10]);
-        ui->robomaster1_snake_motor_speed_control_12->setValue(msg->snake_speed_control_1_array[11]);
-        ui->robomaster1_snake_motor_position_control_1->setValue(msg->snake_position_control_1_array[0]);  
-        ui->robomaster1_snake_motor_position_control_2->setValue(msg->snake_position_control_1_array[1]);
-        ui->robomaster1_snake_motor_position_control_3->setValue(msg->snake_position_control_1_array[2]);
-        ui->robomaster1_snake_motor_position_control_4->setValue(msg->snake_position_control_1_array[3]);
-        ui->robomaster1_snake_motor_position_control_5->setValue(msg->snake_position_control_1_array[4]);
-        ui->robomaster1_snake_motor_position_control_6->setValue(msg->snake_position_control_1_array[5]);
-        ui->robomaster1_snake_motor_position_control_7->setValue(msg->snake_position_control_1_array[6]);
-        ui->robomaster1_snake_motor_position_control_8->setValue(msg->snake_position_control_1_array[7]);
-        ui->robomaster1_snake_motor_position_control_9->setValue(msg->snake_position_control_1_array[8]);
-        ui->robomaster1_snake_motor_position_control_10->setValue(msg->snake_position_control_1_array[9]);
-        ui->robomaster1_snake_motor_position_control_11->setValue(msg->snake_position_control_1_array[10]);
-        ui->robomaster1_snake_motor_position_control_12->setValue(msg->snake_position_control_1_array[11]);
-        ui->gripper_gm6020_position_1_control->setValue(msg->gripper_gm6020_position_1);
-        ui->gripper_c610_position_1_control->setValue(msg->gripper_c610_position_1);
-        ui->gripper_sts3032_position_1_control->setValue(msg->gripper_sts3032_position_1);
-        ui->gripper1_gm6020->setValue(msg->gripper_gm6020_position_1);
-        ui->gripper1_c610->setValue(msg->gripper_c610_position_1);
-        ui->gripper1_sts3032->setValue(msg->gripper_sts3032_position_1);
-        ui->robomaster1_mode->setValue(msg->robomaster_1_mode);
-        
+        ui->robomaster1_snake_motor_speed_control_1->setValue(msg->snake_speed_control_array[0]);  
+        ui->robomaster1_snake_motor_speed_control_2->setValue(msg->snake_speed_control_array[1]);
+        ui->robomaster1_snake_motor_speed_control_3->setValue(msg->snake_speed_control_array[2]);
+        ui->robomaster1_snake_motor_speed_control_4->setValue(msg->snake_speed_control_array[3]);
+        ui->robomaster1_snake_motor_speed_control_5->setValue(msg->snake_speed_control_array[4]);
+        ui->robomaster1_snake_motor_speed_control_6->setValue(msg->snake_speed_control_array[5]);
+        ui->robomaster1_snake_motor_speed_control_7->setValue(msg->snake_speed_control_array[6]);
+        ui->robomaster1_snake_motor_speed_control_8->setValue(msg->snake_speed_control_array[7]);
+        ui->robomaster1_snake_motor_speed_control_9->setValue(msg->snake_speed_control_array[8]);
+        ui->robomaster1_snake_motor_speed_control_10->setValue(msg->snake_speed_control_array[9]);
+        ui->robomaster1_snake_motor_speed_control_11->setValue(msg->snake_speed_control_array[10]);
+        ui->robomaster1_snake_motor_speed_control_12->setValue(msg->snake_speed_control_array[11]);
+        ui->robomaster1_snake_motor_position_control_1->setValue(msg->snake_position_control_array[0]);  
+        ui->robomaster1_snake_motor_position_control_2->setValue(msg->snake_position_control_array[1]);
+        ui->robomaster1_snake_motor_position_control_3->setValue(msg->snake_position_control_array[2]);
+        ui->robomaster1_snake_motor_position_control_4->setValue(msg->snake_position_control_array[3]);
+        ui->robomaster1_snake_motor_position_control_5->setValue(msg->snake_position_control_array[4]);
+        ui->robomaster1_snake_motor_position_control_6->setValue(msg->snake_position_control_array[5]);
+        ui->robomaster1_snake_motor_position_control_7->setValue(msg->snake_position_control_array[6]);
+        ui->robomaster1_snake_motor_position_control_8->setValue(msg->snake_position_control_array[7]);
+        ui->robomaster1_snake_motor_position_control_9->setValue(msg->snake_position_control_array[8]);
+        ui->robomaster1_snake_motor_position_control_10->setValue(msg->snake_position_control_array[9]);
+        ui->robomaster1_snake_motor_position_control_11->setValue(msg->snake_position_control_array[10]);
+        ui->robomaster1_snake_motor_position_control_12->setValue(msg->snake_position_control_array[11]);
+        ui->gripper_gm6020_position_1_control->setValue(msg->gripper_gm6020_position);
+        ui->gripper_c610_position_1_control->setValue(msg->gripper_c610_position);
+        ui->gripper_sts3032_position_1_control->setValue(msg->gripper_sts3032_position);
+        ui->gripper1_gm6020->setValue(msg->gripper_gm6020_position);
+        ui->gripper1_c610->setValue(msg->gripper_c610_position);
+        ui->gripper1_sts3032->setValue(msg->gripper_sts3032_position);
+        ui->robomaster1_mode->setValue(msg->robomaster_mode);
+    }
+     
+    void updateSlaveControlIndicator2(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {       
         // robomaster 2
-        ui->robomaster2_snake_motor_speed_control_1->setValue(msg->snake_speed_control_2_array[0]);  
-        ui->robomaster2_snake_motor_speed_control_2->setValue(msg->snake_speed_control_2_array[1]);
-        ui->robomaster2_snake_motor_speed_control_3->setValue(msg->snake_speed_control_2_array[2]);
-        ui->robomaster2_snake_motor_speed_control_4->setValue(msg->snake_speed_control_2_array[3]);
-        ui->robomaster2_snake_motor_speed_control_5->setValue(msg->snake_speed_control_2_array[4]);
-        ui->robomaster2_snake_motor_speed_control_6->setValue(msg->snake_speed_control_2_array[5]);
-        ui->robomaster2_snake_motor_speed_control_7->setValue(msg->snake_speed_control_2_array[6]);
-        ui->robomaster2_snake_motor_speed_control_8->setValue(msg->snake_speed_control_2_array[7]);
-        ui->robomaster2_snake_motor_speed_control_9->setValue(msg->snake_speed_control_2_array[8]);
-        ui->robomaster2_snake_motor_speed_control_10->setValue(msg->snake_speed_control_2_array[9]);
-        ui->robomaster2_snake_motor_speed_control_11->setValue(msg->snake_speed_control_2_array[10]);
-        ui->robomaster2_snake_motor_speed_control_12->setValue(msg->snake_speed_control_2_array[11]);
-        ui->robomaster2_snake_motor_position_control_1->setValue(msg->snake_position_control_2_array[0]);  
-        ui->robomaster2_snake_motor_position_control_2->setValue(msg->snake_position_control_2_array[1]);
-        ui->robomaster2_snake_motor_position_control_3->setValue(msg->snake_position_control_2_array[2]);
-        ui->robomaster2_snake_motor_position_control_4->setValue(msg->snake_position_control_2_array[3]);
-        ui->robomaster2_snake_motor_position_control_5->setValue(msg->snake_position_control_2_array[4]);
-        ui->robomaster2_snake_motor_position_control_6->setValue(msg->snake_position_control_2_array[5]);
-        ui->robomaster2_snake_motor_position_control_7->setValue(msg->snake_position_control_2_array[6]);
-        ui->robomaster2_snake_motor_position_control_8->setValue(msg->snake_position_control_2_array[7]);
-        ui->robomaster2_snake_motor_position_control_9->setValue(msg->snake_position_control_2_array[8]);
-        ui->robomaster2_snake_motor_position_control_10->setValue(msg->snake_position_control_2_array[9]);
-        ui->robomaster2_snake_motor_position_control_11->setValue(msg->snake_position_control_2_array[10]);
-        ui->robomaster2_snake_motor_position_control_12->setValue(msg->snake_position_control_2_array[11]);
-        ui->gripper_gm6020_position_2_control->setValue(msg->gripper_gm6020_position_2);
-        ui->gripper_c610_position_2_control->setValue(msg->gripper_c610_position_2);
-        ui->gripper_sts3032_position_2_control->setValue(msg->gripper_sts3032_position_2);
-        ui->gripper2_gm6020->setValue(msg->gripper_gm6020_position_2);
-        ui->gripper2_c610->setValue(msg->gripper_c610_position_2);
-        ui->gripper2_sts3032->setValue(msg->gripper_sts3032_position_2);
-        ui->robomaster2_mode->setValue(msg->robomaster_2_mode);
+        ui->robomaster2_snake_motor_speed_control_1->setValue(msg->snake_speed_control_array[0]);  
+        ui->robomaster2_snake_motor_speed_control_2->setValue(msg->snake_speed_control_array[1]);
+        ui->robomaster2_snake_motor_speed_control_3->setValue(msg->snake_speed_control_array[2]);
+        ui->robomaster2_snake_motor_speed_control_4->setValue(msg->snake_speed_control_array[3]);
+        ui->robomaster2_snake_motor_speed_control_5->setValue(msg->snake_speed_control_array[4]);
+        ui->robomaster2_snake_motor_speed_control_6->setValue(msg->snake_speed_control_array[5]);
+        ui->robomaster2_snake_motor_speed_control_7->setValue(msg->snake_speed_control_array[6]);
+        ui->robomaster2_snake_motor_speed_control_8->setValue(msg->snake_speed_control_array[7]);
+        ui->robomaster2_snake_motor_speed_control_9->setValue(msg->snake_speed_control_array[8]);
+        ui->robomaster2_snake_motor_speed_control_10->setValue(msg->snake_speed_control_array[9]);
+        ui->robomaster2_snake_motor_speed_control_11->setValue(msg->snake_speed_control_array[10]);
+        ui->robomaster2_snake_motor_speed_control_12->setValue(msg->snake_speed_control_array[11]);
+        ui->robomaster2_snake_motor_position_control_1->setValue(msg->snake_position_control_array[0]);  
+        ui->robomaster2_snake_motor_position_control_2->setValue(msg->snake_position_control_array[1]);
+        ui->robomaster2_snake_motor_position_control_3->setValue(msg->snake_position_control_array[2]);
+        ui->robomaster2_snake_motor_position_control_4->setValue(msg->snake_position_control_array[3]);
+        ui->robomaster2_snake_motor_position_control_5->setValue(msg->snake_position_control_array[4]);
+        ui->robomaster2_snake_motor_position_control_6->setValue(msg->snake_position_control_array[5]);
+        ui->robomaster2_snake_motor_position_control_7->setValue(msg->snake_position_control_array[6]);
+        ui->robomaster2_snake_motor_position_control_8->setValue(msg->snake_position_control_array[7]);
+        ui->robomaster2_snake_motor_position_control_9->setValue(msg->snake_position_control_array[8]);
+        ui->robomaster2_snake_motor_position_control_10->setValue(msg->snake_position_control_array[9]);
+        ui->robomaster2_snake_motor_position_control_11->setValue(msg->snake_position_control_array[10]);
+        ui->robomaster2_snake_motor_position_control_12->setValue(msg->snake_position_control_array[11]);
+        ui->gripper_gm6020_position_2_control->setValue(msg->gripper_gm6020_position);
+        ui->gripper_c610_position_2_control->setValue(msg->gripper_c610_position);
+        ui->gripper_sts3032_position_2_control->setValue(msg->gripper_sts3032_position);
+        ui->gripper2_gm6020->setValue(msg->gripper_gm6020_position);
+        ui->gripper2_c610->setValue(msg->gripper_c610_position);
+        ui->gripper2_sts3032->setValue(msg->gripper_sts3032_position);
+        ui->robomaster2_mode->setValue(msg->robomaster_mode);
     }
 
     void updateMasterControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessageMaster::SharedPtr msg) {
@@ -212,7 +214,8 @@ public slots:
 private:
     
     rclcpp::Node::SharedPtr node;  // 添加这一行，声明一个ROS 2节点
-    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr slave_control_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr slave_control_topic_publisher_1;  // 添加这一行，声明一个ROS 2发布器
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr slave_control_topic_publisher_2;  // 添加这一行，声明一个ROS 2发布器
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageMaster>::SharedPtr master_control_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
     rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr joint_space_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
 

@@ -90,8 +90,8 @@ public:
 
 
         
-        // 创建订阅器，订阅名为"slave_control_topic"的话题
-          subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic", 10, 
+        // 创建订阅器，订阅名为"slave_control_topic_2"的话题
+          subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_2", 10, 
           std::bind(&serial_robomaster_2::callback, this, std::placeholders::_1));
 
         // 在serial_robomaster_2的构造函数中初始化这个发布器
@@ -320,11 +320,11 @@ private:    // 私有成员函数和变量
         frame.push_back(0x31);  // 功能码
         frame.push_back(0x10);  // 电机数量: 0x10（12个绳驱电机，3个手部电机，1个RESET指令）
 
-        // 2. 提取snake_position_control_1_array的值，手部电机的值,并添加到数据帧中
+        // 2. 提取snake_position_control_array的值，手部电机的值,并添加到数据帧中
         for (int i = 0; i < 12; ++i)  // 12个绳驱电机
         {
-            uint8_t snake_motors_speed = msg->snake_speed_control_2_array[i];  // 电机speed
-            int32_t snake_motors_position = msg->snake_position_control_2_array[i];          
+            uint8_t snake_motors_speed = msg->snake_speed_control_array[i];  // 电机speed
+            int32_t snake_motors_position = msg->snake_position_control_array[i];          
             frame.push_back(snake_motors_speed & 0xFF);  // 添加电机speed
             uint8_t bytes[4];  // 用于存储4个字节的数组
             // 分解 int32_t 变量为4个字节
@@ -341,22 +341,22 @@ private:    // 私有成员函数和变量
         
         // Gripper GM6020
         frame.push_back(0x0D);  // 添加电机地址
-        frame.push_back((msg->gripper_gm6020_position_2 >> 8) & 0xFF);
-        frame.push_back(msg->gripper_gm6020_position_2 & 0xFF);
+        frame.push_back((msg->gripper_gm6020_position >> 8) & 0xFF);
+        frame.push_back(msg->gripper_gm6020_position & 0xFF);
 
         // Gripper C610
         frame.push_back(0x0E);  // 添加电机地址
-        frame.push_back((msg->gripper_c610_position_2 >> 8) & 0xFF);
-        frame.push_back(msg->gripper_c610_position_2 & 0xFF);
+        frame.push_back((msg->gripper_c610_position >> 8) & 0xFF);
+        frame.push_back(msg->gripper_c610_position & 0xFF);
 
         // Gripper STS3032
         frame.push_back(0x0F);  // 添加电机地址
-        frame.push_back((msg->gripper_sts3032_position_2 >> 8) & 0xFF);
-        frame.push_back(msg->gripper_sts3032_position_2 & 0xFF);
+        frame.push_back((msg->gripper_sts3032_position >> 8) & 0xFF);
+        frame.push_back(msg->gripper_sts3032_position & 0xFF);
 
         // RESET
         frame.push_back(0x10);  // 添加RESET地址
-        frame.push_back(msg->robomaster_2_mode & 0xFF);
+        frame.push_back(msg->robomaster_mode & 0xFF);
 
         // 3. 计算CRC-16 Modbus校验码
         uint16_t crc = calculate_crc16(frame, 0, frame.size());
@@ -391,8 +391,7 @@ private:    // 私有成员函数和变量
     std::vector<uint8_t> modbus_frame_; // 存储Modbus协议帧
     
     std::vector<uint8_t> frame;  // Modbus协议帧
-
-    std::array<int32_t, 12> snake_motor_encorder_position_2; 
+ 
     std::vector<uint8_t> data_buffer_;  // 数据缓存区
 
     
