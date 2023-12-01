@@ -255,20 +255,20 @@ private:
               if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_1) > error_tension)
               {
                 int32_t adjust_speed = (mean_tension_segment_2_1 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > 5)
+                if (adjust_speed > average_speed/2)
                 {
-                  adjust_speed = 5;
+                  adjust_speed = average_speed/2;
                 }
-                if (adjust_speed < -5)
+                if (adjust_speed < -average_speed/2)
                 {
-                  adjust_speed = -5;
+                  adjust_speed = -average_speed/2;
                 }
                 if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
                 {
                   adjust_speed = -adjust_speed;
                 }
                 
-                msg->snake_speed_control_array[i] = 10 + adjust_speed;
+                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
               }
             } 
             if(i == 2 || i == 3 || i == 8 || i == 9) 
@@ -276,19 +276,19 @@ private:
               if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_2) > error_tension)
               {
                 int32_t adjust_speed = (mean_tension_segment_2_2 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > 5)
+                if (adjust_speed > average_speed/2)
                 {
-                  adjust_speed = 5;
+                  adjust_speed = average_speed/2;
                 }
-                if (adjust_speed < -5)
+                if (adjust_speed < -average_speed/2)
                 {
-                  adjust_speed = -5;
+                  adjust_speed = -average_speed/2;
                 }
                 if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
                 {
                   adjust_speed = -adjust_speed;
                 }
-                msg->snake_speed_control_array[i] = 10 + adjust_speed;
+                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
               }
             } 
             if(i == 4 || i == 5 || i == 6 || i == 7) 
@@ -296,19 +296,19 @@ private:
               if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_3) > error_tension)
               {
                 int32_t adjust_speed = (mean_tension_segment_2_3 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > 5)
+                if (adjust_speed > average_speed/2)
                 {
-                  adjust_speed = 5;
+                  adjust_speed = average_speed/2;
                 }
-                if (adjust_speed < -5)
+                if (adjust_speed < -average_speed/2)
                 {
-                  adjust_speed = -5;
+                  adjust_speed = -average_speed/2;
                 }
                 if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
                 {
                   adjust_speed = -adjust_speed;
                 }
-                msg->snake_speed_control_array[i] = 10 + adjust_speed;
+                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
               }
             }
           }
@@ -330,7 +330,7 @@ private:
         } 
         if(last_sensors_pull_push_data_2.pull_push_sensors[i] > 5) {
           msg-> snake_position_control_array[i]  = last_sensors_robomaster_data_2.snake_motor_encorder_position[i] - 200000;
-          msg-> snake_speed_control_array[i] = 10;
+          msg-> snake_speed_control_array[i] = 20;
         }
       }
       if (auto_lock == 0)
@@ -372,19 +372,19 @@ private:
               if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_1) > error_tension)
               {
                 int32_t adjust_speed = (mean_tension_segment_2_1 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > 5)
+                if (adjust_speed > average_speed/2)
                 {
-                  adjust_speed = 5;
+                  adjust_speed = average_speed/2;
                 }
-                if (adjust_speed < -5)
+                if (adjust_speed < -average_speed/2)
                 {
-                  adjust_speed = -5;
+                  adjust_speed = -average_speed/2;
                 }
                 if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
                 {
                   adjust_speed = -adjust_speed;
                 }
-                msg->snake_speed_control_array[i] = 10 + adjust_speed;
+                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
               }
             } 
             if(i == 2 || i == 3 || i == 8 || i == 9) 
@@ -392,19 +392,19 @@ private:
               if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_2) > error_tension)
               {
                 int32_t adjust_speed = (mean_tension_segment_2_2 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > 5)
+                if (adjust_speed > average_speed/2)
                 {
-                  adjust_speed = 5;
+                  adjust_speed = average_speed/2;
                 }
-                if (adjust_speed < -5)
+                if (adjust_speed < -average_speed/2)
                 {
-                  adjust_speed = -5;
+                  adjust_speed = -average_speed/2;
                 }
                 if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
                 {
                   adjust_speed = -adjust_speed;
                 }
-                msg->snake_speed_control_array[i] = 10 + adjust_speed;
+                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
               }
             } 
             if(i == 4 || i == 5 || i == 6 || i == 7) 
@@ -412,19 +412,19 @@ private:
               if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_3) > error_tension)
               {
                 int32_t adjust_speed = (mean_tension_segment_2_3 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > 5)
+                if (adjust_speed > average_speed/2)
                 {
-                  adjust_speed = 5;
+                  adjust_speed = average_speed/2;
                 }
-                if (adjust_speed < -5)
+                if (adjust_speed < -average_speed/2)
                 {
-                  adjust_speed = -5;
+                  adjust_speed = -average_speed/2;
                 }
                 if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
                 {
                   adjust_speed = -adjust_speed;
                 }
-                msg->snake_speed_control_array[i] = 10 + adjust_speed;
+                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
               }
             }
           }
@@ -491,6 +491,7 @@ private:
   std::array<int32_t, 12> encorder_zero_up_limit_2 = {0,0,0,0,0,0,0,0,0,0,0,0}; // 所有元素都将初始化为0
   std::array<int32_t, 12> encorder_zero_down_limit_2 = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
 
+  int average_speed = 30;
   int32_t fine_delta = 500;
   int32_t coarse_delta = 5000;
   int32_t error_threshold = 2;
