@@ -3523,6 +3523,16 @@ p, li { white-space: pre-wrap; }
 </string>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="camera3">
+    <property name="geometry">
+     <rect>
+      <x>1270</x>
+      <y>700</y>
+      <width>481</width>
+      <height>286</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

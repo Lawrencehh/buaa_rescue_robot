@@ -16,14 +16,26 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    // 初始化三个摄像头
+    cap1.open(0); // 第一个摄像头
+    cap2.open(1); // 第二个摄像头
+    cap3.open("/dev/my_camera3"); // 第三个摄像头
 
-    cap.open(0);  // 打开默认摄像头
-    scene = new QGraphicsScene(this);
-    ui->camera1->setScene(scene);
+    // 为每个摄像头创建场景
+    scene1 = new QGraphicsScene(this);
+    scene2 = new QGraphicsScene(this);
+    scene3 = new QGraphicsScene(this);
 
+    // 将场景关联到UI控件
+    ui->camera1->setScene(scene1);
+    ui->camera2->setScene(scene2);
+    ui->camera3->setScene(scene3);
+
+    // 初始化定时器
     timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateCameraFrame()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(updateCameraFrames()));
     timer->start(100); // 10 fps
+
 
     // 连接 QDial 的 valueChanged 信号到自定义的槽函数
     connect(ui->gripper1_gm6020, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
@@ -446,18 +458,22 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
     }
 }
 
-void MainWindow::updateCameraFrame()
-{
+void MainWindow::updateCameraFrames() {
+    updateCameraFrame(cap1, scene1, ui->camera1);
+    updateCameraFrame(cap2, scene2, ui->camera2);
+    updateCameraFrame(cap3, scene3, ui->camera3);
+}
+
+
+void MainWindow::updateCameraFrame(cv::VideoCapture &cap, QGraphicsScene *scene, QGraphicsView *view) {
     cv::Mat frame;
-    cap >> frame;
-    if(!frame.empty())
-    {
+    if (cap.read(frame)) {
         cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
         QImage qimg((uchar*)frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888);
         QPixmap pixmap = QPixmap::fromImage(qimg);
         scene->clear();
         scene->addPixmap(pixmap);
-        ui->camera1->fitInView(scene->sceneRect(), Qt::KeepAspectRatio);
+        view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio); // 这里进行适配
     }
 }
 

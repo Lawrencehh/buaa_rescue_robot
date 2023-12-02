@@ -33,6 +33,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
+
     void updateSensorsMessageDisplay_1(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
         QStringList list;
 
@@ -208,8 +210,9 @@ public:
 public slots:
     void on_publishButton_clicked();
     void on_transButton_clicked();
-    void updateCameraFrame();
     void dialValueChanged(int value);
+    void updateCameraFrames();
+    void updateCameraFrame(cv::VideoCapture &cap, QGraphicsScene *scene, QGraphicsView *view);
 
 private:
     
@@ -228,9 +231,8 @@ private:
     QStringListModel *SensorsMessageDisplay_6;
     QStringListModel *SensorsMessageDisplay_7;
     Ui::MainWindow *ui;
-
-    cv::VideoCapture cap;
-    QGraphicsScene *scene;
+    cv::VideoCapture cap1, cap2, cap3; // 三个摄像头
+    QGraphicsScene *scene1, *scene2, *scene3; // 三个场景
     QTimer *timer;
 
 protected:
