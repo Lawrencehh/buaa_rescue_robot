@@ -2,7 +2,7 @@
 #include "./ui_mainwindow.h"
 #include <opencv2/opencv.hpp>
 #include <QKeyEvent>  // 引入QKeyEvent头文件
-#include <thread>
+// #include <thread>
 // #include <chrono>
 #include <QTime>
 #include <chrono>
@@ -14,12 +14,22 @@ bool reset_flag = false;
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , cameraThreadRunning(false) // 初始化为 false
 {
     ui->setupUi(this);
     // 初始化三个摄像头
-    cap1.open(0); // 第一个摄像头
-    cap2.open(1); // 第二个摄像头
-    cap3.open("/dev/my_camera3"); // 第三个摄像头
+    if (!cap1.open("/dev/video3")) {
+        qDebug() << "无法打开摄像头 /dev/my_camera1";
+        // 您可以在这里添加更多的错误处理代码，比如显示错误对话框
+    }
+    if (!cap2.open("/dev/video0")) {
+        qDebug() << "无法打开摄像头 /dev/my_camera2";
+        // 错误处理代码
+    }
+    if (!cap3.open("/dev/video4")) {
+        qDebug() << "无法打开摄像头 /dev/my_camera3";
+        // 错误处理代码
+    }
 
     // 为每个摄像头创建场景
     scene1 = new QGraphicsScene(this);
@@ -31,10 +41,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->camera2->setScene(scene2);
     ui->camera3->setScene(scene3);
 
-    // 初始化定时器
-    timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(updateCameraFrames()));
-    timer->start(100); // 10 fps
+    // // 初始化定时器
+    // timer = new QTimer(this);
+    // connect(timer, SIGNAL(timeout()), this, SLOT(updateCameraFrames()));
+    // timer->start(100); // 10 fps
+
+    // 连接新的槽函数
+    connect(this, &MainWindow::signalUpdateGraphicsView, this, &MainWindow::updateGraphicsView, Qt::QueuedConnection);
+
+    startCameraThreads(); // 启动摄像头线程
 
 
     // 连接 QDial 的 valueChanged 信号到自定义的槽函数
@@ -92,7 +107,53 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->transButton, SIGNAL(clicked()), this, SLOT(on_transButton_clicked()));
 }
 
+void MainWindow::startCameraThreads() {
+    cameraThreadRunning = true;
+    cameraThread1 = std::thread(&MainWindow::updateCameraFrame, this, std::ref(cap1), scene1, ui->camera1);
+    cameraThread2 = std::thread(&MainWindow::updateCameraFrame, this, std::ref(cap2), scene2, ui->camera2);
+    cameraThread3 = std::thread(&MainWindow::updateCameraFrame, this, std::ref(cap3), scene3, ui->camera3);
+}
 
+void MainWindow::stopCameraThreads() {
+    cameraThreadRunning = false;
+    if (cameraThread1.joinable()) cameraThread1.join();
+    if (cameraThread2.joinable()) cameraThread2.join();
+    if (cameraThread3.joinable()) cameraThread3.join();
+    // 正确调用 release 方法
+    cap1.release();
+    cap2.release();
+    cap3.release();
+}
+void MainWindow::updateCameraFrames(){
+    MainWindow::updateCameraFrame(cap1,scene1,ui->camera1);
+    MainWindow::updateCameraFrame(cap2,scene2,ui->camera2);
+    MainWindow::updateCameraFrame(cap3,scene3,ui->camera3);
+}
+
+void MainWindow::updateCameraFrame(cv::VideoCapture &cap, QGraphicsScene *scene, QGraphicsView *view) {
+    while (cameraThreadRunning) {
+        cv::Mat frame;
+        if (!cap.isOpened() || !cap.read(frame)) {
+            qDebug() << "摄像头读取失败或未打开";
+            break; // 或其他错误处理
+        }
+        cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
+        QImage qimg((uchar*)frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888);
+        QPixmap pixmap = QPixmap::fromImage(qimg);
+
+        // 使用信号发送 pixmap 给 GUI 线程
+        emit signalUpdateGraphicsView(scene, pixmap, view);
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // 控制帧率
+    }
+}
+
+void MainWindow::updateGraphicsView(QGraphicsScene* scene, QPixmap pixmap) {
+    scene->clear();
+    scene->addPixmap(pixmap);
+    ui->camera1->fitInView(scene->sceneRect(), Qt::KeepAspectRatio); // 根据需要选择相应的视图
+    ui->camera2->fitInView(scene->sceneRect(), Qt::KeepAspectRatio); // 根据需要选择相应的视图
+    ui->camera3->fitInView(scene->sceneRect(), Qt::KeepAspectRatio); // 根据需要选择相应的视图
+}
 
 // 重载keyPressEvent方法, control the robot by keyboard
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -458,25 +519,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
     }
 }
 
-void MainWindow::updateCameraFrames() {
-    updateCameraFrame(cap1, scene1, ui->camera1);
-    updateCameraFrame(cap2, scene2, ui->camera2);
-    updateCameraFrame(cap3, scene3, ui->camera3);
-}
-
-
-void MainWindow::updateCameraFrame(cv::VideoCapture &cap, QGraphicsScene *scene, QGraphicsView *view) {
-    cv::Mat frame;
-    if (cap.read(frame)) {
-        cv::cvtColor(frame, frame, cv::COLOR_BGR2RGB);
-        QImage qimg((uchar*)frame.data, frame.cols, frame.rows, frame.step, QImage::Format_RGB888);
-        QPixmap pixmap = QPixmap::fromImage(qimg);
-        scene->clear();
-        scene->addPixmap(pixmap);
-        view->fitInView(scene->sceneRect(), Qt::KeepAspectRatio); // 这里进行适配
-    }
-}
-
 // 自定义槽函数：当 QDial 的值改变时会被调用
 void MainWindow::dialValueChanged(int value)
 {
@@ -742,6 +784,7 @@ void MainWindow::on_publishButton_clicked()
 
 MainWindow::~MainWindow()
 {
+    stopCameraThreads(); // 确保在销毁窗口前停止线程
     delete ui;
 }
 

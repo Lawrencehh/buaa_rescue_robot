@@ -19,6 +19,9 @@
 #include <iostream>
 #include <array>
 
+#include <thread>
+#include <atomic>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,6 +35,9 @@ public:
     
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    // 新的方法来启动和停止线程
+    void startCameraThreads();
+    void stopCameraThreads();
 
 
 
@@ -211,8 +217,13 @@ public slots:
     void on_publishButton_clicked();
     void on_transButton_clicked();
     void dialValueChanged(int value);
-    void updateCameraFrames();
     void updateCameraFrame(cv::VideoCapture &cap, QGraphicsScene *scene, QGraphicsView *view);
+    void updateCameraFrames();
+    void updateGraphicsView(QGraphicsScene* scene, QPixmap pixmap);
+
+// 新的信号定义
+signals:
+    void signalUpdateGraphicsView(QGraphicsScene* scene, QPixmap pixmap, QGraphicsView* view);
 
 private:
     
@@ -234,6 +245,10 @@ private:
     cv::VideoCapture cap1, cap2, cap3; // 三个摄像头
     QGraphicsScene *scene1, *scene2, *scene3; // 三个场景
     QTimer *timer;
+
+    // 新的线程成员
+    std::thread cameraThread1, cameraThread2, cameraThread3;
+    std::atomic<bool> cameraThreadRunning;
 
 protected:
     void keyPressEvent(QKeyEvent *event) override;

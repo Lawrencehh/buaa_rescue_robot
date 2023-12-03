@@ -449,9 +449,6 @@ private:    // 私有成员函数和变量
             modbus_frame_ = {0x02, 0x06, 0x05, 0x1D, 0x00, 0x00, 0x19, 0x33};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
             async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-            // modbus_frame_ = {0x02, 0x06, 0x05, 0x14, 0x00, 0x00, 0xC9, 0x31};   // diasble the lower linear module
-            // async_write_to_serial(modbus_frame_);
-            // std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒
         }
         else if (msg->lower_linear_module_control == -1)   //lower linear module going backwards
         {
@@ -505,10 +502,7 @@ private:    // 私有成员函数和变量
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
             modbus_frame_ = {0x03, 0x06, 0x05, 0x1D, 0x00, 0x00, 0x18, 0xE2};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
             async_write_to_serial(modbus_frame_);
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-            // modbus_frame_ = {0x03, 0x06, 0x05, 0x14, 0x00, 0x00, 0xC8, 0xE0};   // diasble the upper linear module
-            // async_write_to_serial(modbus_frame_);
-            // std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒
         }
         else if (msg->upper_linear_module_control == -1)   //upper linear module going backwards
         {
@@ -531,9 +525,9 @@ private:    // 私有成员函数和变量
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒            
             modbus_frame_ = {0x03, 0x06, 0x05, 0x1D, 0x00, 0x00, 0x18, 0xE2};   // turn P5-28 to be 0. turn P5-29 to be 0. (speed to be 0)
             async_write_to_serial(modbus_frame_);
-            std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
-            modbus_frame_ = {0x03, 0x06, 0x05, 0x14, 0x00, 0x00, 0xC8, 0xE0};   // diasble the upper linear module
-            async_write_to_serial(modbus_frame_);
+            // std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
+            // modbus_frame_ = {0x03, 0x06, 0x05, 0x14, 0x00, 0x00, 0xC8, 0xE0};   // diasble the upper linear module
+            // async_write_to_serial(modbus_frame_);
             std::this_thread::sleep_for(std::chrono::milliseconds(10));  // 延迟10毫秒 
             modbus_frame_ = {0x03, 0x06, 0x21, 0x06, 0x00, 0x03, 0x22, 0x14};   // reset the upper linear module encorder
             async_write_to_serial(modbus_frame_);
