@@ -62,9 +62,9 @@ public:
           for (int i = 0; i < 12; ++i) {
               // 计算第一节的Gap1和Gap3
               if (i > 5) {
-                  Gap_1[i] = sin((beta - theta[0]) / 2) * 2 * R_Gap_1[i];
+                  Gap_1[i] = sin((beta - theta[0] + M_PI/10) / 2) * 2 * R_Gap_1[i]; 
               } else {
-                  Gap_1[i] = sin((beta + theta[0]) / 2) * 2 * R_Gap_1[i];
+                  Gap_1[i] = sin((beta + theta[0] - M_PI/10) / 2) * 2 * R_Gap_1[i];
               }
 
               if (i % 2 == 0) {
@@ -119,33 +119,48 @@ public:
       return Rope_length;
   }
 
+  // 计算adjust_speed， 该值用于绳驱电机的调速使用
+  int32_t calculateAdjustedSpeed(int32_t sensor_value, int32_t mean_tension, int32_t error_tension, int32_t average_speed, int32_t motor_speed) {
+      int32_t adjust_speed = (mean_tension - sensor_value) / error_tension;
+      adjust_speed = std::clamp(adjust_speed, -average_speed / 2, average_speed / 2);
+      if (motor_speed < 0) {
+          adjust_speed = -adjust_speed;
+      }
+      return adjust_speed;
+  }
+
 private:
   void slave_control_topic_callback(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {
+    // 所能忍受的绳子张力与均值之前的误差（均值由同一段的4根绳子张力求得）
+    int32_t error_tension = 5;
+    // 第一段4根绳子的张力均值
+    int32_t mean_tension_segment_2_1 = (last_sensors_pull_push_data_2.pull_push_sensors[0] + last_sensors_pull_push_data_2.pull_push_sensors[1]
+    + last_sensors_pull_push_data_2.pull_push_sensors[10] + last_sensors_pull_push_data_2.pull_push_sensors[11]) / 4;
+    // 第二段4根绳子的张力均值
+    int32_t mean_tension_segment_2_2 = (last_sensors_pull_push_data_2.pull_push_sensors[2] + last_sensors_pull_push_data_2.pull_push_sensors[3]
+    + last_sensors_pull_push_data_2.pull_push_sensors[8] + last_sensors_pull_push_data_2.pull_push_sensors[9]) / 4;
+    // 第三段4根绳子的张力均值
+    int32_t mean_tension_segment_2_3 = (last_sensors_pull_push_data_2.pull_push_sensors[4] + last_sensors_pull_push_data_2.pull_push_sensors[5]
+    + last_sensors_pull_push_data_2.pull_push_sensors[6] + last_sensors_pull_push_data_2.pull_push_sensors[7]) / 4;
+
+    // mode 6的时候将禁止其他模式，并失能所有绳驱电机
     if ((msg->robomaster_mode == 6))// mode 6, to quit
     {
       auto_lock = 1;
     }
 
+    // mode 9的时候将使能所有绳驱电机
     if ((msg->robomaster_mode == 9))// mode 9, to enable
     {
       auto_lock = 0;
     }   
-    // RCLCPP_INFO(this->get_logger(), "auto_lock: %d", auto_lock);
-    int32_t error_tension = 5;
-    int32_t mean_tension_segment_2_1 = (last_sensors_pull_push_data_2.pull_push_sensors[0] + last_sensors_pull_push_data_2.pull_push_sensors[1]
-    + last_sensors_pull_push_data_2.pull_push_sensors[10] + last_sensors_pull_push_data_2.pull_push_sensors[11]) / 4;
-    int32_t mean_tension_segment_2_2 = (last_sensors_pull_push_data_2.pull_push_sensors[2] + last_sensors_pull_push_data_2.pull_push_sensors[3]
-    + last_sensors_pull_push_data_2.pull_push_sensors[8] + last_sensors_pull_push_data_2.pull_push_sensors[9]) / 4;
-    int32_t mean_tension_segment_2_3 = (last_sensors_pull_push_data_2.pull_push_sensors[4] + last_sensors_pull_push_data_2.pull_push_sensors[5]
-    + last_sensors_pull_push_data_2.pull_push_sensors[6] + last_sensors_pull_push_data_2.pull_push_sensors[7]) / 4;
 
-    // robomaster 2
+    // mode 2 及 mode 12
     if(msg->robomaster_mode == 2 || msg->robomaster_mode == 12){ // Mode 2 and mode 12
       running_flag_2 = 0;
-      // robomaster 2
       for (size_t i = 0; i < 12; i++)
       {
-        // stop calibration
+        // 当绳子张力处于设定区间的时候，让running_flag_2加一
         if ((last_sensors_pull_push_data_2.pull_push_sensors[i] <= encorder_zero_final_up_limit[i]) && 
         (last_sensors_pull_push_data_2.pull_push_sensors[i] >= encorder_zero_final_down_limit[i]))
         {
@@ -153,7 +168,7 @@ private:
         }
       }
       
-      // robomaster 2
+      // mode 2，让绳子依照1、2、3段顺序进行绷紧
       if(msg->robomaster_mode == 2){
         if (running_flag_2 == 0)
         {
@@ -200,7 +215,7 @@ private:
         }
       }
 
-      // robomaster 2
+      // mode 12，每根绳子都预紧到设定范围内
       if(msg->robomaster_mode == 12){
         for (size_t i = 0; i < 12; i++)
         {
@@ -209,9 +224,8 @@ private:
         } 
       }
 
-      // robomaster 2
+      // 如果正常收到反馈信号
       if (received_sensors_robomaster_2 && received_sensors_pull_push_2) {
-        // RCLCPP_INFO(this->get_logger(), "running_flag_2: %d", running_flag_2);
         for (size_t i = 0; i < 12; i++)
         {
           int16_t delta;       
@@ -238,81 +252,32 @@ private:
             }
           }
         }
-        // running flag
+
+        // running flag为12的时候，且mode 2，让连续体机器人停止运动
         if (running_flag_2 == 12 && msg->robomaster_mode == 2) {         
           msg->robomaster_mode = 0;
           received_sensors_robomaster_2 = false;
           received_sensors_pull_push_2 = false;
         }
-        // mode 6 verified
+
+        // 未触发保护机制，通过力反馈矫正速度并发送指令
         if (auto_lock == 0) 
         { 
-
-          for (size_t i = 0; i < 12; i++)
-          {                
-            if (i == 0 || i == 1 || i == 10 || i == 11)
-            {            
-              if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_1) > error_tension)
-              {
-                int32_t adjust_speed = (mean_tension_segment_2_1 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > average_speed/2)
-                {
-                  adjust_speed = average_speed/2;
+          for (size_t i = 0; i < 12; i++) {                
+            if (i == 0 || i == 1 || i == 10 || i == 11) {            
+                if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_1) > error_tension) {
+                    msg->snake_speed_control_array[i] = average_speed + calculateAdjustedSpeed(last_sensors_pull_push_data_2.pull_push_sensors[i], mean_tension_segment_2_1, error_tension, average_speed, last_sensors_robomaster_data_2.snake_motor_encorder_speed[i]);
                 }
-                if (adjust_speed < -average_speed/2)
-                {
-                  adjust_speed = -average_speed/2;
+            } else if(i == 2 || i == 3 || i == 8 || i == 9) {              
+                if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_2) > error_tension) {
+                    msg->snake_speed_control_array[i] = average_speed + calculateAdjustedSpeed(last_sensors_pull_push_data_2.pull_push_sensors[i], mean_tension_segment_2_2, error_tension, average_speed, last_sensors_robomaster_data_2.snake_motor_encorder_speed[i]);
                 }
-                if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
-                {
-                  adjust_speed = -adjust_speed;
+            } else if(i == 4 || i == 5 || i == 6 || i == 7) {
+                if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_3) > error_tension) {
+                    msg->snake_speed_control_array[i] = average_speed + calculateAdjustedSpeed(last_sensors_pull_push_data_2.pull_push_sensors[i], mean_tension_segment_2_3, error_tension, average_speed, last_sensors_robomaster_data_2.snake_motor_encorder_speed[i]);
                 }
-                
-                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
-              }
-            } 
-            if(i == 2 || i == 3 || i == 8 || i == 9) 
-            {
-              if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_2) > error_tension)
-              {
-                int32_t adjust_speed = (mean_tension_segment_2_2 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > average_speed/2)
-                {
-                  adjust_speed = average_speed/2;
-                }
-                if (adjust_speed < -average_speed/2)
-                {
-                  adjust_speed = -average_speed/2;
-                }
-                if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
-                {
-                  adjust_speed = -adjust_speed;
-                }
-                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
-              }
-            } 
-            if(i == 4 || i == 5 || i == 6 || i == 7) 
-            {
-              if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_3) > error_tension)
-              {
-                int32_t adjust_speed = (mean_tension_segment_2_3 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > average_speed/2)
-                {
-                  adjust_speed = average_speed/2;
-                }
-                if (adjust_speed < -average_speed/2)
-                {
-                  adjust_speed = -average_speed/2;
-                }
-                if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
-                {
-                  adjust_speed = -adjust_speed;
-                }
-                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
-              }
             }
           }
-
           // 然后发布新的控制消息
           std::this_thread::sleep_for(std::chrono::milliseconds(100)); // sleep for 100ms, being too fast will cause the process errors
           publisher_slave_control_topic_->publish(*msg);
@@ -320,7 +285,7 @@ private:
       }
     } 
 
-    // robomaster 2
+    // mode 3
     if(msg->robomaster_mode == 3){ // Mode 3, Release, robomaster 2
       for (size_t i = 0; i < 12; i++)
       {
@@ -341,20 +306,14 @@ private:
       }
     }
 
-    // robomaster 2
+    // mode 5
     if(msg->robomaster_mode == 5){ // Mode 5, Omega7 joystick
-        std::array<double, 6> theta_1; // left hand omega7 
         std::array<double, 6> theta_2; // right hand omega7 
         std::array<double, 6> theta_initial = {0,0,0,0,0,0};
-        for (size_t i = 0; i < 6; i++)
-        {
-            theta_1[i] = last_joint_space_data.data[i];
-        }
         for (size_t i = 6; i < 12; i++)
         {
             theta_2[i-6] = last_joint_space_data.data[i];
         }
-        std::array<double, 12> rope_1 = theta2rope(theta_1);
         std::array<double, 12> rope_2 = theta2rope(theta_2);
         std::array<double, 12> rope_initial = theta2rope(theta_initial);
 
@@ -365,67 +324,19 @@ private:
         }
 
         if (auto_lock == 0) {
-          for (size_t i = 0; i < 12; i++)
-          {                
-            if (i == 0 || i == 1 || i == 10 || i == 11)
-            {            
-              if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_1) > error_tension)
-              {
-                int32_t adjust_speed = (mean_tension_segment_2_1 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > average_speed/2)
-                {
-                  adjust_speed = average_speed/2;
+          for (size_t i = 0; i < 12; i++) {                
+            if (i == 0 || i == 1 || i == 10 || i == 11) {            
+                if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_1) > error_tension) {
+                    msg->snake_speed_control_array[i] = average_speed + calculateAdjustedSpeed(last_sensors_pull_push_data_2.pull_push_sensors[i], mean_tension_segment_2_1, error_tension, average_speed, last_sensors_robomaster_data_2.snake_motor_encorder_speed[i]);
                 }
-                if (adjust_speed < -average_speed/2)
-                {
-                  adjust_speed = -average_speed/2;
+            } else if(i == 2 || i == 3 || i == 8 || i == 9) {              
+                if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_2) > error_tension) {
+                    msg->snake_speed_control_array[i] = average_speed + calculateAdjustedSpeed(last_sensors_pull_push_data_2.pull_push_sensors[i], mean_tension_segment_2_2, error_tension, average_speed, last_sensors_robomaster_data_2.snake_motor_encorder_speed[i]);
                 }
-                if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
-                {
-                  adjust_speed = -adjust_speed;
+            } else if(i == 4 || i == 5 || i == 6 || i == 7) {
+                if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_3) > error_tension) {
+                    msg->snake_speed_control_array[i] = average_speed + calculateAdjustedSpeed(last_sensors_pull_push_data_2.pull_push_sensors[i], mean_tension_segment_2_3, error_tension, average_speed, last_sensors_robomaster_data_2.snake_motor_encorder_speed[i]);
                 }
-                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
-              }
-            } 
-            if(i == 2 || i == 3 || i == 8 || i == 9) 
-            {              
-              if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_2) > error_tension)
-              {
-                int32_t adjust_speed = (mean_tension_segment_2_2 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > average_speed/2)
-                {
-                  adjust_speed = average_speed/2;
-                }
-                if (adjust_speed < -average_speed/2)
-                {
-                  adjust_speed = -average_speed/2;
-                }
-                if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
-                {
-                  adjust_speed = -adjust_speed;
-                }
-                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
-              }
-            } 
-            if(i == 4 || i == 5 || i == 6 || i == 7) 
-            {
-              if (abs(last_sensors_pull_push_data_2.pull_push_sensors[i] - mean_tension_segment_2_3) > error_tension)
-              {
-                int32_t adjust_speed = (mean_tension_segment_2_3 - last_sensors_pull_push_data_2.pull_push_sensors[i]) / error_tension;
-                if (adjust_speed > average_speed/2)
-                {
-                  adjust_speed = average_speed/2;
-                }
-                if (adjust_speed < -average_speed/2)
-                {
-                  adjust_speed = -average_speed/2;
-                }
-                if (last_sensors_robomaster_data_2.snake_motor_encorder_speed[i] < 0)
-                {
-                  adjust_speed = -adjust_speed;
-                }
-                msg->snake_speed_control_array[i] = average_speed + adjust_speed;
-              }
             }
           }
           // 发布消息
@@ -436,20 +347,20 @@ private:
 
   }
 
+  // 取得Robomaster传感器数据
   void sensors_robomaster_2_callback(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
-    // 保存Robomaster传感器数据
     last_sensors_robomaster_data_2 = *msg;
     received_sensors_robomaster_2 = true;
   }
 
+  // 取得joint_space数据
   void joint_space_callback(const std_msgs::msg::Float64MultiArray::SharedPtr theta_msg) {
-    // 保存joint_space数据
     last_joint_space_data = *theta_msg;
     received_joint_space_data = true;
   }
 
+  // 取得推拉力传感器数据，并对绳驱电机拉力做保护措施
   void sensors_pull_push_2_callback(const buaa_rescue_robot_msgs::msg::SensorsMessageMasterDevicePullPushSensors::SharedPtr pull_push_sensors_msg) {
-    // 保存拉推传感器数据
     last_sensors_pull_push_data_2 = *pull_push_sensors_msg;
     received_sensors_pull_push_2 = true;
     auto msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlave>();
@@ -491,19 +402,17 @@ private:
   std::array<int32_t, 12> encorder_zero_up_limit_2 = {0,0,0,0,0,0,0,0,0,0,0,0}; // 所有元素都将初始化为0
   std::array<int32_t, 12> encorder_zero_down_limit_2 = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
 
-  int average_speed = 30;
+  int average_speed = 10;
   int32_t fine_delta = 500;
   int32_t coarse_delta = 5000;
   int32_t error_threshold = 2;
   int32_t auto_lock = 0;
   int32_t tension_limit = 2000; 
   int16_t running_flag_2 = 0;
-  // int16_t tension_segment_1 = 1100;
-  // int16_t tension_segment_2 = 1100;
-  // int16_t tension_segment_3 = 1100;
-  int16_t tension_segment_1 = 1200;
-  int16_t tension_segment_2 = 1100;
-  int16_t tension_segment_3 = 1000;
+  // 设定在mode12下的各段的力的设定值
+  int16_t tension_segment_1 = 1100; 
+  int16_t tension_segment_2 = 800;
+  int16_t tension_segment_3 = 150;
   std::array<int32_t, 12> encorder_zero_final_up_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
   std::array<int32_t, 12> encorder_zero_final_down_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
 
