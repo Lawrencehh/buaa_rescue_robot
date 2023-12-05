@@ -321,7 +321,6 @@ private:
           rope_2[i] = rope_2[i] / (1 - last_sensors_pull_push_data_2.pull_push_sensors[i] * elastic_deformation); // 补偿上张力造成的误差
           rope_initial[i] = rope_initial[i] / (1 - encorder_zero_down_limit_2[i] * elastic_deformation); // 补偿上张力造成的误差
           msg-> snake_position_control_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
-          RCLCPP_INFO(this->get_logger(), "encorder_zero_down_limit_2[%zu]:%d", i, encorder_zero_down_limit_2[i]);
         }
 
         if (auto_lock == 0) {
