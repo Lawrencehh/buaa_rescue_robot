@@ -310,17 +310,18 @@ private:
     if(msg->robomaster_mode == 5){ // Mode 5, Omega7 joystick
         std::array<double, 6> theta_1; // right hand omega7 
         std::array<double, 6> theta_initial = {0,0,0,0,0,0};
-        for (size_t i = 0; i < 6; i++)
+        for (size_t i = 0; i < 6; i++) // 取得关节空间值
         {
             theta_1[i] = last_joint_space_data.data[i];
         }
-        std::array<double, 12> rope_2 = theta2rope(theta_1);
+        std::array<double, 12> rope_1 = theta2rope(theta_1);
         std::array<double, 12> rope_initial = theta2rope(theta_initial);
-
-        // snake motors control for robomaster 
         for (size_t i = 0; i < 12; i++)
         {
-            msg-> snake_position_control_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
+          rope_1[i] = rope_1[i] / (1 - last_sensors_pull_push_data_1.pull_push_sensors[i] * elastic_deformation); // 补偿上张力造成的误差
+          rope_initial[i] = rope_initial[i] / (1 - encorder_zero_down_limit_1[i] * elastic_deformation); // 补偿上张力造成的误差
+          msg-> snake_position_control_array[i]  = (rope_initial[i] - rope_1[i]) * 65536/4;
+          RCLCPP_INFO(this->get_logger(), "encorder_zero_down_limit_1[%zu]:%d", i, encorder_zero_down_limit_1[i]);
         }
 
         if (auto_lock == 0) {
@@ -409,6 +410,7 @@ private:
   int32_t auto_lock = 0;
   int32_t tension_limit = 2000; 
   int16_t running_flag_1 = 0;
+  double elastic_deformation = 6.5e-6;
   // 设定在mode12下的各段的力的设定值
   int16_t tension_segment_1 = 1100; 
   int16_t tension_segment_2 = 800;

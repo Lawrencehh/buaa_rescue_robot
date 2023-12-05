@@ -316,11 +316,12 @@ private:
         }
         std::array<double, 12> rope_2 = theta2rope(theta_2);
         std::array<double, 12> rope_initial = theta2rope(theta_initial);
-
-        // snake motors control for robomaster 
         for (size_t i = 0; i < 12; i++)
         {
-            msg-> snake_position_control_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
+          rope_2[i] = rope_2[i] / (1 - last_sensors_pull_push_data_2.pull_push_sensors[i] * elastic_deformation); // 补偿上张力造成的误差
+          rope_initial[i] = rope_initial[i] / (1 - encorder_zero_down_limit_2[i] * elastic_deformation); // 补偿上张力造成的误差
+          msg-> snake_position_control_array[i]  = (rope_initial[i] - rope_2[i]) * 65536/4;
+          RCLCPP_INFO(this->get_logger(), "encorder_zero_down_limit_2[%zu]:%d", i, encorder_zero_down_limit_2[i]);
         }
 
         if (auto_lock == 0) {
@@ -409,6 +410,7 @@ private:
   int32_t auto_lock = 0;
   int32_t tension_limit = 2000; 
   int16_t running_flag_2 = 0;
+  double elastic_deformation = 6.5e-6;
   // 设定在mode12下的各段的力的设定值
   int16_t tension_segment_1 = 1100; 
   int16_t tension_segment_2 = 800;
