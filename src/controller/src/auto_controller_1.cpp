@@ -321,6 +321,10 @@ private:
           rope_1[i] = rope_1[i] / (1 - last_sensors_pull_push_data_1.pull_push_sensors[i] * elastic_deformation); // 补偿上张力造成的误差
           rope_initial[i] = rope_initial[i] / (1 - encorder_zero_down_limit_1[i] * elastic_deformation); // 补偿上张力造成的误差
           msg-> snake_position_control_array[i]  = (rope_initial[i] - rope_1[i]) * 65536/4;
+          if (last_sensors_pull_push_data_1.pull_push_sensors[i] < 20) // 如果绳子松了，就给拽回来
+          {
+            msg-> snake_position_control_array[i] = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] + fine_delta;
+          }          
         }
 
         if (auto_lock == 0) {
