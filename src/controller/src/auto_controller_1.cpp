@@ -289,11 +289,11 @@ private:
     if(msg->robomaster_mode == 3){ // Mode 3, Release, robomaster 2
       for (size_t i = 0; i < 12; i++)
       {
-        if(last_sensors_pull_push_data_1.pull_push_sensors[i] < 5){
+        if(last_sensors_pull_push_data_1.pull_push_sensors[i] < 10){
           msg-> snake_position_control_array[i]  = last_sensors_robomaster_data_1.snake_motor_encorder_position[i];
           msg-> snake_speed_control_array[i] = 0;
         } 
-        if(last_sensors_pull_push_data_1.pull_push_sensors[i] > 5) {
+        if(last_sensors_pull_push_data_1.pull_push_sensors[i] >= 10) {
           msg-> snake_position_control_array[i]  = last_sensors_robomaster_data_1.snake_motor_encorder_position[i] - 200000;
           msg-> snake_speed_control_array[i] = 20;
         }

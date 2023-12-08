@@ -1976,7 +1976,7 @@ font: 20pt &quot;Ubuntu&quot;;</string>
 font: 20pt &quot;Ubuntu&quot;;</string>
     </property>
     <property name="minimum">
-     <number>-1000</number>
+     <number>-5000</number>
     </property>
     <property name="maximum">
      <number>1000</number>
@@ -2073,10 +2073,10 @@ font: 20pt &quot;Ubuntu&quot;;</string>
 font: 20pt &quot;Ubuntu&quot;;</string>
     </property>
     <property name="minimum">
-     <number>-5000</number>
+     <number>-4000</number>
     </property>
     <property name="maximum">
-     <number>1000</number>
+     <number>3000</number>
     </property>
     <property name="notchTarget">
      <double>0.000000000000000</double>
