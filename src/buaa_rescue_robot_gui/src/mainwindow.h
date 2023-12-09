@@ -55,7 +55,7 @@ public:
 public slots:
     void on_publishButton_clicked();
     void on_transButton_clicked();
-    void dialValueChanged(int value);
+    void sliderValueChanged(int value);
     void updateCameraFrame(cv::VideoCapture &cap, QGraphicsScene *scene, QGraphicsView *view);
     void updateGraphicsView(QGraphicsScene* scene, QPixmap pixmap);
 

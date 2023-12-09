@@ -32,13 +32,13 @@ MainWindow::MainWindow(QWidget *parent)
     startCameraThreads(); // 启动摄像头线程
 
     // 手部电机的控制旋钮相关
-    // 连接 QDial 的 valueChanged 信号到自定义的槽函数
-    connect(ui->gripper1_gm6020, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
-    connect(ui->gripper1_c610, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
-    connect(ui->gripper1_sts3032, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
-    connect(ui->gripper2_gm6020, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
-    connect(ui->gripper2_c610, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
-    connect(ui->gripper2_sts3032, SIGNAL(valueChanged(int)), this, SLOT(dialValueChanged(int)));
+    // 连接 QSlider 的 valueChanged 信号到自定义的槽函数
+    connect(ui->gripper1_gm6020, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
+    connect(ui->gripper1_c610, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
+    connect(ui->gripper1_sts3032, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
+    connect(ui->gripper2_gm6020, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
+    connect(ui->gripper2_c610, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
+    connect(ui->gripper2_sts3032, SIGNAL(valueChanged(int)), this, SLOT(sliderValueChanged(int)));
     // 初始化 SensorsMessageDisplay_X，将模型与视图关联
     SensorsMessageDisplay_1 = new QStringListModel(this);    ui->SensorsMessageDisplay_1->setModel(SensorsMessageDisplay_1);
     SensorsMessageDisplay_2 = new QStringListModel(this);    ui->SensorsMessageDisplay_2->setModel(SensorsMessageDisplay_2);
@@ -525,8 +525,8 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
     }
 }
 
-// 自定义槽函数：当 QDial 的值改变时会被调用
-void MainWindow::dialValueChanged(int value)
+// 自定义槽函数：当 QSlider 的值改变时会被调用
+void MainWindow::sliderValueChanged(int value)
 {
     QTime currentTime = QTime::currentTime();
     int elapsed = lastTime.msecsTo(currentTime);
@@ -551,7 +551,7 @@ void MainWindow::dialValueChanged(int value)
         slave_msg_2-> snake_speed_control_array[i]  = speedControls_robomaster2[i]->value();
         slave_msg_2-> snake_position_control_array[i]  = positionControls_robomaster2[i]->value();
     }
-    // 从 QDial 读取值并设置到 ROS2 消息中
+    // 从 QSlider 读取值并设置到 ROS2 消息中
     // gripper control for robomaster 1
     slave_msg_1->gripper_gm6020_position = ui->gripper1_gm6020->value();
     slave_msg_1->gripper_c610_position = ui->gripper1_c610->value();
