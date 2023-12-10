@@ -14,6 +14,7 @@ find_package(rosidl_default_generators REQUIRED)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/ControlMessageMaster.msg"
   "msg/ControlMessageSlave.msg"
+  "msg/ControlMessageSlaveGripper.msg"
   "msg/SensorsMessageMasterDeviceElevator.msg"
   "msg/SensorsMessageMasterDevicePullPushSensors.msg"
   "msg/SensorsMessageRobomaster.msg"

@@ -51,6 +51,8 @@ MainWindow::MainWindow(QWidget *parent)
     node = std::make_shared<rclcpp::Node>("mainwindow_node");
     slave_control_topic_publisher_1 = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_1", 10);
     slave_control_topic_publisher_2 = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_2", 10);
+    gripper_control_topic_publisher_1 = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>("gripper_control_topic_1", 10);
+    gripper_control_topic_publisher_2 = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>("gripper_control_topic_2", 10);
     master_control_topic_publisher = node->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessageMaster>("master_control_topic", 10);
     joint_space_topic_publisher = node->create_publisher<std_msgs::msg::Float64MultiArray>("joint_space_topic", 10);
     // 连接Qt信号和槽
@@ -150,26 +152,24 @@ void MainWindow::updateGraphicsView(QGraphicsScene* scene, QPixmap pixmap) {
 /*****************************************************传感反馈显示控件******************************************************/
 void MainWindow::updateSensorsMessageDisplay_1(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
     QStringList list;
-
     for (int i = 0; i < 12; ++i) {
         list << QString::number(msg->snake_motor_encorder_position[i]);
     }
     list << QString::number(msg->gripper_gm6020_position);
     list << QString::number(msg->gripper_c610_position);
-    list << QString::number(msg->gripper_sts3032_position);
+    list << QString::number(msg->gripper_sts3032_position);  
     list << QString::number(msg->robomaster_mode);
     SensorsMessageDisplay_1->setStringList(list);
 }
 
 void MainWindow::updateSensorsMessageDisplay_2(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg) {
     QStringList list;
-
     for (int i = 0; i < 12; ++i) {
         list << QString::number(msg->snake_motor_encorder_position[i]);
     }
     list << QString::number(msg->gripper_gm6020_position);
     list << QString::number(msg->gripper_c610_position);
-    list << QString::number(msg->gripper_sts3032_position);
+    list << QString::number(msg->gripper_sts3032_position); 
     list << QString::number(msg->robomaster_mode);
     SensorsMessageDisplay_2->setStringList(list);
 }
@@ -226,13 +226,16 @@ void MainWindow::updateSlaveControlIndicator1(const buaa_rescue_robot_msgs::msg:
         speedControls_robomaster1[i]->setValue(msg->snake_speed_control_array[i]);
         positionControls_robomaster1[i]->setValue(msg->snake_position_control_array[i]);
     }        
+    ui->robomaster1_mode->setValue(msg->robomaster_mode);
+}
+
+void MainWindow::updateSlaveGripperControlIndicator1(const buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper::SharedPtr msg) {             
     ui->gripper_gm6020_position_1_control->setValue(msg->gripper_gm6020_position);
     ui->gripper_c610_position_1_control->setValue(msg->gripper_c610_position);
     ui->gripper_sts3032_position_1_control->setValue(msg->gripper_sts3032_position);
     ui->gripper1_gm6020->setValue(msg->gripper_gm6020_position);
     ui->gripper1_c610->setValue(msg->gripper_c610_position);
     ui->gripper1_sts3032->setValue(msg->gripper_sts3032_position);
-    ui->robomaster1_mode->setValue(msg->robomaster_mode);
 }
     
 void MainWindow::updateSlaveControlIndicator2(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg) {       
@@ -241,13 +244,16 @@ void MainWindow::updateSlaveControlIndicator2(const buaa_rescue_robot_msgs::msg:
         speedControls_robomaster2[i]->setValue(msg->snake_speed_control_array[i]);
         positionControls_robomaster2[i]->setValue(msg->snake_position_control_array[i]);
     }    
+    ui->robomaster2_mode->setValue(msg->robomaster_mode);
+}
+
+void MainWindow::updateSlaveGripperControlIndicator2(const buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper::SharedPtr msg) {       
     ui->gripper_gm6020_position_2_control->setValue(msg->gripper_gm6020_position);
     ui->gripper_c610_position_2_control->setValue(msg->gripper_c610_position);
     ui->gripper_sts3032_position_2_control->setValue(msg->gripper_sts3032_position);
     ui->gripper2_gm6020->setValue(msg->gripper_gm6020_position);
     ui->gripper2_c610->setValue(msg->gripper_c610_position);
     ui->gripper2_sts3032->setValue(msg->gripper_sts3032_position);
-    ui->robomaster2_mode->setValue(msg->robomaster_mode);
 }
 
 void MainWindow::updateMasterControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessageMaster::SharedPtr msg) {
@@ -285,16 +291,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         slave_msg_2-> snake_speed_control_array[i]  = speedControls_robomaster2[i]->value();
         slave_msg_2-> snake_position_control_array[i]  = positionControls_robomaster2[i]->value();
     }
-    // gripper control for robomaster 1
-    slave_msg_1->gripper_gm6020_position = ui->gripper_gm6020_position_1_control->value();
-    slave_msg_1->gripper_c610_position = ui->gripper_c610_position_1_control->value();
-    slave_msg_1->gripper_sts3032_position = ui->gripper_sts3032_position_1_control->value();
-    slave_msg_1->robomaster_mode = ui->robomaster1_mode->value();
-    // gripper control for robomaster 2
-    slave_msg_2->gripper_gm6020_position = ui->gripper_gm6020_position_2_control->value();
-    slave_msg_2->gripper_c610_position = ui->gripper_c610_position_2_control->value();
-    slave_msg_2->gripper_sts3032_position = ui->gripper_sts3032_position_2_control->value();
-    slave_msg_2->robomaster_mode = ui->robomaster2_mode->value();    
     // master devices control
     auto master_msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageMaster>();
     master_msg->elevator_control = ui->elevator_speed_control->value();
@@ -449,16 +445,6 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event){
         slave_msg_2-> snake_speed_control_array[i]  = speedControls_robomaster2[i]->value();
         slave_msg_2-> snake_position_control_array[i]  = positionControls_robomaster2[i]->value();
     }
-    // gripper control for robomaster 1
-    slave_msg_1->gripper_gm6020_position = ui->gripper_gm6020_position_1_control->value();
-    slave_msg_1->gripper_c610_position = ui->gripper_c610_position_1_control->value();
-    slave_msg_1->gripper_sts3032_position = ui->gripper_sts3032_position_1_control->value();
-    slave_msg_1->robomaster_mode = ui->robomaster1_mode->value();    
-    // gripper control for robomaster 2
-    slave_msg_2->gripper_gm6020_position = ui->gripper_gm6020_position_2_control->value();
-    slave_msg_2->gripper_c610_position = ui->gripper_c610_position_2_control->value();
-    slave_msg_2->gripper_sts3032_position = ui->gripper_sts3032_position_2_control->value();
-    slave_msg_2->robomaster_mode = ui->robomaster2_mode->value();
     // master devices control
     auto master_msg = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageMaster>();
     master_msg->elevator_control = ui->elevator_speed_control->value();
@@ -541,6 +527,21 @@ void MainWindow::sliderValueChanged(int value)
 
     lastTime = currentTime;
 
+    auto gripper_msg_1 = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>();
+    auto gripper_msg_2 = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>();
+    // 从 QSlider 读取值并设置到 ROS2 消息中
+    // gripper control for robomaster 1
+    gripper_msg_1->gripper_gm6020_position = ui->gripper1_gm6020->value();
+    gripper_msg_1->gripper_c610_position = ui->gripper1_c610->value();
+    gripper_msg_1->gripper_sts3032_position = ui->gripper1_sts3032->value();
+    // gripper control for robomaster 2
+    gripper_msg_2->gripper_gm6020_position = ui->gripper2_gm6020->value();
+    gripper_msg_2->gripper_c610_position = ui->gripper2_c610->value();
+    gripper_msg_2->gripper_sts3032_position = ui->gripper2_sts3032->value();
+    // 发布 ROS2 消息
+    gripper_control_topic_publisher_1->publish(*gripper_msg_1);
+    gripper_control_topic_publisher_2->publish(*gripper_msg_2);
+
     auto slave_msg_1 = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlave>();
     auto slave_msg_2 = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlave>();
     // snake motors control for robomaster 1 & 2
@@ -551,17 +552,10 @@ void MainWindow::sliderValueChanged(int value)
         slave_msg_2-> snake_speed_control_array[i]  = speedControls_robomaster2[i]->value();
         slave_msg_2-> snake_position_control_array[i]  = positionControls_robomaster2[i]->value();
     }
-    // 从 QSlider 读取值并设置到 ROS2 消息中
-    // gripper control for robomaster 1
-    slave_msg_1->gripper_gm6020_position = ui->gripper1_gm6020->value();
-    slave_msg_1->gripper_c610_position = ui->gripper1_c610->value();
-    slave_msg_1->gripper_sts3032_position = ui->gripper1_sts3032->value();
-    // gripper control for robomaster 2
-    slave_msg_2->gripper_gm6020_position = ui->gripper2_gm6020->value();
-    slave_msg_2->gripper_c610_position = ui->gripper2_c610->value();
-    slave_msg_2->gripper_sts3032_position = ui->gripper2_sts3032->value();
-
-    // 发布 ROS2 消息
+    slave_msg_1->robomaster_mode = 0; // 
+    slave_msg_2->robomaster_mode = 0; // 
+    // 然后发布新的控制消息
+    std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 10ms
     slave_control_topic_publisher_1->publish(*slave_msg_1);
     slave_control_topic_publisher_2->publish(*slave_msg_2);
 }
@@ -587,14 +581,6 @@ void MainWindow::on_transButton_clicked(){
         slave_msg_2-> snake_speed_control_array[i]  = speedControls_robomaster2[i]->value();
         slave_msg_2-> snake_position_control_array[i]  = positionControls_robomaster2[i]->value();
     }
-    // gripper control for robomaster 1
-    slave_msg_1->gripper_gm6020_position = ui->gripper_gm6020_position_1_control->value();
-    slave_msg_1->gripper_c610_position = ui->gripper_c610_position_1_control->value();
-    slave_msg_1->gripper_sts3032_position = ui->gripper_sts3032_position_1_control->value();
-    // gripper control for robomaster 2
-    slave_msg_2->gripper_gm6020_position = ui->gripper_gm6020_position_2_control->value();
-    slave_msg_2->gripper_c610_position = ui->gripper_c610_position_2_control->value();
-    slave_msg_2->gripper_sts3032_position = ui->gripper_sts3032_position_2_control->value();
     slave_msg_1->robomaster_mode = 5; // mode 5, control by omega7
     slave_msg_2->robomaster_mode = 5; // mode 5, control by omega7
     // 然后发布新的控制消息
@@ -621,15 +607,7 @@ void MainWindow::on_publishButton_clicked()
         slave_msg_2-> snake_speed_control_array[i]  = speedControls_robomaster2[i]->value();
         slave_msg_2-> snake_position_control_array[i]  = positionControls_robomaster2[i]->value();
     }
-    // gripper control for robomaster 1
-    slave_msg_1->gripper_gm6020_position = ui->gripper_gm6020_position_1_control->value();
-    slave_msg_1->gripper_c610_position = ui->gripper_c610_position_1_control->value();
-    slave_msg_1->gripper_sts3032_position = ui->gripper_sts3032_position_1_control->value();
     slave_msg_1->robomaster_mode = ui->robomaster1_mode->value();    
-    // gripper control for robomaster 2
-    slave_msg_2->gripper_gm6020_position = ui->gripper_gm6020_position_2_control->value();
-    slave_msg_2->gripper_c610_position = ui->gripper_c610_position_2_control->value();
-    slave_msg_2->gripper_sts3032_position = ui->gripper_sts3032_position_2_control->value();
     slave_msg_2->robomaster_mode = ui->robomaster2_mode->value();
     slave_control_topic_publisher_1->publish(*slave_msg_1);
     slave_control_topic_publisher_2->publish(*slave_msg_2);

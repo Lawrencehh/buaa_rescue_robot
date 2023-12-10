@@ -3,6 +3,7 @@
 #include <asio.hpp> // 引入ASIO库，用于串口通信
 #include <std_msgs/msg/string.hpp>  // 引入标准消息类型
 #include "buaa_rescue_robot_msgs/msg/control_message_slave.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_slave_gripper.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"   // 引入自定义消息类型
 #include <thread>   // 用于线程中的sleep_for函数
 #include <chrono>   // 用于时间表示
@@ -91,12 +92,18 @@ public:
 
         
         // 创建订阅器，订阅名为"slave_control_topic_1"的话题
-          subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_1", 10, 
-          std::bind(&serial_robomaster_1::callback, this, std::placeholders::_1));
+        subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_1", 10, 
+        std::bind(&serial_robomaster_1::callback, this, std::placeholders::_1));
+
+        subscription_gripper = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>("gripper_control_topic_1", 10, 
+        std::bind(&serial_robomaster_1::callback_gripper, this, std::placeholders::_1));
 
         // 在serial_robomaster_1的构造函数中初始化这个发布器
         publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>("Sensors_Robomaster_1", 10);
-
+        
+        gripper_gm6020_position = 0;
+        gripper_c610_position = 0;
+        gripper_sts3032_position = 0;
 
         // 在构造函数中启动接收
         start_receive();
@@ -308,6 +315,11 @@ private:    // 私有成员函数和变量
 
     }
 
+    void callback_gripper(const buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper::SharedPtr msg){
+        gripper_gm6020_position = msg->gripper_gm6020_position;
+        gripper_c610_position = msg->gripper_c610_position;
+        gripper_sts3032_position = msg->gripper_sts3032_position;
+    }
  
     void callback(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg){   
         // 1. 准备数据帧的头部, robomaster_1, snake control
@@ -341,18 +353,18 @@ private:    // 私有成员函数和变量
         
         // Gripper GM6020
         frame.push_back(0x0D);  // 添加电机地址
-        frame.push_back((msg->gripper_gm6020_position >> 8) & 0xFF);
-        frame.push_back(msg->gripper_gm6020_position & 0xFF);
+        frame.push_back((gripper_gm6020_position >> 8) & 0xFF);
+        frame.push_back(gripper_gm6020_position & 0xFF);
 
         // Gripper C610
         frame.push_back(0x0E);  // 添加电机地址
-        frame.push_back((msg->gripper_c610_position >> 8) & 0xFF);
-        frame.push_back(msg->gripper_c610_position & 0xFF);
+        frame.push_back((gripper_c610_position >> 8) & 0xFF);
+        frame.push_back(gripper_c610_position & 0xFF);
 
         // Gripper STS3032
         frame.push_back(0x0F);  // 添加电机地址
-        frame.push_back((msg->gripper_sts3032_position >> 8) & 0xFF);
-        frame.push_back(msg->gripper_sts3032_position & 0xFF);
+        frame.push_back((gripper_sts3032_position >> 8) & 0xFF);
+        frame.push_back(gripper_sts3032_position & 0xFF);
 
         // RESET
         frame.push_back(0x10);  // 添加RESET地址
@@ -386,15 +398,15 @@ private:    // 私有成员函数和变量
     rclcpp::TimerBase::SharedPtr timer_;    // 定时器
 
     rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr subscription_;  //订阅器
+    rclcpp::Subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>::SharedPtr subscription_gripper;  //订阅器
     std::shared_ptr<asio::serial_port> serial_port_;    // 串口对象
     asio::io_service io_;   // ASIO I/O服务
     std::vector<uint8_t> modbus_frame_; // 存储Modbus协议帧
-    
     std::vector<uint8_t> frame;  // Modbus协议帧
-
     std::vector<uint8_t> data_buffer_;  // 数据缓存区
-
-    
+    int16_t gripper_gm6020_position = 0;
+    int16_t gripper_c610_position = 0;
+    int16_t gripper_sts3032_position = 0;
 };
 
 int main(int argc, char **argv) // 主函数

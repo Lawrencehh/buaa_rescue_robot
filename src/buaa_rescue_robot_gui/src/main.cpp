@@ -15,6 +15,7 @@
 #include <std_msgs/msg/string.hpp>
 #include "buaa_rescue_robot_msgs/msg/control_message_master.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/control_message_slave.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_slave_gripper.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
@@ -54,6 +55,27 @@ int main(int argc, char **argv) {
 
             // 在这里更新QSpinBox的值
             mainWindow.updateSlaveControlIndicator2(msg);     
+        }
+    );
+
+    auto subscription_gripper_control_topic_1 = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>(
+        "gripper_control_topic_1",
+        10,
+        [&](const buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper::SharedPtr msg) {
+
+            // 在这里更新QSpinBox的值
+            mainWindow.updateSlaveGripperControlIndicator1(msg);     
+        }
+    );
+
+    // show 
+    auto subscription_gripper_control_topic_2 = node->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>(
+        "gripper_control_topic_2",
+        10,
+        [&](const buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper::SharedPtr msg) {
+
+            // 在这里更新QSpinBox的值
+            mainWindow.updateSlaveGripperControlIndicator2(msg);     
         }
     );
 

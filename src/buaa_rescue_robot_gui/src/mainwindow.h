@@ -7,6 +7,7 @@
 #include <QStringListModel>  
 #include "buaa_rescue_robot_msgs/msg/control_message_master.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/control_message_slave.hpp"  // 引入自定义消息类型
+#include "buaa_rescue_robot_msgs/msg/control_message_slave_gripper.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_robomaster.hpp"  // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_elevator.hpp"   // 引入自定义消息类型
 #include "buaa_rescue_robot_msgs/msg/sensors_message_master_device_pull_push_sensors.hpp"   // 引入自定义消息类型
@@ -49,6 +50,8 @@ public:
     void updateSensorsMessageDisplay_7(const buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster::SharedPtr msg);
     void updateSlaveControlIndicator1(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg);
     void updateSlaveControlIndicator2(const buaa_rescue_robot_msgs::msg::ControlMessageSlave::SharedPtr msg);
+    void updateSlaveGripperControlIndicator1(const buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper::SharedPtr msg);
+    void updateSlaveGripperControlIndicator2(const buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper::SharedPtr msg);
     void updateMasterControlIndicator(const buaa_rescue_robot_msgs::msg::ControlMessageMaster::SharedPtr msg);
     void updateJointSpaceIndicator(const std_msgs::msg::Float64MultiArray::SharedPtr theta_msg);
 
@@ -68,6 +71,8 @@ private:
     rclcpp::Node::SharedPtr node;  // 添加这一行，声明一个ROS 2节点
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr slave_control_topic_publisher_1;  // 添加这一行，声明一个ROS 2发布器
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>::SharedPtr slave_control_topic_publisher_2;  // 添加这一行，声明一个ROS 2发布器
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>::SharedPtr gripper_control_topic_publisher_1;  // 添加这一行，声明一个ROS 2发布器
+    rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>::SharedPtr gripper_control_topic_publisher_2;  // 添加这一行，声明一个ROS 2发布器
     rclcpp::Publisher<buaa_rescue_robot_msgs::msg::ControlMessageMaster>::SharedPtr master_control_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
     rclcpp::Publisher<std_msgs::msg::Float64MultiArray>::SharedPtr joint_space_topic_publisher;  // 添加这一行，声明一个ROS 2发布器
 

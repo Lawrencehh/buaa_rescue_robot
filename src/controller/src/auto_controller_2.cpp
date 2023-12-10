@@ -370,9 +370,6 @@ private:
       {
         msg->snake_speed_control_array = {0,0,0,0,0,0,0,0,0,0,0,0};
         msg->snake_position_control_array = {0,0,0,0,0,0,0,0,0,0,0,0};
-        msg->gripper_gm6020_position = 0;
-        msg->gripper_c610_position = 0;
-        msg->gripper_sts3032_position = 0;
         msg->robomaster_mode = 6; // quit
         // 然后发布新的控制消息
         std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 100ms

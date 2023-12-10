@@ -1697,7 +1697,7 @@ p, li { white-space: pre-wrap; }
       <x>1260</x>
       <y>70</y>
       <width>81</width>
-      <height>281</height>
+      <height>276</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -1793,7 +1793,7 @@ p, li { white-space: pre-wrap; }
       <x>1260</x>
       <y>360</y>
       <width>81</width>
-      <height>281</height>
+      <height>276</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -3415,6 +3415,9 @@ p, li { white-space: pre-wrap; }
     </property>
     <property name="maximum">
      <number>360</number>
+    </property>
+    <property name="value">
+     <number>180</number>
     </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
