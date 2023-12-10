@@ -538,9 +538,6 @@ void MainWindow::sliderValueChanged(int value)
     gripper_msg_2->gripper_gm6020_position = ui->gripper2_gm6020->value();
     gripper_msg_2->gripper_c610_position = ui->gripper2_c610->value();
     gripper_msg_2->gripper_sts3032_position = ui->gripper2_sts3032->value();
-    // 发布 ROS2 消息
-    gripper_control_topic_publisher_1->publish(*gripper_msg_1);
-    gripper_control_topic_publisher_2->publish(*gripper_msg_2);
 
     auto slave_msg_1 = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlave>();
     auto slave_msg_2 = std::make_shared<buaa_rescue_robot_msgs::msg::ControlMessageSlave>();
@@ -555,8 +552,12 @@ void MainWindow::sliderValueChanged(int value)
     slave_msg_1->robomaster_mode = 0; // 
     slave_msg_2->robomaster_mode = 0; // 
     // 然后发布新的控制消息
+    gripper_control_topic_publisher_1->publish(*gripper_msg_1);
     std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 10ms
     slave_control_topic_publisher_1->publish(*slave_msg_1);
+
+    gripper_control_topic_publisher_2->publish(*gripper_msg_2);
+    std::this_thread::sleep_for(std::chrono::milliseconds(10)); // sleep for 10ms
     slave_control_topic_publisher_2->publish(*slave_msg_2);
 }
 

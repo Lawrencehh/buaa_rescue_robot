@@ -92,9 +92,10 @@ public:
 
         
         // 创建订阅器，订阅名为"slave_control_topic_2"的话题
-          subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_2", 10, 
-          std::bind(&serial_robomaster_2::callback, this, std::placeholders::_1));
-
+        subscription_ = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_2", 10, 
+        std::bind(&serial_robomaster_2::callback, this, std::placeholders::_1));
+        subscription_gripper = this->create_subscription<buaa_rescue_robot_msgs::msg::ControlMessageSlaveGripper>("gripper_control_topic_2", 10, 
+        std::bind(&serial_robomaster_2::callback_gripper, this, std::placeholders::_1));
         // 在serial_robomaster_2的构造函数中初始化这个发布器
         publisher_ = this->create_publisher<buaa_rescue_robot_msgs::msg::SensorsMessageRobomaster>("Sensors_Robomaster_2", 10);
         gripper_gm6020_position = 0;
