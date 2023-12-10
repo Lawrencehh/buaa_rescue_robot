@@ -30,20 +30,18 @@ public:
     // 初始化发布者
     publisher_slave_control_topic_ = this->create_publisher<buaa_rescue_robot_msgs::msg::ControlMessageSlave>("slave_control_topic_1", 10);
 
-    // for (size_t i = 0; i < 12; i++)
-    // {
-    //   if (i == 0 || i == 1 || i == 10 || i == 11)
-    //   {
-    //     encorder_zero_final_up_limit[i] = tension_segment_1;
-    //   } else if(i == 2 || i == 3 || i == 8 || i == 9) {
-    //     encorder_zero_final_up_limit[i] = tension_segment_2;
-    //   } else if(i == 4 || i == 5 || i == 6 || i == 7) {
-    //     encorder_zero_final_up_limit[i] = tension_segment_3;
-    //   }
-    //   encorder_zero_final_down_limit[i] = encorder_zero_final_up_limit[i] - 100;
-    // } 
-    encorder_zero_final_up_limit = {1100,1100,700,700,50,50,50,50,700,700,900,900};
-    encorder_zero_final_down_limit = {1000,1000,600,600,0,0,0,0,600,600,800,800};
+    for (size_t i = 0; i < 12; i++)
+    {
+      if (i == 0 || i == 1 || i == 10 || i == 11)
+      {
+        encorder_zero_final_up_limit[i] = tension_segment_1;
+      } else if(i == 2 || i == 3 || i == 8 || i == 9) {
+        encorder_zero_final_up_limit[i] = tension_segment_2;
+      } else if(i == 4 || i == 5 || i == 6 || i == 7) {
+        encorder_zero_final_up_limit[i] = tension_segment_3;
+      }
+      encorder_zero_final_down_limit[i] = encorder_zero_final_up_limit[i] - 100;
+    } 
   }
 
   // theta to rope

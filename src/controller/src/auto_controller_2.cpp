@@ -408,9 +408,9 @@ private:
   int16_t running_flag_2 = 0;
   double elastic_deformation = 6.5e-6;
   // 设定在mode12下的各段的力的设定值
-  int16_t tension_segment_1 = 100; 
-  int16_t tension_segment_2 = 100;
-  int16_t tension_segment_3 = 100;
+  int16_t tension_segment_1 = 1100; 
+  int16_t tension_segment_2 = 800;
+  int16_t tension_segment_3 = 150;
   std::array<int32_t, 12> encorder_zero_final_up_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
   std::array<int32_t, 12> encorder_zero_final_down_limit = {0,0,0,0,0,0,0,0,0,0,0,0};  // 所有元素都将初始化为0
 
